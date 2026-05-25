@@ -1,0 +1,93 @@
+vocabulary: 0.1
+info:
+  name: Didomi Vocabulary
+  description: >-
+    Controlled vocabulary mapping Didomi's consent and preference management
+    domain to API Commons operational dimensions (capabilities, services,
+    standards, concepts) and to neighboring vocabularies (DPV, GDPR, IAB TCF,
+    IAB GPP, schema.org).
+  modified: '2026-05-25'
+  provider: didomi
+concepts:
+- name: Consent
+  description: Freely given, specific, informed, unambiguous agreement to a processing purpose, as defined by GDPR Article 4(11).
+  see_also:
+  - https://w3id.org/dpv#Consent
+  - https://gdpr-info.eu/art-4-gdpr/
+- name: Purpose
+  description: A processing purpose against which consent is requested (e.g., measurement, personalization, ad targeting).
+  see_also:
+  - https://w3id.org/dpv#Purpose
+- name: Vendor
+  description: A third party (SSP, DSP, analytics provider, etc.) that processes user data and to which consent is granted or denied.
+- name: Regulation
+  description: A privacy regulation under which consent is captured (GDPR, CCPA, VCDPA, CTDPA, CPA, Utah, CDPA, Chilean Law 25, etc.).
+- name: TCF
+  description: IAB Transparency and Consent Framework v2.x, an industry standard for signaling consent between publishers, CMPs, and vendors.
+- name: GPP
+  description: IAB Global Privacy Platform, a successor framework that carries consent / opt-out signals across multiple regulations in a single string.
+- name: GPC
+  description: Global Privacy Control browser signal honored under CCPA and several US state laws.
+- name: ConsentString
+  description: An encoded payload (IAB TCF, IAB GPP, or Didomi-native) representing a user's complete consent / preference state.
+- name: PreferenceCenter
+  description: A persistent UI where authenticated users manage their marketing-channel and processing-purpose preferences beyond regulatory consent.
+- name: DSAR
+  description: Data Subject Access Request — a request under GDPR Articles 15-22 or CCPA/CPRA rights to access, delete, port, or restrict personal data.
+- name: ConsentNotice
+  description: The end-user-facing UI (banner, popup, modal, fullscreen) that captures consent.
+- name: MultiRegulationConfiguration
+  description: A single Didomi configuration that drives different consent UX and signaling based on the regulation that applies to the visitor.
+services:
+- name: Consent Management Platform
+  description: Capture, store, and signal user consent across web, mobile, CTV, and AMP.
+- name: Preference Management Platform
+  description: Capture and manage marketing-channel and processing-purpose preferences for authenticated users.
+- name: Privacy Requests
+  description: Intake and workflow for GDPR / CCPA DSARs with audit-grade evidence.
+- name: Compliance Monitoring
+  description: Continuous scanning of digital properties for vendor coverage and CMP misconfigurations.
+- name: Server-side Tagging
+  description: Server-side Google Tag Manager (Addingwell by Didomi) gated on Didomi consent.
+standards:
+- name: IAB TCF v2.x
+  url: https://iabeurope.eu/tcf/
+- name: IAB GPP
+  url: https://iabtechlab.com/gpp/
+- name: GPC
+  url: https://globalprivacycontrol.org/
+- name: GDPR
+  url: https://gdpr-info.eu/
+- name: CCPA / CPRA
+  url: https://oag.ca.gov/privacy/ccpa
+- name: DPV
+  url: https://w3id.org/dpv
+- name: schema.org
+  url: https://schema.org/
+tools:
+- name: Didomi Web SDK
+  url: https://developers.didomi.io/cmp/web-sdk
+- name: Didomi iOS / tvOS SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/ios
+- name: Didomi Android SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/android
+- name: Didomi React Native SDK
+  url: https://github.com/didomi/react-native
+- name: Didomi Flutter plugin
+  url: https://github.com/didomi/flutter
+- name: Didomi Unity plugin
+  url: https://github.com/didomi/unity
+- name: Didomi Vega OS SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/vega-os
+- name: Didomi AMP SDK
+  url: https://developers.didomi.io/cmp/amp
+- name: consent-string (TypeScript)
+  url: https://github.com/didomi/consent-string
+- name: consent-string-decoder-rust
+  url: https://github.com/didomi/consent-string-decoder-rust
+- name: consent-string-golang
+  url: https://github.com/didomi/consent-string-golang
+- name: iabtcf-es
+  url: https://github.com/didomi/iabtcf-es
+- name: Didomi GTM template
+  url: https://github.com/didomi/gtm-template

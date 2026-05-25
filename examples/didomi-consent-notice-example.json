@@ -1,0 +1,30 @@
+{
+  "id": "notice_a1b2c3",
+  "organization_id": "org_didomi_demo",
+  "name": "Multi-regulation EU+US notice",
+  "config_id": "cfg_eu_us_2026q2",
+  "sdk_config_id": "sdkcfg_v3_eu_us",
+  "deployment_id": "depl_20260525a",
+  "platforms": ["web", "ios", "android", "amp"],
+  "regulations": ["gdpr", "tcf", "ccpa", "vcdpa", "ctdpa", "cpa", "gpp"],
+  "languages": ["en", "fr", "de", "es", "it", "nl"],
+  "vendors": {
+    "iab_tcf": [1, 2, 3, 6, 7, 9, 42, 76, 91, 128],
+    "didomi":  ["google", "meta", "amazon", "criteo", "the-trade-desk"],
+    "custom":  ["custom-crm-sync"]
+  },
+  "purposes": [
+    "cookies",
+    "select_basic_ads",
+    "create_ads_profile",
+    "select_personalized_ads",
+    "measure_ad_performance",
+    "measure_content_performance",
+    "analytics_measurement",
+    "develop_improve_products"
+  ],
+  "look_and_feel": { "theme": "publisher-dark", "position": "popup", "shape": "card" },
+  "status": "active",
+  "created_at": "2026-04-01T08:00:00Z",
+  "updated_at": "2026-05-25T10:00:00Z"
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/didomi/main/json-schema/didomi-consent-event-schema.json",
+  "title": "Didomi Consent Event",
+  "description": "A single consent / preference event captured by the Didomi platform via POST /v1/consents/events. Represents the act of a user granting, denying, or modifying consent or marketing preferences against one or more purposes / vendors under a given regulatory regime.",
+  "type": "object",
+  "required": ["organization_id", "user", "events"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Server-assigned identifier for the consent event record."
+    },
+    "organization_id": {
+      "type": "string",
+      "description": "Didomi organization identifier that owns this event."
+    },
+    "notice_id": {
+      "type": "string",
+      "description": "Identifier of the consent notice that produced this event."
+    },
+    "user": {
+      "type": "object",
+      "description": "End-user the consent event applies to.",
+      "properties": {
+        "id": { "type": "string", "description": "Stable user identifier (typically a UUID or pseudonymous id)." },
+        "type": { "type": "string", "enum": ["didomi", "external"], "description": "Whether the id is a Didomi-managed id or a customer-owned external id." },
+        "country": { "type": "string", "description": "ISO 3166-1 alpha-2 country code." },
+        "region": { "type": "string", "description": "ISO 3166-2 subdivision code (used for US-state regulations)." }
+      }
+    },
+    "regulation": {
+      "type": "string",
+      "enum": ["gdpr", "ccpa", "vcdpa", "ctdpa", "cpa", "utah", "cdpa", "tcf", "gpp", "chilean-law-25", "australian-privacy", "none"],
+      "description": "Regulatory regime under which consent was captured."
+    },
+    "consent_string": {
+      "type": "string",
+      "description": "Encoded IAB TCF v2 / IAB GPP / Didomi consent string for the choice set."
+    },
+    "events": {
+      "type": "array",
+      "description": "Per-purpose / per-vendor consent decisions captured in this event.",
+      "items": {
+        "type": "object",
+        "required": ["action"],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["consent.given", "consent.refused", "preference.shown", "preferences.click.agreetoall", "preferences.click.disagreetoall", "preferences.click.savechoices"],
+            "description": "The user action recorded."
+          },
+          "purpose": { "type": "string", "description": "Didomi purpose id, IAB TCF purpose number, or vendor-scoped purpose." },
+          "vendor": { "type": "string", "description": "Didomi or IAB vendor identifier." },
+          "value": { "type": "boolean", "description": "Boolean state for the purpose / vendor (true = consent granted)." },
+          "legal_basis": {
+            "type": "string",
+            "enum": ["consent", "legitimate_interest", "contract", "legal_obligation", "vital_interest", "public_interest"],
+            "description": "Legal basis under GDPR Article 6."
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "description": "Captures the source surface (web, mobile, CTV, AMP) and SDK version that produced the event.",
+      "properties": {
+        "type": { "type": "string", "enum": ["web", "ios", "android", "react-native", "flutter", "unity", "vega-os", "amp", "api"] },
+        "sdk_version": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}

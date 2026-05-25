@@ -1,0 +1,85 @@
+extends:
+- spectral:oas
+documentationUrl: https://developers.didomi.io/api-and-platform/introduction
+rules:
+  didomi-info-title-prefix:
+    description: API titles SHOULD start with "Didomi" to make the provider explicit.
+    given: $.info.title
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Didomi"
+  didomi-info-description-required:
+    description: API descriptions MUST be present.
+    given: $.info
+    severity: error
+    then:
+      field: description
+      function: truthy
+  didomi-servers-https:
+    description: Server URLs MUST use HTTPS — Didomi redirects HTTP with a 301.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+  didomi-server-v1-prefix:
+    description: Server URLs SHOULD include the /v1 versioned base path.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/v1$"
+  didomi-paths-kebab-case:
+    description: Path segments SHOULD be kebab-case (consents/events, widgets/notices, sso-connections).
+    given: $.paths[*]~
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/[A-Za-z0-9/_{}\\-]+$"
+  didomi-operation-summary:
+    description: Every operation MUST have a summary.
+    given: $.paths[*][*]
+    severity: error
+    then:
+      field: summary
+      function: truthy
+  didomi-operation-tags:
+    description: Every operation MUST be tagged with at least one of the Didomi resource group tags (consents/*, widgets/*, metadata/*, taxonomies, domains, secrets, keys, etc.).
+    given: $.paths[*][*]
+    severity: error
+    then:
+      field: tags
+      function: truthy
+  didomi-bearer-security:
+    description: The API uses bearer JWT authentication — operations SHOULD declare bearer security except for /sessions endpoints that exchange API key + secret.
+    given: $.paths[?(@property != '/sessions' && @property != '/sessions/{id}')][*]
+    severity: warn
+    then:
+      field: security
+      function: truthy
+  didomi-error-responses:
+    description: Operations SHOULD document 401 (missing/expired token), 429 (rate limit exceeded), and a default 4xx envelope.
+    given: $.paths[*][*].responses
+    severity: warn
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+          - required: ["401"]
+          - required: ["default"]
+  didomi-pagination-shape:
+    description: List operations SHOULD support cursor / offset pagination via standard query parameters.
+    given: $.paths[*].get.parameters
+    severity: info
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array

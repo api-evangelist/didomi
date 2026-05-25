@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/didomi/main/json-schema/didomi-privacy-request-schema.json",
+  "title": "Didomi Privacy Request (DSAR)",
+  "description": "A data-subject privacy request captured by Didomi's Privacy Requests product. Covers GDPR Articles 15-22 (access, rectification, erasure, restriction, portability, objection) and the CCPA / US-state right to delete and opt-out of sale / sharing.",
+  "type": "object",
+  "required": ["organization_id", "type", "data_subject"],
+  "properties": {
+    "id": { "type": "string", "description": "Request identifier." },
+    "organization_id": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": ["access", "rectification", "erasure", "restriction", "portability", "objection", "opt-out-sale", "opt-out-sharing", "delete", "limit-sensitive", "do-not-sell-share"],
+      "description": "Right being exercised."
+    },
+    "regulation": { "type": "string", "enum": ["gdpr", "ccpa", "vcdpa", "ctdpa", "cpa", "utah", "cdpa", "chilean-law-25", "australian-privacy"] },
+    "data_subject": {
+      "type": "object",
+      "required": ["email"],
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "first_name": { "type": "string" },
+        "last_name": { "type": "string" },
+        "country": { "type": "string" },
+        "state": { "type": "string" },
+        "id_documents": { "type": "array", "items": { "type": "string", "format": "uri" }, "description": "URLs to identity-verification documents stored in Didomi." }
+      }
+    },
+    "status": { "type": "string", "enum": ["received", "in-review", "in-progress", "completed", "rejected", "expired"] },
+    "due_at": { "type": "string", "format": "date-time", "description": "Statutory deadline (30 days under GDPR, 45 days under CCPA)." },
+    "completed_at": { "type": "string", "format": "date-time" },
+    "evidence_url": { "type": "string", "format": "uri", "description": "Pointer to the structured export delivered to the data subject." },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}

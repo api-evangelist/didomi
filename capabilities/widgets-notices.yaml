@@ -1,0 +1,1178 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Didomi Platform API — Widgets, Notices, Configs & Templates
+  description: Didomi Platform API — Widgets, Notices, Configs & Templates. 39 operations. Self-contained Naftiko capability over the Didomi Platform REST API.
+  tags:
+  - Didomi
+  - Consent Management
+  - Privacy
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    DIDOMI_BEARER_TOKEN: DIDOMI_BEARER_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: widgets-notices
+    baseUri: https://api.didomi.io/v1
+    description: Didomi Platform API — Widgets, Notices, Configs & Templates business capability against the Didomi Platform REST API (https://api.didomi.io/v1).
+    resources:
+    - name: widgets-notices-remote-configs
+      path: /widgets/notices/remote-configs
+      operations:
+      - name: post-widgets-notices-remote-configs
+        method: POST
+        description: Deploy a SDK config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-texts
+      path: /widgets/notices/texts
+      operations:
+      - name: get-widgets-notices-texts
+        method: GET
+        description: Retrieve a list of notice texts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+      - name: post-widgets-notices-texts
+        method: POST
+        description: Create a notice text
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-texts-id
+      path: /widgets/notices/texts/{id}
+      operations:
+      - name: get-widgets-notices-texts-id
+        method: GET
+        description: Retrieve a notice text
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: put-widgets-notices-texts-id
+        method: PUT
+        description: Update a notice text
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: patch-widgets-notices-texts-id
+        method: PATCH
+        description: Patch a notice text
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-texts-contents
+      path: /widgets/notices/texts-contents
+      operations:
+      - name: get-widgets-notices-texts-contents
+        method: GET
+        description: Retrieve a list of notice text contents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+      - name: post-widgets-notices-texts-contents
+        method: POST
+        description: Create a notice text content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-texts-contents-id
+      path: /widgets/notices/texts-contents/{id}
+      operations:
+      - name: get-widgets-notices-texts-contents-id
+        method: GET
+        description: Retrieve a notice text content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: put-widgets-notices-texts-contents-id
+        method: PUT
+        description: Update a notice text content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: patch-widgets-notices-texts-contents-id
+        method: PATCH
+        description: Patch a notice text content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: delete-widgets-notices-texts-contents-id
+        method: DELETE
+        description: Delete a notice text content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: widgets-notices-generators-sdk
+      path: /widgets/notices/generators/sdk
+      operations:
+      - name: post-widgets-notices-generators-sdk
+        method: POST
+        description: Generate a SDK configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-generators-configs
+      path: /widgets/notices/generators/configs
+      operations:
+      - name: post-widgets-notices-generators-configs
+        method: POST
+        description: Generate a Notice configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-templates-configs
+      path: /widgets/notices/templates/configs
+      operations:
+      - name: get-widgets-notices-templates-configs
+        method: GET
+        description: Retrieve a list of notice template configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+    - name: widgets-notices-templates-configs-id
+      path: /widgets/notices/templates/configs/{id}
+      operations:
+      - name: get-widgets-notices-templates-configs-id
+        method: GET
+        description: Retrieve a notice template configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: put-widgets-notices-templates-configs-id
+        method: PUT
+        description: Update a notice template configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: patch-widgets-notices-templates-configs-id
+        method: PATCH
+        description: Patch a notice template configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: delete-widgets-notices-templates-configs-id
+        method: DELETE
+        description: Removes the resource with id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: widgets-notices-templates
+      path: /widgets/notices/templates
+      operations:
+      - name: get-widgets-notices-templates
+        method: GET
+        description: Retrieve a list of notices templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+      - name: post-widgets-notices-templates
+        method: POST
+        description: Create a notice template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-templates-id
+      path: /widgets/notices/templates/{id}
+      operations:
+      - name: get-widgets-notices-templates-id
+        method: GET
+        description: Retrieve a notice template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: put-widgets-notices-templates-id
+        method: PUT
+        description: Updates the resource identified by id using data.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: patch-widgets-notices-templates-id
+        method: PATCH
+        description: Patch a notice template, and associate notice template with notices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: delete-widgets-notices-templates-id
+        method: DELETE
+        description: Removes the notice template, and associated notice template config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: widgets-notices-deployments
+      path: /widgets/notices/deployments
+      operations:
+      - name: get-widgets-notices-deployments
+        method: GET
+        description: Retrieve a list of deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+      - name: post-widgets-notices-deployments
+        method: POST
+        description: Create a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-deployments-id
+      path: /widgets/notices/deployments/{id}
+      operations:
+      - name: get-widgets-notices-deployments-id
+        method: GET
+        description: Retrieve a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: widgets-notices-configs
+      path: /widgets/notices/configs
+      operations:
+      - name: get-widgets-notices-configs
+        method: GET
+        description: Retrieve a list of configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+    - name: widgets-notices-configs-id
+      path: /widgets/notices/configs/{id}
+      operations:
+      - name: get-widgets-notices-configs-id
+        method: GET
+        description: Retrieve a notice configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: patch-widgets-notices-configs-id
+        method: PATCH
+        description: Patch a notice configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-sdk-configs
+      path: /widgets/notices/sdk-configs
+      operations:
+      - name: get-widgets-notices-sdk-configs
+        method: GET
+        description: Retrieve a list of SDK configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+    - name: widgets-notices-sdk-configs-id
+      path: /widgets/notices/sdk-configs/{id}
+      operations:
+      - name: get-widgets-notices-sdk-configs-id
+        method: GET
+        description: Retrieve a SDK configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: widgets-notices
+      path: /widgets/notices
+      operations:
+      - name: get-widgets-notices
+        method: GET
+        description: Retrieve a list of notices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+      - name: post-widgets-notices
+        method: POST
+        description: Create a notice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: widgets-notices-id
+      path: /widgets/notices/{id}
+      operations:
+      - name: get-widgets-notices-id
+        method: GET
+        description: Retrieve a notice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: put-widgets-notices-id
+        method: PUT
+        description: Update a notice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: patch-widgets-notices-id
+        method: PATCH
+        description: Patch a notice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: delete-widgets-notices-id
+        method: DELETE
+        description: Delete a notice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      value: '{{env.DIDOMI_BEARER_TOKEN}}'
+      placement: header
+      note: Obtain by POSTing api-key + secret to /v1/sessions and reusing access_token for up to one hour.
+  exposes:
+  - type: rest
+    namespace: widgets-notices-rest
+    port: 8080
+    description: REST adapter for Didomi Platform API — Widgets, Notices, Configs & Templates. One resource per consumed operation.
+    resources:
+    - path: /v1/widgets/notices/remote-configs
+      name: widgets-notices-remote-configs
+      description: REST surface for widgets-notices-remote-configs.
+      operations:
+      - method: POST
+        name: post-widgets-notices-remote-configs
+        description: Deploy a SDK config
+        call: widgets-notices.post-widgets-notices-remote-configs
+    - path: /v1/widgets/notices/texts
+      name: widgets-notices-texts
+      description: REST surface for widgets-notices-texts.
+      operations:
+      - method: GET
+        name: get-widgets-notices-texts
+        description: Retrieve a list of notice texts
+        call: widgets-notices.get-widgets-notices-texts
+      - method: POST
+        name: post-widgets-notices-texts
+        description: Create a notice text
+        call: widgets-notices.post-widgets-notices-texts
+    - path: /v1/widgets/notices/texts/{id}
+      name: widgets-notices-texts-id
+      description: REST surface for widgets-notices-texts-id.
+      operations:
+      - method: GET
+        name: get-widgets-notices-texts-id
+        description: Retrieve a notice text
+        call: widgets-notices.get-widgets-notices-texts-id
+      - method: PUT
+        name: put-widgets-notices-texts-id
+        description: Update a notice text
+        call: widgets-notices.put-widgets-notices-texts-id
+      - method: PATCH
+        name: patch-widgets-notices-texts-id
+        description: Patch a notice text
+        call: widgets-notices.patch-widgets-notices-texts-id
+    - path: /v1/widgets/notices/texts-contents
+      name: widgets-notices-texts-contents
+      description: REST surface for widgets-notices-texts-contents.
+      operations:
+      - method: GET
+        name: get-widgets-notices-texts-contents
+        description: Retrieve a list of notice text contents
+        call: widgets-notices.get-widgets-notices-texts-contents
+      - method: POST
+        name: post-widgets-notices-texts-contents
+        description: Create a notice text content
+        call: widgets-notices.post-widgets-notices-texts-contents
+    - path: /v1/widgets/notices/texts-contents/{id}
+      name: widgets-notices-texts-contents-id
+      description: REST surface for widgets-notices-texts-contents-id.
+      operations:
+      - method: GET
+        name: get-widgets-notices-texts-contents-id
+        description: Retrieve a notice text content
+        call: widgets-notices.get-widgets-notices-texts-contents-id
+      - method: PUT
+        name: put-widgets-notices-texts-contents-id
+        description: Update a notice text content
+        call: widgets-notices.put-widgets-notices-texts-contents-id
+      - method: PATCH
+        name: patch-widgets-notices-texts-contents-id
+        description: Patch a notice text content
+        call: widgets-notices.patch-widgets-notices-texts-contents-id
+      - method: DELETE
+        name: delete-widgets-notices-texts-contents-id
+        description: Delete a notice text content
+        call: widgets-notices.delete-widgets-notices-texts-contents-id
+    - path: /v1/widgets/notices/generators/sdk
+      name: widgets-notices-generators-sdk
+      description: REST surface for widgets-notices-generators-sdk.
+      operations:
+      - method: POST
+        name: post-widgets-notices-generators-sdk
+        description: Generate a SDK configuration
+        call: widgets-notices.post-widgets-notices-generators-sdk
+    - path: /v1/widgets/notices/generators/configs
+      name: widgets-notices-generators-configs
+      description: REST surface for widgets-notices-generators-configs.
+      operations:
+      - method: POST
+        name: post-widgets-notices-generators-configs
+        description: Generate a Notice configuration
+        call: widgets-notices.post-widgets-notices-generators-configs
+    - path: /v1/widgets/notices/templates/configs
+      name: widgets-notices-templates-configs
+      description: REST surface for widgets-notices-templates-configs.
+      operations:
+      - method: GET
+        name: get-widgets-notices-templates-configs
+        description: Retrieve a list of notice template configurations
+        call: widgets-notices.get-widgets-notices-templates-configs
+    - path: /v1/widgets/notices/templates/configs/{id}
+      name: widgets-notices-templates-configs-id
+      description: REST surface for widgets-notices-templates-configs-id.
+      operations:
+      - method: GET
+        name: get-widgets-notices-templates-configs-id
+        description: Retrieve a notice template configuration
+        call: widgets-notices.get-widgets-notices-templates-configs-id
+      - method: PUT
+        name: put-widgets-notices-templates-configs-id
+        description: Update a notice template configuration
+        call: widgets-notices.put-widgets-notices-templates-configs-id
+      - method: PATCH
+        name: patch-widgets-notices-templates-configs-id
+        description: Patch a notice template configuration
+        call: widgets-notices.patch-widgets-notices-templates-configs-id
+      - method: DELETE
+        name: delete-widgets-notices-templates-configs-id
+        description: Removes the resource with id.
+        call: widgets-notices.delete-widgets-notices-templates-configs-id
+    - path: /v1/widgets/notices/templates
+      name: widgets-notices-templates
+      description: REST surface for widgets-notices-templates.
+      operations:
+      - method: GET
+        name: get-widgets-notices-templates
+        description: Retrieve a list of notices templates
+        call: widgets-notices.get-widgets-notices-templates
+      - method: POST
+        name: post-widgets-notices-templates
+        description: Create a notice template
+        call: widgets-notices.post-widgets-notices-templates
+    - path: /v1/widgets/notices/templates/{id}
+      name: widgets-notices-templates-id
+      description: REST surface for widgets-notices-templates-id.
+      operations:
+      - method: GET
+        name: get-widgets-notices-templates-id
+        description: Retrieve a notice template
+        call: widgets-notices.get-widgets-notices-templates-id
+      - method: PUT
+        name: put-widgets-notices-templates-id
+        description: Updates the resource identified by id using data.
+        call: widgets-notices.put-widgets-notices-templates-id
+      - method: PATCH
+        name: patch-widgets-notices-templates-id
+        description: Patch a notice template, and associate notice template with notices
+        call: widgets-notices.patch-widgets-notices-templates-id
+      - method: DELETE
+        name: delete-widgets-notices-templates-id
+        description: Removes the notice template, and associated notice template config
+        call: widgets-notices.delete-widgets-notices-templates-id
+    - path: /v1/widgets/notices/deployments
+      name: widgets-notices-deployments
+      description: REST surface for widgets-notices-deployments.
+      operations:
+      - method: GET
+        name: get-widgets-notices-deployments
+        description: Retrieve a list of deployments
+        call: widgets-notices.get-widgets-notices-deployments
+      - method: POST
+        name: post-widgets-notices-deployments
+        description: Create a deployment
+        call: widgets-notices.post-widgets-notices-deployments
+    - path: /v1/widgets/notices/deployments/{id}
+      name: widgets-notices-deployments-id
+      description: REST surface for widgets-notices-deployments-id.
+      operations:
+      - method: GET
+        name: get-widgets-notices-deployments-id
+        description: Retrieve a deployment
+        call: widgets-notices.get-widgets-notices-deployments-id
+    - path: /v1/widgets/notices/configs
+      name: widgets-notices-configs
+      description: REST surface for widgets-notices-configs.
+      operations:
+      - method: GET
+        name: get-widgets-notices-configs
+        description: Retrieve a list of configurations
+        call: widgets-notices.get-widgets-notices-configs
+    - path: /v1/widgets/notices/configs/{id}
+      name: widgets-notices-configs-id
+      description: REST surface for widgets-notices-configs-id.
+      operations:
+      - method: GET
+        name: get-widgets-notices-configs-id
+        description: Retrieve a notice configuration
+        call: widgets-notices.get-widgets-notices-configs-id
+      - method: PATCH
+        name: patch-widgets-notices-configs-id
+        description: Patch a notice configuration
+        call: widgets-notices.patch-widgets-notices-configs-id
+    - path: /v1/widgets/notices/sdk-configs
+      name: widgets-notices-sdk-configs
+      description: REST surface for widgets-notices-sdk-configs.
+      operations:
+      - method: GET
+        name: get-widgets-notices-sdk-configs
+        description: Retrieve a list of SDK configurations
+        call: widgets-notices.get-widgets-notices-sdk-configs
+    - path: /v1/widgets/notices/sdk-configs/{id}
+      name: widgets-notices-sdk-configs-id
+      description: REST surface for widgets-notices-sdk-configs-id.
+      operations:
+      - method: GET
+        name: get-widgets-notices-sdk-configs-id
+        description: Retrieve a SDK configuration
+        call: widgets-notices.get-widgets-notices-sdk-configs-id
+    - path: /v1/widgets/notices
+      name: widgets-notices
+      description: REST surface for widgets-notices.
+      operations:
+      - method: GET
+        name: get-widgets-notices
+        description: Retrieve a list of notices
+        call: widgets-notices.get-widgets-notices
+      - method: POST
+        name: post-widgets-notices
+        description: Create a notice
+        call: widgets-notices.post-widgets-notices
+    - path: /v1/widgets/notices/{id}
+      name: widgets-notices-id
+      description: REST surface for widgets-notices-id.
+      operations:
+      - method: GET
+        name: get-widgets-notices-id
+        description: Retrieve a notice
+        call: widgets-notices.get-widgets-notices-id
+      - method: PUT
+        name: put-widgets-notices-id
+        description: Update a notice
+        call: widgets-notices.put-widgets-notices-id
+      - method: PATCH
+        name: patch-widgets-notices-id
+        description: Patch a notice
+        call: widgets-notices.patch-widgets-notices-id
+      - method: DELETE
+        name: delete-widgets-notices-id
+        description: Delete a notice
+        call: widgets-notices.delete-widgets-notices-id
+  - type: mcp
+    namespace: widgets-notices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Didomi Platform API — Widgets, Notices, Configs & Templates. One tool per consumed operation.
+    tools:
+    - name: didomi-post-widgets-notices-remote-configs
+      description: Deploy a SDK config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.post-widgets-notices-remote-configs
+    - name: didomi-get-widgets-notices-texts
+      description: Retrieve a list of notice texts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-texts
+    - name: didomi-post-widgets-notices-texts
+      description: Create a notice text
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.post-widgets-notices-texts
+    - name: didomi-get-widgets-notices-texts-id
+      description: Retrieve a notice text
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-texts-id
+    - name: didomi-put-widgets-notices-texts-id
+      description: Update a notice text
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: widgets-notices.put-widgets-notices-texts-id
+    - name: didomi-patch-widgets-notices-texts-id
+      description: Patch a notice text
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.patch-widgets-notices-texts-id
+    - name: didomi-get-widgets-notices-texts-contents
+      description: Retrieve a list of notice text contents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-texts-contents
+    - name: didomi-post-widgets-notices-texts-contents
+      description: Create a notice text content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.post-widgets-notices-texts-contents
+    - name: didomi-get-widgets-notices-texts-contents-id
+      description: Retrieve a notice text content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-texts-contents-id
+    - name: didomi-put-widgets-notices-texts-contents-id
+      description: Update a notice text content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: widgets-notices.put-widgets-notices-texts-contents-id
+    - name: didomi-patch-widgets-notices-texts-contents-id
+      description: Patch a notice text content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.patch-widgets-notices-texts-contents-id
+    - name: didomi-delete-widgets-notices-texts-contents-id
+      description: Delete a notice text content
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: widgets-notices.delete-widgets-notices-texts-contents-id
+    - name: didomi-post-widgets-notices-generators-sdk
+      description: Generate a SDK configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.post-widgets-notices-generators-sdk
+    - name: didomi-post-widgets-notices-generators-configs
+      description: Generate a Notice configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.post-widgets-notices-generators-configs
+    - name: didomi-get-widgets-notices-templates-configs
+      description: Retrieve a list of notice template configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-templates-configs
+    - name: didomi-get-widgets-notices-templates-configs-id
+      description: Retrieve a notice template configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-templates-configs-id
+    - name: didomi-put-widgets-notices-templates-configs-id
+      description: Update a notice template configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: widgets-notices.put-widgets-notices-templates-configs-id
+    - name: didomi-patch-widgets-notices-templates-configs-id
+      description: Patch a notice template configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.patch-widgets-notices-templates-configs-id
+    - name: didomi-delete-widgets-notices-templates-configs-id
+      description: Removes the resource with id.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: widgets-notices.delete-widgets-notices-templates-configs-id
+    - name: didomi-get-widgets-notices-templates
+      description: Retrieve a list of notices templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-templates
+    - name: didomi-post-widgets-notices-templates
+      description: Create a notice template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.post-widgets-notices-templates
+    - name: didomi-get-widgets-notices-templates-id
+      description: Retrieve a notice template
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-templates-id
+    - name: didomi-put-widgets-notices-templates-id
+      description: Updates the resource identified by id using data.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: widgets-notices.put-widgets-notices-templates-id
+    - name: didomi-patch-widgets-notices-templates-id
+      description: Patch a notice template, and associate notice template with notices
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.patch-widgets-notices-templates-id
+    - name: didomi-delete-widgets-notices-templates-id
+      description: Removes the notice template, and associated notice template config
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: widgets-notices.delete-widgets-notices-templates-id
+    - name: didomi-get-widgets-notices-deployments
+      description: Retrieve a list of deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-deployments
+    - name: didomi-post-widgets-notices-deployments
+      description: Create a deployment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.post-widgets-notices-deployments
+    - name: didomi-get-widgets-notices-deployments-id
+      description: Retrieve a deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-deployments-id
+    - name: didomi-get-widgets-notices-configs
+      description: Retrieve a list of configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-configs
+    - name: didomi-get-widgets-notices-configs-id
+      description: Retrieve a notice configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-configs-id
+    - name: didomi-patch-widgets-notices-configs-id
+      description: Patch a notice configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.patch-widgets-notices-configs-id
+    - name: didomi-get-widgets-notices-sdk-configs
+      description: Retrieve a list of SDK configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-sdk-configs
+    - name: didomi-get-widgets-notices-sdk-configs-id
+      description: Retrieve a SDK configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-sdk-configs-id
+    - name: didomi-get-widgets-notices
+      description: Retrieve a list of notices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices
+    - name: didomi-post-widgets-notices
+      description: Create a notice
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.post-widgets-notices
+    - name: didomi-get-widgets-notices-id
+      description: Retrieve a notice
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: widgets-notices.get-widgets-notices-id
+    - name: didomi-put-widgets-notices-id
+      description: Update a notice
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: widgets-notices.put-widgets-notices-id
+    - name: didomi-patch-widgets-notices-id
+      description: Patch a notice
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: widgets-notices.patch-widgets-notices-id
+    - name: didomi-delete-widgets-notices-id
+      description: Delete a notice
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: widgets-notices.delete-widgets-notices-id

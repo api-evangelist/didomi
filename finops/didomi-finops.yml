@@ -1,0 +1,57 @@
+finops: 0.1
+info:
+  name: Didomi FinOps Mapping
+  description: >-
+    Mapping of Didomi's commercial surface to the FinOps Foundation FOCUS data
+    spec dimensions. Didomi sells on a contact-sales / quote basis so the
+    publicly observable FinOps signal is limited; this file captures what is
+    inferable from the developer documentation, the offers page, and the
+    Platform API.
+  provider: didomi
+  modified: '2026-05-25'
+  sources:
+  - https://www.didomi.io/offers
+  - https://developers.didomi.io/api-and-platform/introduction
+  - https://developers.didomi.io/api-and-platform/introduction/quotas
+billing_model:
+  primary: subscription
+  secondary:
+  - module-based add-on (Preference Management Platform, Privacy Requests, Compliance Monitoring, Addingwell)
+  - separate metered surface for the Consents API and Integrations (per Didomi developer docs)
+  currency: EUR
+  invoicing:
+    cadence: monthly_or_annual
+    channels:
+    - direct invoice from Didomi
+    delivery: account-team
+focus_dimensions:
+- name: ServiceCategory
+  value: Compliance & Governance
+- name: ServiceName
+  value: Didomi Consent Management
+- name: ChargeCategory
+  value: Subscription
+- name: ChargeFrequency
+  value: Recurring
+- name: BillingPeriod
+  value: Monthly or Annual
+- name: Provider
+  value: Didomi SAS
+- name: Region
+  value: EU (Paris HQ); global delivery
+metering:
+- dimension: Consent events ingested
+  notes: Backs the /v1/consents/events ingestion surface; volume is the primary unit driving plan sizing.
+- dimension: Monthly active users / sessions
+  notes: Typical CMP pricing input across the industry; Didomi quotes per traffic tier.
+- dimension: Number of websites / apps / properties
+  notes: Didomi's compliance monitoring and notice deployment scopes are per-property.
+- dimension: API quotas
+  notes: Exposed programmatically at /v1/quotas; per-key monthly call ceilings.
+allocation_guidance:
+- Allocate Didomi spend to the privacy / compliance cost center (or shared services), not to individual product teams.
+- Tag the CMP and PMP modules separately when consumed by distinct customer-facing brands.
+- Track the Consents API as a separately priced line item — it's metered independently per Didomi's docs.
+caveats:
+- Didomi does not publish list pricing; all FinOps modeling must rely on the negotiated contract and the Platform API's quotas and rate-limit telemetry.
+- Pricing tiers, included quotas, and overage rules can change at contract renewal; rebuild this mapping annually.

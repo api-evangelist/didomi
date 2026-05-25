@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/draft/0.1/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/didomi/main/json-structure/didomi-consent-event-structure.json",
+  "name": "DidomiConsentEvent",
+  "description": "JSON Structure form of the Didomi consent event payload accepted by POST /v1/consents/events. Aligned with the equivalent JSON Schema in json-schema/didomi-consent-event-schema.json.",
+  "type": "object",
+  "properties": {
+    "id":              { "type": "string" },
+    "organization_id": { "type": "string", "required": true },
+    "notice_id":       { "type": "string" },
+    "user": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "id":      { "type": "string" },
+        "type":    { "type": "enum", "values": ["didomi", "external"] },
+        "country": { "type": "string" },
+        "region":  { "type": "string" }
+      }
+    },
+    "regulation": {
+      "type": "enum",
+      "values": ["gdpr", "ccpa", "vcdpa", "ctdpa", "cpa", "utah", "cdpa", "tcf", "gpp", "chilean-law-25", "australian-privacy", "none"]
+    },
+    "consent_string": { "type": "string" },
+    "events": {
+      "type": "array",
+      "required": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "action":      { "type": "enum", "values": ["consent.given", "consent.refused", "preference.shown", "preferences.click.agreetoall", "preferences.click.disagreetoall", "preferences.click.savechoices"], "required": true },
+          "purpose":     { "type": "string" },
+          "vendor":      { "type": "string" },
+          "value":       { "type": "boolean" },
+          "legal_basis": { "type": "enum", "values": ["consent", "legitimate_interest", "contract", "legal_obligation", "vital_interest", "public_interest"] }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "type":        { "type": "enum", "values": ["web", "ios", "android", "react-native", "flutter", "unity", "vega-os", "amp", "api"] },
+        "sdk_version": { "type": "string" },
+        "url":         { "type": "string", "format": "uri" }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}

@@ -1,0 +1,51 @@
+rate_limits: 0.1
+info:
+  name: Didomi Platform API Rate Limits
+  description: >-
+    Token-bucket-style request limits enforced by the Didomi Platform REST API
+    at https://api.didomi.io/v1/. Limits are scoped to the organization (not
+    the individual API key) and are subject to change without notice per
+    Didomi's documentation. The high-volume /consents/* endpoints are exempt
+    from the general limit except when consent payloads include
+    $include_full_tree=true.
+  provider: didomi
+  modified: '2026-05-25'
+  sources:
+  - https://developers.didomi.io/api-and-platform/introduction/rate-limiting
+  - https://developers.didomi.io/api-and-platform/introduction/quotas
+policies:
+- id: general
+  name: General API rate limit
+  scope: organization
+  window_seconds: 15
+  max_requests: 100
+  applies_to:
+  - All Platform API routes except /consents/*
+  - /consents/* routes when called with $include_full_tree=true
+  response_headers:
+  - name: RateLimit
+    description: "limit=<n>, remaining=<n>, reset=<seconds>"
+  - name: RateLimit-Policy
+    description: "<n>;w=<window-seconds>, e.g. 100;w=15"
+  throttle:
+    status_code: 429
+    retry_header: Retry-After
+    retry_unit: seconds
+- id: consents
+  name: Consents pipeline (exempt)
+  scope: organization
+  description: >-
+    /consents/* endpoints (events, proofs, users, tokens, links) are exempt
+    from the general 15-second window so that consent ingestion at scale is
+    not blocked. Quotas may still apply.
+quotas:
+- id: api-key-quota
+  name: Per-key call quota
+  description: >-
+    Didomi exposes a /v1/quotas resource for inspecting and managing per-key
+    monthly call quotas; values are organization- and plan-specific.
+  resource_url: https://api.didomi.io/v1/quotas
+guidance:
+- Cache the JWT access_token returned by POST /v1/sessions; it is valid for one hour.
+- Read the RateLimit / RateLimit-Policy response headers proactively and back off before hitting 429.
+- Treat the limits as soft contracts — Didomi explicitly reserves the right to change them without notice.

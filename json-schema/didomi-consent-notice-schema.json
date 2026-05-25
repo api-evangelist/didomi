@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/didomi/main/json-schema/didomi-consent-notice-schema.json",
+  "title": "Didomi Consent Notice",
+  "description": "Didomi consent notice resource as exposed by /v1/widgets/notices and its child configs / SDK-configs / deployments. A notice ties together a multi-regulation configuration, an SDK config, a deployment, and a set of texts / translations.",
+  "type": "object",
+  "required": ["organization_id", "name"],
+  "properties": {
+    "id": { "type": "string", "description": "Notice identifier." },
+    "organization_id": { "type": "string", "description": "Owning Didomi organization." },
+    "name": { "type": "string", "description": "Human-readable name of the notice." },
+    "config_id": { "type": "string", "description": "Multi-regulation configuration id (regulations, vendors, purposes)." },
+    "sdk_config_id": { "type": "string", "description": "SDK config id consumed by the Web / Mobile / CTV SDK." },
+    "deployment_id": { "type": "string", "description": "Active deployment id (publish target)." },
+    "platforms": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["web", "ios", "android", "amp", "ctv", "react-native", "flutter", "unity", "vega-os"] }
+    },
+    "regulations": {
+      "type": "array",
+      "description": "Regulations this notice is configured to serve.",
+      "items": { "type": "string", "enum": ["gdpr", "ccpa", "vcdpa", "ctdpa", "cpa", "utah", "cdpa", "tcf", "gpp", "chilean-law-25", "australian-privacy"] }
+    },
+    "languages": {
+      "type": "array",
+      "description": "ISO 639-1 language codes for which translated texts are available.",
+      "items": { "type": "string" }
+    },
+    "vendors": {
+      "type": "object",
+      "description": "Vendor selection for the notice.",
+      "properties": {
+        "iab_tcf": { "type": "array", "items": { "type": "integer" } },
+        "didomi": { "type": "array", "items": { "type": "string" } },
+        "custom": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "purposes": {
+      "type": "array",
+      "description": "Didomi or IAB TCF purpose identifiers selected for the notice.",
+      "items": { "type": "string" }
+    },
+    "look_and_feel": {
+      "type": "object",
+      "description": "Theme and layout for the rendered consent UI.",
+      "properties": {
+        "theme": { "type": "string" },
+        "position": { "type": "string", "enum": ["popup", "bottom", "top"] },
+        "shape": { "type": "string", "enum": ["card", "fullscreen", "banner"] }
+      }
+    },
+    "status": { "type": "string", "enum": ["draft", "active", "archived"] },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}

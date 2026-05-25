@@ -1,0 +1,211 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Didomi Platform API — Consents Users & Tokens
+  description: Didomi Platform API — Consents Users & Tokens. 6 operations. Self-contained Naftiko capability over the Didomi Platform REST API.
+  tags:
+  - Didomi
+  - Consent Management
+  - Privacy
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    DIDOMI_BEARER_TOKEN: DIDOMI_BEARER_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: consents-users
+    baseUri: https://api.didomi.io/v1
+    description: Didomi Platform API — Consents Users & Tokens business capability against the Didomi Platform REST API (https://api.didomi.io/v1).
+    resources:
+    - name: consents-tokens
+      path: /consents/tokens
+      operations:
+      - name: post-consents-tokens
+        method: POST
+        description: Create a new consent token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: consents-users
+      path: /consents/users
+      operations:
+      - name: get-consents-users
+        method: GET
+        description: Retrieve users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+      - name: post-consents-users
+        method: POST
+        description: Create a new user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: consents-users-id
+      path: /consents/users/{id}
+      operations:
+      - name: get-consents-users-id
+        method: GET
+        description: Retrieve a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: patch-consents-users-id
+        method: PATCH
+        description: Patch a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: delete-consents-users-id
+        method: DELETE
+        description: Delete a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      value: '{{env.DIDOMI_BEARER_TOKEN}}'
+      placement: header
+      note: Obtain by POSTing api-key + secret to /v1/sessions and reusing access_token for up to one hour.
+  exposes:
+  - type: rest
+    namespace: consents-users-rest
+    port: 8080
+    description: REST adapter for Didomi Platform API — Consents Users & Tokens. One resource per consumed operation.
+    resources:
+    - path: /v1/consents/tokens
+      name: consents-tokens
+      description: REST surface for consents-tokens.
+      operations:
+      - method: POST
+        name: post-consents-tokens
+        description: Create a new consent token
+        call: consents-users.post-consents-tokens
+    - path: /v1/consents/users
+      name: consents-users
+      description: REST surface for consents-users.
+      operations:
+      - method: GET
+        name: get-consents-users
+        description: Retrieve users
+        call: consents-users.get-consents-users
+      - method: POST
+        name: post-consents-users
+        description: Create a new user
+        call: consents-users.post-consents-users
+    - path: /v1/consents/users/{id}
+      name: consents-users-id
+      description: REST surface for consents-users-id.
+      operations:
+      - method: GET
+        name: get-consents-users-id
+        description: Retrieve a user
+        call: consents-users.get-consents-users-id
+      - method: PATCH
+        name: patch-consents-users-id
+        description: Patch a user
+        call: consents-users.patch-consents-users-id
+      - method: DELETE
+        name: delete-consents-users-id
+        description: Delete a user
+        call: consents-users.delete-consents-users-id
+  - type: mcp
+    namespace: consents-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Didomi Platform API — Consents Users & Tokens. One tool per consumed operation.
+    tools:
+    - name: didomi-post-consents-tokens
+      description: Create a new consent token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: consents-users.post-consents-tokens
+    - name: didomi-get-consents-users
+      description: Retrieve users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: consents-users.get-consents-users
+    - name: didomi-post-consents-users
+      description: Create a new user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: consents-users.post-consents-users
+    - name: didomi-get-consents-users-id
+      description: Retrieve a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: consents-users.get-consents-users-id
+    - name: didomi-patch-consents-users-id
+      description: Patch a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: consents-users.patch-consents-users-id
+    - name: didomi-delete-consents-users-id
+      description: Delete a user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: consents-users.delete-consents-users-id

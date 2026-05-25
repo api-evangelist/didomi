@@ -1,0 +1,378 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Didomi Platform API — Domains & Cookies
+  description: Didomi Platform API — Domains & Cookies. 12 operations. Self-contained Naftiko capability over the Didomi Platform REST API.
+  tags:
+  - Didomi
+  - Consent Management
+  - Privacy
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    DIDOMI_BEARER_TOKEN: DIDOMI_BEARER_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: domains
+    baseUri: https://api.didomi.io/v1
+    description: Didomi Platform API — Domains & Cookies business capability against the Didomi Platform REST API (https://api.didomi.io/v1).
+    resources:
+    - name: domains
+      path: /domains
+      operations:
+      - name: get-domains
+        method: GET
+        description: Retrieve a list of domains
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+      - name: post-domains
+        method: POST
+        description: Create a domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: domains-id
+      path: /domains/{id}
+      operations:
+      - name: get-domains-id
+        method: GET
+        description: Retrieve a domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: put-domains-id
+        method: PUT
+        description: Update a domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: patch-domains-id
+        method: PATCH
+        description: Patch a domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: delete-domains-id
+        method: DELETE
+        description: Delete a domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: cookies
+      path: /cookies
+      operations:
+      - name: get-cookies
+        method: GET
+        description: Retrieve a list of cookies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: object
+          required: false
+          description: Optional query filters / pagination.
+      - name: post-cookies
+        method: POST
+        description: Create a cookie
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+    - name: cookies-id
+      path: /cookies/{id}
+      operations:
+      - name: get-cookies-id
+        method: GET
+        description: Retrieve a cookie
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: put-cookies-id
+        method: PUT
+        description: Update a cookie
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: patch-cookies-id
+        method: PATCH
+        description: Patch a cookie
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body (JSON).
+      - name: delete-cookies-id
+        method: DELETE
+        description: Delete a cookie
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      value: '{{env.DIDOMI_BEARER_TOKEN}}'
+      placement: header
+      note: Obtain by POSTing api-key + secret to /v1/sessions and reusing access_token for up to one hour.
+  exposes:
+  - type: rest
+    namespace: domains-rest
+    port: 8080
+    description: REST adapter for Didomi Platform API — Domains & Cookies. One resource per consumed operation.
+    resources:
+    - path: /v1/domains
+      name: domains
+      description: REST surface for domains.
+      operations:
+      - method: GET
+        name: get-domains
+        description: Retrieve a list of domains
+        call: domains.get-domains
+      - method: POST
+        name: post-domains
+        description: Create a domain
+        call: domains.post-domains
+    - path: /v1/domains/{id}
+      name: domains-id
+      description: REST surface for domains-id.
+      operations:
+      - method: GET
+        name: get-domains-id
+        description: Retrieve a domain
+        call: domains.get-domains-id
+      - method: PUT
+        name: put-domains-id
+        description: Update a domain
+        call: domains.put-domains-id
+      - method: PATCH
+        name: patch-domains-id
+        description: Patch a domain
+        call: domains.patch-domains-id
+      - method: DELETE
+        name: delete-domains-id
+        description: Delete a domain
+        call: domains.delete-domains-id
+    - path: /v1/cookies
+      name: cookies
+      description: REST surface for cookies.
+      operations:
+      - method: GET
+        name: get-cookies
+        description: Retrieve a list of cookies
+        call: domains.get-cookies
+      - method: POST
+        name: post-cookies
+        description: Create a cookie
+        call: domains.post-cookies
+    - path: /v1/cookies/{id}
+      name: cookies-id
+      description: REST surface for cookies-id.
+      operations:
+      - method: GET
+        name: get-cookies-id
+        description: Retrieve a cookie
+        call: domains.get-cookies-id
+      - method: PUT
+        name: put-cookies-id
+        description: Update a cookie
+        call: domains.put-cookies-id
+      - method: PATCH
+        name: patch-cookies-id
+        description: Patch a cookie
+        call: domains.patch-cookies-id
+      - method: DELETE
+        name: delete-cookies-id
+        description: Delete a cookie
+        call: domains.delete-cookies-id
+  - type: mcp
+    namespace: domains-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Didomi Platform API — Domains & Cookies. One tool per consumed operation.
+    tools:
+    - name: didomi-get-domains
+      description: Retrieve a list of domains
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: domains.get-domains
+    - name: didomi-post-domains
+      description: Create a domain
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: domains.post-domains
+    - name: didomi-get-domains-id
+      description: Retrieve a domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: domains.get-domains-id
+    - name: didomi-put-domains-id
+      description: Update a domain
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: domains.put-domains-id
+    - name: didomi-patch-domains-id
+      description: Patch a domain
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: domains.patch-domains-id
+    - name: didomi-delete-domains-id
+      description: Delete a domain
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: domains.delete-domains-id
+    - name: didomi-get-cookies
+      description: Retrieve a list of cookies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: domains.get-cookies
+    - name: didomi-post-cookies
+      description: Create a cookie
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: domains.post-cookies
+    - name: didomi-get-cookies-id
+      description: Retrieve a cookie
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: domains.get-cookies-id
+    - name: didomi-put-cookies-id
+      description: Update a cookie
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: domains.put-cookies-id
+    - name: didomi-patch-cookies-id
+      description: Patch a cookie
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: domains.patch-cookies-id
+    - name: didomi-delete-cookies-id
+      description: Delete a cookie
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: domains.delete-cookies-id

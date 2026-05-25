@@ -1,0 +1,69 @@
+plans: 0.1
+info:
+  name: Didomi Plans and Pricing
+  description: >-
+    Didomi publicly advertises product modules (CMP, Preference Management
+    Platform, Privacy Requests, Compliance Monitoring, Addingwell server-side
+    tagging) but does not publish dollar pricing on a self-serve page; all
+    commercial plans are quoted via the sales team at /contact-us and
+    /offers. This file captures the publicly visible structure of the
+    commercial offering as a starting point — pricing values are
+    unpublished/quote-based.
+  provider: didomi
+  modified: '2026-05-25'
+  sources:
+  - https://www.didomi.io/offers
+  - https://www.didomi.io/contact-us
+  - https://www.didomi.io
+plans:
+- id: cmp
+  name: Consent Management Platform
+  pricing_model: contact-sales
+  description: >-
+    Didomi's flagship multi-regulation Consent Management Platform for
+    publishers, advertisers, retailers, and large enterprises. Covers GDPR,
+    CCPA / US state laws, IAB TCF v2.x, IAB GPP, GPC, Google Consent Mode v2,
+    Amazon Consent Signal, Microsoft UET Consent Mode, and other regimes.
+  surfaces:
+  - Web SDK
+  - iOS / tvOS SDK
+  - Android / Android TV SDK
+  - React Native, Flutter, Unity, Vega OS, AMP plugins
+  - Console
+  - Platform API (CMP scope)
+- id: pmp
+  name: Preference Management Platform
+  pricing_model: contact-sales
+  description: >-
+    Custom preference centers, headless preference widgets, marketing-channel
+    opt-in flows, and authenticated-user preference storage. Sold separately
+    from the CMP and per Didomi's docs the underlying Consents API and
+    integrations are priced separately.
+  surfaces:
+  - Privacy Widgets
+  - Headless widgets
+  - Platform API (Widgets scope)
+- id: privacy-requests
+  name: Privacy Requests
+  pricing_model: contact-sales
+  description: >-
+    DSAR intake, internal workflow, identity verification, structured
+    response, and audit-grade evidence for GDPR Articles 15-22 and CCPA /
+    US-state delete / opt-out rights.
+- id: compliance-monitoring
+  name: Advanced Compliance Monitoring
+  pricing_model: contact-sales
+  description: >-
+    Continuous scanning of websites and apps for vendor coverage, unauthorized
+    tags, and CMP misconfigurations, surfaced as CSV / Excel compliance
+    reports.
+- id: addingwell
+  name: Addingwell - Server-side Tagging
+  pricing_model: contact-sales
+  description: >-
+    Server-side Google Tag Manager product acquired by Didomi, integrated
+    with the Didomi consent model for first-party tagging.
+notes:
+- All pricing is quote-based; Didomi does not expose a self-serve checkout for the enterprise CMP/PMP.
+- A free Starter tier has historically been available for very small sites; verify via /offers or sales.
+- Per the developer docs, "the Consents API and Integrations are separately priced" on top of the base CMP / PMP modules.

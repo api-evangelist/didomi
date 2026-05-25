@@ -1,0 +1,47 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "didomi": "https://raw.githubusercontent.com/api-evangelist/didomi/main/json-ld/didomi-context.jsonld#",
+    "schema": "https://schema.org/",
+    "dpv": "https://w3id.org/dpv#",
+    "gdpr": "https://w3id.org/dpv/legal/eu/gdpr#",
+
+    "ConsentEvent": "didomi:ConsentEvent",
+    "ConsentNotice": "didomi:ConsentNotice",
+    "PreferenceCenter": "didomi:PreferenceCenter",
+    "PrivacyRequest": "didomi:PrivacyRequest",
+    "Vendor": "didomi:Vendor",
+    "Purpose": "didomi:Purpose",
+    "Regulation": "didomi:Regulation",
+    "ConsentString": "didomi:ConsentString",
+    "Organization": "schema:Organization",
+    "DataSubject": "dpv:DataSubject",
+
+    "id": "@id",
+    "type": "@type",
+    "organization": { "@id": "schema:provider", "@type": "@id" },
+    "name": "schema:name",
+    "description": "schema:description",
+
+    "regulation": { "@id": "didomi:regulation", "@type": "@vocab" },
+    "purpose": { "@id": "dpv:hasPurpose", "@type": "@id" },
+    "vendor": { "@id": "didomi:vendor", "@type": "@id" },
+    "legal_basis": { "@id": "dpv:hasLegalBasis", "@type": "@vocab" },
+    "consent_string": "didomi:consentString",
+    "action": "didomi:consentAction",
+    "value": "didomi:consentValue",
+
+    "data_subject": { "@id": "dpv:DataSubject", "@type": "@id" },
+    "country": "schema:addressCountry",
+    "region": "schema:addressRegion",
+
+    "created_at": { "@id": "schema:dateCreated", "@type": "schema:DateTime" },
+    "updated_at": { "@id": "schema:dateModified", "@type": "schema:DateTime" },
+    "due_at": { "@id": "didomi:dueAt", "@type": "schema:DateTime" },
+    "completed_at": { "@id": "didomi:completedAt", "@type": "schema:DateTime" },
+
+    "platforms": "didomi:platform",
+    "languages": "schema:inLanguage",
+    "status": "schema:status"
+  }
+}
