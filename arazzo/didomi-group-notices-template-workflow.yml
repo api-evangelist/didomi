@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Group Notices Under a Template
+  summary: Create a consent notice, group it under a new notice template, and read the template back.
+  description: >-
+    A Didomi pattern for sharing common configuration across multiple consent
+    notices. The workflow creates a consent notice, creates a notice template that
+    references the new notice in its notices_id list, and reads the template back
+    by its ID to confirm the grouping. Each step spells out its request inline,
+    including the bearer Authorization header, so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: group-notices-template
+  summary: Create a notice, group it under a new notice template, and read the template back.
+  description: >-
+    Creates a consent notice, creates a notice template that lists the new notice
+    in its notices_id array, and retrieves the template by its ID to confirm the
+    grouping.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - noticeName
+    - templateName
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization that owns the notice.
+      noticeName:
+        type: string
+        description: Internal name of the notice to create.
+      templateName:
+        type: string
+        description: Name of the notice template to create.
+  steps:
+  - stepId: createNotice
+    description: >-
+      Create a consent notice owned by the organization. organization_id and name
+      are both required by the NoticeInput schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_id: $inputs.organizationId
+        name: $inputs.noticeName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      noticeId: $response.body#/id
+  - stepId: createTemplate
+    description: >-
+      Create a notice template that groups the new notice via its notices_id
+      list, sharing common configuration across the listed notices.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1templates/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.templateName
+        notices_id:
+        - $steps.createNotice.outputs.noticeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      templateId: $response.body#/id
+  - stepId: getTemplate
+    description: >-
+      Read the template back by its ID to confirm it was created and groups the
+      notice.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1templates~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createTemplate.outputs.templateId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      templateId: $response.body#/id
+  outputs:
+    noticeId: $steps.createNotice.outputs.noticeId
+    templateId: $steps.getTemplate.outputs.templateId

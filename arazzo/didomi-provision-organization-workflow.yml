@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Provision an Organization and Invite a Member
+  summary: Create an organization, invite a first member into it, and read the organization back.
+  description: >-
+    An onboarding pattern for standing up a new Didomi organization. The workflow
+    creates an organization, invites a first member (which provisions the user and
+    sends a password reset email if the user is new), and then reads the
+    organization back to confirm it exists. Each step spells out its request
+    inline, including the bearer Authorization header, so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-organization
+  summary: Create an organization, invite its first member, and read the organization back.
+  description: >-
+    Creates a new organization, invites a member into it by email, and reads the
+    organization back by its ID to confirm provisioning succeeded.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationName
+    - memberName
+    - memberEmail
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationName:
+        type: string
+        description: Unique name of the organization to create.
+      website:
+        type: string
+        description: Optional website URL of the organization.
+      memberName:
+        type: string
+        description: Name of the member to invite into the new organization.
+      memberEmail:
+        type: string
+        description: Email address of the member to invite.
+  steps:
+  - stepId: createOrganization
+    description: >-
+      Create a new organization. Only name is required by the OrganizationInput
+      schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1organizations/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.organizationName
+        website: $inputs.website
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      organizationId: $response.body#/id
+  - stepId: inviteMember
+    description: >-
+      Invite a member into the new organization. name, email and organization_id
+      are all required by the InvitedMemberInput schema. If the user is new an
+      email with a password reset link is sent.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1members/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.memberName
+        email: $inputs.memberEmail
+        organization_id: $steps.createOrganization.outputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      memberId: $response.body#/id
+      userId: $response.body#/user_id
+  - stepId: getOrganization
+    description: >-
+      Read the organization back by its ID to confirm it was created.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1organizations~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createOrganization.outputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      organizationId: $response.body#/id
+      name: $response.body#/name
+  outputs:
+    organizationId: $steps.getOrganization.outputs.organizationId
+    memberId: $steps.inviteMember.outputs.memberId

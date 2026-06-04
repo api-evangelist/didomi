@@ -1,0 +1,139 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Submit Notice Text Content for Approval
+  summary: Create a notice text, submit a content version for the Didomi approval process, and read the content status.
+  description: >-
+    A Didomi pattern for managing the versioned, approved wording shown to end
+    users during consent collection. The workflow creates a notice text, submits a
+    content version against it (which enters the Didomi team's approval process),
+    and reads the content back by its ID to inspect its approval status. Each step
+    spells out its request inline, including the bearer Authorization header, so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: submit-notice-text-content
+  summary: Create a notice text, submit a content version, and read its approval status.
+  description: >-
+    Creates a notice text for an organization, submits a content version against
+    it for approval, and reads the content back to inspect its approval status,
+    branching on whether it is already approved or still submitted.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - textName
+    - content
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization that owns the text and content.
+      textName:
+        type: string
+        description: Name used to distinguish this notice text in your account.
+      content:
+        type: string
+        description: The actual text content to submit for approval.
+      includesPurposes:
+        type: boolean
+        description: Whether the content includes a complete list of purposes.
+  steps:
+  - stepId: createText
+    description: >-
+      Create a notice text. organization_id and name are both required by the
+      NoticeTextInput schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1texts/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_id: $inputs.organizationId
+        name: $inputs.textName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      textId: $response.body#/id
+  - stepId: submitContent
+    description: >-
+      Submit a content version against the new text. content, organization_id and
+      text_id are required by the NoticeTextContentInput schema. The content
+      enters the Didomi approval process and is assigned a content version.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1texts-contents/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        content: $inputs.content
+        organization_id: $inputs.organizationId
+        text_id: $steps.createText.outputs.textId
+        includes_purposes: $inputs.includesPurposes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      contentId: $response.body#/id
+      status: $response.body#/status
+  - stepId: getContent
+    description: >-
+      Read the content back by its ID and branch on its approval status: approved
+      content ends the flow while submitted content is polled once more.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1texts-contents~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.submitContent.outputs.contentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      contentId: $response.body#/id
+      status: $response.body#/status
+    onSuccess:
+    - name: approved
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "approved"
+        type: jsonpath
+    - name: stillSubmitted
+      type: goto
+      stepId: pollContent
+      criteria:
+      - context: $response.body
+        condition: $.status == "submitted"
+        type: jsonpath
+  - stepId: pollContent
+    description: >-
+      Re-read the content to poll its approval status when it was still submitted
+      and awaiting review by the Didomi team.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1texts-contents~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.submitContent.outputs.contentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  outputs:
+    textId: $steps.createText.outputs.textId
+    contentId: $steps.submitContent.outputs.contentId
+    status: $steps.getContent.outputs.status

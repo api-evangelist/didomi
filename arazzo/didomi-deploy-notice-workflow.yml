@@ -1,0 +1,105 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Deploy a Consent Notice
+  summary: Create a consent notice, deploy a notice configuration to production, and confirm the deployment.
+  description: >-
+    A core Didomi CMP publishing pattern. The workflow creates a new consent
+    notice for an organization, creates a production deployment that points the
+    notice at a prepared notice configuration, and then reads the deployment
+    back to confirm it was registered. Each step spells out its request inline,
+    including the bearer Authorization header, so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: deploy-notice
+  summary: Create a notice then deploy a notice configuration to production for an organization.
+  description: >-
+    Creates a consent notice owned by the organization, deploys a previously
+    prepared notice configuration to production, and reads the resulting
+    deployment back to confirm it exists.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - noticeName
+    - productionConfigId
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization that owns the notice and deployment.
+      noticeName:
+        type: string
+        description: Internal name of the notice used to distinguish it in your account.
+      productionConfigId:
+        type: string
+        description: The ID of the notice configuration to deploy to production.
+      deploymentMessage:
+        type: string
+        description: Optional human-readable description of the deployment content.
+  steps:
+  - stepId: createNotice
+    description: >-
+      Create a new consent notice owned by the organization. Only the
+      organization_id and name are required by the NoticeInput schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_id: $inputs.organizationId
+        name: $inputs.noticeName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      noticeId: $response.body#/id
+  - stepId: createDeployment
+    description: >-
+      Deploy the supplied production notice configuration for the new notice.
+      notice_id, organization_id and production_config_id are all required by
+      the NoticeDeploymentInput schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1deployments/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        notice_id: $steps.createNotice.outputs.noticeId
+        organization_id: $inputs.organizationId
+        production_config_id: $inputs.productionConfigId
+        message: $inputs.deploymentMessage
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentId: $response.body#/id
+  - stepId: getDeployment
+    description: >-
+      Read the deployment back by its ID to confirm it was registered.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1deployments~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createDeployment.outputs.deploymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentId: $response.body#/id
+      noticeId: $response.body#/notice_id
+  outputs:
+    noticeId: $steps.createNotice.outputs.noticeId
+    deploymentId: $steps.getDeployment.outputs.deploymentId

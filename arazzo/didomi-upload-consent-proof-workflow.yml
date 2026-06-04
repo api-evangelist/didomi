@@ -1,0 +1,80 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Upload and Verify a Consent Proof
+  summary: Upload a file as proof of consent for an organization and read it back to verify storage.
+  description: >-
+    A compliance-focused Didomi pattern for retaining evidence of consent. The
+    workflow uploads a base64-encoded file that serves as proof of consent for an
+    organization, then retrieves the stored proof by its ID to verify it was
+    persisted. Each step spells out its request inline, including the bearer
+    Authorization header, so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upload-consent-proof
+  summary: Upload a consent proof file for an organization and read it back by ID.
+  description: >-
+    Uploads a base64-encoded data URI as proof of consent for the organization
+    and then retrieves the created proof by its ID to confirm it was stored.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - file
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization that the proof belongs to.
+      file:
+        type: string
+        description: 'Base64-encoded data URI of the proof file (PDF, PNG, JPG, GIF, DOCX or DOC).'
+  steps:
+  - stepId: uploadProof
+    description: >-
+      Upload the base64-encoded file to serve as proof of consent for the
+      organization. The file field is required by the ConsentProof input schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1proofs/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    requestBody:
+      contentType: application/json
+      payload:
+        file: $inputs.file
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      proofId: $response.body#/id
+  - stepId: getProof
+    description: >-
+      Retrieve the uploaded proof by its ID, scoped to the same organization, to
+      verify that it was persisted.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1proofs~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.uploadProof.outputs.proofId
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      proofId: $response.body#/id
+  outputs:
+    proofId: $steps.getProof.outputs.proofId

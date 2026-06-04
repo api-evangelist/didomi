@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Data Subject Erasure Request
+  summary: Look up an end user by your internal ID and fulfil a right-to-erasure request by deleting their consent record.
+  description: >-
+    The Didomi API has no dedicated data-subject-request resource, so this
+    right-to-erasure (GDPR Article 17) flow is adapted onto the consent users
+    resource. The workflow looks up an end user by your organization's internal
+    user ID, branches on whether a matching user exists, and when one is found
+    deletes the user's consent record to fulfil the erasure request. Each step
+    spells out its request inline, including the bearer Authorization header, so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: data-subject-erasure
+  summary: Find an end user by internal ID and delete their consent record to fulfil an erasure request.
+  description: >-
+    Looks up an end user by your organization's internal user ID and, when a match
+    is found, deletes the user's consent record to fulfil a right-to-erasure
+    request. When no user matches, the flow ends without deleting anything.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - organizationUserId
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization the user belongs to.
+      organizationUserId:
+        type: string
+        description: Your organization's internal user ID identifying the data subject (email, phone or client ID).
+  steps:
+  - stepId: findUser
+    description: >-
+      Retrieve the end user matching the supplied organization user ID. Branch on
+      whether a user was returned: delete it when present, otherwise end.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    - name: organization_user_id
+      in: query
+      value: $inputs.organizationUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedUserId: $response.body#/0/id
+    onSuccess:
+    - name: userFound
+      type: goto
+      stepId: deleteUser
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+    - name: noUser
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.length == 0
+        type: jsonpath
+  - stepId: deleteUser
+    description: >-
+      Delete the matched user's consent record, fulfilling the right-to-erasure
+      request. The deleted ConsentUser object is returned on success.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users~1{id}/delete'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.findUser.outputs.matchedUserId
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletedUserId: $response.body#/id
+  outputs:
+    deletedUserId: $steps.deleteUser.outputs.deletedUserId

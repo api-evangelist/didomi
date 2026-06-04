@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Issue a Consent Token for an End User
+  summary: Create an end user, assign an internal ID, and issue a scoped JWT consent token for that user.
+  description: >-
+    A Didomi pattern for handing an end user a token that authorizes them to read
+    and modify their own consent data from client-side environments. The workflow
+    creates an end user, patches it to assign your organization's internal user ID,
+    and issues a scoped consent token for that user. Each step spells out its
+    request inline, including the bearer Authorization header, so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: issue-consent-token
+  summary: Create a user, assign an internal ID, and issue a scoped consent token for that user.
+  description: >-
+    Creates an end user, patches it to assign your organization's internal user
+    ID, and issues a consent token scoped to that user and organization.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - organizationUserId
+    - lifetime
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization that the user and token belong to.
+      organizationUserId:
+        type: string
+        description: Your organization's internal user ID to assign to the new user.
+      lifetime:
+        type: integer
+        description: Lifetime of the issued consent token, in seconds.
+  steps:
+  - stepId: createUser
+    description: >-
+      Create a new end user under the organization. organization_id is supplied as
+      a required query parameter.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_id: $inputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/id
+  - stepId: assignInternalId
+    description: >-
+      Patch the user to assign your organization's internal user ID so the token
+      can be scoped to that ID.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users~1{id}/patch'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createUser.outputs.userId
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_user_id: $inputs.organizationUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      organizationUserId: $response.body#/organization_user_id
+  - stepId: issueToken
+    description: >-
+      Issue a consent token scoped to the user and organization. organization_id,
+      organization_user_id and lifetime are all required by the ConsentToken input
+      schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1tokens/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_id: $inputs.organizationId
+        organization_user_id: $steps.assignInternalId.outputs.organizationUserId
+        lifetime: $inputs.lifetime
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      idToken: $response.body#/id_token
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    idToken: $steps.issueToken.outputs.idToken

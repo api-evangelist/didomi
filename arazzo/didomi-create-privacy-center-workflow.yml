@@ -1,0 +1,83 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Create and Verify a Privacy Center
+  summary: Create a privacy center for an organization and read it back to confirm it was created.
+  description: >-
+    A Didomi pattern for standing up the public-facing privacy experience that
+    gives end users legal information and consent-management options. The workflow
+    creates a privacy center owned by an organization and reads it back by its ID
+    to confirm creation. Each step spells out its request inline, including the
+    bearer Authorization header, so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-privacy-center
+  summary: Create a privacy center for an organization and read it back by ID.
+  description: >-
+    Creates a privacy center owned by the organization and retrieves it by its ID
+    to confirm that it was persisted.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - name
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization that owns the privacy center.
+      name:
+        type: string
+        description: Display name of the privacy center (usually the company or website name).
+      website:
+        type: string
+        description: Optional URL of the website linked to the privacy center.
+      legalName:
+        type: string
+        description: Optional full legal name of the company.
+  steps:
+  - stepId: createPrivacyCenter
+    description: >-
+      Create a new privacy center. name and organization_id are both required by
+      the PrivacyCenterInput schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1privacy-centers/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        organization_id: $inputs.organizationId
+        website: $inputs.website
+        legal_name: $inputs.legalName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      privacyCenterId: $response.body#/id
+  - stepId: getPrivacyCenter
+    description: >-
+      Read the privacy center back by its ID to confirm it was created.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1privacy-centers~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createPrivacyCenter.outputs.privacyCenterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      privacyCenterId: $response.body#/id
+      name: $response.body#/name
+  outputs:
+    privacyCenterId: $steps.getPrivacyCenter.outputs.privacyCenterId

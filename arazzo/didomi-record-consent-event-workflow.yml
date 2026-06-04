@@ -1,0 +1,143 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Record a Consent Event and Confirm Status
+  summary: Create a consent event for an end user, then branch on whether it is confirmed or pending approval.
+  description: >-
+    A foundational Didomi consent-collection pattern. The workflow records a new
+    consent event that updates the consent status of an end user, then reads the
+    event back by its ID and branches on its status: when the event is already
+    confirmed the flow ends, and when it is pending approval the flow re-reads
+    the event to poll for confirmation. Each step spells out its request inline,
+    including the bearer Authorization header, so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: record-consent-event
+  summary: Create a consent event for a user and confirm whether it is confirmed or pending approval.
+  description: >-
+    Records a consent event that updates an end user's consent status, reads the
+    event back, and branches on its status to either finish or poll once more for
+    confirmation.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - userId
+    - purposeId
+    - purposeEnabled
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization for which to create the event.
+      userId:
+        type: string
+        description: The Didomi user ID the consent event belongs to (a UUID or mobile advertising ID).
+      organizationUserId:
+        type: string
+        description: Optional unique user ID internal to your organization (email, phone, client ID).
+      purposeId:
+        type: string
+        description: The purpose ID the user is making a consent choice for.
+      purposeEnabled:
+        type: boolean
+        description: Whether the user has given consent to the purpose.
+  steps:
+  - stepId: createEvent
+    description: >-
+      Create a new consent event that updates the user's consent status for a
+      single purpose. The user.id field is required by the ConsentEventInput
+      schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1events/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_id: $inputs.organizationId
+        user:
+          id: $inputs.userId
+          organization_user_id: $inputs.organizationUserId
+        consents:
+          purposes:
+          - id: $inputs.purposeId
+            enabled: $inputs.purposeEnabled
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventId: $response.body#/id
+      status: $response.body#/status
+  - stepId: getEvent
+    description: >-
+      Read the created event back by its ID and branch on its status: confirmed
+      events end the flow while pending_approval events are polled once more.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1events~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createEvent.outputs.eventId
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    - name: user_id
+      in: query
+      value: $inputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventId: $response.body#/id
+      status: $response.body#/status
+    onSuccess:
+    - name: confirmed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "confirmed"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollEvent
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending_approval"
+        type: jsonpath
+  - stepId: pollEvent
+    description: >-
+      Re-read the event to poll for a confirmed status when the event was still
+      pending approval after creation.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1events~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createEvent.outputs.eventId
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    - name: user_id
+      in: query
+      value: $inputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  outputs:
+    eventId: $steps.createEvent.outputs.eventId
+    status: $steps.getEvent.outputs.status

@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Register and Verify a Cookie
+  summary: Register a cookie set by a property and read it back to confirm registration.
+  description: >-
+    A Didomi pattern for cataloguing the cookies a property sets so they can be
+    disclosed to end users. The workflow registers a cookie against a property,
+    classifying it with a vendor taxonomy item, and reads the cookie back by its
+    ID to confirm it was stored. Each step spells out its request inline, including
+    the bearer Authorization header, so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: register-cookie
+  summary: Register a cookie for a property and read it back by ID.
+  description: >-
+    Registers a cookie set by a property, classified with a taxonomy item, and
+    retrieves it by ID to confirm it was persisted.
+  inputs:
+    type: object
+    required:
+    - token
+    - propertyId
+    - name
+    - domain
+    - taxonomyId
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      propertyId:
+        type: string
+        description: The ID of the property that sets this cookie.
+      name:
+        type: string
+        description: Name of the cookie.
+      domain:
+        type: string
+        description: Domain the cookie is set on (same as the property or a sub-domain).
+      taxonomyId:
+        type: string
+        description: The ID of the taxonomy item for classifying this cookie.
+      lifetime:
+        type: integer
+        description: Optional lifetime of the cookie in seconds.
+      vendorId:
+        type: string
+        description: Optional ID of the vendor that sets or uses this cookie.
+  steps:
+  - stepId: createCookie
+    description: >-
+      Register a cookie for the property. name, domain, taxonomy_id and
+      property_id are all required by the CookieInput schema.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1cookies/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        domain: $inputs.domain
+        taxonomy_id: $inputs.taxonomyId
+        property_id: $inputs.propertyId
+        lifetime: $inputs.lifetime
+        vendor_id: $inputs.vendorId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cookieId: $response.body#/id
+  - stepId: getCookie
+    description: >-
+      Read the cookie back by its ID to confirm it was registered.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1cookies~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createCookie.outputs.cookieId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cookieId: $response.body#/id
+      name: $response.body#/name
+  outputs:
+    cookieId: $steps.getCookie.outputs.cookieId

@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: Didomi Create a Consent User and Assign an Internal ID
+  summary: Create an end user, patch it to assign your organization's internal user ID, and read it back.
+  description: >-
+    A Didomi pattern for linking an end user's consent record to your own systems.
+    The workflow creates an end user under an organization, patches the user to
+    assign your organization's internal user ID and country, and reads the user
+    back to confirm the assignment. Each step spells out its request inline,
+    including the bearer Authorization header, so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: didomiApi
+  url: ../openapi/didomi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-and-assign-consent-user
+  summary: Create a consent user, assign an internal organization user ID, and read it back.
+  description: >-
+    Creates an end user under an organization, patches it to assign your
+    organization's internal user ID and country, and retrieves the user by ID to
+    confirm the assignment.
+  inputs:
+    type: object
+    required:
+    - token
+    - organizationId
+    - organizationUserId
+    properties:
+      token:
+        type: string
+        description: A valid Didomi JWT used as the bearer token for the Authorization header.
+      organizationId:
+        type: string
+        description: The ID of the organization that owns the user.
+      organizationUserId:
+        type: string
+        description: A unique user ID internal to your organization (email, phone or client ID).
+      country:
+        type: string
+        description: Optional two-letter ISO country code for the user.
+  steps:
+  - stepId: createUser
+    description: >-
+      Create a new end user under the organization and store its consent status.
+      organization_id is supplied as a required query parameter.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users/post'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_id: $inputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/id
+  - stepId: assignInternalId
+    description: >-
+      Patch the user to assign your organization's internal user ID and country,
+      linking the Didomi user to your own systems.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users~1{id}/patch'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createUser.outputs.userId
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    requestBody:
+      contentType: application/json
+      payload:
+        organization_user_id: $inputs.organizationUserId
+        country: $inputs.country
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/id
+      organizationUserId: $response.body#/organization_user_id
+  - stepId: getUser
+    description: >-
+      Read the user back by its ID to confirm the internal ID assignment.
+    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users~1{id}/get'
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: id
+      in: path
+      value: $steps.createUser.outputs.userId
+    - name: organization_id
+      in: query
+      value: $inputs.organizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/id
+      organizationUserId: $response.body#/organization_user_id
+  outputs:
+    userId: $steps.getUser.outputs.userId
+    organizationUserId: $steps.getUser.outputs.organizationUserId
