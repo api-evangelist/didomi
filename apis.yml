@@ -2,33 +2,29 @@ aid: didomi
 url: https://raw.githubusercontent.com/api-evangelist/didomi/refs/heads/main/apis.yml
 name: Didomi
 description: >-
-  Didomi is a Paris-based consent and preference management platform (CMP/PMP)
-  that helps publishers, advertisers, retailers, and large enterprises collect,
-  manage, and act on user privacy choices across web, mobile, CTV, and AMP
-  surfaces. The platform covers GDPR, CCPA and the wider US state-law landscape,
-  IAB TCF v2.x, Google Consent Mode v2, the IAB GPP, GPC, the EU DMA, Chilean
-  Law 25, Australian privacy law, and other regulations through a single
-  multi-regulation configuration model. Didomi exposes a JSON REST API
-  (https://api.didomi.io/v1/) plus first-party SDKs for Web, iOS/tvOS,
-  Android/Android TV, Unity, React Native, Flutter, Vega OS, and AMP, alongside
-  IAB-compliant consent string tooling and reverse-proxy boilerplates for
-  Fastly, CloudFront, and Cloudflare.
+  Didomi is a Paris-based consent and preference management platform (CMP/PMP) that helps publishers, advertisers,
+  retailers, and large enterprises collect, manage, and act on user privacy choices across web, mobile, CTV, and AMP
+  surfaces. The platform covers GDPR, CCPA and the wider US state-law landscape, IAB TCF v2.x, Google Consent Mode v2,
+  the IAB GPP, GPC, the EU DMA, Chilean Law 25, Australian privacy law, and other regulations through a single
+  multi-regulation configuration model. Didomi exposes a JSON REST API (https://api.didomi.io/v1/) plus first-party SDKs
+  for Web, iOS/tvOS, Android/Android TV, Unity, React Native, Flutter, Vega OS, and AMP, alongside IAB-compliant consent
+  string tooling and reverse-proxy boilerplates for Fastly, CloudFront, and Cloudflare.
 tags:
-- Advertising
-- AdTech
-- CCPA
-- CMP
-- Consent
-- Consent Management
-- DSAR
-- Data Privacy
-- GDPR
-- IAB TCF
-- MarTech
-- Preference Management
-- Privacy
-- Privacy Requests
-- Regulatory Compliance
+  - Advertising
+  - AdTech
+  - CCPA
+  - CMP
+  - Consent
+  - Consent Management
+  - DSAR
+  - Data Privacy
+  - GDPR
+  - IAB TCF
+  - MarTech
+  - Preference Management
+  - Privacy
+  - Privacy Requests
+  - Regulatory Compliance
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 kind: contract
 access: 3rd-Party
@@ -36,457 +32,470 @@ created: '2026-05-25'
 modified: '2026-05-25'
 specificationVersion: '0.20'
 apis:
-- aid: didomi:didomi-platform-api
-  name: Didomi Platform API
-  tags:
-  - Consent Management
-  - Data Manager
-  - Privacy
-  - Vendors
-  - Widgets
-  humanURL: https://developers.didomi.io/api-and-platform/introduction
-  baseURL: https://api.didomi.io/v1
-  properties:
+  - aid: didomi:didomi-platform-api
+    name: Didomi Platform API
+    tags:
+      - Consent Management
+      - Data Manager
+      - Privacy
+      - Vendors
+      - Widgets
+    humanURL: https://developers.didomi.io/api-and-platform/introduction
+    baseURL: https://api.didomi.io/v1
+    properties:
+      - type: Documentation
+        url: https://developers.didomi.io/api-and-platform/introduction
+      - type: Authentication
+        url: https://developers.didomi.io/api-and-platform/introduction/authentication
+      - type: RateLimits
+        url: https://developers.didomi.io/api-and-platform/introduction/rate-limiting
+      - type: Errors
+        url: https://developers.didomi.io/api-and-platform/introduction/errors
+      - type: Pagination
+        url: https://developers.didomi.io/api-and-platform/introduction/pagination
+      - type: OpenAPI
+        url: openapi/didomi-platform-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/didomi-consent-event-schema.json
+      - type: JSONSchema
+        url: json-schema/didomi-consent-notice-schema.json
+      - type: JSONSchema
+        url: json-schema/didomi-privacy-request-schema.json
+      - type: JSONStructure
+        url: json-structure/didomi-consent-event-structure.json
+      - type: Example
+        url: examples/didomi-consent-event-example.json
+      - type: Example
+        url: examples/didomi-consent-notice-example.json
+      - type: Example
+        url: examples/didomi-privacy-request-example.json
+    description: >-
+      The Didomi Platform REST API at https://api.didomi.io/v1/ is the machine-facing surface for the entire Didomi
+      CMP/PMP. It exposes 80+ operations across consents events / proofs / tokens / users, widgets (notices, configs,
+      deployments, SDK configs, templates), data manager metadata (vendors, purposes, partners, taxonomies,
+      regulations), and administration (organizations, members, keys, secrets, domains, SSO connections, premium
+      features). Authentication is JWT bearer — clients POST API key + secret to /v1/sessions and reuse the returned
+      access_token for one hour. Default rate limit is 100 requests per 15 seconds per organization (the /consents/*
+      high-volume routes are exempt). Standard JSON request / response, cursor and offset pagination, structured error
+      envelope.
+  - aid: didomi:didomi-web-sdk
+    name: Didomi Web SDK
+    tags:
+      - Consent
+      - JavaScript
+      - SDK
+      - Web
+    humanURL: https://developers.didomi.io/cmp/web-sdk
+    properties:
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/web-sdk
+      - type: GettingStarted
+        url: https://developers.didomi.io/cmp/web-sdk/getting-started
+      - type: APIReference
+        url: https://developers.didomi.io/cmp/web-sdk/reference/api
+      - type: Events
+        url: https://developers.didomi.io/cmp/web-sdk/reference/events
+      - type: Versioning
+        url: https://developers.didomi.io/cmp/web-sdk/reference/versions
+      - type: Performance
+        url: https://developers.didomi.io/cmp/web-sdk/performance
+    description: >-
+      The Didomi Web SDK is the browser-side library that renders consent notices, preference centers, and privacy
+      widgets, gates third-party tags on user consent, and writes IAB TCF v2 / GPP / Didomi consent strings to storage.
+      It exposes a programmatic API (Didomi.getUserConsentStatus, Didomi.setUserAgreeToAll, Didomi.openPreferences,
+      etc.), a typed event bus, and integrations with Google Tag Manager, Adobe Launch, Tealium, Prebid, Google Consent
+      Mode v2, Salesforce DMP, Piano Analytics and other tag managers and SSPs.
+  - aid: didomi:didomi-android-sdk
+    name: Didomi Android SDK
+    tags:
+      - Android
+      - Android TV
+      - Consent
+      - Mobile
+      - SDK
+    humanURL: https://developers.didomi.io/cmp/mobile-sdk/android
+    properties:
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/mobile-sdk/android
+      - type: GettingStarted
+        url: https://developers.didomi.io/cmp/mobile-sdk/android/setup
+      - type: APIReference
+        url: https://developers.didomi.io/cmp/mobile-sdk/android/reference/api
+      - type: Events
+        url: https://developers.didomi.io/cmp/mobile-sdk/android/reference/events
+      - type: Versioning
+        url: https://developers.didomi.io/cmp/mobile-sdk/android/versions
+    description: >-
+      Didomi's Android and Android TV SDK delivers native consent notices, preference popups, and TCF / GPP / Didomi
+      consent string generation in Java / Kotlin / Jetpack Compose apps. It shares consent with WebViews, bridges to
+      Google Consent Mode v2, and ships with sample apps in Java, Kotlin, and Compose.
+  - aid: didomi:didomi-ios-sdk
+    name: Didomi iOS SDK
+    tags:
+      - Consent
+      - iOS
+      - Mobile
+      - SDK
+      - tvOS
+    humanURL: https://developers.didomi.io/cmp/mobile-sdk/ios
+    properties:
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/mobile-sdk/ios
+      - type: GettingStarted
+        url: https://developers.didomi.io/cmp/mobile-sdk/ios/setup
+      - type: APIReference
+        url: https://developers.didomi.io/cmp/mobile-sdk/ios/reference/api
+      - type: Events
+        url: https://developers.didomi.io/cmp/mobile-sdk/ios/reference/events
+      - type: Versioning
+        url: https://developers.didomi.io/cmp/mobile-sdk/ios/versions
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/mobile-sdk/ios/app-tracking-transparency-ios-14
+    description: >-
+      The iOS / tvOS / Mac Catalyst SDK renders Didomi consent notices and preference centers natively in Swift and
+      Objective-C apps, coordinates Apple's App Tracking Transparency (ATT) prompt with consent, shares consent with
+      WebViews, and emits TCF / GPP / Didomi consent strings. Distributed via Swift Package Manager
+      (github.com/didomi/didomi-ios-sdk-spm) and CocoaPods.
+  - aid: didomi:didomi-cross-platform-sdks
+    name: Didomi Cross-Platform SDKs (React Native, Flutter, Unity, Vega OS, AMP)
+    tags:
+      - AMP
+      - Consent
+      - Cross-Platform
+      - Flutter
+      - React Native
+      - SDK
+      - Unity
+      - Vega OS
+    humanURL: https://developers.didomi.io/cmp/mobile-sdk
+    properties:
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/mobile-sdk/react-native
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/mobile-sdk/flutter
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/mobile-sdk/unity-sdk
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/mobile-sdk/vega-os
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/amp
+    description: >-
+      Didomi maintains first-party CMP plugins for React Native, Flutter, Unity (games and game consoles), Vega OS (LG
+      webOS smart TVs), and Google AMP. Each wraps the platform's notice rendering, consent storage, event bus, and
+      consent-string generation so cross-platform teams ship one consent UX across browser, native mobile, CTV, in-game,
+      and AMP surfaces.
+  - aid: didomi:didomi-consent-string-toolkit
+    name: Didomi Consent String Toolkit
+    tags:
+      - Consent String
+      - Decoder
+      - Encoder
+      - IAB TCF
+      - Toolkit
+    humanURL: https://developers.didomi.io/cmp/didomi-consent-string
+    properties:
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/didomi-consent-string
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/didomi-consent-string/didomi-consent-string-structure
+      - type: Documentation
+        url: https://developers.didomi.io/cmp/didomi-consent-string/consent-string-examples
+      - type: GitHubRepository
+        url: https://github.com/didomi/consent-string
+      - type: GitHubRepository
+        url: https://github.com/didomi/consent-string-schema
+      - type: GitHubRepository
+        url: https://github.com/didomi/consent-string-decoder-rust
+      - type: GitHubRepository
+        url: https://github.com/didomi/consent-string-golang
+      - type: GitHubRepository
+        url: https://github.com/didomi/iabtcf-es
+    description: >-
+      Open-source libraries published under github.com/didomi for encoding, decoding, and validating the Didomi consent
+      string and the IAB TCF v2 consent string. Includes TypeScript (`consent-string`, `consent-string-schema`), Rust
+      with C/Java FFI (`consent-string-decoder-rust`), Go (`consent-string-golang`), and a fork of the official IAB
+      tooling (`iabtcf-es`). Useful for server-side auditing, downstream ad-tech reading consent state, and offline
+      analysis.
+common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/didomi/overview
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+      - url: arazzo/didomi-classify-and-register-cookie-workflow.yml
+        name: Didomi Classify a Vendor and Register a Cookie
+        summary: Create a vendor taxonomy item, register a cookie classified with it, and read the cookie back.
+      - url: arazzo/didomi-create-and-assign-consent-user-workflow.yml
+        name: Didomi Create a Consent User and Assign an Internal ID
+        summary: Create an end user, patch it to assign your organization's internal user ID, and read it back.
+      - url: arazzo/didomi-create-privacy-center-workflow.yml
+        name: Didomi Create and Verify a Privacy Center
+        summary: Create a privacy center for an organization and read it back to confirm it was created.
+      - url: arazzo/didomi-data-subject-erasure-workflow.yml
+        name: Didomi Data Subject Erasure Request
+        summary: >-
+          Look up an end user by your internal ID and fulfil a right-to-erasure request by deleting their consent
+          record.
+      - url: arazzo/didomi-deploy-notice-workflow.yml
+        name: Didomi Deploy a Consent Notice
+        summary: Create a consent notice, deploy a notice configuration to production, and confirm the deployment.
+      - url: arazzo/didomi-group-notices-template-workflow.yml
+        name: Didomi Group Notices Under a Template
+        summary: Create a consent notice, group it under a new notice template, and read the template back.
+      - url: arazzo/didomi-issue-consent-token-workflow.yml
+        name: Didomi Issue a Consent Token for an End User
+        summary: Create an end user, assign an internal ID, and issue a scoped JWT consent token for that user.
+      - url: arazzo/didomi-provision-organization-workflow.yml
+        name: Didomi Provision an Organization and Invite a Member
+        summary: Create an organization, invite a first member into it, and read the organization back.
+      - url: arazzo/didomi-record-consent-event-workflow.yml
+        name: Didomi Record a Consent Event and Confirm Status
+        summary: Create a consent event for an end user, then branch on whether it is confirmed or pending approval.
+      - url: arazzo/didomi-register-cookie-workflow.yml
+        name: Didomi Register and Verify a Cookie
+        summary: Register a cookie set by a property and read it back to confirm registration.
+      - url: arazzo/didomi-submit-notice-text-content-workflow.yml
+        name: Didomi Submit Notice Text Content for Approval
+        summary: Create a notice text, submit a content version for the Didomi approval process, and read the content status.
+      - url: arazzo/didomi-upload-consent-proof-workflow.yml
+        name: Didomi Upload and Verify a Consent Proof
+        summary: Upload a file as proof of consent for an organization and read it back to verify storage.
+  - type: Portal
+    url: https://www.didomi.io
   - type: Documentation
-    url: https://developers.didomi.io/api-and-platform/introduction
-  - type: Authentication
-    url: https://developers.didomi.io/api-and-platform/introduction/authentication
-  - type: RateLimits
-    url: https://developers.didomi.io/api-and-platform/introduction/rate-limiting
-  - type: Errors
-    url: https://developers.didomi.io/api-and-platform/introduction/errors
-  - type: Pagination
-    url: https://developers.didomi.io/api-and-platform/introduction/pagination
-  - type: OpenAPI
-    url: openapi/didomi-platform-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/didomi-consent-event-schema.json
-  - type: JSONSchema
-    url: json-schema/didomi-consent-notice-schema.json
-  - type: JSONSchema
-    url: json-schema/didomi-privacy-request-schema.json
-  - type: JSONStructure
-    url: json-structure/didomi-consent-event-structure.json
-  - type: Example
-    url: examples/didomi-consent-event-example.json
-  - type: Example
-    url: examples/didomi-consent-notice-example.json
-  - type: Example
-    url: examples/didomi-privacy-request-example.json
-  - type: NaftikoCapability
-    url: capabilities/sessions-authentication.yaml
-  - type: NaftikoCapability
-    url: capabilities/consents-events.yaml
-  - type: NaftikoCapability
-    url: capabilities/consents-proofs.yaml
-  - type: NaftikoCapability
-    url: capabilities/consents-users.yaml
-  - type: NaftikoCapability
-    url: capabilities/widgets-notices.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-manager-vendors.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-manager-purposes.yaml
-  - type: NaftikoCapability
-    url: capabilities/organizations.yaml
-  - type: NaftikoCapability
-    url: capabilities/keys-secrets.yaml
-  - type: NaftikoCapability
-    url: capabilities/domains.yaml
-  description: >-
-    The Didomi Platform REST API at https://api.didomi.io/v1/ is the
-    machine-facing surface for the entire Didomi CMP/PMP. It exposes 80+
-    operations across consents events / proofs / tokens / users, widgets
-    (notices, configs, deployments, SDK configs, templates), data manager
-    metadata (vendors, purposes, partners, taxonomies, regulations), and
-    administration (organizations, members, keys, secrets, domains, SSO
-    connections, premium features). Authentication is JWT bearer — clients POST
-    API key + secret to /v1/sessions and reuse the returned access_token for one
-    hour. Default rate limit is 100 requests per 15 seconds per organization
-    (the /consents/* high-volume routes are exempt). Standard JSON request /
-    response, cursor and offset pagination, structured error envelope.
-- aid: didomi:didomi-web-sdk
-  name: Didomi Web SDK
-  tags:
-  - Consent
-  - JavaScript
-  - SDK
-  - Web
-  humanURL: https://developers.didomi.io/cmp/web-sdk
-  properties:
+    url: https://developers.didomi.io/
   - type: Documentation
-    url: https://developers.didomi.io/cmp/web-sdk
+    url: https://developers.didomi.io/readme
   - type: GettingStarted
     url: https://developers.didomi.io/cmp/web-sdk/getting-started
-  - type: APIReference
-    url: https://developers.didomi.io/cmp/web-sdk/reference/api
-  - type: Events
-    url: https://developers.didomi.io/cmp/web-sdk/reference/events
-  - type: Versioning
-    url: https://developers.didomi.io/cmp/web-sdk/reference/versions
-  - type: Performance
-    url: https://developers.didomi.io/cmp/web-sdk/performance
-  description: >-
-    The Didomi Web SDK is the browser-side library that renders consent
-    notices, preference centers, and privacy widgets, gates third-party tags
-    on user consent, and writes IAB TCF v2 / GPP / Didomi consent strings to
-    storage. It exposes a programmatic API (Didomi.getUserConsentStatus,
-    Didomi.setUserAgreeToAll, Didomi.openPreferences, etc.), a typed event
-    bus, and integrations with Google Tag Manager, Adobe Launch, Tealium,
-    Prebid, Google Consent Mode v2, Salesforce DMP, Piano Analytics and
-    other tag managers and SSPs.
-- aid: didomi:didomi-android-sdk
-  name: Didomi Android SDK
-  tags:
-  - Android
-  - Android TV
-  - Consent
-  - Mobile
-  - SDK
-  humanURL: https://developers.didomi.io/cmp/mobile-sdk/android
-  properties:
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/mobile-sdk/android
-  - type: GettingStarted
-    url: https://developers.didomi.io/cmp/mobile-sdk/android/setup
-  - type: APIReference
-    url: https://developers.didomi.io/cmp/mobile-sdk/android/reference/api
-  - type: Events
-    url: https://developers.didomi.io/cmp/mobile-sdk/android/reference/events
-  - type: Versioning
-    url: https://developers.didomi.io/cmp/mobile-sdk/android/versions
-  description: >-
-    Didomi's Android and Android TV SDK delivers native consent notices,
-    preference popups, and TCF / GPP / Didomi consent string generation in
-    Java / Kotlin / Jetpack Compose apps. It shares consent with WebViews,
-    bridges to Google Consent Mode v2, and ships with sample apps in Java,
-    Kotlin, and Compose.
-- aid: didomi:didomi-ios-sdk
-  name: Didomi iOS SDK
-  tags:
-  - Consent
-  - iOS
-  - Mobile
-  - SDK
-  - tvOS
-  humanURL: https://developers.didomi.io/cmp/mobile-sdk/ios
-  properties:
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/mobile-sdk/ios
-  - type: GettingStarted
-    url: https://developers.didomi.io/cmp/mobile-sdk/ios/setup
-  - type: APIReference
-    url: https://developers.didomi.io/cmp/mobile-sdk/ios/reference/api
-  - type: Events
-    url: https://developers.didomi.io/cmp/mobile-sdk/ios/reference/events
-  - type: Versioning
-    url: https://developers.didomi.io/cmp/mobile-sdk/ios/versions
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/mobile-sdk/ios/app-tracking-transparency-ios-14
-  description: >-
-    The iOS / tvOS / Mac Catalyst SDK renders Didomi consent notices and
-    preference centers natively in Swift and Objective-C apps, coordinates
-    Apple's App Tracking Transparency (ATT) prompt with consent, shares
-    consent with WebViews, and emits TCF / GPP / Didomi consent strings.
-    Distributed via Swift Package Manager
-    (github.com/didomi/didomi-ios-sdk-spm) and CocoaPods.
-- aid: didomi:didomi-cross-platform-sdks
-  name: Didomi Cross-Platform SDKs (React Native, Flutter, Unity, Vega OS, AMP)
-  tags:
-  - AMP
-  - Consent
-  - Cross-Platform
-  - Flutter
-  - React Native
-  - SDK
-  - Unity
-  - Vega OS
-  humanURL: https://developers.didomi.io/cmp/mobile-sdk
-  properties:
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/mobile-sdk/react-native
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/mobile-sdk/flutter
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/mobile-sdk/unity-sdk
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/mobile-sdk/vega-os
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/amp
-  description: >-
-    Didomi maintains first-party CMP plugins for React Native, Flutter, Unity
-    (games and game consoles), Vega OS (LG webOS smart TVs), and Google AMP.
-    Each wraps the platform's notice rendering, consent storage, event bus,
-    and consent-string generation so cross-platform teams ship one consent
-    UX across browser, native mobile, CTV, in-game, and AMP surfaces.
-- aid: didomi:didomi-consent-string-toolkit
-  name: Didomi Consent String Toolkit
-  tags:
-  - Consent String
-  - Decoder
-  - Encoder
-  - IAB TCF
-  - Toolkit
-  humanURL: https://developers.didomi.io/cmp/didomi-consent-string
-  properties:
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/didomi-consent-string
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/didomi-consent-string/didomi-consent-string-structure
-  - type: Documentation
-    url: https://developers.didomi.io/cmp/didomi-consent-string/consent-string-examples
-  - type: GitHubRepository
-    url: https://github.com/didomi/consent-string
-  - type: GitHubRepository
-    url: https://github.com/didomi/consent-string-schema
-  - type: GitHubRepository
-    url: https://github.com/didomi/consent-string-decoder-rust
-  - type: GitHubRepository
-    url: https://github.com/didomi/consent-string-golang
-  - type: GitHubRepository
-    url: https://github.com/didomi/iabtcf-es
-  description: >-
-    Open-source libraries published under github.com/didomi for encoding,
-    decoding, and validating the Didomi consent string and the IAB TCF v2
-    consent string. Includes TypeScript (`consent-string`,
-    `consent-string-schema`), Rust with C/Java FFI
-    (`consent-string-decoder-rust`), Go (`consent-string-golang`), and a fork
-    of the official IAB tooling (`iabtcf-es`). Useful for server-side
-    auditing, downstream ad-tech reading consent state, and offline analysis.
-common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/didomi-classify-and-register-cookie-workflow.yml
-    name: Didomi Classify a Vendor and Register a Cookie
-    summary: Create a vendor taxonomy item, register a cookie classified with it, and read the cookie back.
-  - url: arazzo/didomi-create-and-assign-consent-user-workflow.yml
-    name: Didomi Create a Consent User and Assign an Internal ID
-    summary: Create an end user, patch it to assign your organization's internal user ID, and read it back.
-  - url: arazzo/didomi-create-privacy-center-workflow.yml
-    name: Didomi Create and Verify a Privacy Center
-    summary: Create a privacy center for an organization and read it back to confirm it was created.
-  - url: arazzo/didomi-data-subject-erasure-workflow.yml
-    name: Didomi Data Subject Erasure Request
-    summary: Look up an end user by your internal ID and fulfil a right-to-erasure request by deleting their consent record.
-  - url: arazzo/didomi-deploy-notice-workflow.yml
-    name: Didomi Deploy a Consent Notice
-    summary: Create a consent notice, deploy a notice configuration to production, and confirm the deployment.
-  - url: arazzo/didomi-group-notices-template-workflow.yml
-    name: Didomi Group Notices Under a Template
-    summary: Create a consent notice, group it under a new notice template, and read the template back.
-  - url: arazzo/didomi-issue-consent-token-workflow.yml
-    name: Didomi Issue a Consent Token for an End User
-    summary: Create an end user, assign an internal ID, and issue a scoped JWT consent token for that user.
-  - url: arazzo/didomi-provision-organization-workflow.yml
-    name: Didomi Provision an Organization and Invite a Member
-    summary: Create an organization, invite a first member into it, and read the organization back.
-  - url: arazzo/didomi-record-consent-event-workflow.yml
-    name: Didomi Record a Consent Event and Confirm Status
-    summary: Create a consent event for an end user, then branch on whether it is confirmed or pending approval.
-  - url: arazzo/didomi-register-cookie-workflow.yml
-    name: Didomi Register and Verify a Cookie
-    summary: Register a cookie set by a property and read it back to confirm registration.
-  - url: arazzo/didomi-submit-notice-text-content-workflow.yml
-    name: Didomi Submit Notice Text Content for Approval
-    summary: Create a notice text, submit a content version for the Didomi approval process, and read the content status.
-  - url: arazzo/didomi-upload-consent-proof-workflow.yml
-    name: Didomi Upload and Verify a Consent Proof
-    summary: Upload a file as proof of consent for an organization and read it back to verify storage.
-- type: Portal
-  url: https://www.didomi.io
-- type: Documentation
-  url: https://developers.didomi.io/
-- type: Documentation
-  url: https://developers.didomi.io/readme
-- type: GettingStarted
-  url: https://developers.didomi.io/cmp/web-sdk/getting-started
-- type: Console
-  url: https://console.didomi.io
-- type: SignUp
-  url: https://www.didomi.io/contact-us
-- type: Pricing
-  url: https://www.didomi.io/offers
-- type: TermsOfService
-  url: https://www.didomi.io/legal-notice
-- type: PrivacyPolicy
-  url: https://www.didomi.io/privacy-policy
-- type: CookiePolicy
-  url: https://www.didomi.io/cookie-policy
-- type: StatusPage
-  url: https://status.didomi.io
-- type: Blog
-  url: https://www.didomi.io/blog
-- type: Support
-  url: https://support.didomi.io
-- type: Training
-  url: https://www.didomi.io/didomi-academy
-- type: LinkedIn
-  url: https://www.linkedin.com/company/didomi
-- type: GitHubOrganization
-  url: https://github.com/didomi
-- type: SDK
-  url: https://www.npmjs.com/package/@didomi/react
-  name: Didomi React component (npm)
-- type: SDK
-  url: https://github.com/didomi/react-native
-  name: Didomi SDK for React Native
-- type: SDK
-  url: https://github.com/didomi/flutter
-  name: Didomi Flutter plugin
-- type: SDK
-  url: https://github.com/didomi/unity
-  name: Didomi Unity plugin
-- type: SDK
-  url: https://github.com/didomi/didomi-ios-sdk-spm
-  name: Didomi iOS SDK (Swift Package)
-- type: Tool
-  url: https://github.com/didomi/gtm-template
-  name: Didomi GTM template
-- type: Tool
-  url: https://github.com/didomi/magento
-  name: Didomi Magento 2 extension
-- type: Tool
-  url: https://github.com/didomi/mparticle-javascript-integration-didomi
-  name: mParticle JavaScript kit integration
-- type: Tool
-  url: https://github.com/didomi/firebase
-  name: Firebase Cloud Functions integration
-- type: CodeExamples
-  url: https://github.com/didomi/samples
-  name: Didomi implementation samples
-- type: CodeExamples
-  url: https://github.com/didomi/boilerplate-fastly-reverse-proxy-didomi-cmp
-  name: Fastly reverse-proxy boilerplate
-- type: CodeExamples
-  url: https://github.com/didomi/boilerplate-aws-cloudfront-reverse-proxy-didomi-cmp
-  name: AWS CloudFront reverse-proxy boilerplate
-- type: CodeExamples
-  url: https://github.com/didomi/boilerplate-cloudflare-reverse-proxy-didomi-cmp
-  name: Cloudflare reverse-proxy boilerplate
-- type: JSONLD
-  url: json-ld/didomi-context.jsonld
-- type: SpectralRules
-  url: rules/didomi-rules.yml
-- type: Vocabulary
-  url: vocabulary/didomi-vocabulary.yml
-- type: Plans
-  url: plans/didomi-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/didomi-rate-limits.yml
-- type: FinOps
-  url: finops/didomi-finops.yml
-- type: Features
-  data:
-  - name: Multi-regulation CMP
-    description: One Didomi notice can target GDPR, CCPA and the wider US-state landscape, TCF v2.x, GPP, GPC, EU DMA, Chilean Law 25, Australian privacy law, and Nordic regimes from a single multi-regulation configuration.
-  - name: IAB TCF v2.x / GPP / GPC compliance
-    description: Didomi is an IAB-registered CMP that emits, validates, and decodes TCF v2.x and IAB GPP consent strings and honors Global Privacy Control signals.
-  - name: Google Consent Mode v2
-    description: Native, certified Google Consent Mode v2 integration on Web and Mobile, plus Amazon Consent Signal and Microsoft UET Consent Mode bridges.
-  - name: Preference Management Platform (PMP)
-    description: A separately licensed Preference Management module exposing custom preference centers, headless preference widgets, marketing channel preferences, and email/SMS opt-in flows.
-  - name: Privacy Requests Management
-    description: DSAR / privacy-request intake forms, internal workflow, evidence storage, and reporting for GDPR Articles 15-22 and CCPA opt-out / delete rights.
-  - name: Compliance Monitoring & Reports
-    description: Automated scanning of websites and apps for vendor coverage, unauthorized tags, and CMP behavior; CSV / Excel compliance reports surfaced via the Platform API and Console.
-  - name: Privacy Widgets
-    description: Configurable, themed widgets (preference centers, DSAR forms, headless React widgets, embeddable widgets) deployable on Didomi-managed or customer-owned domains.
-  - name: Consent Notice on Custom Domain
-    description: Serve consent notices from the customer's own domain via DNS delegation or via reverse-proxy boilerplates for Fastly, AWS CloudFront, and Cloudflare.
-  - name: Cross-device / cross-domain consent sharing
-    description: Authenticated users can carry their consent state across domains and across devices via the platform's tokens and links APIs.
-  - name: Server-side Google Tag Manager (Addingwell)
-    description: Server-side tagging product (Addingwell, acquired by Didomi) integrated with the consent model for first-party tagging without browser-side third-party calls.
-  - name: Cross-Platform SDKs
-    description: First-party SDKs for Web, iOS / tvOS / Mac Catalyst, Android / Android TV, React Native, Flutter, Unity, Vega OS (LG smart TVs), and Google AMP.
-  - name: Open Consent String tooling
-    description: Open-source consent-string encoders / decoders in TypeScript, Rust (with C and Java FFI), and Go, plus the iabtcf-es TCF v2 toolkit fork.
-  - name: JWT bearer authentication
-    description: Platform API uses short-lived (one-hour) JWT access tokens obtained by exchanging API key + secret against POST /v1/sessions.
-  - name: Token-bucket rate limiting
-    description: 100 requests per 15 seconds per organization across most routes, with the high-volume /consents/* family exempt; RateLimit / RateLimit-Policy headers and 429 + Retry-After when exceeded.
-  - name: SSO and member management
-    description: Programmatic management of organization members, roles, SSO connections, partner-portal sessions, and per-key API quotas via the Platform API.
-  sources:
-  - https://www.didomi.io
-  - https://developers.didomi.io/api-and-platform/introduction
-  - https://api.didomi.io/openapi.json
-  - https://status.didomi.io
-- type: UseCases
-  data:
-  - name: Publisher CMP for ad monetization
-    description: News publishers and media groups (Yahoo, large French / European publishers) use Didomi as their IAB TCF CMP so SSPs and DSPs receive valid consent signals and ad inventory is monetizable under GDPR.
-  - name: Retailer / e-commerce consent and preference
-    description: Retail and e-commerce brands (Lacoste, Rakuten, Michelin) capture consent for analytics, personalization, marketing, and CRM channels via the CMP and Preference Management Platform.
-  - name: Connected TV CMP
-    description: CTV apps on LG webOS / Vega OS, Android TV, and tvOS use Didomi's native SDKs to render consent on TV screens and emit the same TCF / Didomi consent strings used on web.
-  - name: DSAR / privacy-request intake at scale
-    description: Enterprises route GDPR Article 15-22 and CCPA opt-out / delete requests through Didomi's Privacy Requests product, with audit-grade proofs and structured exports.
-  - name: Cross-domain / cross-device consent for media groups
-    description: Media groups operating dozens of domains share a single consent across all properties and across user devices via consent tokens and links.
-  - name: Server-side first-party tagging
-    description: Marketing teams replace browser-side third-party tags with server-side Google Tag Manager via Addingwell, gated on Didomi consent.
-  sources:
-  - https://www.didomi.io
-- type: Integrations
-  data:
-  - name: Google Tag Manager
-    description: First-class Didomi GTM template and native integration; certified Google Consent Mode v2 signal delivery.
-  - name: Google Ad Manager / AdSense / AdX
-    description: Pass TCF consent signal and non-personalized-ads (NPA) fallback to Google ad stack.
-  - name: Adobe Launch / Adobe DTM
-    description: Documented integration patterns for managing tag firing under Didomi consent.
-  - name: Tealium iQ
-    description: Native Tealium integration for tag governance under Didomi consent.
-  - name: Eulerian
-    description: Tag firing control through Eulerian tag management.
-  - name: Prebid
-    description: Pass TCF v2 / US state-law consent to Prebid header bidding wrappers.
-  - name: Salesforce DMP (Krux)
-    description: Forward consent state to Salesforce DMP / Krux.
-  - name: Piano Analytics (AT Internet)
-    description: Integration with Piano Analytics (formerly AT Internet) for consent-aware analytics.
-  - name: Kameleoon
-    description: Consent integration with Kameleoon experimentation / personalization platform.
-  - name: Simple Analytics
-    description: Privacy-friendly analytics integration.
-  - name: Amazon Consent Signal
-    description: Native bridge to Amazon's consent signal for Amazon Publisher Services.
-  - name: Microsoft UET Consent Mode
-    description: Native bridge to Microsoft UET / Bing Ads consent mode.
-  - name: mParticle
-    description: First-party JavaScript kit integration for mParticle customer data platform.
-  - name: Magento 2
-    description: Didomi Magento 2 extension for consent management on Magento storefronts.
-  - name: Firebase
-    description: Cloud Functions integration to ship Didomi consent into the Firebase / Google ecosystem.
-  - name: Postman
-    description: Public Postman workspace and collections for the Platform API.
-  sources:
-  - https://github.com/didomi
-  - https://www.didomi.io
-- type: Solutions
-  data:
-  - name: CMP for Publishers
-    description: IAB TCF v2.x CMP specialized for ad-funded publishers and media groups.
-  - name: CMP for Advertisers and Brands
-    description: Consent capture and forwarding for advertiser stacks, MarTech tools, and CDPs.
-  - name: CMP for Connected TV
-    description: Native CTV consent for Vega OS, Android TV, tvOS, and other TV runtimes.
-  - name: CMP for Mobile Apps
-    description: iOS / Android / cross-platform consent management coordinated with ATT and Google Consent Mode v2.
-  - name: Preference Management Platform
-    description: Marketing-preference and channel-opt-in management beyond regulatory consent.
-  - name: Privacy Requests
-    description: GDPR / CCPA DSAR intake, internal workflow, and audit-grade evidence.
-  - name: Compliance Monitoring
-    description: Continuous scanning of digital properties for vendor coverage, unauthorized tags, and CMP misconfigurations.
-  - name: Addingwell - Server-side Tagging
-    description: Server-side Google Tag Manager product acquired by Didomi, integrated with the Didomi consent model.
-  sources:
-  - https://www.didomi.io
+  - type: Console
+    url: https://console.didomi.io
+  - type: SignUp
+    url: https://www.didomi.io/contact-us
+  - type: Pricing
+    url: https://www.didomi.io/offers
+  - type: TermsOfService
+    url: https://www.didomi.io/legal-notice
+  - type: PrivacyPolicy
+    url: https://www.didomi.io/privacy-policy
+  - type: CookiePolicy
+    url: https://www.didomi.io/cookie-policy
+  - type: StatusPage
+    url: https://status.didomi.io
+  - type: Blog
+    url: https://www.didomi.io/blog
+  - type: Support
+    url: https://support.didomi.io
+  - type: Training
+    url: https://www.didomi.io/didomi-academy
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/didomi
+  - type: GitHubOrganization
+    url: https://github.com/didomi
+  - type: SDK
+    url: https://www.npmjs.com/package/@didomi/react
+    name: Didomi React component (npm)
+  - type: SDK
+    url: https://github.com/didomi/react-native
+    name: Didomi SDK for React Native
+  - type: SDK
+    url: https://github.com/didomi/flutter
+    name: Didomi Flutter plugin
+  - type: SDK
+    url: https://github.com/didomi/unity
+    name: Didomi Unity plugin
+  - type: SDK
+    url: https://github.com/didomi/didomi-ios-sdk-spm
+    name: Didomi iOS SDK (Swift Package)
+  - type: Tool
+    url: https://github.com/didomi/gtm-template
+    name: Didomi GTM template
+  - type: Tool
+    url: https://github.com/didomi/magento
+    name: Didomi Magento 2 extension
+  - type: Tool
+    url: https://github.com/didomi/mparticle-javascript-integration-didomi
+    name: mParticle JavaScript kit integration
+  - type: Tool
+    url: https://github.com/didomi/firebase
+    name: Firebase Cloud Functions integration
+  - type: CodeExamples
+    url: https://github.com/didomi/samples
+    name: Didomi implementation samples
+  - type: CodeExamples
+    url: https://github.com/didomi/boilerplate-fastly-reverse-proxy-didomi-cmp
+    name: Fastly reverse-proxy boilerplate
+  - type: CodeExamples
+    url: https://github.com/didomi/boilerplate-aws-cloudfront-reverse-proxy-didomi-cmp
+    name: AWS CloudFront reverse-proxy boilerplate
+  - type: CodeExamples
+    url: https://github.com/didomi/boilerplate-cloudflare-reverse-proxy-didomi-cmp
+    name: Cloudflare reverse-proxy boilerplate
+  - type: JSONLD
+    url: json-ld/didomi-context.jsonld
+  - type: SpectralRules
+    url: rules/didomi-rules.yml
+  - type: Vocabulary
+    url: vocabulary/didomi-vocabulary.yml
+  - type: Plans
+    url: plans/didomi-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/didomi-rate-limits.yml
+  - type: FinOps
+    url: finops/didomi-finops.yml
+  - type: Features
+    data:
+      - name: Multi-regulation CMP
+        description: >-
+          One Didomi notice can target GDPR, CCPA and the wider US-state landscape, TCF v2.x, GPP, GPC, EU DMA, Chilean
+          Law 25, Australian privacy law, and Nordic regimes from a single multi-regulation configuration.
+      - name: IAB TCF v2.x / GPP / GPC compliance
+        description: >-
+          Didomi is an IAB-registered CMP that emits, validates, and decodes TCF v2.x and IAB GPP consent strings and
+          honors Global Privacy Control signals.
+      - name: Google Consent Mode v2
+        description: >-
+          Native, certified Google Consent Mode v2 integration on Web and Mobile, plus Amazon Consent Signal and
+          Microsoft UET Consent Mode bridges.
+      - name: Preference Management Platform (PMP)
+        description: >-
+          A separately licensed Preference Management module exposing custom preference centers, headless preference
+          widgets, marketing channel preferences, and email/SMS opt-in flows.
+      - name: Privacy Requests Management
+        description: >-
+          DSAR / privacy-request intake forms, internal workflow, evidence storage, and reporting for GDPR Articles
+          15-22 and CCPA opt-out / delete rights.
+      - name: Compliance Monitoring & Reports
+        description: >-
+          Automated scanning of websites and apps for vendor coverage, unauthorized tags, and CMP behavior; CSV / Excel
+          compliance reports surfaced via the Platform API and Console.
+      - name: Privacy Widgets
+        description: >-
+          Configurable, themed widgets (preference centers, DSAR forms, headless React widgets, embeddable widgets)
+          deployable on Didomi-managed or customer-owned domains.
+      - name: Consent Notice on Custom Domain
+        description: >-
+          Serve consent notices from the customer's own domain via DNS delegation or via reverse-proxy boilerplates for
+          Fastly, AWS CloudFront, and Cloudflare.
+      - name: Cross-device / cross-domain consent sharing
+        description: >-
+          Authenticated users can carry their consent state across domains and across devices via the platform's tokens
+          and links APIs.
+      - name: Server-side Google Tag Manager (Addingwell)
+        description: >-
+          Server-side tagging product (Addingwell, acquired by Didomi) integrated with the consent model for first-party
+          tagging without browser-side third-party calls.
+      - name: Cross-Platform SDKs
+        description: >-
+          First-party SDKs for Web, iOS / tvOS / Mac Catalyst, Android / Android TV, React Native, Flutter, Unity, Vega
+          OS (LG smart TVs), and Google AMP.
+      - name: Open Consent String tooling
+        description: >-
+          Open-source consent-string encoders / decoders in TypeScript, Rust (with C and Java FFI), and Go, plus the
+          iabtcf-es TCF v2 toolkit fork.
+      - name: JWT bearer authentication
+        description: >-
+          Platform API uses short-lived (one-hour) JWT access tokens obtained by exchanging API key + secret against
+          POST /v1/sessions.
+      - name: Token-bucket rate limiting
+        description: >-
+          100 requests per 15 seconds per organization across most routes, with the high-volume /consents/* family
+          exempt; RateLimit / RateLimit-Policy headers and 429 + Retry-After when exceeded.
+      - name: SSO and member management
+        description: >-
+          Programmatic management of organization members, roles, SSO connections, partner-portal sessions, and per-key
+          API quotas via the Platform API.
+    sources:
+      - https://www.didomi.io
+      - https://developers.didomi.io/api-and-platform/introduction
+      - https://api.didomi.io/openapi.json
+      - https://status.didomi.io
+  - type: UseCases
+    data:
+      - name: Publisher CMP for ad monetization
+        description: >-
+          News publishers and media groups (Yahoo, large French / European publishers) use Didomi as their IAB TCF CMP
+          so SSPs and DSPs receive valid consent signals and ad inventory is monetizable under GDPR.
+      - name: Retailer / e-commerce consent and preference
+        description: >-
+          Retail and e-commerce brands (Lacoste, Rakuten, Michelin) capture consent for analytics, personalization,
+          marketing, and CRM channels via the CMP and Preference Management Platform.
+      - name: Connected TV CMP
+        description: >-
+          CTV apps on LG webOS / Vega OS, Android TV, and tvOS use Didomi's native SDKs to render consent on TV screens
+          and emit the same TCF / Didomi consent strings used on web.
+      - name: DSAR / privacy-request intake at scale
+        description: >-
+          Enterprises route GDPR Article 15-22 and CCPA opt-out / delete requests through Didomi's Privacy Requests
+          product, with audit-grade proofs and structured exports.
+      - name: Cross-domain / cross-device consent for media groups
+        description: >-
+          Media groups operating dozens of domains share a single consent across all properties and across user devices
+          via consent tokens and links.
+      - name: Server-side first-party tagging
+        description: >-
+          Marketing teams replace browser-side third-party tags with server-side Google Tag Manager via Addingwell,
+          gated on Didomi consent.
+    sources:
+      - https://www.didomi.io
+  - type: Integrations
+    data:
+      - name: Google Tag Manager
+        description: First-class Didomi GTM template and native integration; certified Google Consent Mode v2 signal delivery.
+      - name: Google Ad Manager / AdSense / AdX
+        description: Pass TCF consent signal and non-personalized-ads (NPA) fallback to Google ad stack.
+      - name: Adobe Launch / Adobe DTM
+        description: Documented integration patterns for managing tag firing under Didomi consent.
+      - name: Tealium iQ
+        description: Native Tealium integration for tag governance under Didomi consent.
+      - name: Eulerian
+        description: Tag firing control through Eulerian tag management.
+      - name: Prebid
+        description: Pass TCF v2 / US state-law consent to Prebid header bidding wrappers.
+      - name: Salesforce DMP (Krux)
+        description: Forward consent state to Salesforce DMP / Krux.
+      - name: Piano Analytics (AT Internet)
+        description: Integration with Piano Analytics (formerly AT Internet) for consent-aware analytics.
+      - name: Kameleoon
+        description: Consent integration with Kameleoon experimentation / personalization platform.
+      - name: Simple Analytics
+        description: Privacy-friendly analytics integration.
+      - name: Amazon Consent Signal
+        description: Native bridge to Amazon's consent signal for Amazon Publisher Services.
+      - name: Microsoft UET Consent Mode
+        description: Native bridge to Microsoft UET / Bing Ads consent mode.
+      - name: mParticle
+        description: First-party JavaScript kit integration for mParticle customer data platform.
+      - name: Magento 2
+        description: Didomi Magento 2 extension for consent management on Magento storefronts.
+      - name: Firebase
+        description: Cloud Functions integration to ship Didomi consent into the Firebase / Google ecosystem.
+      - name: Postman
+        description: Public Postman workspace and collections for the Platform API.
+    sources:
+      - https://github.com/didomi
+      - https://www.didomi.io
+  - type: Solutions
+    data:
+      - name: CMP for Publishers
+        description: IAB TCF v2.x CMP specialized for ad-funded publishers and media groups.
+      - name: CMP for Advertisers and Brands
+        description: Consent capture and forwarding for advertiser stacks, MarTech tools, and CDPs.
+      - name: CMP for Connected TV
+        description: Native CTV consent for Vega OS, Android TV, tvOS, and other TV runtimes.
+      - name: CMP for Mobile Apps
+        description: iOS / Android / cross-platform consent management coordinated with ATT and Google Consent Mode v2.
+      - name: Preference Management Platform
+        description: Marketing-preference and channel-opt-in management beyond regulatory consent.
+      - name: Privacy Requests
+        description: GDPR / CCPA DSAR intake, internal workflow, and audit-grade evidence.
+      - name: Compliance Monitoring
+        description: Continuous scanning of digital properties for vendor coverage, unauthorized tags, and CMP misconfigurations.
+      - name: Addingwell - Server-side Tagging
+        description: Server-side Google Tag Manager product acquired by Didomi, integrated with the Didomi consent model.
+    sources:
+      - https://www.didomi.io
 maintainers:
-- FN: API Evangelist
-  url: https://apievangelist.com
-  email: info@apievangelist.com
+  - FN: API Evangelist
+    url: https://apievangelist.com
+    email: info@apievangelist.com
