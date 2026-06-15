@@ -1,0 +1,5171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Didomi API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "consents/events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/events",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization for which to retrieve events"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter events according to their status (possible values: confirmed, pending_approval). If this field is missing, only confirmed events are returned. To filter on multiple statuses in a single request, use the notation status[$in]: ?status[$in]=confirmed&status[$in]=pending_approval."
+              },
+              {
+                "name": "regulation",
+                "value": "",
+                "type": "query",
+                "description": "Filter events according to their regulation. Possible value is any existing regulation in the Regulations API (/compliance/v1/regulations). If this field is missing, only GDPR events are returned. To filter on multiple regulations in a single request, use the notation regulation[$in]: ?regulation[$in]=gdpr&regulation[$in]=cpra."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of events for a given organization ID and user ID or organization user ID"
+        },
+        {
+          "info": {
+            "name": "Create a new event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/consents/events",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization for which to create an event"
+              },
+              {
+                "name": "$disable_integrations",
+                "value": "",
+                "type": "query",
+                "description": "Disable sending the event to integrations configured for the organization. Set this parameter to true if you do not want the event processed by integrations (if you are importing events that already exist in the integrated systems, for instance)."
+              },
+              {
+                "name": "$generate_tcfcs",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"true\" to generate a TCF consent string for the user based on the latest status of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new event and update the consent status of the user"
+        },
+        {
+          "info": {
+            "name": "Delete events",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/consents/events",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the event belongs to"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "{filters}",
+                "value": "",
+                "type": "query",
+                "description": "Keys and values to filter the events to delete. You can filter using any property of the events, including nested properties like metadata by using . as a separator for each level"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete events and update the user consent status as if the events had never happened ; the user consent status is re-computed from all events for that user except deleted events"
+        },
+        {
+          "info": {
+            "name": "Retrieve an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to retrieve"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the event belongs to"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns an event"
+        },
+        {
+          "info": {
+            "name": "Patch an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/consents/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to update"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the event belongs to"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to update events. You must provide either **user_id** or **organization_user_id** when updating events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to update events. You must provide either **user_id** or **organization_user_id** when updating events"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch an existing event"
+        },
+        {
+          "info": {
+            "name": "Delete an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/consents/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to delete"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the event belongs to"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an event and update the user consent status as if the event had never happened ; the user consent status is re-computed from all events for that user except deleted events"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "consents/proofs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a consent proof",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/consents/proofs",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the proof belongs to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload a file to serve as proof of consent"
+        },
+        {
+          "info": {
+            "name": "Retrieve a proof",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/proofs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the proof to retrieve"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the proof belongs to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a consent proof"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "consents/tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new consent token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/consents/tokens",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new consent token for the user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "consents/users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/users",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization for which to retrieve users"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID to retrieve (optional)"
+              },
+              {
+                "name": "regulation",
+                "value": "",
+                "type": "query",
+                "description": "Filter user consents according to their regulation. Possible value is any existing regulation in the Regulations API (/compliance/v1/regulations). If this field is missing, only GDPR events are returned. To filter on multiple regulations in a single request, use the notation regulation[$in]: ?regulation[$in]=gdpr&regulation[$in]=cpra."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of end users and their consent status"
+        },
+        {
+          "info": {
+            "name": "Create a new user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/consents/users",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "$generate_tcfcs",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"true\" to generate a TCF consent string for the user based on the latest status of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new user and store its consent status"
+        },
+        {
+          "info": {
+            "name": "Retrieve a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/users/:id",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to retrieve. You can query by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter"
+              },
+              {
+                "name": "$by_organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Add this query-string parameter if you provide an organization user ID as the **id** in the path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a user and its consent status"
+        },
+        {
+          "info": {
+            "name": "Patch a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/consents/users/:id",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to update. You can update a user by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter"
+              },
+              {
+                "name": "$by_organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Add this query-string parameter if you provide an organization user ID as the **id** in the path"
+              },
+              {
+                "name": "$generate_tcfcs",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"true\" to generate a TCF consent string for the user based on the latest status of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch an existing user"
+        },
+        {
+          "info": {
+            "name": "Delete a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/consents/users/:id",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to delete. You can delete a user by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter"
+              },
+              {
+                "name": "$by_organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Add this query-string parameter if you provide an organization user ID as the **id** in the path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "widgets/notices/remote-configs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deploy a SDK config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/widgets/notices/remote-configs",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Directly deploy a SDK config to the production environment for the property"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /sessions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/sessions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of sessions to return"
+              }
+            ]
+          },
+          "docs": "Retrieves a single resource with the given id from the service."
+        },
+        {
+          "info": {
+            "name": "Create a new session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate against the Didomi API and get an access token to use for calls requiring authorization"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of API keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/keys",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all API keys the user has access to"
+        },
+        {
+          "info": {
+            "name": "Create a new API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new API key that can be used for authenticating HTTP requests to the Didomi API"
+        },
+        {
+          "info": {
+            "name": "Retrieve an API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single API key with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update an API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing API key"
+        },
+        {
+          "info": {
+            "name": "Patch an API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch an existing API key"
+        },
+        {
+          "info": {
+            "name": "Delete an API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing API key"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "quotas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of quotas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/quotas",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all quotas for the organizations the user belongs to"
+        },
+        {
+          "info": {
+            "name": "Retrieve a quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/quotas/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the quota to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single quota with the given ID"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "domains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/domains",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of domains"
+        },
+        {
+          "info": {
+            "name": "Create a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/domains",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new domain"
+        },
+        {
+          "info": {
+            "name": "Retrieve a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/domains/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the domain to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a domain by its ID"
+        },
+        {
+          "info": {
+            "name": "Update a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/domains/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the domain to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing domain"
+        },
+        {
+          "info": {
+            "name": "Patch a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/domains/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the domain to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a domain"
+        },
+        {
+          "info": {
+            "name": "Delete a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/domains/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the domain to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a domain with type \"managed\" by its ID"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "secrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/secrets",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all the secrets the user has access to"
+        },
+        {
+          "info": {
+            "name": "Create a secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/secrets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new secret"
+        },
+        {
+          "info": {
+            "name": "Retrieve a secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/secrets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the secret to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single secret with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/secrets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the secret to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing secret"
+        },
+        {
+          "info": {
+            "name": "Patch a secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/secrets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the secret to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a secret"
+        },
+        {
+          "info": {
+            "name": "Delete a secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/secrets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the secret to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing secret. Secrets are unrecoverable after being deleted so make sure that they are not in-use before deleting them."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mint JWT token for custodial platform integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/platform-integrations/sessions",
+            "headers": [
+              {
+                "name": "X-Shopify-Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates using platform-specific session token (e.g., Shopify Session Token) and returns a session response with a short-lived JWT token for accessing Didomi Admin API resources. The token is scoped to the integration's role (external-integrations-notices-manager) and organization. Only custodial integrations are supported."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "cookies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of cookies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/cookies",
+            "params": [
+              {
+                "name": "property_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the property"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of cookies set by a property"
+        },
+        {
+          "info": {
+            "name": "Create a cookie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/cookies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new cookie for a property"
+        },
+        {
+          "info": {
+            "name": "Retrieve a cookie",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/cookies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the cookie to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single cookie set by a property"
+        },
+        {
+          "info": {
+            "name": "Update a cookie",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/cookies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the cookie to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing cookie set by a property and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a cookie",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/cookies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the cookie to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a cookie set by a property"
+        },
+        {
+          "info": {
+            "name": "Delete a cookie",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/cookies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the cookie to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing cookie"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "languages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve list of available languages/locales",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/languages",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns list of available languages/locales"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "dashboards-urls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of dashboards with signed URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/analytics/dashboards-urls",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "The category of the dashboard. Used for grouping dashboard (per page for example)."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of max results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "[object Object]",
+                "type": "query",
+                "description": "Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all dashboards with signed URLs"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/organizations",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all organizations the user belongs to"
+        },
+        {
+          "info": {
+            "name": "Create an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/organizations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new organization"
+        },
+        {
+          "info": {
+            "name": "Retrieve an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single organization with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing organization and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update an organization"
+        },
+        {
+          "info": {
+            "name": "Delete an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing organization"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of members of an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/members",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of members of an organization"
+        },
+        {
+          "info": {
+            "name": "Add a user to an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/members",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add a new member to an organization. If the user is new it will send an email with a password reset link. Finally it will send an added to organization notification"
+        },
+        {
+          "info": {
+            "name": "Retrieve a member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single member of an organization"
+        },
+        {
+          "info": {
+            "name": "PATCH /members/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of members to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the resource identified by id using data."
+        },
+        {
+          "info": {
+            "name": "Remove a user from an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing member of an organization"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "privacy-centers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of privacy centers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/privacy-centers",
+            "params": [
+              {
+                "name": "privacy_center_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the privacy center"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all the privacy centers the user has access to"
+        },
+        {
+          "info": {
+            "name": "Create a privacy center",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/privacy-centers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new privacy center"
+        },
+        {
+          "info": {
+            "name": "Retrieve a privacy center",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/privacy-centers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the privacy center to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single privacy center with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a privacy center",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/privacy-centers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the session to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing privacy center and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a privacy center",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/privacy-centers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the session to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a privacy center"
+        },
+        {
+          "info": {
+            "name": "Delete a privacy center",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/privacy-centers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the privacy center to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing privacy center"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "vendors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/vendors",
+            "params": [
+              {
+                "name": "property_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the property"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of vendors used by a property"
+        },
+        {
+          "info": {
+            "name": "Create a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/vendors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new vendor for a property"
+        },
+        {
+          "info": {
+            "name": "Retrieve a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the vendor to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single vendor used by a property"
+        },
+        {
+          "info": {
+            "name": "Update a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the vendor to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing vendor used by a property and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the vendor to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a vendor used by a property"
+        },
+        {
+          "info": {
+            "name": "Delete a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the vendor to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing vendor"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "premium-features",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of premium features",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/premium-features",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all premium features for the organizations the user belongs to"
+        },
+        {
+          "info": {
+            "name": "Retrieve a premium-feature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/premium-features/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the premium feature to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single premium feature with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a premium feature",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/premium-features/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the premium feature to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing premium feature"
+        },
+        {
+          "info": {
+            "name": "Patch a premium feature",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/premium-features/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the premium feature to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a premium feature"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "sso-connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of SSO connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/sso-connections",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all SSO connections."
+        },
+        {
+          "info": {
+            "name": "Create a SSO connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/sso-connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new SSO connection."
+        },
+        {
+          "info": {
+            "name": "Patch a SSO connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/sso-connections/:id",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch an existing SSO connection."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "organizations-source-systems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of organization source systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/organizations-source-systems",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of organization source system mappings"
+        },
+        {
+          "info": {
+            "name": "Create an organization source system mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/organizations-source-systems",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new organization source system mapping"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "notices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of notice texts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of notice texts"
+        },
+        {
+          "info": {
+            "name": "Create a notice text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new notice text for an organization"
+        },
+        {
+          "info": {
+            "name": "Retrieve a notice text",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice text to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single notice text"
+        },
+        {
+          "info": {
+            "name": "Update a notice text",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice text to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing notice text"
+        },
+        {
+          "info": {
+            "name": "Patch a notice text",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice text to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a notice text"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of notice text contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts-contents",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of notice text contents"
+        },
+        {
+          "info": {
+            "name": "Create a notice text content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts-contents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new notice text content for an organization. A content version will be automatically assigned and the content will need to go through the approval process from the Didomi team before it can be used in a notice. If there is already an approved content for a given notice text, it remains available for notices until the new version of the content get approved."
+        },
+        {
+          "info": {
+            "name": "Retrieve a notice text content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts-contents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice text content to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single notice text content"
+        },
+        {
+          "info": {
+            "name": "Update a notice text content",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts-contents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice text content to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing notice text content. Text contents cannot be modified once their status is \"approved\". If you want to update an approved text content, create a new content for the same text and get it approved again by the Didomi team."
+        },
+        {
+          "info": {
+            "name": "Patch a notice text content",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts-contents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice text content to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update an existing notice text content. Text contents cannot be modified once their status is \"approved\". If you want to update an approved text content, create a new content for the same text and get it approved again by the Didomi team."
+        },
+        {
+          "info": {
+            "name": "Delete a notice text content",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/widgets/notices/texts-contents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice text content to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing notice text content. Text contents cannot be deleted once their status is \"approved\". If you want to update an approved text content, create a new content for the same text and get it approved again by the Didomi team."
+        },
+        {
+          "info": {
+            "name": "Generate a SDK configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/widgets/notices/generators/sdk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate a SDK configuration from a notice configuration"
+        },
+        {
+          "info": {
+            "name": "Generate a Notice configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/widgets/notices/generators/configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate a Notice configuration from a SDK configuration"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of notice template configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/configs",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of notice template configurations"
+        },
+        {
+          "info": {
+            "name": "Retrieve a notice template configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/configs/:id",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice template to retrieve configuration"
+              },
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single notice template configuration"
+        },
+        {
+          "info": {
+            "name": "Update a notice template configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice template configuration to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing notice template configuration."
+        },
+        {
+          "info": {
+            "name": "Patch a notice template configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice template configuration to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update an existing notice template configuration."
+        },
+        {
+          "info": {
+            "name": "DELETE /widgets/notices/templates/configs/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of notices to remove"
+              }
+            ]
+          },
+          "docs": "Removes the resource with id."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of notices templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of notices templates"
+        },
+        {
+          "info": {
+            "name": "Create a notice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new notice template for an organization."
+        },
+        {
+          "info": {
+            "name": "Retrieve a notice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice template to retrieve"
+              },
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single notice template"
+        },
+        {
+          "info": {
+            "name": "PUT /widgets/notices/templates/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of notices to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the resource identified by id using data."
+        },
+        {
+          "info": {
+            "name": "Patch a notice template, and associate notice template with notices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice template to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update an existing notice template."
+        },
+        {
+          "info": {
+            "name": "Removes the notice template, and associated notice template config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/widgets/notices/templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice template to patch"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the notice template."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/deployments",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of deployments"
+        },
+        {
+          "info": {
+            "name": "Create a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/widgets/notices/deployments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new deployment for an organization"
+        },
+        {
+          "info": {
+            "name": "Retrieve a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/deployments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deployment to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single deployment"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/configs",
+            "headers": [
+              {
+                "name": "v",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "download",
+                "value": "",
+                "type": "query",
+                "description": "Flag to indicate the response should be returned as an attachment (interpreted as true if present regardless of value). Responds with a CSV extract of the items or Not Found if no items match the query."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of configurations"
+        },
+        {
+          "info": {
+            "name": "Retrieve a notice configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/configs/:id",
+            "headers": [
+              {
+                "name": "v",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice configuration to retrieve"
+              },
+              {
+                "name": "download",
+                "value": "",
+                "type": "query",
+                "description": "Flag to indicate the response should be returned as an attachment (interpreted as true if present regardless of value)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single notice configuration"
+        },
+        {
+          "info": {
+            "name": "Patch a notice configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/widgets/notices/configs/:id",
+            "headers": [
+              {
+                "name": "v",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice configuration to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a notice configuration"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of SDK configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/sdk-configs",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of SDK configurations"
+        },
+        {
+          "info": {
+            "name": "Retrieve a SDK configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/sdk-configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SDK configuration to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single SDK configuration"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of notices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of notices"
+        },
+        {
+          "info": {
+            "name": "Create a notice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/widgets/notices",
+            "params": [
+              {
+                "name": "duplicate",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the notice you want to duplicate"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new notice for an organization"
+        },
+        {
+          "info": {
+            "name": "Retrieve a notice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/widgets/notices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the notice to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single notice"
+        },
+        {
+          "info": {
+            "name": "Update a notice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/widgets/notices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing notice"
+        },
+        {
+          "info": {
+            "name": "Patch a notice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/widgets/notices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a notice"
+        },
+        {
+          "info": {
+            "name": "Delete a notice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/widgets/notices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the notice to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing notice"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /metadata/partners/deprecate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners/deprecate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new resource with data."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/vendors",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "An URL to match to a vendor. This parameter can be repeated multiple times to identify multiple vendors at once."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of vendors"
+        },
+        {
+          "info": {
+            "name": "Create a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/vendors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new vendor"
+        },
+        {
+          "info": {
+            "name": "Retrieve  a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the vendor to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns  a single vendor with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the vendor to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing vendor"
+        },
+        {
+          "info": {
+            "name": "Patch a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the vendor to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a vendor"
+        },
+        {
+          "info": {
+            "name": "Delete a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the vendor to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete the vendor"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of partners categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-categories",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all partners categories"
+        },
+        {
+          "info": {
+            "name": "Create a partners category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners-categories",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new partners category"
+        },
+        {
+          "info": {
+            "name": "Retrieve a partners category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partners category to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single partners category with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a partners category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/partners-categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partners category to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing partners category and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a partners category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/partners-categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partners category to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a partners category"
+        },
+        {
+          "info": {
+            "name": "Delete a partners category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/partners-categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partners category to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing partners category"
+        },
+        {
+          "info": {
+            "name": "List partner-purpose associations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a paginated list of partner-purpose associations the user has access to"
+        },
+        {
+          "info": {
+            "name": "Create a partner-purpose association",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new association between a partner and purpose, optionally scoped to an organization"
+        },
+        {
+          "info": {
+            "name": "Get a partner-purpose association",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves a single partner-purpose association by ID"
+        },
+        {
+          "info": {
+            "name": "PUT /metadata/partners-purposes/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of partners-purposes to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the resource identified by id using data."
+        },
+        {
+          "info": {
+            "name": "Update processing rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates only the processing rules for an existing partner-purpose association"
+        },
+        {
+          "info": {
+            "name": "Delete a partner-purpose association",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Permanently removes a partner-purpose association"
+        },
+        {
+          "info": {
+            "name": "List template overrides",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-templates-overrides",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a paginated list of template overrides"
+        },
+        {
+          "info": {
+            "name": "Create a template override",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-templates-overrides",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new template override for a partner-purpose association"
+        },
+        {
+          "info": {
+            "name": "Get a template override",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-templates-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves a single template override by ID"
+        },
+        {
+          "info": {
+            "name": "PUT /metadata/partners-purposes-templates-overrides/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-templates-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of partners-purposes-templates-overrides to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the resource identified by id using data."
+        },
+        {
+          "info": {
+            "name": "Update a template override",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-templates-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the processing rule for an existing template override"
+        },
+        {
+          "info": {
+            "name": "Delete a template override",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-templates-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Permanently removes a template override"
+        },
+        {
+          "info": {
+            "name": "List notice-regulation overrides",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-notices-regulations-overrides",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a paginated list of notice-regulation overrides"
+        },
+        {
+          "info": {
+            "name": "Create a notice-regulation override",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-notices-regulations-overrides",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new notice-regulation override for a partner-purpose association"
+        },
+        {
+          "info": {
+            "name": "Get a notice-regulation override",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-notices-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves a single notice-regulation override by ID"
+        },
+        {
+          "info": {
+            "name": "PUT /metadata/partners-purposes-notices-regulations-overrides/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-notices-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of partners-purposes-notices-regulations-overrides to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the resource identified by id using data."
+        },
+        {
+          "info": {
+            "name": "Update a notice-regulation override",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-notices-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the processing rule for an existing notice-regulation override"
+        },
+        {
+          "info": {
+            "name": "Delete a notice-regulation override",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/partners-purposes-notices-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Permanently removes a notice-regulation override"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "partners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of partners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "An URL to match to a partner. This parameter can be repeated multiple times to identify multiple partners at once."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of partners"
+        },
+        {
+          "info": {
+            "name": "Create a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new partner"
+        },
+        {
+          "info": {
+            "name": "Retrieve a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partner to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single partner with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partner to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing a partner"
+        },
+        {
+          "info": {
+            "name": "Patch a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partner to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update the partner"
+        },
+        {
+          "info": {
+            "name": "Delete a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partner to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete the partner"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "purposes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of available purposes for restrictions. For publisher restriction list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes/restrictions",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all purposes"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes",
+            "params": [
+              {
+                "name": "$translations",
+                "value": "",
+                "type": "query",
+                "description": "If true, will return translatable fields as objects with translations"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of max results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "[object Object]",
+                "type": "query",
+                "description": "Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all purposes"
+        },
+        {
+          "info": {
+            "name": "Create a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/purposes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new purpose"
+        },
+        {
+          "info": {
+            "name": "Retrieve a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the purpose to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single purpose with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the purpose to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing purpose and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the purpose to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a purpose"
+        },
+        {
+          "info": {
+            "name": "Delete a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the purpose to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing purpose"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "taxonomies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of taxonomy items for vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/taxonomies/vendors",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of taxonomy items for vendors"
+        },
+        {
+          "info": {
+            "name": "Create a taxonomy item for vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/taxonomies/vendors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new taxonomy item"
+        },
+        {
+          "info": {
+            "name": "Retrieve a taxonomy item for vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/taxonomies/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the item to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single taxonomy item"
+        },
+        {
+          "info": {
+            "name": "Update a taxonomy item for vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/taxonomies/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the item to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing taxonomy item"
+        },
+        {
+          "info": {
+            "name": "Patch a taxonomy item for vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/taxonomies/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the item to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a taxonomy item"
+        },
+        {
+          "info": {
+            "name": "Delete a taxonomy item for vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/taxonomies/vendors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the item to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an item"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "purposes-groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of purposes groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes-groups",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all purposes groups"
+        },
+        {
+          "info": {
+            "name": "Create a group of purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/purposes-groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new group of purposes"
+        },
+        {
+          "info": {
+            "name": "Retrieve a group of purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single group with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a group of purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/purposes-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing group of purposes and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a group of purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/purposes-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group of purposes to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a group of purposes"
+        },
+        {
+          "info": {
+            "name": "Delete a group of purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/purposes-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing group of purposes"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "metadata-purpose-regulation-override",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of MetadataPurposeRegulationOverrides.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization for which to filter overrides"
+              },
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of max results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all MetadataPurposeRegulationOverrides. A null value of `regulations_id` means all regulations are supported, and an empty array means no regulations are supported."
+        },
+        {
+          "info": {
+            "name": "Create a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new MetadataPurposeRegulationOverride"
+        },
+        {
+          "info": {
+            "name": "Retrieve a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the MetadataPurposeRegulationOverride to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single MetadataPurposeRegulationOverride with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the MetadataPurposeRegulationOverride to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing MetadataPurposeRegulationOverride and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the MetadataPurposeRegulationOverride to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a MetadataPurposeRegulationOverride"
+        },
+        {
+          "info": {
+            "name": "Delete a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the MetadataPurposeRegulationOverride to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing MetadataPurposeRegulationOverride"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "partners-default-purposes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of partners-default-purposes objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-default-purposes",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all partners-default-purposes objects"
+        },
+        {
+          "info": {
+            "name": "Create a new association between a partner and purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners-default-purposes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new partner purpose association"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "partners-legitimate-interest-purposes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of partners-legitimate-interest-purposes objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-legitimate-interest-purposes",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all partners-legitimate-interest-purposes objects"
+        },
+        {
+          "info": {
+            "name": "Create a new association between a partner and purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners-legitimate-interest-purposes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new partner purpose association"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "partners-spi-purposes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of partners-spi-purposes objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-spi-purposes",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all partners-spi-purposes objects"
+        },
+        {
+          "info": {
+            "name": "Create a new association between a partner and purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners-spi-purposes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new partner purpose association"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "partners-storages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of storages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-storages",
+            "params": [
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Query parameters to filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all storages"
+        },
+        {
+          "info": {
+            "name": "Create a storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/partners-storages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new storage"
+        },
+        {
+          "info": {
+            "name": "Retrieve a storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/partners-storages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the storage to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single storage with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/partners-storages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the storage to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing storage and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/partners-storages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the storage to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a storage"
+        },
+        {
+          "info": {
+            "name": "Delete a storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/partners-storages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the storage to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing storage"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
