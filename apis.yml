@@ -49,7 +49,7 @@ apis:
         url: https://developers.didomi.io/api-and-platform/introduction/authentication
       - type: RateLimits
         url: https://developers.didomi.io/api-and-platform/introduction/rate-limiting
-      - type: Errors
+      - type: ErrorCodes
         url: https://developers.didomi.io/api-and-platform/introduction/errors
       - type: Pagination
         url: https://developers.didomi.io/api-and-platform/introduction/pagination
@@ -63,11 +63,11 @@ apis:
         url: json-schema/didomi-privacy-request-schema.json
       - type: JSONStructure
         url: json-structure/didomi-consent-event-structure.json
-      - type: Example
+      - type: Examples
         url: examples/didomi-consent-event-example.json
-      - type: Example
+      - type: Examples
         url: examples/didomi-consent-notice-example.json
-      - type: Example
+      - type: Examples
         url: examples/didomi-privacy-request-example.json
     description: >-
       The Didomi Platform REST API at https://api.didomi.io/v1/ is the machine-facing surface for the entire Didomi
@@ -219,47 +219,42 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/didomi/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/didomi-classify-and-register-cookie-workflow.yml
-        name: Didomi Classify a Vendor and Register a Cookie
-        summary: Create a vendor taxonomy item, register a cookie classified with it, and read the cookie back.
-      - url: arazzo/didomi-create-and-assign-consent-user-workflow.yml
-        name: Didomi Create a Consent User and Assign an Internal ID
-        summary: Create an end user, patch it to assign your organization's internal user ID, and read it back.
-      - url: arazzo/didomi-create-privacy-center-workflow.yml
-        name: Didomi Create and Verify a Privacy Center
-        summary: Create a privacy center for an organization and read it back to confirm it was created.
-      - url: arazzo/didomi-data-subject-erasure-workflow.yml
-        name: Didomi Data Subject Erasure Request
-        summary: >-
-          Look up an end user by your internal ID and fulfil a right-to-erasure request by deleting their consent
-          record.
-      - url: arazzo/didomi-deploy-notice-workflow.yml
-        name: Didomi Deploy a Consent Notice
-        summary: Create a consent notice, deploy a notice configuration to production, and confirm the deployment.
-      - url: arazzo/didomi-group-notices-template-workflow.yml
-        name: Didomi Group Notices Under a Template
-        summary: Create a consent notice, group it under a new notice template, and read the template back.
-      - url: arazzo/didomi-issue-consent-token-workflow.yml
-        name: Didomi Issue a Consent Token for an End User
-        summary: Create an end user, assign an internal ID, and issue a scoped JWT consent token for that user.
-      - url: arazzo/didomi-provision-organization-workflow.yml
-        name: Didomi Provision an Organization and Invite a Member
-        summary: Create an organization, invite a first member into it, and read the organization back.
-      - url: arazzo/didomi-record-consent-event-workflow.yml
-        name: Didomi Record a Consent Event and Confirm Status
-        summary: Create a consent event for an end user, then branch on whether it is confirmed or pending approval.
-      - url: arazzo/didomi-register-cookie-workflow.yml
-        name: Didomi Register and Verify a Cookie
-        summary: Register a cookie set by a property and read it back to confirm registration.
-      - url: arazzo/didomi-submit-notice-text-content-workflow.yml
-        name: Didomi Submit Notice Text Content for Approval
-        summary: Create a notice text, submit a content version for the Didomi approval process, and read the content status.
-      - url: arazzo/didomi-upload-consent-proof-workflow.yml
-        name: Didomi Upload and Verify a Consent Proof
-        summary: Upload a file as proof of consent for an organization and read it back to verify storage.
+  - type: Arazzo
+    url: arazzo/didomi-classify-and-register-cookie-workflow.yml
+    name: Didomi Classify a Vendor and Register a Cookie
+  - type: Arazzo
+    url: arazzo/didomi-create-and-assign-consent-user-workflow.yml
+    name: Didomi Create a Consent User and Assign an Internal ID
+  - type: Arazzo
+    url: arazzo/didomi-create-privacy-center-workflow.yml
+    name: Didomi Create and Verify a Privacy Center
+  - type: Arazzo
+    url: arazzo/didomi-data-subject-erasure-workflow.yml
+    name: Didomi Data Subject Erasure Request
+  - type: Arazzo
+    url: arazzo/didomi-deploy-notice-workflow.yml
+    name: Didomi Deploy a Consent Notice
+  - type: Arazzo
+    url: arazzo/didomi-group-notices-template-workflow.yml
+    name: Didomi Group Notices Under a Template
+  - type: Arazzo
+    url: arazzo/didomi-issue-consent-token-workflow.yml
+    name: Didomi Issue a Consent Token for an End User
+  - type: Arazzo
+    url: arazzo/didomi-provision-organization-workflow.yml
+    name: Didomi Provision an Organization and Invite a Member
+  - type: Arazzo
+    url: arazzo/didomi-record-consent-event-workflow.yml
+    name: Didomi Record a Consent Event and Confirm Status
+  - type: Arazzo
+    url: arazzo/didomi-register-cookie-workflow.yml
+    name: Didomi Register and Verify a Cookie
+  - type: Arazzo
+    url: arazzo/didomi-submit-notice-text-content-workflow.yml
+    name: Didomi Submit Notice Text Content for Approval
+  - type: Arazzo
+    url: arazzo/didomi-upload-consent-proof-workflow.yml
+    name: Didomi Upload and Verify a Consent Proof
   - type: Portal
     url: https://www.didomi.io
   - type: Documentation
@@ -270,7 +265,7 @@ common:
     url: https://developers.didomi.io/cmp/web-sdk/getting-started
   - type: Console
     url: https://console.didomi.io
-  - type: SignUp
+  - type: Signup
     url: https://www.didomi.io/contact-us
   - type: Pricing
     url: https://www.didomi.io/offers
@@ -292,31 +287,31 @@ common:
     url: https://www.linkedin.com/company/didomi
   - type: GitHubOrganization
     url: https://github.com/didomi
-  - type: SDK
+  - type: SDKs
     url: https://www.npmjs.com/package/@didomi/react
     name: Didomi React component (npm)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/didomi/react-native
     name: Didomi SDK for React Native
-  - type: SDK
+  - type: SDKs
     url: https://github.com/didomi/flutter
     name: Didomi Flutter plugin
-  - type: SDK
+  - type: SDKs
     url: https://github.com/didomi/unity
     name: Didomi Unity plugin
-  - type: SDK
+  - type: SDKs
     url: https://github.com/didomi/didomi-ios-sdk-spm
     name: Didomi iOS SDK (Swift Package)
-  - type: Tool
+  - type: Tools
     url: https://github.com/didomi/gtm-template
     name: Didomi GTM template
-  - type: Tool
+  - type: Tools
     url: https://github.com/didomi/magento
     name: Didomi Magento 2 extension
-  - type: Tool
+  - type: Tools
     url: https://github.com/didomi/mparticle-javascript-integration-didomi
     name: mParticle JavaScript kit integration
-  - type: Tool
+  - type: Tools
     url: https://github.com/didomi/firebase
     name: Firebase Cloud Functions integration
   - type: CodeExamples
