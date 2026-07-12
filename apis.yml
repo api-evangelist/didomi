@@ -217,6 +217,12 @@ apis:
       tooling (`iabtcf-es`). Useful for server-side auditing, downstream ad-tech reading consent state, and offline
       analysis.
 common:
+  - type: TrustCenter
+    url: security/didomi-trust-center.yml
+  - type: DomainSecurity
+    url: security/didomi-domain-security.yml
+  - type: Authentication
+    url: authentication/didomi-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/didomi/overview
   - type: Arazzo

@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://www.didomi.io/security
+url: https://www.didomi.io/security
+certifications:
+- ISO 27001
+- GDPR
+evidence:
+- source: https://www.didomi.io/security
+  keywords:
+  - iso/iec 27001
+  - compliance certification
+  - gdpr
