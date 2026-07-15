@@ -217,6 +217,8 @@ apis:
       tooling (`iabtcf-es`). Useful for server-side auditing, downstream ad-tech reading consent state, and offline
       analysis.
 common:
+  - type: AgenticAccess
+    url: agentic-access/didomi-agentic-access.yml
   - type: TrustCenter
     url: security/didomi-trust-center.yml
   - type: DomainSecurity
