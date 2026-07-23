@@ -1,0 +1,103 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events consents/tokens API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: consents/tokens
+paths:
+  /consents/tokens:
+    post:
+      summary: Create a new consent token
+      description: Create a new consent token for the user
+      parameters:
+      - name: token
+        in: body
+        description: Token information
+        required: true
+        schema:
+          $ref: '#/definitions/consent-tokens-input'
+      responses:
+        '200':
+          description: The created ConsentToken object
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/consent-tokens'
+      tags:
+      - consents/tokens
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      security:
+      - bearer: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+definitions:
+  consent-tokens:
+    type: object
+    title: ConsentToken
+    description: A JWT token authorizing users to access and modify their consent data
+    properties:
+      id_token:
+        type: string
+        description: JWT token
+      organization_id:
+        type: string
+        description: ID of the organization that the consent gives access to
+      organization_user_id:
+        type: string
+        description: User ID
+      lifetime:
+        type: integer
+        description: Lifetime of the token (in seconds)
+      metadata:
+        type: object
+        description: Free-form metadata object on the token. Use it to store custom information tied to the token user. That information will not be stored in events or user data and will only be available for the lifetime of the token.
+    required:
+    - id_token
+    - organization_id
+    - organization_user_id
+    - lifetime
+  consent-tokens-input:
+    type: object
+    title: ConsentToken
+    description: A JWT token authorizing users to access and modify their consent data
+    properties:
+      organization_id:
+        type: string
+        description: ID of the organization that the consent gives access to
+      organization_user_id:
+        type: string
+        description: User ID
+      lifetime:
+        type: integer
+        description: Lifetime of the token (in seconds)
+      metadata:
+        type: object
+        description: Free-form metadata object on the token. Use it to store custom information tied to the token user. That information will not be stored in events or user data and will only be available for the lifetime of the token.
+    required:
+    - organization_id
+    - organization_user_id
+    - lifetime

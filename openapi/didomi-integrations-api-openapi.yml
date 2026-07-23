@@ -1,0 +1,92 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events Integrations API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: Integrations
+paths:
+  /platform-integrations/sessions:
+    post:
+      parameters:
+      - name: X-Shopify-Authorization
+        in: header
+        description: Shopify session token (JWT) from App Bridge
+        required: true
+        schema:
+          type: string
+          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+      responses:
+        '201':
+          description: JWT token successfully minted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/platform-integrations-sessions'
+        '400':
+          description: Invalid request or integration configuration error
+        '401':
+          description: Platform authentication failed or missing
+        '404':
+          description: Platform integration not found
+      description: Authenticates using platform-specific session token (e.g., Shopify Session Token) and returns a session response with a short-lived JWT token for accessing Didomi Admin API resources. The token is scoped to the integration's role (external-integrations-notices-manager) and organization. Only custodial integrations are supported.
+      summary: Mint JWT token for custodial platform integration
+      tags:
+      - Integrations
+      security:
+      - ShopifySessionToken: []
+      requestBody:
+        description: Empty body (authentication via header)
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/platform-integrations-sessions-input'
+components:
+  schemas:
+    platform-integrations-sessions:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Session type (always "api-key")
+          example: api-key
+        key:
+          type: string
+          description: API key ID
+        access_token:
+          type: string
+          description: JWT access token for API authentication
+        platform_integration_id:
+          type: string
+          description: ID of the platform integration this token authenticates against.
+      required:
+      - type
+      - key
+      - access_token
+      - platform_integration_id
+    platform-integrations-sessions-input:
+      type: object
+      properties: {}
+      required: []
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

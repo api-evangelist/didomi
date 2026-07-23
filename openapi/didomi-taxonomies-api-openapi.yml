@@ -1,0 +1,262 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events taxonomies API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: taxonomies
+  description: Manage the taxonomy for vendors
+paths:
+  /taxonomies/vendors:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: A list of TaxonomyVendor objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/taxonomies-vendors'
+      description: Returns a list of taxonomy items for vendors
+      summary: Retrieve a list of taxonomy items for vendors
+      tags:
+      - taxonomies
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: item
+        in: body
+        description: The TaxonomyVendor object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/taxonomies-vendors-input'
+      responses:
+        '200':
+          description: The created TaxonomyVendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/taxonomies-vendors'
+      description: Create a new taxonomy item
+      summary: Create a taxonomy item for vendors
+      tags:
+      - taxonomies
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+  /taxonomies/vendors/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the item to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A TaxonomyVendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/taxonomies-vendors'
+      description: Returns a single taxonomy item
+      summary: Retrieve a taxonomy item for vendors
+      tags:
+      - taxonomies
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the item to update
+        required: true
+        schema:
+          type: string
+      - name: item
+        in: body
+        description: The new data to update the item with
+        required: true
+        schema:
+          $ref: '#/components/schemas/taxonomies-vendors-input'
+      responses:
+        '200':
+          description: The updated TaxonomyVendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/taxonomies-vendors'
+      description: Update an existing taxonomy item
+      summary: Update a taxonomy item for vendors
+      tags:
+      - taxonomies
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the item to patch
+        required: true
+        schema:
+          type: string
+      - name: item
+        in: body
+        description: The properties to replace on the item
+        required: true
+        schema:
+          $ref: '#/components/schemas/taxonomies-vendors-input'
+      responses:
+        '200':
+          description: The patched TaxonomyVendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/taxonomies-vendors'
+      description: Partially update a taxonomy item
+      summary: Patch a taxonomy item for vendors
+      tags:
+      - taxonomies
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the item to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted TaxonomyVendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/taxonomies-vendors'
+      description: Delete an item
+      summary: Delete a taxonomy item for vendors
+      tags:
+      - taxonomies
+      security:
+      - bearer: []
+components:
+  schemas:
+    taxonomies-vendors-input:
+      title: TaxonomyVendorInput
+      type: object
+      properties:
+        id:
+          type: string
+          description: Item ID
+        name:
+          type: string
+          description: Name of the item
+        parent_id:
+          type: string
+          description: ID of the parent of this item
+      required:
+      - id
+      - name
+    taxonomies-vendors:
+      type: object
+      title: TaxonomyVendor
+      description: A classification item for vendors
+      properties:
+        id:
+          type: string
+          description: Item ID
+        name:
+          type: string
+          description: Name of the item
+        parent_id:
+          type: string
+          description: ID of the parent of this item
+        created_at:
+          type: string
+          description: Creation date of the item
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the item
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the item
+      required:
+      - id
+      - name
+    vendors:
+      type: object
+      title: Vendor
+      description: A vendor that provides services to a property
+      properties:
+        id:
+          type: string
+          description: The ID of the vendor for the property (ie different from the ID of the vendor metadata on the Didomi platform)
+        status:
+          type: string
+          description: The status of the vendor for the privacy center (draft or published)
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+        metadata_id:
+          type: string
+          description: The ID of the vendor metadata
+        created_at:
+          type: string
+          description: Creation date of the property
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the property
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the property object
+      required:
+      - id
+      - property_id
+      - metadata_id
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

@@ -1,0 +1,338 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events privacy-centers API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: privacy-centers
+  description: Manage privacy centers
+paths:
+  /privacy-centers:
+    get:
+      parameters:
+      - name: privacy_center_id
+        in: query
+        description: The ID of the privacy center
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of PrivacyCenter objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/privacy-centers'
+      description: Returns a list of all the privacy centers the user has access to
+      summary: Retrieve a list of privacy centers
+      tags:
+      - privacy-centers
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: privacycenter
+        in: body
+        description: The PrivacyCenter object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/privacy-centers-input'
+      responses:
+        '200':
+          description: The created PrivacyCenter object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/privacy-centers'
+      description: Create a new privacy center
+      summary: Create a privacy center
+      tags:
+      - privacy-centers
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/privacy-centers'
+  /privacy-centers/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the privacy center to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A PrivacyCenter object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/privacy-centers'
+      description: Returns a single privacy center with the given ID
+      summary: Retrieve a privacy center
+      tags:
+      - privacy-centers
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the session to update
+        required: true
+        schema:
+          type: string
+      - name: privacycenter
+        in: body
+        description: The new data to update the privacy center with
+        required: true
+        schema:
+          $ref: '#/components/schemas/privacy-centers-input'
+      responses:
+        '200':
+          description: The updated PrivacyCenter object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/privacy-centers'
+      description: Update an existing privacy center and replace all its properties
+      summary: Update a privacy center
+      tags:
+      - privacy-centers
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/privacy-centers'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the session to patch
+        required: true
+        schema:
+          type: string
+      - name: privacycenter
+        in: body
+        description: The properties to replace in the PrivacyCenter object
+        required: true
+        schema:
+          $ref: '#/components/schemas/privacy-centers-input'
+      responses:
+        '200':
+          description: The patched PrivacyCenter object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/privacy-centers'
+      description: Partially update a privacy center
+      summary: Patch a privacy center
+      tags:
+      - privacy-centers
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/privacy-centers'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the privacy center to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted PrivacyCenter object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/privacy-centers'
+      description: Delete an existing privacy center
+      summary: Delete a privacy center
+      tags:
+      - privacy-centers
+      security:
+      - bearer: []
+components:
+  schemas:
+    privacy-centers-contact:
+      type: object
+      title: Contact
+      description: Contact information of the DPO or person in charge of privacy
+      properties:
+        email:
+          type: string
+          description: Email address
+        schedule:
+          type: string
+          description: Phone number
+        address:
+          type: string
+          description: Postal address
+    privacy-centers-input:
+      title: PrivacyCenterInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name of the privacy center (usually the company or website name)
+        website:
+          type: string
+          format: uri
+          description: URL of the website linked to the privacy center
+        custom_domains:
+          type: array
+          description: Sub-domains that the privacy center should be served on
+          items:
+            type: string
+        contact:
+          $ref: '#/components/schemas/privacy-centers-contact'
+        customization:
+          $ref: '#/components/schemas/privacy-centers-customization'
+        legal_name:
+          type: string
+          description: Full legal name of the company
+        display_cookies:
+          type: string
+          description: How to display the cookies section in the privacy center?
+          enum:
+          - list
+          - choices
+          - none
+        privacy_policy:
+          type: string
+          description: The privacy policy to display in the privacy center formatted with Markdown (English)
+        content:
+          type: object
+          description: Texts of the privacy center
+        languages:
+          type: array
+          description: Languages enabled in the privacy center (two-letter codes); an empty list or a null value will enabled all available languages
+          items:
+            type: string
+        auth_required:
+          type: boolean
+          description: Whether end users must be authenticated when accessing a privacy center
+        organization_id:
+          type: string
+          description: The ID of the organization that owns this property
+      required:
+      - name
+      - organization_id
+    privacy-centers:
+      type: object
+      title: PrivacyCenter
+      description: A privacy center gives legal information to users as well as options to manage consent
+      properties:
+        id:
+          type: string
+          description: Privacy Center ID
+        name:
+          type: string
+          description: Display name of the privacy center (usually the company or website name)
+        website:
+          type: string
+          format: uri
+          description: URL of the website linked to the privacy center
+        custom_domains:
+          type: array
+          description: 'Sub-domains that the privacy center should be served on (without http or / ; example: privacy.domain.com)'
+          items:
+            type: string
+        contact:
+          $ref: '#/components/schemas/privacy-centers-contact'
+        customization:
+          $ref: '#/components/schemas/privacy-centers-customization'
+        legal_name:
+          type: string
+          description: Full legal name of the company
+        display_cookies:
+          type: string
+          description: How to display the cookies section in the privacy center?
+          enum:
+          - list
+          - choices
+          - none
+        privacy_policy:
+          type: string
+          description: The privacy policy to display in the privacy center formatted with Markdown (English)
+        content:
+          type: object
+          description: Texts of the privacy center
+        languages:
+          type: array
+          description: Languages enabled in the privacy center (two-letter codes or two-letter language and two-letter country code); an empty list or a null value will enabled all available languages
+          items:
+            type: string
+        auth_required:
+          type: boolean
+          description: Whether end users must be authenticated when accessing a privacy center
+        organization_id:
+          type: string
+          description: The ID of the organization that owns this privacy center
+        created_at:
+          type: string
+          description: Creation date of the privacy center
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the privacy center
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the privacy center object
+      required:
+      - id
+      - name
+    privacy-centers-customization:
+      type: object
+      title: Customization
+      description: Customization options for the privacy center
+      properties:
+        logo:
+          type: string
+          format: uri
+          description: URL of the logo to display (must be HTTPS)
+        colors:
+          type: object
+          title: Colors
+          description: Colors information
+          properties:
+            primary:
+              type: string
+              description: Primary color to use in the Privacy Center theme
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

@@ -1,0 +1,1442 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events metadata API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: metadata
+  description: A metadata service
+paths:
+  /metadata/partners/deprecate:
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Creates a new resource with data.
+      summary: ''
+      tags:
+      - metadata
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners'
+  /metadata/vendors:
+    get:
+      parameters:
+      - name: url
+        in: query
+        required: false
+        schema:
+          type: string
+        description: An URL to match to a vendor. This parameter can be repeated multiple times to identify multiple vendors at once.
+      responses:
+        '200':
+          description: A list of Vendor objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/metadata-vendors'
+      description: Returns a list of vendors
+      summary: Retrieve a list of vendors
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: vendor
+        in: body
+        description: The Vendor object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/metadata-vendors-input'
+      responses:
+        '200':
+          description: The created Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/metadata-vendors'
+      description: Create a new vendor
+      summary: Create a vendor
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+  /metadata/vendors/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the vendor to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/metadata-vendors'
+      description: Returns  a single vendor with the given ID
+      summary: Retrieve  a vendor
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the vendor to update
+        required: true
+        schema:
+          type: string
+      - name: vendor
+        in: body
+        description: The new data to update the vendor with
+        required: true
+        schema:
+          $ref: '#/components/schemas/metadata-vendors-input'
+      responses:
+        '200':
+          description: The updated Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/metadata-vendors'
+      description: Update an existing vendor
+      summary: Update a vendor
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the vendor to patch
+        required: true
+        schema:
+          type: string
+      - name: vendor
+        in: body
+        description: The data to replace in the Vendor object
+        required: true
+        schema:
+          $ref: '#/components/schemas/metadata-vendors-input'
+      responses:
+        '200':
+          description: The patched Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/metadata-vendors'
+      description: Partially update a vendor
+      summary: Patch a vendor
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the vendor to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendors'
+      description: Delete the vendor
+      summary: Delete a vendor
+      tags:
+      - metadata
+      security:
+      - bearer: []
+  /metadata/partners-categories:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/partners-categories'
+      responses:
+        '200':
+          description: A list of PartnersCategory objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partners-categories'
+      description: Returns a list of all partners categories
+      summary: Retrieve a list of partners categories
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: partners category
+        in: body
+        description: The Partners category object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/partners-categories-input'
+      responses:
+        '200':
+          description: The created PartnersCategory object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-categories'
+      description: Create a new partners category
+      summary: Create a partners category
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-categories'
+  /metadata/partners-categories/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the partners category to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A PartnersCategory object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-categories'
+      description: Returns a single partners category with the given ID
+      summary: Retrieve a partners category
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the partners category to update
+        required: true
+        schema:
+          type: string
+      - name: partners category
+        in: body
+        description: The new data to update the partners category with
+        required: true
+        schema:
+          $ref: '#/components/schemas/partners-categories-input'
+      responses:
+        '200':
+          description: The updated PartnersCategory object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-categories'
+      description: Update an existing partners category and replace all its properties
+      summary: Update a partners category
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-categories'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the partners category to patch
+        required: true
+        schema:
+          type: string
+      - name: partners category
+        in: body
+        description: The properties to replace in the Partners category object
+        required: true
+        schema:
+          $ref: '#/components/schemas/partners-categories-input'
+      responses:
+        '200':
+          description: The patched PartnersCategory object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-categories'
+      description: Partially update a partners category
+      summary: Patch a partners category
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-categories'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the partners category to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted PartnersCategory object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-categories'
+      description: Delete an existing partners category
+      summary: Delete a partners category
+      tags:
+      - metadata
+      security:
+      - bearer: []
+  /metadata/partners-purposes:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/partners-purposes'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total number of records
+                  limit:
+                    type: integer
+                    description: Number of records per page
+                  skip:
+                    type: integer
+                    description: Number of records to skip
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/partners-purposes'
+      description: Returns a paginated list of partner-purpose associations the user has access to
+      summary: List partner-purpose associations
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    post:
+      parameters: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes'
+      description: Creates a new association between a partner and purpose, optionally scoped to an organization
+      summary: Create a partner-purpose association
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-purposes-input'
+  /metadata/partners-purposes/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes'
+      description: Retrieves a single partner-purpose association by ID
+      summary: Get a partner-purpose association
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - in: path
+        name: id
+        description: ID of partners-purposes to update
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Updates the resource identified by id using data.
+      summary: ''
+      tags:
+      - metadata
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-purposes'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes'
+      description: Updates only the processing rules for an existing partner-purpose association
+      summary: Update processing rules
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                processing_rules:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - opt-in
+                    - opt-out
+                  minItems: 1
+              required:
+              - processing_rules
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Association successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: ID of the deleted association
+      description: Permanently removes a partner-purpose association
+      summary: Delete a partner-purpose association
+      tags:
+      - metadata
+      security:
+      - bearer: []
+  /metadata/partners-purposes-templates-overrides:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/partners-purposes-templates-overrides'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total number of records
+                  limit:
+                    type: integer
+                    description: Number of records per page
+                  skip:
+                    type: integer
+                    description: Number of records to skip
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/partners-purposes-templates-overrides'
+      description: Returns a paginated list of template overrides
+      summary: List template overrides
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    post:
+      parameters: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes-templates-overrides'
+      description: Creates a new template override for a partner-purpose association
+      summary: Create a template override
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-purposes-templates-overrides-input'
+  /metadata/partners-purposes-templates-overrides/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes-templates-overrides'
+      description: Retrieves a single template override by ID
+      summary: Get a template override
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - in: path
+        name: id
+        description: ID of partners-purposes-templates-overrides to update
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes-templates-overrides'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Updates the resource identified by id using data.
+      summary: ''
+      tags:
+      - metadata
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-purposes-templates-overrides'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes-templates-overrides'
+      description: Updates the processing rule for an existing template override
+      summary: Update a template override
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                processing_rule:
+                  type: string
+                  enum:
+                  - opt-in
+                  - opt-out
+              required:
+              - processing_rule
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Template override successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: ID of the deleted template override
+      description: Permanently removes a template override
+      summary: Delete a template override
+      tags:
+      - metadata
+      security:
+      - bearer: []
+  /metadata/partners-purposes-notices-regulations-overrides:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/partners-purposes-notices-regulations-overrides'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total number of records
+                  limit:
+                    type: integer
+                    description: Number of records per page
+                  skip:
+                    type: integer
+                    description: Number of records to skip
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/partners-purposes-notices-regulations-overrides'
+      description: Returns a paginated list of notice-regulation overrides
+      summary: List notice-regulation overrides
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    post:
+      parameters: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes-notices-regulations-overrides'
+      description: Creates a new notice-regulation override for a partner-purpose association
+      summary: Create a notice-regulation override
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-purposes-notices-regulations-overrides-input'
+  /metadata/partners-purposes-notices-regulations-overrides/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes-notices-regulations-overrides'
+      description: Retrieves a single notice-regulation override by ID
+      summary: Get a notice-regulation override
+      tags:
+      - metadata
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - in: path
+        name: id
+        description: ID of partners-purposes-notices-regulations-overrides to update
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes-notices-regulations-overrides'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Updates the resource identified by id using data.
+      summary: ''
+      tags:
+      - metadata
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-purposes-notices-regulations-overrides'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-purposes-notices-regulations-overrides'
+      description: Updates the processing rule for an existing notice-regulation override
+      summary: Update a notice-regulation override
+      tags:
+      - metadata
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                processing_rule:
+                  type: string
+                  enum:
+                  - opt-in
+                  - opt-out
+              required:
+              - processing_rule
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Notice-regulation override successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: ID of the deleted notice-regulation override
+      description: Permanently removes a notice-regulation override
+      summary: Delete a notice-regulation override
+      tags:
+      - metadata
+      security:
+      - bearer: []
+components:
+  schemas:
+    metadata-vendors-input:
+      title: VendorInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the vendor
+        tags:
+          type: array
+          description: Extra classification items for the vendor
+          items:
+            type: string
+        website:
+          type: string
+          format: uri
+          description: Website URL of the vendor
+        website_optout:
+          type: string
+          format: uri
+          description: URL for consumers to opt-out from data collection and processing from the vendor
+        hosts:
+          type: array
+          description: List of hosts (DNS names) that belong to the vendor
+          items:
+            type: string
+        url_patterns:
+          type: array
+          description: List of URL patterns (regular expressions) that uniquely identify the vendor
+          items:
+            type: string
+        taxonomy_id:
+          type: string
+          description: The ID of the taxonomy item for classifying this vendor
+      required:
+      - name
+    partners-purposes-notices-regulations-overrides:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the notice-regulation override
+        metadata_partner_id:
+          type: string
+          description: Foreign key reference to metadata-partners(id)
+        metadata_purpose_id:
+          type: string
+          description: Foreign key reference to metadata-purposes(id)
+        notice_id:
+          type: string
+          description: Foreign key reference to widgets-notices(id)
+        organization_id:
+          type: string
+          description: Foreign key reference to organizations(id)
+        regulation_id:
+          type: string
+          description: Reference to the regulation ID in the Regulations Service
+        processing_rule:
+          type: string
+          enum:
+          - opt-in
+          - opt-out
+          description: Processing rule override for this notice-regulation combination
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of record creation
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last update
+        version:
+          type: integer
+          description: Version number for concurrency control
+      required:
+      - id
+      - metadata_partner_id
+      - metadata_purpose_id
+      - notice_id
+      - organization_id
+      - regulation_id
+      - processing_rule
+    partners-purposes-templates-overrides:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the template override
+        metadata_partner_id:
+          type: string
+          description: Foreign key reference to metadata-partners(id)
+        metadata_purpose_id:
+          type: string
+          description: Foreign key reference to metadata-purposes(id)
+        template_id:
+          type: string
+          description: Foreign key reference to widgets-notices-templates(id)
+        organization_id:
+          type: string
+          description: Foreign key reference to organizations(id)
+        processing_rule:
+          type: string
+          enum:
+          - opt-in
+          - opt-out
+          description: Processing rule override for this template
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of record creation
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last update
+        version:
+          type: integer
+          description: Version number for concurrency control
+      required:
+      - id
+      - metadata_partner_id
+      - metadata_purpose_id
+      - template_id
+      - organization_id
+      - processing_rule
+    partners-categories:
+      type: object
+      title: PartnersCategory
+      properties:
+        id:
+          type: string
+          description: Partners category ID
+        name:
+          type: string
+          description: Name of the partners category
+        created_at:
+          type: string
+          description: Creation date of the partners category
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the partners category
+          format: date-time
+      required:
+      - id
+    partners-categories-input:
+      title: PartnersCategoryInput
+      type: object
+      properties:
+        id:
+          type: string
+          description: Partners category ID
+        name:
+          type: string
+          description: Name of the partners category
+    partners-purposes-input:
+      title: partners-purposes-input
+      type: object
+      properties:
+        metadata_partner_id:
+          type: string
+          description: Foreign key reference to metadata-partners(id)
+        metadata_purpose_id:
+          type: string
+          description: Foreign key reference to metadata-purposes(id)
+        organization_id:
+          type: string
+          description: Optional organization ID for org-specific overrides. Null indicates a global association
+          nullable: true
+        processing_rules:
+          type: array
+          items:
+            type: string
+            enum:
+            - opt-in
+            - opt-out
+          description: Processing rules for this partner-purpose combination
+          minItems: 1
+      required:
+      - metadata_partner_id
+      - metadata_purpose_id
+      - processing_rules
+    partners-purposes-notices-regulations-overrides-input:
+      type: object
+      properties:
+        metadata_partner_id:
+          type: string
+          description: Foreign key reference to metadata-partners(id)
+        metadata_purpose_id:
+          type: string
+          description: Foreign key reference to metadata-purposes(id)
+        notice_id:
+          type: string
+          description: Foreign key reference to widgets-notices(id)
+        organization_id:
+          type: string
+          description: Foreign key reference to organizations(id)
+        regulation_id:
+          type: string
+          description: Reference to the regulation ID in the Regulations Service
+        processing_rule:
+          type: string
+          enum:
+          - opt-in
+          - opt-out
+          description: Processing rule override for this notice-regulation combination
+      required:
+      - metadata_partner_id
+      - metadata_purpose_id
+      - notice_id
+      - organization_id
+      - regulation_id
+      - processing_rule
+    metadata-vendors:
+      type: object
+      title: Vendor
+      description: A vendor is a third-party company that provides services to properties by collecting data, transforming it, ... This object describes a vendor.
+      properties:
+        id:
+          type: string
+          description: Vendor ID
+        name:
+          type: string
+          description: Name of the vendor
+        tags:
+          type: array
+          description: Extra classification items for the vendor
+          items:
+            type: string
+        website:
+          type: string
+          format: uri
+          description: Website URL of the vendor
+        website_optout:
+          type: string
+          format: uri
+          description: URL for consumers to opt-out from data collection and processing from the vendor
+        hosts:
+          type: array
+          description: List of hosts (DNS names) that belong to the vendor
+          items:
+            type: string
+        url_patterns:
+          type: array
+          description: List of URL patterns (regular expressions) that uniquely identify the vendor
+          items:
+            type: string
+        urls:
+          type: array
+          description: If vendors were queried from URLs (with the `url` query-string parameter), this property contains a list of all URLs that were matched to this vendor
+          items:
+            type: string
+            format: uri
+        taxonomy_id:
+          type: string
+          description: The ID of the taxonomy item for classifying this vendor
+        created_at:
+          type: string
+          description: Creation date of the vendor
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the vendor
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the vendor object
+      required:
+      - id
+      - name
+    partners-purposes:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the partner-purpose association
+        metadata_partner_id:
+          type: string
+          description: Foreign key reference to metadata-partners(id)
+        metadata_purpose_id:
+          type: string
+          description: Foreign key reference to metadata-purposes(id)
+        organization_id:
+          type: string
+          description: Optional organization ID for org-specific overrides. Null indicates a global association
+          nullable: true
+        processing_rules:
+          type: array
+          items:
+            type: string
+            enum:
+            - opt-in
+            - opt-out
+          description: Processing rules for this partner-purpose combination
+          minItems: 1
+        is_org_override:
+          type: boolean
+          description: Read-only flag indicating if this is an organization override of a global association
+        default_purposes_id:
+          type: string
+          description: Legacy foreign key reference to metadata-partners-default-purposes(id)
+          nullable: true
+        legitimate_interest_purposes_id:
+          type: string
+          description: Legacy foreign key reference to metadata-partners-legitimate-interest-purposes(id)
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of record creation
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last update
+        version:
+          type: integer
+          description: Version number for concurrency control
+      required:
+      - id
+      - metadata_partner_id
+      - metadata_purpose_id
+      - processing_rules
+    vendors:
+      type: object
+      title: Vendor
+      description: A vendor that provides services to a property
+      properties:
+        id:
+          type: string
+          description: The ID of the vendor for the property (ie different from the ID of the vendor metadata on the Didomi platform)
+        status:
+          type: string
+          description: The status of the vendor for the privacy center (draft or published)
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+        metadata_id:
+          type: string
+          description: The ID of the vendor metadata
+        created_at:
+          type: string
+          description: Creation date of the property
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the property
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the property object
+      required:
+      - id
+      - property_id
+      - metadata_id
+    partners-purposes-templates-overrides-input:
+      type: object
+      properties:
+        metadata_partner_id:
+          type: string
+          description: Foreign key reference to metadata-partners(id)
+        metadata_purpose_id:
+          type: string
+          description: Foreign key reference to metadata-purposes(id)
+        template_id:
+          type: string
+          description: Foreign key reference to widgets-notices-templates(id)
+        organization_id:
+          type: string
+          description: Foreign key reference to organizations(id)
+        processing_rule:
+          type: string
+          enum:
+          - opt-in
+          - opt-out
+          description: Processing rule override for this template
+      required:
+      - metadata_partner_id
+      - metadata_purpose_id
+      - template_id
+      - organization_id
+      - processing_rule
+    partners:
+      type: object
+      title: Partner
+      description: A third-party company that provides services to companies by collecting data, transforming it, etc.
+      properties:
+        id:
+          type: string
+          description: Partner ID
+        name:
+          type: string
+          description: Name of the partner
+        tags:
+          type: array
+          description: Extra classification items for the partner
+          items:
+            type: string
+        contact:
+          type: string
+          description: Contact information for someone from the partner
+        website:
+          type: string
+          format: uri
+          description: Website URL of the partner
+        website_optout:
+          type: string
+          format: uri
+          description: URL for consumers to opt-out from data collection and processing from the partner
+        hosts:
+          type: array
+          description: List of hosts (DNS names) that belong to the partner
+          items:
+            type: string
+        url_patterns:
+          type: array
+          description: List of URL patterns (regular expressions) that uniquely identify the partner
+          items:
+            type: string
+        urls:
+          type: array
+          description: If partners were queried from URLs (with the `url` query-string parameter), this property contains a list of all URLs that were matched to this partner
+          items:
+            type: string
+            format: uri
+        taxonomy_id:
+          type: string
+          description: The ID of the taxonomy item for classifying this partner
+        organization_id:
+          type: string
+          description: The organization ID that owns the partner
+        category_id:
+          type: string
+          description: The category ID of the partner
+        country:
+          type: string
+          description: The ISO Alpha-2 code of the country where the partner is located
+        created_at:
+          type: string
+          description: Creation date of the partner
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the partner
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the partner object
+        namespaces:
+          type: object
+          description: IDs of this partner in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab:
+              type: string
+              description: ID of the vendor in the IAB TCF version 1
+            iab2:
+              type: string
+              description: ID of the vendor in the IAB TCF version 2
+            didomi:
+              type: string
+              description: ID of the vendor in the Didomi SDK
+            custom:
+              type: string
+              description: Custom ID for the vendor
+            google:
+              type: string
+              description: ID of the vendor for Google DFP/GAM
+        default_purposes_id:
+          type: array
+          description: Purposes of the partner with consent legal basis
+          items:
+            type: string
+        legitimate_interest_purposes_id:
+          type: array
+          description: Purposes of the partner with legitimate interest legal basis
+          items:
+            type: string
+        spi_purposes_id:
+          type: array
+          description: Purposes of the partner with sensitive personal information
+          items:
+            type: string
+        cookie_max_duration:
+          type: number
+          description: The duration of time for which the cookies are stored
+        cookie_max_duration_unit:
+          type: string
+          enum:
+          - months
+          - days
+          - seconds
+          description: The unit of the cookie max duration
+        uses_non_cookie_access:
+          type: boolean
+          description: Whether the vendor uses other means of storage than cookies
+        deprecated:
+          type: boolean
+          description: Whether a partner is deprecated or not. Deprecated partners cannot be added to privacy centers or consent notices but are not immediately removed to not break entities that already use them. Deprecated partners will eventually be removed.
+        notes:
+          type: string
+          description: Free-form field to keep various notes on a vendor
+      required:
+      - id
+      - name
+      - category_id
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

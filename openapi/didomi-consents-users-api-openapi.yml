@@ -1,0 +1,804 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events consents/users API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: consents/users
+paths:
+  /consents/users:
+    get:
+      summary: Retrieve users
+      description: Returns a list of end users and their consent status
+      security:
+      - bearer: []
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization for which to retrieve users
+        required: true
+        schema:
+          type: string
+      - name: organization_user_id
+        in: query
+        description: The organization user ID to retrieve (optional)
+        required: false
+        schema:
+          type: string
+      - name: regulation
+        in: query
+        description: 'Filter user consents according to their regulation. Possible value is any existing regulation in the Regulations API (/compliance/v1/regulations). If this field is missing, only GDPR events are returned. To filter on multiple regulations in a single request, use the notation regulation[$in]: ?regulation[$in]=gdpr&regulation[$in]=cpra.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of ConsentUser objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/consent-users'
+      tags:
+      - consents/users
+      consumes:
+      - application/json
+      produces:
+      - application/json
+    post:
+      summary: Create a new user
+      description: Create a new user and store its consent status
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the user belongs to
+        required: true
+        schema:
+          type: string
+      - name: $generate_tcfcs
+        in: query
+        description: Set to "true" to generate a TCF consent string for the user based on the latest status of the user
+        required: false
+        schema:
+          type: boolean
+      - name: user
+        in: body
+        description: User information
+        required: true
+        schema:
+          $ref: '#/definitions/consent-users-input-create'
+      responses:
+        '200':
+          description: The created ConsentUser object
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/consent-users'
+      tags:
+      - consents/users
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      security:
+      - bearer: []
+  /consents/users/{id}:
+    get:
+      summary: Retrieve a user
+      description: Returns a user and its consent status
+      security:
+      - bearer: []
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the user belongs to
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The ID of the user to retrieve. You can query by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter
+        required: true
+        schema:
+          type: string
+      - name: $by_organization_user_id
+        in: query
+        description: Add this query-string parameter if you provide an organization user ID as the **id** in the path
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A ConsentUser object
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/consent-users'
+      tags:
+      - consents/users
+      consumes:
+      - application/json
+      produces:
+      - application/json
+    patch:
+      summary: Patch a user
+      description: Patch an existing user
+      security:
+      - bearer: []
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the user belongs to
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The ID of the user to update. You can update a user by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter
+        required: true
+        schema:
+          type: string
+      - name: $by_organization_user_id
+        in: query
+        description: Add this query-string parameter if you provide an organization user ID as the **id** in the path
+        required: false
+        schema:
+          type: string
+      - name: $generate_tcfcs
+        in: query
+        description: Set to "true" to generate a TCF consent string for the user based on the latest status of the user
+        required: false
+        schema:
+          type: boolean
+      - name: user
+        in: body
+        description: The new user data
+        required: true
+        schema:
+          $ref: '#/definitions/consent-users-input-update'
+      responses:
+        '200':
+          description: The patched ConsentUser object
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/consent-users'
+      tags:
+      - consents/users
+      consumes:
+      - application/json
+      produces:
+      - application/json
+    delete:
+      summary: Delete a user
+      description: Delete an existing user
+      security:
+      - bearer: []
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the user belongs to
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The ID of the user to delete. You can delete a user by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter
+        required: true
+        schema:
+          type: string
+      - name: $by_organization_user_id
+        in: query
+        description: Add this query-string parameter if you provide an organization user ID as the **id** in the path
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted ConsentUser object
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/consent-users'
+      tags:
+      - consents/users
+      consumes:
+      - application/json
+      produces:
+      - application/json
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+definitions:
+  consent-users:
+    type: object
+    title: ConsentUser
+    description: An end user and its consent status
+    properties:
+      id:
+        type: string
+        description: Didomi user ID (A random UUID for users encountered on websites and an IDFA/ADID for users from mobile apps)
+      organization_id:
+        type: string
+        description: ID of the organization that owns the user
+      organization_user_id:
+        type: string
+        description: A unique user ID, internal to your organization. This can be an email, a phone number, an internal client ID, etc. It is used to link Didomi users to your internal systems.
+      version:
+        type: number
+        description: Version number of the user record for optimistic locking
+      created_at:
+        type: string
+        description: Creation date of the user (ISO8601)
+      updated_at:
+        type: string
+        description: Last update date of the user (ISO8601)
+      metadata:
+        type: object
+        title: Metadata
+        description: Free-form metadata object on the user. Use it to store custom information on the user.
+      country:
+        type: string
+        title: Country
+        description: Two-letter ISO code of the user country
+      last_seen_country:
+        type: string
+        title: Last seen country
+        description: Two-letter ISO country code of the last consent event for the user.
+      consents:
+        type: object
+        title: Consents
+        description: Consent status of the user
+        properties:
+          channels:
+            type: array
+            description: Channels
+            items:
+              type: object
+              title: Channel
+              description: Channel
+              properties:
+                id:
+                  type: string
+                  description: Channel ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the channel
+              required:
+              - id
+          purposes:
+            type: array
+            description: Purposes that the user has made choices for
+            items:
+              type: object
+              title: ConsentChoice
+              description: Consent choice of the user
+              properties:
+                id:
+                  type: string
+                  description: Purpose ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this purpose or not. A null value indicates that the user has not made a specific choice for the purpose but might have made choices for preferences or channels.
+                enabled_li:
+                  type: boolean
+                  description: Whether the user has objected to this purpose based on legitimate interest. A null value indicates that the user has not made a specific choice for the purpose. A "false" value indicates that the user has objected to the purpose.
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the purpose
+                channels:
+                  type: array
+                  description: Channels. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: Channel
+                    description: Channel
+                    properties:
+                      id:
+                        type: string
+                        description: Channel ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the channel
+                    required:
+                    - id
+                preferences:
+                  type: array
+                  description: Extra preferences expressed for the purpose. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: ConsentPreference
+                    description: Extra preference expressed for the purpose
+                    properties:
+                      id:
+                        type: string
+                        description: Preference ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this preference or not. A null value indicates that the user has not made a specific choice for the preference but might have made choices for channels.
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the preference
+                      channels:
+                        type: array
+                        description: Channels
+                        items:
+                          type: object
+                          title: Channel
+                          description: Channel
+                          properties:
+                            id:
+                              type: string
+                              description: Channel ID
+                            enabled:
+                              type: boolean
+                              description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                            metadata:
+                              type: object
+                              title: Metadata
+                              description: Free-form metadata object on the channel
+                          required:
+                          - id
+                    required:
+                    - id
+                values:
+                  type: object
+                  description: Flat structure for every selected value by the user.
+                  title: ConsentValues
+                  properties:
+                    preferenceId1:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+                    preferenceId2:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+              required:
+              - id
+          vendors:
+            type: object
+            description: Vendors that the user has made choices for
+            properties:
+              enabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user given consent to
+              enabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has not objected to based on legitimate interest
+              disabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user denied consent to
+              disabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has objected to based on legitimate interest
+          tcfcs:
+            type: string
+            description: TCF consent string of the user
+        required:
+        - vendors
+    required:
+    - id
+    - organization_id
+    - version
+    - created_at
+    - updated_at
+  consent-users-input-create:
+    type: object
+    title: ConsentUserCreate
+    description: An end user and its consent status
+    properties:
+      id:
+        type: string
+        description: Didomi user ID (A random UUID for users encountered on websites and an IDFA/ADID for users from mobile apps)
+      organization_id:
+        type: string
+        description: ID of the organization that owns the user
+      organization_user_id:
+        type: string
+        description: A unique user ID, internal to your organization. This can be an email, a phone number, an internal client ID, etc. It is used to link Didomi users to your internal systems.
+      version:
+        type: number
+        description: Version number of the user record for optimistic locking
+      metadata:
+        type: object
+        title: Metadata
+        description: Free-form metadata object on the user. Use it to store custom information on the user.
+      country:
+        type: string
+        title: Country
+        description: Two-letter ISO code of the user country
+      last_seen_country:
+        type: string
+        title: Last seen country
+        description: Two-letter ISO country code of the last consent event for the user.
+      consents:
+        type: object
+        title: Consents
+        description: Consent status of the user
+        properties:
+          channels:
+            type: array
+            description: Channels
+            items:
+              type: object
+              title: Channel
+              description: Channel
+              properties:
+                id:
+                  type: string
+                  description: Channel ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the channel
+              required:
+              - id
+          purposes:
+            type: array
+            description: Purposes that the user has made choices for
+            items:
+              type: object
+              title: ConsentChoice
+              description: Consent choice of the user
+              properties:
+                id:
+                  type: string
+                  description: Purpose ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this purpose or not. A null value indicates that the user has not made a specific choice for the purpose but might have made choices for preferences or channels.
+                enabled_li:
+                  type: boolean
+                  description: Whether the user has objected to this purpose based on legitimate interest. A null value indicates that the user has not made a specific choice for the purpose. A "false" value indicates that the user has objected to the purpose.
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the purpose
+                channels:
+                  type: array
+                  description: Channels. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: Channel
+                    description: Channel
+                    properties:
+                      id:
+                        type: string
+                        description: Channel ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the channel
+                    required:
+                    - id
+                preferences:
+                  type: array
+                  description: Extra preferences expressed for the purpose. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: ConsentPreference
+                    description: Extra preference expressed for the purpose
+                    properties:
+                      id:
+                        type: string
+                        description: Preference ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this preference or not. A null value indicates that the user has not made a specific choice for the preference but might have made choices for channels.
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the preference
+                      channels:
+                        type: array
+                        description: Channels
+                        items:
+                          type: object
+                          title: Channel
+                          description: Channel
+                          properties:
+                            id:
+                              type: string
+                              description: Channel ID
+                            enabled:
+                              type: boolean
+                              description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                            metadata:
+                              type: object
+                              title: Metadata
+                              description: Free-form metadata object on the channel
+                          required:
+                          - id
+                    required:
+                    - id
+                values:
+                  type: object
+                  description: Flat structure for every selected value by the user.
+                  title: ConsentValues
+                  properties:
+                    preferenceId1:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+                    preferenceId2:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+              required:
+              - id
+          vendors:
+            type: object
+            description: Vendors that the user has made choices for
+            properties:
+              enabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user given consent to
+              enabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has not objected to based on legitimate interest
+              disabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user denied consent to
+              disabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has objected to based on legitimate interest
+          tcfcs:
+            type: string
+            description: TCF consent string of the user
+        required:
+        - vendors
+        deprecated: true
+    required:
+    - id
+    - organization_id
+  consent-users-input-update:
+    type: object
+    title: ConsentUserUpdate
+    description: An end user and its consent status
+    properties:
+      organization_user_id:
+        type: string
+        description: A unique user ID, internal to your organization. This can be an email, a phone number, an internal client ID, etc. It is used to link Didomi users to your internal systems.
+      version:
+        type: number
+        description: Version number of the user record for optimistic locking
+      metadata:
+        type: object
+        title: Metadata
+        description: Free-form metadata object on the user. Use it to store custom information on the user.
+      country:
+        type: string
+        title: Country
+        description: Two-letter ISO code of the user's country
+      last_seen_country:
+        type: string
+        title: Last seen country
+        description: Two-letter ISO country code of the last consent event for the user.
+      consents:
+        type: object
+        title: Consents
+        description: Consent status of the user
+        properties:
+          channels:
+            type: array
+            description: Channels
+            items:
+              type: object
+              title: Channel
+              description: Channel
+              properties:
+                id:
+                  type: string
+                  description: Channel ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the channel
+              required:
+              - id
+          purposes:
+            type: array
+            description: Purposes that the user has made choices for
+            items:
+              type: object
+              title: ConsentChoice
+              description: Consent choice of the user
+              properties:
+                id:
+                  type: string
+                  description: Purpose ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this purpose or not. A null value indicates that the user has not made a specific choice for the purpose but might have made choices for preferences or channels.
+                enabled_li:
+                  type: boolean
+                  description: Whether the user has objected to this purpose based on legitimate interest. A null value indicates that the user has not made a specific choice for the purpose. A "false" value indicates that the user has objected to the purpose.
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the purpose
+                channels:
+                  type: array
+                  description: Channels. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: Channel
+                    description: Channel
+                    properties:
+                      id:
+                        type: string
+                        description: Channel ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the channel
+                    required:
+                    - id
+                preferences:
+                  type: array
+                  description: Extra preferences expressed for the purpose. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: ConsentPreference
+                    description: Extra preference expressed for the purpose
+                    properties:
+                      id:
+                        type: string
+                        description: Preference ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this preference or not. A null value indicates that the user has not made a specific choice for the preference but might have made choices for channels.
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the preference
+                      channels:
+                        type: array
+                        description: Channels
+                        items:
+                          type: object
+                          title: Channel
+                          description: Channel
+                          properties:
+                            id:
+                              type: string
+                              description: Channel ID
+                            enabled:
+                              type: boolean
+                              description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                            metadata:
+                              type: object
+                              title: Metadata
+                              description: Free-form metadata object on the channel
+                          required:
+                          - id
+                    required:
+                    - id
+                values:
+                  type: object
+                  description: Flat structure for every selected value by the user.
+                  title: ConsentValues
+                  properties:
+                    preferenceId1:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+                    preferenceId2:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+              required:
+              - id
+          vendors:
+            type: object
+            description: Vendors that the user has made choices for
+            properties:
+              enabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user given consent to
+              enabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has not objected to based on legitimate interest
+              disabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user denied consent to
+              disabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has objected to based on legitimate interest
+          tcfcs:
+            type: string
+            description: TCF consent string of the user
+        required:
+        - vendors
+        deprecated: true

@@ -1,0 +1,203 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events sso-connections API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: sso-connections
+  description: Manage SSO connections
+paths:
+  /sso-connections:
+    get:
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the user belongs to
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/sso-connections'
+      description: Returns a list of all SSO connections.
+      summary: Retrieve a list of SSO connections
+      tags:
+      - sso-connections
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: sso-connection
+        in: body
+        description: The SSO connection object to create.
+        required: true
+        schema:
+          $ref: '#/components/schemas/sso-connection-input-create'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sso-connections'
+      description: Create a new SSO connection.
+      summary: Create a SSO connection
+      tags:
+      - sso-connections
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sso-connections'
+  /sso-connections/{id}:
+    patch:
+      parameters:
+      - name: sso-connection
+        in: body
+        description: The SSO connection object to patch.
+        required: true
+        schema:
+          $ref: '#/components/schemas/sso-connection-input-patch'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sso-connections'
+      description: Patch an existing SSO connection.
+      summary: Patch a SSO connection
+      tags:
+      - sso-connections
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sso-connections'
+components:
+  schemas:
+    sso-connection-input-patch:
+      title: SSOConnectionInputPatch
+      type: object
+      properties:
+        auth0_certificate:
+          type: string
+          description: The public SSO connection certificate.
+        auth0_domain_aliases:
+          type: array
+          items:
+            type: string
+            description: A list of domains aliases that will be used for home realm discovery for the SSO connection.
+        auth0_sign_in_endpoint:
+          type: string
+          description: The sign in URL where users will be redirected to complete the authentication step.
+        auth0_sign_out_endpoint:
+          type: string
+          description: The sign out URL where users will be redirected after logging out.
+        auth0_sign_saml_request:
+          type: boolean
+          description: Whether or not SAML request signing is enabled for the SSO connection.
+        organization_id:
+          type: string
+          description: The ID of the organization.
+      required:
+      - organization_id
+    sso-connections:
+      title: SSOConnection
+      type: object
+      properties:
+        id:
+          type: string
+          description: SSO connection ID.
+        auth0_connection_id:
+          type: string
+          description: The id of the SSO connection in Auth0.
+        auth0_connection_name:
+          type: string
+          description: A unique name that identifies the SSO connection.
+        auth0_certificate:
+          type: string
+          description: The public SSO connection certificate.
+        auth0_domain_aliases:
+          type: array
+          items:
+            type: string
+            description: A list of domains aliases that are used for home realm discovery for the SSO connection.
+        auth0_sign_in_endpoint:
+          type: string
+          description: The sign in URL where users are redirected to complete the authentication step.
+        auth0_sign_out_endpoint:
+          type: string
+          description: The sign out URL where users are redirected after logging out.
+        auth0_sign_saml_request:
+          type: boolean
+          description: Whether or not SAML request signing is enabled for the SSO connection.
+        organization_group_id:
+          type: string
+          description: The ID of the organization group.
+        created_at:
+          type: string
+          description: Creation date of the SSO connection.
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the SSO connection.
+          format: date-time
+    sso-connection-input-create:
+      title: SSOConnectionInputCreate
+      type: object
+      properties:
+        auth0_certificate:
+          type: string
+          description: The public SSO connection certificate.
+        auth0_domain_aliases:
+          type: array
+          items:
+            type: string
+            description: A list of domains aliases that will be used for home realm discovery for the SSO connection.
+        auth0_sign_in_endpoint:
+          type: string
+          description: The sign in URL where users will be redirected to complete the authentication step.
+        auth0_sign_out_endpoint:
+          type: string
+          description: The sign out URL where users will be redirected after logging out.
+        auth0_sign_saml_request:
+          type: boolean
+          description: Whether or not SAML request signing is enabled for the SSO connection.
+        organization_id:
+          type: string
+          description: The ID of the organization.
+      required:
+      - auth0_certificate
+      - auth0_sign_in_endpoint
+      - organization_id
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

@@ -1,0 +1,287 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events partners-storages API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: partners-storages
+paths:
+  /metadata/partners-storages:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/partners-storages'
+      responses:
+        '200':
+          description: A list of Storage objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partners-storages'
+      description: Returns a list of all storages
+      summary: Retrieve a list of storages
+      tags:
+      - partners-storages
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: storage
+        in: body
+        description: The Storage object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/partners-storages-input'
+      responses:
+        '200':
+          description: The created Storage object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-storages'
+      description: Create a new storage
+      summary: Create a storage
+      tags:
+      - partners-storages
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-storages'
+  /metadata/partners-storages/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the storage to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A Storage object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-storages'
+      description: Returns a single storage with the given ID
+      summary: Retrieve a storage
+      tags:
+      - partners-storages
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the storage to update
+        required: true
+        schema:
+          type: string
+      - name: storage
+        in: body
+        description: The new data to update the storage with
+        required: true
+        schema:
+          $ref: '#/components/schemas/partners-storages-input'
+      responses:
+        '200':
+          description: The updated Storage object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-storages'
+      description: Update an existing storage and replace all its properties
+      summary: Update a storage
+      tags:
+      - partners-storages
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-storages'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the storage to patch
+        required: true
+        schema:
+          type: string
+      - name: storage
+        in: body
+        description: The properties to replace in the Storage object
+        required: true
+        schema:
+          $ref: '#/components/schemas/partners-storages-input'
+      responses:
+        '200':
+          description: The patched Storage object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-storages'
+      description: Partially update a storage
+      summary: Patch a storage
+      tags:
+      - partners-storages
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-storages'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the storage to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted Storage object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-storages'
+      description: Delete an existing storage
+      summary: Delete a storage
+      tags:
+      - partners-storages
+      security:
+      - bearer: []
+components:
+  schemas:
+    partners-storages-input:
+      title: StorageInput
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - cookie
+          - web_storage
+          - app_storage
+          description: What type of storage or access mechanism is used
+        identifier:
+          type: string
+          description: Name of the storage item
+        purposes_id:
+          type: array
+          description: The purpose IDs for which the storage is used
+          items:
+            type: string
+        domain:
+          type: string
+          description: The domain for which the storage is used (only required for type "cookie" and "web_storage")
+        max_age:
+          type: number
+          description: The duration for storage on a device (only required for type "cookie")
+        max_age_unit:
+          type: string
+          enum:
+          - months
+          - days
+          - seconds
+          description: The unit of the storage duration
+        organization_id:
+          type: string
+          description: The organization ID that owns the storage
+        partner_id:
+          type: string
+          description: The partner ID that owns the storage
+    partners-storages:
+      description: List of additional storages used by the vendor
+      type: object
+      title: Storage
+      properties:
+        type:
+          type: string
+          enum:
+          - cookie
+          - web_storage
+          - app_storage
+          description: What type of storage or access mechanism is used
+        identifier:
+          type: string
+          description: Name of the storage item
+        purposes_id:
+          type: array
+          description: The purpose IDs for which the storage is used
+          items:
+            type: string
+        domain:
+          type: string
+          description: The domain for which the storage is used (only required for type "cookie" and "web_storage")
+        max_age:
+          type: number
+          description: The duration for storage on a device (only required for type "cookie")
+        max_age_unit:
+          type: string
+          enum:
+          - months
+          - days
+          - seconds
+          description: The unit of the storage duration
+        organization_id:
+          type: string
+          description: The organization ID that owns the storage
+        partner_id:
+          type: string
+          description: The partner ID that owns the storage
+      required:
+      - id
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

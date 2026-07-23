@@ -1,0 +1,267 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events cookies API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: cookies
+  description: Manage cookies set by a property
+paths:
+  /cookies:
+    get:
+      parameters:
+      - name: property_id
+        in: query
+        description: The ID of the property
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of Cookie objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/cookies'
+      description: Returns a list of cookies set by a property
+      summary: Retrieve a list of cookies
+      tags:
+      - cookies
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: cookie
+        in: body
+        description: The Cookie object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/cookies-input'
+      responses:
+        '200':
+          description: The created Cookie object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cookies'
+      description: Create a new cookie for a property
+      summary: Create a cookie
+      tags:
+      - cookies
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cookies'
+  /cookies/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the cookie to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A Cookie object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cookies'
+      description: Returns a single cookie set by a property
+      summary: Retrieve a cookie
+      tags:
+      - cookies
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the cookie to update
+        required: true
+        schema:
+          type: string
+      - name: cookie
+        in: body
+        description: The new data to update the cookie with
+        required: true
+        schema:
+          $ref: '#/components/schemas/cookies-input'
+      responses:
+        '200':
+          description: The updated Cookie object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cookies'
+      description: Update an existing cookie set by a property and replace all its properties
+      summary: Update a cookie
+      tags:
+      - cookies
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cookies'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the cookie to patch
+        required: true
+        schema:
+          type: string
+      - name: cookie
+        in: body
+        description: The properties to replace on the Cookie object
+        required: true
+        schema:
+          $ref: '#/components/schemas/cookies-input'
+      responses:
+        '200':
+          description: The patched Cookie object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cookies'
+      description: Partially update a cookie set by a property
+      summary: Patch a cookie
+      tags:
+      - cookies
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cookies'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the cookie to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted Cookie object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cookies'
+      description: Delete an existing cookie
+      summary: Delete a cookie
+      tags:
+      - cookies
+      security:
+      - bearer: []
+components:
+  schemas:
+    cookies-input:
+      title: CookieInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the cookie
+        domain:
+          type: string
+          description: Domain that the cookie is set on (should be the same as the property or a sub-domain)
+        lifetime:
+          type: integer
+          description: Lifetime of the cookie (in seconds)
+        status:
+          type: string
+          description: The status of the cookie for the privacy center (draft or published)
+        taxonomy_id:
+          type: string
+          description: The ID of the taxonomy item for classifying this cookie
+        vendor_id:
+          type: string
+          description: The ID of the vendor that sets or uses this cookie (if any)
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+      required:
+      - name
+      - domain
+      - taxonomy_id
+      - property_id
+    cookies:
+      type: object
+      title: Cookie
+      description: A cookie that is set by a property when consumers visit it
+      properties:
+        id:
+          type: string
+          description: Cookie ID
+        name:
+          type: string
+          description: Name of the cookie
+        domain:
+          type: string
+          description: Domain that the cookie is set on
+        lifetime:
+          type: integer
+          description: Lifetime of the cookie (in seconds)
+        status:
+          type: string
+          description: The status of the cookie for the privacy center (draft or published)
+        taxonomy_id:
+          type: string
+          description: The ID of the taxonomy item for classifying this cookie
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+        vendor_id:
+          type: string
+          description: The ID of the vendor that sets or uses this cookie (if any)
+        created_at:
+          type: string
+          description: Creation date of the property
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the property
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the property object
+      required:
+      - id
+      - name
+      - taxonomy_id
+      - property_id
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

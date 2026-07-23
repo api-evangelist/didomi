@@ -1,0 +1,320 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events organizations API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: organizations
+  description: Manage organizations
+paths:
+  /organizations:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/organizations'
+      responses:
+        '200':
+          description: A list of Organization objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/organizations'
+      description: Returns a list of all organizations the user belongs to
+      summary: Retrieve a list of organizations
+      tags:
+      - organizations
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: organization
+        in: body
+        description: The Organization object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/organizations-input'
+      responses:
+        '200':
+          description: The created Organization object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations'
+      description: Create a new organization
+      summary: Create an organization
+      tags:
+      - organizations
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organizations'
+  /organizations/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the organization to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An Organization object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations'
+      description: Returns a single organization with the given ID
+      summary: Retrieve an organization
+      tags:
+      - organizations
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the organization to update
+        required: true
+        schema:
+          type: string
+      - name: organization
+        in: body
+        description: The new data to update the organization with
+        required: true
+        schema:
+          $ref: '#/components/schemas/organizations-input'
+      responses:
+        '200':
+          description: The updated Organization object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations'
+      description: Update an existing organization and replace all its properties
+      summary: Update an organization
+      tags:
+      - organizations
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organizations'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the organization to patch
+        required: true
+        schema:
+          type: string
+      - name: organization
+        in: body
+        description: The properties to replace in the Organization object
+        required: true
+        schema:
+          $ref: '#/components/schemas/organizations-input'
+      responses:
+        '200':
+          description: The patched Organization object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations'
+      description: Partially update an organization
+      summary: Patch an organization
+      tags:
+      - organizations
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organizations'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the organization to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted Organization object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations'
+      description: Delete an existing organization
+      summary: Delete an organization
+      tags:
+      - organizations
+      security:
+      - bearer: []
+components:
+  schemas:
+    organizations:
+      type: object
+      title: Organization
+      description: An organization can have multiple properties and users
+      properties:
+        id:
+          type: string
+          description: Organization ID
+        name:
+          type: string
+          description: Name of the organization
+        website:
+          type: string
+          format: uri
+          description: Website URL of the organization
+        created_at:
+          type: string
+          description: Creation date of the organization
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the organization
+          format: date-time
+        industry_id:
+          type: string
+          description: Identifier of industry that the organization belongs to
+        analytics_url:
+          type: string
+          description: URL to a public Redash dashboard
+        public_api_key:
+          type: string
+          description: Public API key of the organization (for consent collection on public properties)
+        version:
+          type: number
+          description: Revision number of the organization object
+        validate_purpose_id:
+          type: boolean
+          description: Enable or disable the validation of the purposes in the consent API
+        disable_preferences_in_consents:
+          type: boolean
+          description: Allow or disallow the use of preferences of the consents object in the consent API
+        auth_enabled:
+          type: boolean
+          description: Enable or disable authentication for end users
+        auth_allow_user_creation:
+          type: boolean
+          description: Enable or disable creation of an end user on authentication if it doesn't exist
+        auth_message_priority:
+          type: array
+          description: List the priority of message channels, from the most important to the least
+          items:
+            type: string
+        allow_tcf_with_custom_text:
+          type: boolean
+          description: Whether the organization is allowed to publish consent notices without a standard approved text
+        self_register:
+          type: boolean
+          description: Whether the organization is created by a user (true) or via Didomi's Customer Succes team (false)
+        organization_group_id:
+          type: string
+          description: Identifier of the organization group that the organization belongs to
+        organization_group_name:
+          type: string
+          description: Name of the organization group that the organization belongs to
+          nullable: true
+        iab_tcf_cmp_id:
+          type: integer
+          description: The IAB TCF CMP ID of the organization. If available, the ID will be added to generated TCF consent strings. If not available, the ID will be set to Didomi. If an ID is provided, it must be present in the IAB TCF CMP list (https://cmplist.consensu.org/v2/cmp-list.json).
+          nullable: true
+        allow_chat_support:
+          type: boolean
+          description: Controls wether the organization should be allowed to contact support via chat
+      required:
+      - id
+      - name
+    organizations-input:
+      title: OrganizationInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique name of the organization
+        website:
+          type: string
+          format: uri
+          description: Website URL of the organization
+        industry_id:
+          type: string
+          description: identifier of industry that the organization belongs to
+        analytics_url:
+          type: string
+          description: URL to a public Redash dashboard
+        auth_enabled:
+          type: boolean
+          description: Enable or disable authentication for end users - (DEPRECATED - auth is now always enabled)
+        auth_allow_user_creation:
+          type: boolean
+          description: Enable or disable creation of an end user on authentication if it doesn't exist
+        auth_message_priority:
+          type: array
+          description: List the priority of message channels, from the most important to the least
+          items:
+            type: string
+        organization_group_id:
+          type: string
+          description: Identifier of the organization group that the organization belongs to
+        salesforce_account_id:
+          type: string
+          description: Identifier of the salesforce account that the organization group belongs to
+      required:
+      - name
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

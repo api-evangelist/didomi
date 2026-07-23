@@ -1,0 +1,279 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events keys API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: keys
+  description: Manage API keys
+paths:
+  /keys:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/keys'
+      responses:
+        '200':
+          description: A list of APIKey objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/keys'
+      description: Returns a list of all API keys the user has access to
+      summary: Retrieve a list of API keys
+      tags:
+      - keys
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: key
+        in: body
+        description: API key
+        required: true
+        schema:
+          $ref: '#/components/schemas/keys-input-create'
+      responses:
+        '200':
+          description: The created APIKey object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique ID of the API key
+                  organization_id:
+                    type: string
+                    description: ID of the organization that owns the API key
+                  created_at:
+                    type: string
+                    description: Creation date of the API key (ISO8601)
+                  enabled:
+                    type: boolean
+                    description: Status of the API key. A disabled API key cannot be used for obtaining a token. Already issued tokens remain valid until their expiration.
+                  secret:
+                    type: string
+                    description: Secret of the API key
+      description: Create a new API key that can be used for authenticating HTTP requests to the Didomi API
+      summary: Create a new API key
+      tags:
+      - keys
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/keys'
+  /keys/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the API key to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An APIKey object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/keys'
+      description: Returns a single API key with the given ID
+      summary: Retrieve an API key
+      tags:
+      - keys
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the API key to update
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: body
+        description: The new API key data
+        required: true
+        schema:
+          $ref: '#/components/schemas/keys-input-update'
+      responses:
+        '200':
+          description: The updated APIKey object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/keys'
+      description: Update an existing API key
+      summary: Update an API key
+      tags:
+      - keys
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/keys'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the API key to patch
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: body
+        description: The new API key data
+        required: true
+        schema:
+          $ref: '#/components/schemas/keys-input-update'
+      responses:
+        '200':
+          description: The patched APIKey object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/keys'
+      description: Patch an existing API key
+      summary: Patch an API key
+      tags:
+      - keys
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/keys'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the API key to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted APIKey object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/keys'
+      description: Delete an existing API key
+      summary: Delete an API key
+      tags:
+      - keys
+      security:
+      - bearer: []
+components:
+  schemas:
+    keys-input-update:
+      type: object
+      title: APIKeyInputUpdate
+      properties:
+        name:
+          type: string
+          description: Unique name to identify this key like the app or team that will be using it, or what it will be used for
+        description:
+          type: string
+          description: Description of the API key
+        enabled:
+          type: boolean
+          description: Status of the API key. A disabled API key cannot be used for obtaining a token. Already issued tokens remain valid until their expiration.
+    keys:
+      type: object
+      title: APIKey
+      description: An API key allows machine-to-machine authentication and authorization
+      properties:
+        id:
+          type: string
+          description: Unique ID of the API key
+        name:
+          type: string
+          description: Name of the API key to help identify it. This could be the name of the app or team that will be using it, or a short description of what the key will be used for
+        description:
+          type: string
+          description: Description of the API key
+        organization_id:
+          type: string
+          description: ID of the organization that owns the API key
+        created_at:
+          type: string
+          description: Creation date of the API key (ISO8601)
+        enabled:
+          type: boolean
+          description: Status of the API key. A disabled API key cannot be used for obtaining a token. Already issued tokens remain valid until their expiration.
+        is_internal:
+          type: boolean
+          description: Marks an API key as internal. These keys are managed by Didomi. Internal keys are excluded from list results unless explicitly requested.
+    keys-input-create:
+      type: object
+      title: APIKeyInputCreate
+      properties:
+        organization_id:
+          type: string
+          description: ID of the organization that owns the API key
+        name:
+          type: string
+          description: Unique name to identify this key like the app or team that will be using it, or what it will be used for
+        description:
+          type: string
+          description: Description of the API key
+        is_internal:
+          type: boolean
+          description: Marks an API key as internal. These keys are managed by Didomi. Internal keys are excluded from list results unless explicitly requested.
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

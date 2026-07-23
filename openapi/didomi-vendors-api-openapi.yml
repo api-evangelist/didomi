@@ -1,0 +1,240 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events vendors API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: vendors
+  description: Manage vendors used by a property
+paths:
+  /vendors:
+    get:
+      parameters:
+      - name: property_id
+        in: query
+        description: The ID of the property
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of Vendor objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/vendors'
+      description: Returns a list of vendors used by a property
+      summary: Retrieve a list of vendors
+      tags:
+      - vendors
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: vendor
+        in: body
+        description: The Vendor object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/vendors-input'
+      responses:
+        '200':
+          description: The created Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendors'
+      description: Create a new vendor for a property
+      summary: Create a vendor
+      tags:
+      - vendors
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+  /vendors/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the vendor to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendors'
+      description: Returns a single vendor used by a property
+      summary: Retrieve a vendor
+      tags:
+      - vendors
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the vendor to update
+        required: true
+        schema:
+          type: string
+      - name: vendor
+        in: body
+        description: The new data to update the vendor with
+        required: true
+        schema:
+          $ref: '#/components/schemas/vendors-input'
+      responses:
+        '200':
+          description: The updated Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendors'
+      description: Update an existing vendor used by a property and replace all its properties
+      summary: Update a vendor
+      tags:
+      - vendors
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the vendor to patch
+        required: true
+        schema:
+          type: string
+      - name: vendor
+        in: body
+        description: The properties to replace on the Vendor object
+        required: true
+        schema:
+          $ref: '#/components/schemas/vendors-input'
+      responses:
+        '200':
+          description: The patched Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendors'
+      description: Partially update a vendor used by a property
+      summary: Patch a vendor
+      tags:
+      - vendors
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendors'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the vendor to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted Vendor object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendors'
+      description: Delete an existing vendor
+      summary: Delete a vendor
+      tags:
+      - vendors
+      security:
+      - bearer: []
+components:
+  schemas:
+    vendors-input:
+      title: VendorInput
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the vendor for the privacy center (draft or published)
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+        metadata_id:
+          type: string
+          description: The ID of the vendor metadata
+      required:
+      - property_id
+      - metadata_id
+    vendors:
+      type: object
+      title: Vendor
+      description: A vendor that provides services to a property
+      properties:
+        id:
+          type: string
+          description: The ID of the vendor for the property (ie different from the ID of the vendor metadata on the Didomi platform)
+        status:
+          type: string
+          description: The status of the vendor for the privacy center (draft or published)
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+        metadata_id:
+          type: string
+          description: The ID of the vendor metadata
+        created_at:
+          type: string
+          description: Creation date of the property
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the property
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the property object
+      required:
+      - id
+      - property_id
+      - metadata_id
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

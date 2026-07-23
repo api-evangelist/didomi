@@ -1,0 +1,167 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events dashboards-urls API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: dashboards-urls
+paths:
+  /analytics/dashboards-urls:
+    get:
+      parameters:
+      - name: category
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/DashboardUrlCategory'
+        description: The category of the dashboard. Used for grouping dashboard (per page for example).
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the user belongs to
+        required: false
+        schema:
+          type: string
+      - name: $limit
+        required: false
+        in: query
+        description: Number of max results to return
+        schema:
+          type: number
+      - name: $skip
+        required: false
+        in: query
+        description: Number of results to skip
+        schema:
+          type: number
+      - name: $sort
+        required: false
+        in: query
+        description: Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction
+        example:
+          updated_at: 1
+          created_at: 1
+        schema:
+          type: object
+          properties:
+            updated_at:
+              type: number
+            created_at:
+              type: number
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: A paginated list of DashboardUrl objects
+                properties:
+                  total:
+                    type: number
+                    description: The total amount of dashboard urls
+                  limit:
+                    type: number
+                    description: The limit of dashboard urls on this query
+                  skip:
+                    type: number
+                    description: Number of dashboard urls skipped
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/dashboards-urls'
+      description: Returns a list of all dashboards with signed URLs
+      summary: Retrieve a list of dashboards with signed URLs
+      tags:
+      - dashboards-urls
+      security:
+      - bearer: []
+components:
+  schemas:
+    DashboardUrlCategory:
+      type: string
+      enum:
+      - analytics
+      - home
+    dashboards-urls:
+      type: object
+      title: dashboard
+      properties:
+        id:
+          type: string
+          description: Dashboard ID
+        name:
+          type: string
+          description: Dashboard name
+        order:
+          type: number
+          description: The dashboard order
+        url:
+          type: string
+          description: Signed URL of the dashboard
+        category:
+          type: string
+          $ref: '#/components/schemas/DashboardUrlCategory'
+          description: The category of the dashboard. Used for grouping dashboard (per page for example).
+        type:
+          type: string
+          $ref: '#/components/schemas/DashboardUrlType'
+          description: Type of the dashboard
+        product:
+          type: string
+          $ref: '#/components/schemas/DashboardUrlProduct'
+          description: The product that the dashboard belongs to.
+        aggregation_period:
+          type: string
+          $ref: '#/components/schemas/DashboardUrlAggregationPeriod'
+          description: The aggregation period.
+        description:
+          type: string
+          description: The dashboard description.
+        illustration_ref:
+          type: string
+          description: The illustration ref url.
+      required:
+      - id
+      - url
+      - type
+      - aggregation_period
+      - product
+    DashboardUrlProduct:
+      type: string
+      enum:
+      - cmp
+      - pmp
+      - integration
+      - acm
+    DashboardUrlType:
+      type: string
+      enum:
+      - cluvio
+      - redash
+    DashboardUrlAggregationPeriod:
+      type: string
+      enum:
+      - monthly
+      - weekly
+      - daily
+      - hourly
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

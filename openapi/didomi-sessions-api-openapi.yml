@@ -1,0 +1,121 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events sessions API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: sessions
+  description: Manage sessions
+paths:
+  /sessions/{id}:
+    get:
+      parameters:
+      - in: path
+        name: id
+        description: ID of sessions to return
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sessions'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Retrieves a single resource with the given id from the service.
+      summary: ''
+      tags:
+      - sessions
+      security: []
+  /sessions:
+    post:
+      parameters:
+      - name: session
+        in: body
+        description: The authentication information
+        required: true
+        schema:
+          $ref: '#/components/schemas/sessions-input'
+      responses:
+        '200':
+          description: The created Session object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sessions'
+      description: Authenticate against the Didomi API and get an access token to use for calls requiring authorization
+      summary: Create a new session
+      tags:
+      - sessions
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sessions'
+components:
+  schemas:
+    sessions:
+      type: object
+      title: Session
+      description: A session contains authentication information for a user or an API key
+      properties:
+        type:
+          type: string
+          description: The type of session ("api-key" or "email")
+        key:
+          type: string
+          description: The key used for authentication (either an email address or an API key)
+        access_token:
+          type: string
+          description: The access token to use when making API calls with this session
+      required:
+      - type
+      - key
+      - secret
+    sessions-input:
+      type: object
+      title: SessionInput
+      properties:
+        type:
+          type: string
+          description: The type of session ("api-key" or "email")
+        key:
+          type: string
+          description: The key to use for authentication (either an email address or an API key)
+        secret:
+          type: string
+          description: The secret to use for authentication (either a password or an API secret)
+      required:
+      - type
+      - key
+      - secret
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

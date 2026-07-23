@@ -1,0 +1,142 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events partners-default-purposes API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: partners-default-purposes
+paths:
+  /metadata/partners-default-purposes:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/partners-default-purposes'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partners-default-purposes'
+      description: Returns a list of all partners-default-purposes objects
+      summary: Retrieve a list of partners-default-purposes objects
+      tags:
+      - partners-default-purposes
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: partners-default-purposes
+        in: body
+        description: The partners-default-purposes object to create
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/partners-default-purposes-input'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partners-default-purposes'
+      description: Create a new partner purpose association
+      summary: Create a new association between a partner and purpose
+      tags:
+      - partners-default-purposes
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-default-purposes'
+components:
+  schemas:
+    partners-default-purposes:
+      type: object
+      title: PartnersDefaultPurposes
+      properties:
+        is_org_override:
+          type: boolean
+          description: Override flag, if true, means that the association references a global partner but belongs to an organization
+        metadata_partner_id:
+          type: string
+          description: Partner ID
+        metadata_purpose_id:
+          type: string
+          description: Purpose ID
+        organization_id:
+          type: string
+          description: Organization ID
+        created_at:
+          type: string
+          description: Creation date of the partners-default-purposes object
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the partners-default-purposes object
+          format: date-time
+      required:
+      - metadata_partner_id
+      - metadata_purpose_id
+      - organization_id
+    partners-default-purposes-input:
+      title: PartnersDefaultPurposesInput
+      type: object
+      properties:
+        metadata_partner_id:
+          type: string
+          description: Partner ID
+        metadata_purpose_id:
+          type: string
+          description: Purpose ID
+        organization_id:
+          type: string
+          description: Organization ID
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

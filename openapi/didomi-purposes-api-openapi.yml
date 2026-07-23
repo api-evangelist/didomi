@@ -1,0 +1,434 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events purposes API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: purposes
+paths:
+  /metadata/purposes/restrictions:
+    get:
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the user belongs to
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of Purpose objects
+          content:
+            application/json:
+              schema:
+                type: object
+                description: A paginated list of Purpose objects
+                properties:
+                  total:
+                    type: number
+                    description: The total amount of purposes
+                  limit:
+                    type: number
+                    description: The limit of purposes on this query
+                  skip:
+                    type: number
+                    description: Number of purposes skipped
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/purposes'
+      description: Returns a list of all purposes
+      summary: Retrieve a list of available purposes for restrictions. For publisher restriction list.
+      tags:
+      - purposes
+      security:
+      - bearer: []
+  /metadata/purposes:
+    get:
+      parameters:
+      - name: $translations
+        required: false
+        in: query
+        description: If true, will return translatable fields as objects with translations
+        schema:
+          type: boolean
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the user belongs to
+        required: true
+        schema:
+          type: string
+      - name: $limit
+        required: false
+        in: query
+        description: Number of max results to return
+        schema:
+          type: number
+      - name: $skip
+        required: false
+        in: query
+        description: Number of results to skip
+        schema:
+          type: number
+      - name: $sort
+        required: false
+        in: query
+        description: Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction
+        example:
+          updated_at: 1
+          created_at: 1
+        schema:
+          type: object
+          properties:
+            updated_at:
+              type: number
+            created_at:
+              type: number
+      responses:
+        '200':
+          description: A list of Purpose objects
+          content:
+            application/json:
+              schema:
+                type: object
+                description: A paginated list of Purpose objects
+                properties:
+                  total:
+                    type: number
+                    description: The total amount of purposes
+                  limit:
+                    type: number
+                    description: The limit of purposes on this query
+                  skip:
+                    type: number
+                    description: Number of purposes skipped
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/purposes'
+      description: Returns a list of all purposes
+      summary: Retrieve a list of purposes
+      tags:
+      - purposes
+      security:
+      - bearer: []
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: The created Purpose object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes'
+      description: Create a new purpose
+      summary: Create a purpose
+      tags:
+      - purposes
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/purposes-input'
+  /metadata/purposes/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the purpose to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A Purpose object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes'
+      description: Returns a single purpose with the given ID
+      summary: Retrieve a purpose
+      tags:
+      - purposes
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the purpose to update
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The updated Purpose object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes'
+      description: Update an existing purpose and replace all its properties
+      summary: Update a purpose
+      tags:
+      - purposes
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/purposes-patch-input'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the purpose to patch
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The patched Purpose object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes'
+      description: Partially update a purpose
+      summary: Patch a purpose
+      tags:
+      - purposes
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/purposes-patch-input'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the purpose to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted Purpose object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes'
+      description: Delete an existing purpose
+      summary: Delete a purpose
+      tags:
+      - purposes
+      security:
+      - bearer: []
+components:
+  schemas:
+    purposes-input:
+      title: PurposeInput
+      type: object
+      properties:
+        description:
+          description: Name of the purpose
+          schema:
+            type: object
+        details:
+          description: Details of the purpose
+          schema:
+            type: object
+        enabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is enabled
+          schema:
+            type: object
+        disabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is disabled
+          schema:
+            type: object
+        reference:
+          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
+          schema:
+            type: object
+        organization_id:
+          type: string
+          description: Id of organization which purpose belongs to. If id is 'null', purpose is global
+        namespaces:
+          type: object
+          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab:
+              type: string
+              description: ID of the purpose in the IAB TCF version 1
+            iab2:
+              type: string
+              description: ID of the purpose in the IAB TCF version 2
+            didomi:
+              type: string
+              description: ID of the purpose in the Didomi SDK
+            custom:
+              type: string
+              description: Custom ID for the purpose
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the purpose supports
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata for additional information
+        type:
+          type: string
+          description: The purpose type discriminator.
+          default: purpose
+    purposes:
+      description: The reason why a company is collecting and processing personal data
+      type: object
+      title: Purpose
+      properties:
+        id:
+          type: string
+          description: Purpose ID
+        description:
+          type: object
+          additionalProperties: {}
+          description: Name of the purpose
+        details:
+          type: object
+          additionalProperties: {}
+          description: Details of the purpose
+        enabled_status_description:
+          type: object
+          description: Description of the purpose when the sdk status for the user for this purpose is enabled
+        disabled_status_description:
+          type: object
+          description: Description of the purpose when the sdk status for the user for this purpose is disabled
+        reference:
+          type: object
+          additionalProperties: {}
+          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
+        organization_id:
+          type: string
+          description: Id of organization which purpose belongs to. If id is null, purpose is global
+        created_at:
+          type: string
+          description: Creation date of the purpose
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the purpose
+          format: date-time
+        namespaces:
+          type: object
+          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab:
+              type: string
+              description: ID of the purpose in the IAB TCF version 1
+            iab2:
+              type: string
+              description: ID of the purpose in the IAB TCF version 2 (only allowed if "iab2_special_feature" is not present)
+            iab2_special_feature:
+              type: string
+              description: ID of the special feature in the IAB TCF version 2 (only allowed if "iab2" is not present)
+            didomi:
+              type: string
+              description: ID of the purpose in the Didomi SDK
+            custom:
+              type: string
+              description: Custom ID for the purpose
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the purpose supports
+          items:
+            type: string
+        type:
+          type: string
+          description: The purpose type discriminator.
+          default: purpose
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata for additional information
+      required:
+      - id
+    purposes-patch-input:
+      title: PurposeInput
+      type: object
+      properties:
+        description:
+          description: Name of the purpose
+          schema:
+            type: object
+        details:
+          description: Details of the purpose
+          schema:
+            type: object
+        enabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is enabled
+          schema:
+            type: object
+        disabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is disabled
+          schema:
+            type: object
+        reference:
+          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
+          schema:
+            type: object
+        organization_id:
+          type: string
+          description: Id of organization which purpose belongs to. If id is 'null', purpose is global
+        namespaces:
+          type: object
+          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab:
+              type: string
+              description: ID of the purpose in the IAB TCF version 1
+            iab2:
+              type: string
+              description: ID of the purpose in the IAB TCF version 2
+            didomi:
+              type: string
+              description: ID of the purpose in the Didomi SDK
+            custom:
+              type: string
+              description: Custom ID for the purpose
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata for additional information
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the purpose supports
+          items:
+            type: string
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

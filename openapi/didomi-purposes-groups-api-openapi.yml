@@ -1,0 +1,276 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events purposes-groups API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: purposes-groups
+paths:
+  /metadata/purposes-groups:
+    get:
+      parameters:
+      - description: Number of results to return
+        in: query
+        name: $limit
+        schema:
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: $skip
+        schema:
+          type: integer
+      - description: Property to sort results
+        in: query
+        name: $sort
+        style: deepObject
+        schema:
+          type: object
+      - description: Query parameters to filter
+        in: query
+        name: filter
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/purposes-groups'
+      responses:
+        '200':
+          description: A list of PurposesGroup objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/purposes-groups'
+      description: Returns a list of all purposes groups
+      summary: Retrieve a list of purposes groups
+      tags:
+      - purposes-groups
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: group
+        in: body
+        description: The PurposesGroup object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/purposes-group-input'
+      responses:
+        '200':
+          description: The created PurposesGroup object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes-groups'
+      description: Create a new group of purposes
+      summary: Create a group of purposes
+      tags:
+      - purposes-groups
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/purposes-groups'
+  /metadata/purposes-groups/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the group to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A PurposesGroup object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes-groups'
+      description: Returns a single group with the given ID
+      summary: Retrieve a group of purposes
+      tags:
+      - purposes-groups
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the group to update
+        required: true
+        schema:
+          type: string
+      - name: purposes-group
+        in: body
+        description: The new data to update the group with
+        required: true
+        schema:
+          $ref: '#/components/schemas/purposes-group-input'
+      responses:
+        '200':
+          description: The updated PurposesGroup object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes-groups'
+      description: Update an existing group of purposes and replace all its properties
+      summary: Update a group of purposes
+      tags:
+      - purposes-groups
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/purposes-groups'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the group of purposes to patch
+        required: true
+        schema:
+          type: string
+      - name: purposes-group
+        in: body
+        description: The properties to replace in the group of purposes
+        required: true
+        schema:
+          $ref: '#/components/schemas/purposes-group-input'
+      responses:
+        '200':
+          description: The patched PurposesGroup object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes-groups'
+      description: Partially update a group of purposes
+      summary: Patch a group of purposes
+      tags:
+      - purposes-groups
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/purposes-groups'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the group to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted PurposesGroup object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purposes-groups'
+      description: Delete an existing group of purposes
+      summary: Delete a group of purposes
+      tags:
+      - purposes-groups
+      security:
+      - bearer: []
+components:
+  schemas:
+    purposes-group-input:
+      title: PurposesGroupInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the group
+        description:
+          type: string
+          description: Description of the group
+        namespaces:
+          type: object
+          description: IDs of this group in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab2:
+              type: string
+              description: ID of the group in the IAB TCF version 2 as a stack ID
+        purposes_id:
+          description: Purposes that belong to the group
+          type: array
+          items:
+            type: string
+            description: ID of a purpose
+        organization_id:
+          type: string
+          description: ID of the organization that owns the group. If ID is null, the group is global.
+      required:
+      - name
+    purposes-groups:
+      description: A group of purposes
+      type: object
+      title: PurposesGroup
+      properties:
+        id:
+          type: string
+          description: Group ID
+        name:
+          type: string
+          description: Name of the group
+        description:
+          type: string
+          description: Description of the group
+        namespaces:
+          type: object
+          description: IDs of this group in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab2:
+              type: string
+              description: ID of the group in the IAB TCF version 2 as a stack ID
+        purposes_id:
+          description: Purposes that belong to the group
+          type: array
+          items:
+            type: string
+            description: ID of a purpose
+        organization_id:
+          type: string
+          description: ID of the organization that owns the group. If ID is null, the group is global.
+        created_at:
+          type: string
+          description: Creation date of the purpose
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the purpose
+          format: date-time
+      required:
+      - name
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

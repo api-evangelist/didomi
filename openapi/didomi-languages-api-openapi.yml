@@ -1,0 +1,63 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events languages API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: languages
+  description: List of available languages for the SDKs
+paths:
+  /languages:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: List of Languages object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/languages'
+      description: Returns list of available languages/locales
+      summary: Retrieve list of available languages/locales
+      tags:
+      - languages
+      security:
+      - bearer: []
+components:
+  schemas:
+    languages:
+      title: Languages
+      type: object
+      properties:
+        available:
+          type: array
+          items:
+            type: string
+            description: List of available locales
+        default:
+          type: string
+          description: Fallback locale to use if the configured language is not a supported language
+        defaultCountries:
+          type: object
+          description: Mapping of default countries if the locale does not provide it
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

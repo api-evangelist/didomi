@@ -1,0 +1,267 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events metadata-purpose-regulation-override API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: metadata-purpose-regulation-override
+paths:
+  /metadata/purposes-regulations-overrides:
+    get:
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization for which to filter overrides
+        required: false
+        schema:
+          type: string
+      - name: $limit
+        required: false
+        in: query
+        description: Number of max results to return
+        schema:
+          type: number
+      - name: $skip
+        required: false
+        in: query
+        description: Number of results to skip
+        schema:
+          type: number
+      - name: $sort
+        required: false
+        in: query
+        description: Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction
+      responses:
+        '200':
+          description: A list of MetadataPurposeRegulationOverride objects
+          content:
+            application/json:
+              schema:
+                type: object
+                description: A paginated list of MetadataPurposeRegulationOverride objects
+                properties:
+                  total:
+                    type: number
+                    description: The total amount of MetadataPurposeRegulationOverrides
+                  limit:
+                    type: number
+                    description: The limit of MetadataPurposeRegulationOverrides on this query
+                  skip:
+                    type: number
+                    description: Number of MetadataPurposeRegulationOverrides skipped
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MetadataPurposeRegulationOverride'
+      description: Returns a list of all MetadataPurposeRegulationOverrides. A null value of `regulations_id` means all regulations are supported, and an empty array means no regulations are supported.
+      summary: Retrieve a list of MetadataPurposeRegulationOverrides.
+      tags:
+      - metadata-purpose-regulation-override
+      security:
+      - bearer: []
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: The created MetadataPurposeRegulationOverride object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPurposeRegulationOverride'
+      description: Create a new MetadataPurposeRegulationOverride
+      summary: Create a MetadataPurposeRegulationOverride
+      tags:
+      - metadata-purpose-regulation-override
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataPurposeRegulationOverrideInput'
+  /metadata/purposes-regulations-overrides/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the MetadataPurposeRegulationOverride to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A MetadataPurposeRegulationOverride
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPurposeRegulationOverride'
+      description: Returns a single MetadataPurposeRegulationOverride with the given ID
+      summary: Retrieve a MetadataPurposeRegulationOverride
+      tags:
+      - metadata-purpose-regulation-override
+      security:
+      - bearer: []
+    put:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the MetadataPurposeRegulationOverride to update
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The updated MetadataPurposeRegulationOverride object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPurposeRegulationOverride'
+      description: Update an existing MetadataPurposeRegulationOverride and replace all its properties
+      summary: Update a MetadataPurposeRegulationOverride
+      tags:
+      - metadata-purpose-regulation-override
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataPurposeRegulationOverridePatchInput'
+    patch:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the MetadataPurposeRegulationOverride to patch
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The patched MetadataPurposeRegulationOverride object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPurposeRegulationOverride'
+      description: Partially update a MetadataPurposeRegulationOverride
+      summary: Patch a MetadataPurposeRegulationOverride
+      tags:
+      - metadata-purpose-regulation-override
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataPurposeRegulationOverridePatchInput'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the MetadataPurposeRegulationOverride to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted MetadataPurposeRegulationOverride object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPurposeRegulationOverride'
+      description: Delete an existing MetadataPurposeRegulationOverride
+      summary: Delete a MetadataPurposeRegulationOverride
+      tags:
+      - metadata-purpose-regulation-override
+      security:
+      - bearer: []
+components:
+  schemas:
+    MetadataPurposeRegulationOverridePatchInput:
+      title: MetadataPurposeRegulationOverridePatchInput
+      type: object
+      properties:
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the override configures the metadata purpose to support
+          items:
+            type: string
+        metadata_purpose_id:
+          type: string
+          description: The ID of the associated global (organization_id=null) metadata purpose
+    MetadataPurposeRegulationOverrideInput:
+      title: MetadataPurposeRegulationOverrideInput
+      type: object
+      properties:
+        organization_id:
+          type: string
+          description: ID of the organization which the MetadataPurposeRegulationOverride belongs to
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the override configures the metadata purpose to support
+          items:
+            type: string
+        metadata_purpose_id:
+          type: string
+          description: The ID of the associated global (organization_id=null) metadata purpose
+      required:
+      - organization_id
+      - metadata_purpose_id
+    MetadataPurposeRegulationOverride:
+      description: A table to define MetadataPurposeRegulationOverrides. Overrides allow clients to define which regulations a global (organization_id=null) metadata purpose supports. It is not supported to define overrides for a custom purpose (purposes created by an organization). A null value of `regulations_id` means all regulations are supported, and an empty array means no regulations are supported.
+      type: object
+      title: MetadataPurposeRegulationOverride
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the override
+        organization_id:
+          type: string
+          description: ID of the organization that owns the override
+        created_at:
+          type: string
+          description: Creation date of the override
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the override
+          format: date-time
+        deleted_at:
+          type: string
+          description: Deletion date of the override
+          format: date-time
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the override configures the metadata purpose to support
+          items:
+            type: string
+        metadata_purpose_id:
+          type: string
+          description: The ID of the associated global (organization_id=null) metadata purpose
+      required:
+      - id
+      - metadata_purpose_id
+      - organization_id
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

@@ -1,0 +1,67 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events widgets/notices/remote-configs API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: widgets/notices/remote-configs
+paths:
+  /widgets/notices/remote-configs:
+    post:
+      summary: Deploy a SDK config
+      description: Directly deploy a SDK config to the production environment for the property
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sdk-configs'
+        '401':
+          description: not authenticated
+        '403':
+          description: forbidden
+        '500':
+          description: general error
+      tags:
+      - widgets/notices/remote-configs
+      consumes:
+      - application/json
+      produces:
+      - application/json
+components:
+  schemas:
+    sdk-configs:
+      type: object
+      title: Didomi SDK configuration
+      description: Consent notice configuration structured for a Didomi SDK
+      properties:
+        config:
+          type: object
+          description: Didomi SDK configuration (see https://developers.didomi.io/cmp/introduction)
+      required:
+      - config
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

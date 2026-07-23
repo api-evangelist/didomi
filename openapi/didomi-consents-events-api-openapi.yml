@@ -1,0 +1,949 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: consents/events
+paths:
+  /consents/events:
+    get:
+      summary: Retrieve events
+      description: Returns a list of events for a given organization ID and user ID or organization user ID
+      security:
+      - bearer: []
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization for which to retrieve events
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The Didomi user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events
+        required: false
+        schema:
+          type: string
+      - name: organization_user_id
+        in: query
+        description: The organization user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: 'Filter events according to their status (possible values: confirmed, pending_approval). If this field is missing, only confirmed events are returned. To filter on multiple statuses in a single request, use the notation status[$in]: ?status[$in]=confirmed&status[$in]=pending_approval.'
+        required: false
+        schema:
+          type: string
+      - name: regulation
+        in: query
+        description: 'Filter events according to their regulation. Possible value is any existing regulation in the Regulations API (/compliance/v1/regulations). If this field is missing, only GDPR events are returned. To filter on multiple regulations in a single request, use the notation regulation[$in]: ?regulation[$in]=gdpr&regulation[$in]=cpra.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of ConsentEvent objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/consent-events'
+      tags:
+      - consents/events
+      consumes:
+      - application/json
+      produces:
+      - application/json
+    post:
+      summary: Create a new event
+      description: Create a new event and update the consent status of the user
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization for which to create an event
+        required: true
+        schema:
+          type: string
+      - name: $disable_integrations
+        in: query
+        description: Disable sending the event to integrations configured for the organization. Set this parameter to true if you do not want the event processed by integrations (if you are importing events that already exist in the integrated systems, for instance).
+        required: false
+        schema:
+          type: boolean
+      - name: $generate_tcfcs
+        in: query
+        description: Set to "true" to generate a TCF consent string for the user based on the latest status of the user
+        required: false
+        schema:
+          type: boolean
+      - name: event
+        in: body
+        description: Event information
+        required: true
+        schema:
+          $ref: '#/definitions/consent-events-input'
+      responses:
+        '200':
+          description: The created ConsentEvent object
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/consent-events'
+      tags:
+      - consents/events
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      security:
+      - bearer: []
+    delete:
+      summary: Delete events
+      description: Delete events and update the user consent status as if the events had never happened ; the user consent status is re-computed from all events for that user except deleted events
+      security:
+      - bearer: []
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the event belongs to
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The Didomi user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events
+        required: false
+        schema:
+          type: string
+      - name: organization_user_id
+        in: query
+        description: The organization user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events
+        required: false
+        schema:
+          type: string
+      - name: '{filters}'
+        in: query
+        description: Keys and values to filter the events to delete. You can filter using any property of the events, including nested properties like metadata by using . as a separator for each level
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: The events were successfully deleted and the user consent status has been updated
+      tags:
+      - consents/events
+      consumes:
+      - application/json
+      produces:
+      - application/json
+  /consents/events/{id}:
+    get:
+      summary: Retrieve an event
+      description: Returns an event
+      security:
+      - bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the event to retrieve
+        required: true
+        schema:
+          type: string
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the event belongs to
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The Didomi user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events
+        required: false
+        schema:
+          type: string
+      - name: organization_user_id
+        in: query
+        description: The organization user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A ConsentEvent object
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/consent-events'
+      tags:
+      - consents/events
+      consumes:
+      - application/json
+      produces:
+      - application/json
+    patch:
+      summary: Patch an event
+      description: Patch an existing event
+      security:
+      - bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the event to update
+        required: true
+        schema:
+          type: string
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the event belongs to
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The Didomi user ID for which to update events. You must provide either **user_id** or **organization_user_id** when updating events
+        required: false
+        schema:
+          type: string
+      - name: organization_user_id
+        in: query
+        description: The organization user ID for which to update events. You must provide either **user_id** or **organization_user_id** when updating events
+        required: false
+        schema:
+          type: string
+      - name: event
+        in: body
+        description: The new event data
+        required: true
+        schema:
+          $ref: '#/definitions/consent-events-input-update'
+      responses:
+        '200':
+          description: The patched ConsentEvent object
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/consent-events'
+      tags:
+      - consents/events
+      consumes:
+      - application/json
+      produces:
+      - application/json
+    delete:
+      summary: Delete an event
+      description: Delete an event and update the user consent status as if the event had never happened ; the user consent status is re-computed from all events for that user except deleted events
+      security:
+      - bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the event to delete
+        required: true
+        schema:
+          type: string
+      - name: organization_id
+        in: query
+        description: The ID of the organization that the event belongs to
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The Didomi user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events
+        required: false
+        schema:
+          type: string
+      - name: organization_user_id
+        in: query
+        description: The organization user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          description: The event was successfully deleted and the user consent status has been updated
+      tags:
+      - consents/events
+      consumes:
+      - application/json
+      produces:
+      - application/json
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+definitions:
+  consent-events-input:
+    type: object
+    title: ConsentEventInput
+    description: A partial update to a user consent status
+    properties:
+      id:
+        type: string
+        description: Unique event ID. Providing an event ID is optional and a unique ID will automatically be generated if no ID is provided. If an ID is provided, the API will ensure that the event does not already exist before creating it.
+      organization_id:
+        type: string
+        description: ID of the organization that owns the event
+      created_at:
+        type: string
+        description: Creation date of the event (ISO8601). Providing a creation data is optional and the date will automatically be set to the time of the request if it is not provided. Dates provided can be in the past to import events that were collected outside of the Didomi platform.
+      status:
+        type: string
+        description: 'Status of the event (possible values: confirmed, pending_approval)'
+      user:
+        type: object
+        description: Information on the user that initiated the event
+        properties:
+          id:
+            type: string
+            description: Didomi user ID (A random UUID for users encountered on websites and an IDFA/ADID for users from mobile apps) ; if the user does not exist, it will be automatically created
+          organization_user_id:
+            type: string
+            description: A unique user ID, internal to your organization. This can be an email, a phone number, an internal client ID, etc. It is used to link Didomi users to your internal systems. This ID will be assigned to user if the user does not already have an organization user ID.
+          metadata:
+            type: object
+            title: Metadata
+            description: Free-form metadata object on the user. Use it to store custom information on the user. The metadata will be merged with the existing metadata of the user.
+          country:
+            type: string
+            title: Country
+            description: Two-letter ISO code of the user's country
+          last_seen_country:
+            type: string
+            title: Last seen country
+            description: Two-letter ISO country code of the event
+        required:
+        - id
+      consents:
+        type: object
+        title: Consents
+        description: Consent status of the user
+        properties:
+          channels:
+            type: array
+            description: Channels
+            items:
+              type: object
+              title: Channel
+              description: Channel
+              properties:
+                id:
+                  type: string
+                  description: Channel ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the channel
+              required:
+              - id
+          purposes:
+            type: array
+            description: Purposes that the user has made choices for
+            items:
+              type: object
+              title: ConsentChoice
+              description: Consent choice of the user
+              properties:
+                id:
+                  type: string
+                  description: Purpose ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this purpose or not. A null value indicates that the user has not made a specific choice for the purpose but might have made choices for preferences or channels.
+                enabled_li:
+                  type: boolean
+                  description: Whether the user has objected to this purpose based on legitimate interest. A null value indicates that the user has not made a specific choice for the purpose. A "false" value indicates that the user has objected to the purpose.
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the purpose
+                channels:
+                  type: array
+                  description: Channels. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: Channel
+                    description: Channel
+                    properties:
+                      id:
+                        type: string
+                        description: Channel ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the channel
+                    required:
+                    - id
+                preferences:
+                  type: array
+                  description: Extra preferences expressed for the purpose. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: ConsentPreference
+                    description: Extra preference expressed for the purpose
+                    properties:
+                      id:
+                        type: string
+                        description: Preference ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this preference or not. A null value indicates that the user has not made a specific choice for the preference but might have made choices for channels.
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the preference
+                      channels:
+                        type: array
+                        description: Channels
+                        items:
+                          type: object
+                          title: Channel
+                          description: Channel
+                          properties:
+                            id:
+                              type: string
+                              description: Channel ID
+                            enabled:
+                              type: boolean
+                              description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                            metadata:
+                              type: object
+                              title: Metadata
+                              description: Free-form metadata object on the channel
+                          required:
+                          - id
+                    required:
+                    - id
+                values:
+                  type: object
+                  description: Flat structure for every selected value by the user.
+                  title: ConsentValues
+                  properties:
+                    preferenceId1:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+                    preferenceId2:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+              required:
+              - id
+          vendors:
+            type: object
+            description: Vendors that the user has made choices for
+            properties:
+              enabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user given consent to
+              enabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has not objected to based on legitimate interest
+              disabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user denied consent to
+              disabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has objected to based on legitimate interest
+          tcfcs:
+            type: string
+            description: TCF consent string of the user
+        required:
+        - vendors
+      proofs_id:
+        type: array
+        items:
+          description: IDs of the proofs associated with this event
+          type: string
+      proofs:
+        type: array
+        items:
+          description: List of proofs to associate with this event. Proofs must be base64-encoded data URIs.
+          type: string
+      delegate:
+        type: object
+        description: Information on the delegate that created the event on behalf of the user. A delegate is a third-party that modifies the consents for an end user and that you want to keep track of. The delegate will be ignored if the API call is done with a consent token.
+        properties:
+          id:
+            type: string
+            description: Unique ID of the delegate. This is usually an internal ID in your organization (team, user, etc.) and is a free-form string.
+          name:
+            type: string
+            description: Name of the delegate
+          metadata:
+            type: object
+            title: Metadata
+            description: Free-form metadata object on the delegate. Use it to store custom information on the delegate.
+        required:
+        - id
+    required:
+    - organization_id
+    - created_at
+    - user
+    - consents
+  consent-events:
+    type: object
+    title: ConsentEvent
+    description: A partial update to a user consent status
+    properties:
+      id:
+        type: string
+        description: Unique event ID
+      organization_id:
+        type: string
+        description: ID of the organization that owns the event
+      created_at:
+        type: string
+        description: Creation date of the event (ISO8601)
+      status:
+        type: string
+        description: 'Status of the event (possible values: confirmed, pending_approval)'
+      regulation:
+        type: string
+        description: Regulation of the event. Possible value is any existing regulation in the Regulations API (/compliance/v1/regulations)
+      user:
+        type: object
+        description: Information on the user that initiated the event
+        properties:
+          id:
+            type: string
+            description: Didomi user ID (A random UUID for users encountered on websites and an IDFA/ADID for users from mobile apps) ; if the user does not exist, it will be automatically created
+          organization_user_id:
+            type: string
+            description: A unique user ID, internal to your organization. This can be an email, a phone number, an internal client ID, etc. It is used to link Didomi users to your internal systems. This ID will be assigned to user if the user does not already have an organization user ID.
+          metadata:
+            type: object
+            title: Metadata
+            description: Free-form metadata object on the user. Use it to store custom information on the user. The metadata will be merged with the existing metadata of the user.
+          country:
+            type: string
+            title: Country
+            description: Two-letter ISO code of the user's country
+          last_seen_country:
+            type: string
+            title: Last seen country
+            description: Two-letter ISO country code of the event
+        required:
+        - id
+      consents:
+        type: object
+        title: Consents
+        description: Consent status of the user
+        properties:
+          channels:
+            type: array
+            description: Channels
+            items:
+              type: object
+              title: Channel
+              description: Channel
+              properties:
+                id:
+                  type: string
+                  description: Channel ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the channel
+              required:
+              - id
+          purposes:
+            type: array
+            description: Purposes that the user has made choices for
+            items:
+              type: object
+              title: ConsentChoice
+              description: Consent choice of the user
+              properties:
+                id:
+                  type: string
+                  description: Purpose ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this purpose or not. A null value indicates that the user has not made a specific choice for the purpose but might have made choices for preferences or channels.
+                enabled_li:
+                  type: boolean
+                  description: Whether the user has objected to this purpose based on legitimate interest. A null value indicates that the user has not made a specific choice for the purpose. A "false" value indicates that the user has objected to the purpose.
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the purpose
+                channels:
+                  type: array
+                  description: Channels. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: Channel
+                    description: Channel
+                    properties:
+                      id:
+                        type: string
+                        description: Channel ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the channel
+                    required:
+                    - id
+                preferences:
+                  type: array
+                  description: Extra preferences expressed for the purpose. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: ConsentPreference
+                    description: Extra preference expressed for the purpose
+                    properties:
+                      id:
+                        type: string
+                        description: Preference ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this preference or not. A null value indicates that the user has not made a specific choice for the preference but might have made choices for channels.
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the preference
+                      channels:
+                        type: array
+                        description: Channels
+                        items:
+                          type: object
+                          title: Channel
+                          description: Channel
+                          properties:
+                            id:
+                              type: string
+                              description: Channel ID
+                            enabled:
+                              type: boolean
+                              description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                            metadata:
+                              type: object
+                              title: Metadata
+                              description: Free-form metadata object on the channel
+                          required:
+                          - id
+                    required:
+                    - id
+                values:
+                  type: object
+                  description: Flat structure for every selected value by the user.
+                  title: ConsentValues
+                  properties:
+                    preferenceId1:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+                    preferenceId2:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+              required:
+              - id
+          vendors:
+            type: object
+            description: Vendors that the user has made choices for
+            properties:
+              enabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user given consent to
+              enabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has not objected to based on legitimate interest
+              disabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user denied consent to
+              disabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has objected to based on legitimate interest
+          tcfcs:
+            type: string
+            description: TCF consent string of the user
+        required:
+        - vendors
+      proofs_id:
+        type: array
+        items:
+          description: IDs of the proofs associated with this consent event
+          type: string
+      delegate:
+        type: object
+        description: Information on the delegate that created the event on behalf of the user. A delegate is a third-party that modifies the consents for an end user and that you want to keep track of.
+        properties:
+          id:
+            type: string
+            description: Unique ID of the delegate. This is usually an internal ID in your organization (team, user, etc.) and is a free-form string.
+          name:
+            type: string
+            description: Name of the delegate
+          metadata:
+            type: object
+            title: Metadata
+            description: Free-form metadata object on the delegate. Use it to store custom information on the delegate.
+        required:
+        - id
+    required:
+    - id
+    - organization_id
+    - created_at
+    - user
+    - consents
+  consent-events-input-update:
+    type: object
+    title: ConsentEventInputUpdate
+    description: A partial update to an event consent status
+    properties:
+      status:
+        type: string
+        description: 'Status of the event (possible values: confirmed, pending_approval)'
+      consents:
+        type: object
+        title: Consents
+        description: Consent status of the user
+        properties:
+          channels:
+            type: array
+            description: Channels
+            items:
+              type: object
+              title: Channel
+              description: Channel
+              properties:
+                id:
+                  type: string
+                  description: Channel ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the channel
+              required:
+              - id
+          purposes:
+            type: array
+            description: Purposes that the user has made choices for
+            items:
+              type: object
+              title: ConsentChoice
+              description: Consent choice of the user
+              properties:
+                id:
+                  type: string
+                  description: Purpose ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this purpose or not. A null value indicates that the user has not made a specific choice for the purpose but might have made choices for preferences or channels.
+                enabled_li:
+                  type: boolean
+                  description: Whether the user has objected to this purpose based on legitimate interest. A null value indicates that the user has not made a specific choice for the purpose. A "false" value indicates that the user has objected to the purpose.
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the purpose
+                channels:
+                  type: array
+                  description: Channels. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: Channel
+                    description: Channel
+                    properties:
+                      id:
+                        type: string
+                        description: Channel ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the channel
+                    required:
+                    - id
+                preferences:
+                  type: array
+                  description: Extra preferences expressed for the purpose. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: ConsentPreference
+                    description: Extra preference expressed for the purpose
+                    properties:
+                      id:
+                        type: string
+                        description: Preference ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this preference or not. A null value indicates that the user has not made a specific choice for the preference but might have made choices for channels.
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the preference
+                      channels:
+                        type: array
+                        description: Channels
+                        items:
+                          type: object
+                          title: Channel
+                          description: Channel
+                          properties:
+                            id:
+                              type: string
+                              description: Channel ID
+                            enabled:
+                              type: boolean
+                              description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                            metadata:
+                              type: object
+                              title: Metadata
+                              description: Free-form metadata object on the channel
+                          required:
+                          - id
+                    required:
+                    - id
+                values:
+                  type: object
+                  description: Flat structure for every selected value by the user.
+                  title: ConsentValues
+                  properties:
+                    preferenceId1:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+                    preferenceId2:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+              required:
+              - id
+          vendors:
+            type: object
+            description: Vendors that the user has made choices for
+            properties:
+              enabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user given consent to
+              enabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has not objected to based on legitimate interest
+              disabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user denied consent to
+              disabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has objected to based on legitimate interest
+          tcfcs:
+            type: string
+            description: TCF consent string of the user
+        required:
+        - vendors
+      proofs_id:
+        type: array
+        items:
+          description: IDs of the proofs associated with this event
+          type: string
+      proofs:
+        type: array
+        items:
+          description: List of proofs to associate with this event. Proofs must be base64-encoded data URIs.
+          type: string
+      delegate:
+        type: object
+        description: Information on the delegate that created the event on behalf of the user. A delegate is a third-party that modifies the consents for an end user and that you want to keep track of. The delegate will be ignored if the API call is done with a consent token.
+        properties:
+          id:
+            type: string
+            description: Unique ID of the delegate. This is usually an internal ID in your organization (team, user, etc.) and is a free-form string.
+          name:
+            type: string
+            description: Name of the delegate
+          metadata:
+            type: object
+            title: Metadata
+            description: Free-form metadata object on the delegate. Use it to store custom information on the delegate.
+        required:
+        - id
+        - consents

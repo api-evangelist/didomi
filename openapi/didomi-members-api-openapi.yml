@@ -1,0 +1,216 @@
+openapi: 3.0.2
+info:
+  title: Didomi consents/events members API
+  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+
+
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+
+
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
+
+
+    '
+  version: '1.0'
+servers:
+- url: https://api.didomi.io/v1
+  description: Didomi Platform API
+security:
+- bearer: []
+tags:
+- name: members
+  description: Manage members of an organization
+paths:
+  /members:
+    get:
+      parameters:
+      - name: organization_id
+        in: query
+        description: The ID of the organization
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of Member objects
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/members'
+      description: Returns a list of members of an organization
+      summary: Retrieve a list of members of an organization
+      tags:
+      - members
+      security:
+      - bearer: []
+    post:
+      parameters:
+      - name: member
+        in: body
+        description: The Member object to create
+        required: true
+        schema:
+          $ref: '#/components/schemas/members-invite-to-org-input'
+      responses:
+        '200':
+          description: The created Member object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members'
+      description: Add a new member to an organization. If the user is new it will send an email with a password reset link. Finally it will send an added to organization notification
+      summary: Add a user to an organization
+      tags:
+      - members
+      security:
+      - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/members'
+  /members/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the member to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A Member object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members'
+      description: Returns a single member of an organization
+      summary: Retrieve a member
+      tags:
+      - members
+      security:
+      - bearer: []
+    patch:
+      parameters:
+      - in: path
+        name: id
+        description: ID of members to update
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Updates the resource identified by id using data.
+      summary: ''
+      tags:
+      - members
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/members'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the member to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted Member object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members'
+      description: Delete an existing member of an organization
+      summary: Remove a user from an organization
+      tags:
+      - members
+      security:
+      - bearer: []
+components:
+  schemas:
+    members:
+      type: object
+      title: Member
+      description: A member of an organization
+      properties:
+        id:
+          type: string
+          description: Member ID (ie, ID of the user in the organization)
+        role_id:
+          type:
+          - string
+          - 'null'
+          description: Role identifier attached to the user membership
+        organization_id:
+          type: string
+          description: Organization ID
+        user_id:
+          type: string
+          description: User ID
+        authentication_method:
+          type: string
+          enum:
+          - email_password
+          - google
+          - microsoft
+          - saml_sso
+        saml_active:
+          type: boolean
+        created_at:
+          type: string
+          description: Date when the user was added to the organization
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the member
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the member record
+      required:
+      - id
+      - organization_id
+      - user_id
+    members-invite-to-org-input:
+      title: InvitedMemberInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: The invited user's name
+        email:
+          type: string
+          description: The invited user's email
+        organization_id:
+          type: string
+          description: Organization ID
+      required:
+      - name
+      - email
+      - organization_id
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
