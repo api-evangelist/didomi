@@ -1278,6 +1278,11 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 common:
+  - type: IssueTracker
+    url: https://github.com/didomi/consent-string/issues
+  - type: License
+    name: BSD-3-Clause
+    url: https://github.com/didomi/consent-string/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/didomi-agentic-access.yml
   - type: TrustCenter
