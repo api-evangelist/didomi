@@ -42,7 +42,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/didomi.png
 kind: contract
 access: 3rd-Party
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-08-13'
 specificationVersion: '0.20'
 apis:
 - aid: didomi:didomi-web-sdk
@@ -53,6 +53,7 @@ apis:
   - SDK
   - Web
   humanURL: https://developers.didomi.io/cmp/web-sdk
+  baseURL: https://sdk.privacy-center.org
   properties:
   - type: Documentation
     url: https://developers.didomi.io/cmp/web-sdk
@@ -1278,6 +1279,72 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 common:
+  - type: Packages
+    name: Didomi Client Libraries and Distributions
+    url: packages/didomi-packages.yml
+  - type: SDKs
+    name: Didomi first-party SDK inventory with versions and publish dates
+    url: packages/didomi-packages.yml
+  - type: LLMsTxt
+    name: Didomi llms.txt, saved verbatim from developers.didomi.io
+    url: llms/didomi-llms.txt
+  - type: MCPServer
+    name: Candidate MCP tool surface derived from the Didomi OpenAPI (Didomi ships no MCP server)
+    url: mcp/didomi-mcp.yml
+  - type: Overlay
+    name: OpenAPI Overlay 1.0.0 of API Evangelist enhancements to the Didomi Platform API
+    url: overlays/didomi-platform-api-overlay.yaml
+  - type: Conformance
+    name: Didomi standards conformance, evidenced
+    url: conformance/didomi-conformance.yml
+  - type: Compliance
+    name: Published compliance and certification posture (ISO/IEC 27001:2022, GDPR, IAB TCF, IAB GPP, GPC, Google Consent Mode v2)
+    url: conformance/didomi-conformance.yml
+  - type: ErrorCatalog
+    name: Didomi Platform API error catalog
+    url: errors/didomi-problem-types.yml
+  - type: Lifecycle
+    name: Didomi API and SDK lifecycle
+    url: lifecycle/didomi-lifecycle.yml
+  - type: Deprecation
+    name: Didomi backwards-compatibility and deprecation policy
+    url: lifecycle/didomi-lifecycle.yml
+  - type: ChangeLog
+    name: Didomi per-SDK dated change log
+    url: changelog/didomi-changelog.yml
+  - type: Conventions
+    name: Didomi Platform API cross-cutting runtime conventions
+    url: conventions/didomi-conventions.yml
+  - type: DataModel
+    name: Didomi Platform API entity-relationship model
+    url: data-model/didomi-data-model.yml
+  - type: Components
+    name: Didomi client-side and embeddable components
+    url: components/didomi-components.yml
+  - type: AsyncAPI
+    name: AsyncAPI 3.0.0 for Didomi consent webhooks (generated from Didomi's published event catalog)
+    url: asyncapi/didomi-consent-webhooks-asyncapi.yml
+  - type: Webhooks
+    name: Didomi outbound webhook catalog
+    url: asyncapi/didomi-webhooks.yml
+  - type: AgentSkill
+    name: Didomi Agent Skills index
+    url: skills/_index.yml
+  - type: Security
+    name: Didomi security contact and vulnerability disclosure route
+    url: security/didomi-vulnerability-disclosure.yml
+  - type: VulnerabilityDisclosure
+    name: Didomi vulnerability disclosure
+    url: security/didomi-vulnerability-disclosure.yml
+  - type: DeveloperPortal
+    name: Didomi Developers Portal
+    url: https://developers.didomi.io/
+  - type: APIReference
+    name: Didomi Platform API reference (interactive, served from the API host)
+    url: https://api.didomi.io/docs/
+  - type: Postman
+    name: Didomi Postman workspace
+    url: https://www.postman.com/kinlaneapi/didomi/overview
   - type: IssueTracker
     url: https://github.com/didomi/consent-string/issues
   - type: License
@@ -1568,3 +1635,9 @@ maintainers:
   - FN: API Evangelist
     url: https://apievangelist.com
     email: info@apievangelist.com
+
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 20
+  pass: local-v1
