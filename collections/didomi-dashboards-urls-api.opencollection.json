@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Didomi consents/events dashboards-urls API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dashboards-urls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of dashboards with signed URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/analytics/dashboards-urls",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "The category of the dashboard. Used for grouping dashboard (per page for example)."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of max results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "[object Object]",
+                "type": "query",
+                "description": "Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all dashboards with signed URLs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

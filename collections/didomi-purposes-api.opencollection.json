@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Didomi consents/events purposes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "purposes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of available purposes for restrictions. For publisher restriction list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes/restrictions",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all purposes"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes",
+            "params": [
+              {
+                "name": "$translations",
+                "value": "",
+                "type": "query",
+                "description": "If true, will return translatable fields as objects with translations"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of max results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "[object Object]",
+                "type": "query",
+                "description": "Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all purposes"
+        },
+        {
+          "info": {
+            "name": "Create a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/purposes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new purpose"
+        },
+        {
+          "info": {
+            "name": "Retrieve a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the purpose to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single purpose with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the purpose to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing purpose and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the purpose to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a purpose"
+        },
+        {
+          "info": {
+            "name": "Delete a purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/purposes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the purpose to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing purpose"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

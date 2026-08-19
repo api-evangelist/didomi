@@ -1,0 +1,159 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.didomi.io/api-and-platform/widgets/privacy-widgets/headless-widgets/custom-elements
+docs:
+- https://developers.didomi.io/api-and-platform/widgets/privacy-widgets/headless-widgets
+- https://developers.didomi.io/api-and-platform/widgets/privacy-widgets/headless-widgets/custom-elements
+- https://developers.didomi.io/api-and-platform/widgets/privacy-widgets/headless-widgets/public-methods
+- https://developers.didomi.io/api-and-platform/widgets/privacy-widgets/edit-a-widget/content-and-design/components
+- https://developers.didomi.io/cmp/web-sdk/getting-started
+info:
+  name: Didomi client-side and embeddable components
+  provider: didomi
+  description: >-
+    Didomi's primary product is a client-side surface, so its component layer is
+    unusually large for an API company. Three distinct families: the CMP notice
+    loader (a script tag), a set of HTML CUSTOM ELEMENTS for building headless
+    preference widgets, and a server-side component vocabulary used to compose
+    hosted privacy widgets from the Console or API. These are UI components, not
+    SDKs — the SDKs are catalogued in packages/didomi-packages.yml.
+  checked: '2026-08-13'
+
+families:
+
+- id: cmp-loader
+  name: CMP notice loader
+  type: script-tag
+  distribution: cdn
+  description: >-
+    The consent notice itself. A single inline script installs the IAB TCF
+    __tcfapi stub, preconnects, then loads the SDK. Serves web, mobile web and
+    CTV (the same loader takes platform=ctv).
+  loader_url: https://sdk.privacy-center.org/{apiKey}/loader.js
+  query_parameters:
+  - platform
+  - target_type
+  - target
+  - country
+  - region
+  custom_domain: >-
+    Customers can serve the loader from their own domain — Didomi documents
+    reverse-proxy boilerplates for Cloudflare, AWS CloudFront and Fastly, and
+    since mobile SDK 2.45.0 an sdkPath/apiPath override routes both static
+    assets and API traffic through it.
+  csp_allowlist:
+  - https://sdk.privacy-center.org/
+  - https://api.privacy-center.org/
+  versioning: >-
+    UNPINNED — the URL carries no version segment. See
+    packages/didomi-packages.yml.
+  docs: https://developers.didomi.io/cmp/web-sdk/getting-started
+
+- id: headless-custom-elements
+  name: Headless widget custom elements
+  type: web-components
+  description: >-
+    HTML custom elements you place in your own markup. They wrap your code and
+    handle widget logic, analytics and API requests, so the preference centre
+    can be styled entirely by the customer while Didomi owns the consent
+    plumbing. Communicated with via synthetic JavaScript events.
+  elements:
+  - name: didomi-container-headless
+    properties: [id]
+    description: >-
+      Wraps the whole widget. Contains the boundary that intercepts events and
+      talks to the Didomi API — every other element must sit inside it.
+  - name: didomi-if-not-authenticated
+    properties: [container-id]
+    description: Renders its children only when the end-user is NOT logged into Didomi.
+  - name: didomi-if-authenticated
+    properties: [container-id]
+    description: Renders its children only when the end-user IS logged into Didomi.
+  - name: didomi-auth-headless
+    description: Authentication surface for the headless widget.
+  - name: didomi-consent-asked
+    description: Signals that consent has been requested.
+  - name: didomi-consent-receiver
+    description: Receives the user's consent state.
+  - name: didomi-pending-consent-receiver
+    description: Receives pending (not yet confirmed) consent state.
+  - name: didomi-component-content
+    description: Renders content for a widget component.
+  - name: didomi-entity-content
+    description: Renders content bound to an entity.
+  docs: https://developers.didomi.io/api-and-platform/widgets/privacy-widgets/headless-widgets/custom-elements
+
+- id: hosted-widget-components
+  name: Hosted privacy-widget component vocabulary
+  type: server-composed
+  description: >-
+    The named component types a hosted privacy widget (preference centre / DSAR
+    form) is assembled from, configurable through the Console or the Widgets
+    API. Complemented by themes and shapes, responsive breakpoints, and options.
+  components:
+  - auth
+  - dsar_form
+  - footer
+  - header
+  - preference
+  - preference_value
+  - save
+  - section
+  - sections
+  styling:
+  - themes-and-shapes
+  - breakpoints
+  - options
+  deployment:
+  - Didomi-managed subdomain
+  - customer's own domain
+  - embeddable on the customer's website
+  docs: https://developers.didomi.io/api-and-platform/widgets/privacy-widgets/edit-a-widget/content-and-design/components
+
+- id: react-wrapper
+  name: React component wrapper
+  type: framework-component
+  package: '@didomi/react'
+  version: 1.10.0
+  published: '2026-05-11'
+  description: >-
+    A React component that embeds and configures the Didomi CMP, so the loader
+    does not have to be hand-installed in a React app.
+  repository: https://github.com/didomi/react
+
+- id: tag-manager-templates
+  name: Tag-manager templates
+  type: template
+  description: >-
+    First-party templates that install and control the CMP from a tag manager
+    rather than from source.
+  items:
+  - name: Google Tag Manager template
+    repository: https://github.com/didomi/gtm-template
+    docs: https://developers.didomi.io/cmp/web-sdk/third-parties/tags-management/tag-managers/google-tag-manager/didomis-gtm-template
+  - name: Adobe Launch / DTM
+    docs: https://developers.didomi.io/cmp/web-sdk/third-parties/tags-management/tag-managers/adobe-launch-dtm
+  - name: Tealium
+    docs: https://developers.didomi.io/cmp/web-sdk/third-parties/tags-management/tag-managers/tealium
+  - name: Eulerian
+    docs: https://developers.didomi.io/cmp/web-sdk/third-parties/tags-management/tag-managers/eulerian
+
+- id: ecommerce-extensions
+  name: E-commerce platform extensions
+  type: plugin
+  items:
+  - name: Adobe Commerce / Magento 2 extension
+    repository: https://github.com/didomi/magento
+    docs: https://developers.didomi.io/integrations/third-party-apps/deploy-didomis-sdk-for-your-adobe-commerce-website
+    note: Last pushed 2023-08-27; not published on Packagist.
+
+notes:
+- >-
+  The headless custom elements are the most interesting surface here: they let a
+  customer own 100% of the preference-centre markup and styling while Didomi
+  retains the consent-of-record plumbing. That is a genuinely composable
+  design and it is the pattern most CMP vendors do not offer.
+- >-
+  No hosted embeddable ANALYTICS dashboard component is published; analytics
+  dashboard access is instead brokered by the API through
+  GET /analytics/dashboards-urls, which returns a signed URL.

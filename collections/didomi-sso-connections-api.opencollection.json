@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Didomi consents/events sso-connections API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sso-connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of SSO connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/sso-connections",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all SSO connections."
+        },
+        {
+          "info": {
+            "name": "Create a SSO connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/sso-connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new SSO connection."
+        },
+        {
+          "info": {
+            "name": "Patch a SSO connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/sso-connections/:id",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch an existing SSO connection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

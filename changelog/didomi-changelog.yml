@@ -1,0 +1,178 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.didomi.io/cmp/mobile-sdk/android/versions
+docs:
+- https://developers.didomi.io/cmp/mobile-sdk/android/versions
+- https://developers.didomi.io/cmp/mobile-sdk/ios/versions
+- https://developers.didomi.io/cmp/web-sdk/reference/versions
+- https://developers.didomi.io/cmp/mobile-sdk/react-native/versions
+- https://developers.didomi.io/cmp/mobile-sdk/flutter/versions
+- https://developers.didomi.io/cmp/mobile-sdk/unity-sdk/versions
+- https://developers.didomi.io/cmp/mobile-sdk/vega-os/versions
+info:
+  name: Didomi change log
+  provider: didomi
+  description: >-
+    Didomi publishes a per-SDK version history. The MOBILE histories are dated
+    ("2.47.0 (August 3, 2026)"); the WEB history is a changesets-style list with
+    versions and change classes but NO dates. There is no changelog for the
+    Didomi Platform REST API at all — the only published API change record is a
+    one-off migration page for the multi-regulation notice configuration change.
+  scheme: semver
+  window: recent entries only
+  checked: '2026-08-13'
+surfaces:
+- surface: Android / Android TV SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/android/versions
+  dated: true
+  current_version: 2.47.0
+  current_date: '2026-08-03'
+- surface: iOS / tvOS SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/ios/versions
+  dated: true
+  current_version: 2.47.0
+- surface: Web SDK
+  url: https://developers.didomi.io/cmp/web-sdk/reference/versions
+  dated: false
+  current_version: 1.5.2
+  note: changesets-style (Minor Changes / Patch Changes) with no release dates
+- surface: React Native SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/react-native/versions
+  current_version: 2.32.0
+  current_date: '2026-08-04'
+- surface: Flutter SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/flutter/versions
+  current_version: 2.31.0
+  current_date: '2026-08-05'
+- surface: Unity SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/unity-sdk/versions
+  current_version: 2.29.0
+  current_date: '2026-08-04'
+- surface: Vega OS SDK
+  url: https://developers.didomi.io/cmp/mobile-sdk/vega-os/versions
+  current_version: 0.2.2
+  current_date: '2026-06-25'
+- surface: Platform REST API
+  url: null
+  published: false
+  note: >-
+    No changelog. The single published API change record is
+    https://developers.didomi.io/api-and-platform/widgets/consent-notices/multi-reg-configurations/migration-of-existing-notices-and-api-updates,
+    which describes how Didomi migrated pre-existing notice Configurations to
+    multi-regulation and what changed on the Notice and Configuration endpoints.
+
+entries:
+- surface: android
+  version: 2.47.0
+  date: '2026-08-03'
+  breaking: false
+  additions:
+  - Update translations and embedded IAB Global Vendor List version.
+  fixes:
+  - Forward sdkPath and apiPath to the Web SDK so notices shown in a WebView load static files and reach the API through the custom domain.
+  - Fix network connectivity detection when the device is on a VPN.
+- surface: android
+  version: 2.46.0
+  date: '2026-07-21'
+  breaking: false
+  additions:
+  - Update translations and embedded GVL version.
+  fixes:
+  - Stop resetting userId during clearUser().
+- surface: android
+  version: 2.45.0
+  date: '2026-07-06'
+  breaking: false
+  additions:
+  - 'App V2 (WebView): fix user ID mismatch between native and web components.'
+  - Add sdkPath and apiPath parameters to DidomiInitializeParameters to override the base URLs used for static files and API requests.
+- surface: android
+  version: 2.44.0
+  date: '2026-06-16'
+  breaking: false
+  additions:
+  - Add frameworks field to the user payload in API events.
+  - Add API events to monitor usage of deprecated Didomi methods.
+  - Add API events to monitor UI rendering time.
+  fixes:
+  - Include the public API key (key query parameter) on /sign, /sync and /batch-sign so access logs can be attributed to the originating organization.
+- surface: android
+  version: 2.43.0
+  date: '2026-05-25'
+  breaking: false
+- surface: web
+  version: 1.5.2
+  date: null
+  breaking: false
+  fixes:
+  - 'CTV: fix notice and preferences failing to render on HbbTV apps served as application/vnd.hbbtv.xhtml+xml.'
+  - 'CTV: fix Next/Previous navigation arrows rendering bold and misaligned on older TV models.'
+  - 'CTV: fix Accept/Reject/Save also activating the focused background element after the consent screen closed.'
+  - 'GPP: add gpp_string to the user object in API event payloads when available.'
+  - 'GPP: fix a first-load race where tcfeuv2 was encoded from an empty consent string.'
+  - Let an explicit consent choice override a GPC opt-out.
+  - Fix user location so region is preserved for all countries instead of only the US.
+  - Fix didomiOnReady callbacks never running when no notice UI module applies.
+- surface: web
+  version: 1.5.1
+  date: null
+  breaking: false
+  fixes:
+  - 'GPP: fix cmpDisplayStatus reporting visible when no CMP UI is displayed.'
+  - 'GPP: fix the Gpc field always reporting false in encoded GPP sections by reflecting navigator.globalPrivacyControl.'
+  - 'IAB TCF: hide the "IAB TCF" mention for IAB vendors and purposes when a non-GDPR regulation applies.'
+- surface: web
+  version: 1.5.0
+  date: null
+  breaking: false
+  additions:
+  - 'GPC: add territories and purposes configuration options.'
+  - Add Google Consent Mode direct-integration support for mixed regulations.
+  - Expose isLoggedIn and ageGroup on Didomi.setUser.
+  fixes:
+  - 'GPP: fix applicableSections returning [] instead of the in-force section IDs.'
+- surface: web
+  version: 1.4.0
+  date: null
+  breaking: true
+  breaking_changes:
+  - 'CCPA: removed support for the deprecated regulation.'
+  note: >-
+    The only removal observed in the recent window. It is a regulation Didomi
+    considers superseded (by CPRA / US state laws), and it is a change to the
+    client SDK rather than to the REST API — the API-level backwards-compat
+    guarantee is not contradicted.
+- surface: web
+  version: 1.3.1
+  date: null
+  breaking: false
+  fixes:
+  - 'IAB TCF: load vendor details server-side instead of bundling them in the SDK.'
+  - Fix consent choices not saving under US regulations when GPC is enabled.
+  - Fix window.didomiState misclassifying purpose-disabled vendors for GTM and other tag managers.
+- surface: web
+  version: 1.2.0
+  date: null
+  breaking: false
+  additions:
+  - 'IAB TCF: apply April 2026 updates including SDK items and new specialPurposes and optOut fields for cookie disclosures.'
+  fixes:
+  - 'A11Y: fix button aria-label to start with visible button text for WCAG 2.5.3.'
+
+themes:
+- >-
+  IAB GPP and Global Privacy Control correctness dominates the recent web
+  window — six of the last eight web releases touch GPP or GPC encoding.
+- >-
+  Connected TV (CTV / HbbTV) rendering and remote-control focus handling is the
+  second recurring theme, consistent with Didomi's CTV product push.
+- >-
+  Custom-domain support (sdkPath / apiPath) landed across mobile in 2.45.0 and
+  2.47.0, letting customers route both static assets and API traffic through
+  their own domain.
+
+gaps:
+- No changelog for the Platform REST API.
+- Web SDK entries carry no release dates.
+- No RSS/Atom or JSON feed for any of the version histories.
+- No single cross-surface release page; each SDK has its own.

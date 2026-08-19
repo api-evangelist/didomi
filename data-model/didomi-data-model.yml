@@ -1,0 +1,437 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/didomi-platform-api-openapi.yml
+enriched_from:
+- https://developers.didomi.io/api-and-platform/data-manager/configuration-tree
+- https://developers.didomi.io/api-and-platform/consents/events
+- https://developers.didomi.io/api-and-platform/widgets/consent-notices
+info:
+  name: Didomi Platform API data model
+  provider: didomi
+  description: >-
+    Entity-relationship graph derived from the 92 schemas and 190 operations in
+    Didomi's OpenAPI, following $ref links and `*_id` reference fields.
+    ORGANIZATION is the root of everything — 34 of the 92 schemas carry an
+    organization_id, and it is a required query parameter on most list
+    endpoints. Below it the model splits into three subgraphs: the METADATA
+    taxonomy (vendors, purposes, partners and their per-regulation overrides),
+    the WIDGET graph (notices, configurations, templates, texts, deployments),
+    and the CONSENT record (users, events, proofs, tokens).
+  derivation:
+    schemas_examined: 92
+    entities: 27
+    relationships: 74
+    method: >-
+      $ref traversal plus `<entity>_id` field-name binding. Input/patch variants
+      (*-input, *-input-create, *-input-update, *-patch-input) are collapsed
+      into their base entity.
+  checked: '2026-08-13'
+
+id_conventions:
+  format: opaque string
+  prefixes: >-
+    None. Didomi ids are bare opaque strings with no type prefix — unlike
+    Stripe-style `cus_`/`sub_` prefixes, a Didomi id is not self-describing, so
+    an agent cannot tell a notice id from a purpose id by looking at it.
+  organization_id: >-
+    Human-readable slug in Didomi's own examples (`organization_id=didomi`)
+    rather than a random identifier.
+  tenancy: >-
+    organization_id is the tenancy key across the whole model and is a REQUIRED
+    query parameter on most list endpoints — omitting it is a 4xx, not an
+    unscoped list.
+
+entities:
+
+- name: organization
+  path: /organizations
+  root: true
+  description: The tenant. Every other entity hangs off it.
+  fields_of_note:
+  - industry_id
+  - organization_group_id
+  - iab_tcf_cmp_id
+  - salesforce_account_id
+  - validate_purpose_id
+  relationships:
+  - {type: has_many, target: member, via: organization_id}
+  - {type: has_many, target: key, via: organization_id}
+  - {type: has_many, target: secret, via: organization_id}
+  - {type: has_many, target: domain, via: organization_id}
+  - {type: has_many, target: notice, via: organization_id}
+  - {type: has_many, target: purpose, via: organization_id}
+  - {type: has_many, target: partner, via: organization_id}
+  - {type: has_many, target: privacy_center, via: organization_id}
+  - {type: has_one, target: quota, via: organization_id}
+  - {type: has_many, target: premium_feature, via: organization_id}
+  - {type: has_many, target: organization_source_system, via: organization_id}
+  - {type: belongs_to, target: organization_group, via: organization_group_id}
+
+- name: organization_group
+  description: >-
+    Parent grouping for multi-organization accounts. Referenced by organization
+    and by sso_connection, but has no CRUD endpoints of its own in the spec.
+  implicit: true
+
+- name: member
+  path: /members
+  description: A human user inside an organization.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: belongs_to, target: role, via: role_id}
+  - {type: belongs_to, target: user, via: user_id}
+
+- name: key
+  path: /keys
+  description: A private API key/secret pair used to mint a session JWT.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: session
+  path: /sessions
+  description: >-
+    A 1-hour JWT minted from a key + secret (or an email + password). The only
+    unauthenticated write in the API.
+  relationships:
+  - {type: belongs_to, target: key, via: key}
+
+- name: secret
+  path: /secrets
+  description: Stored credential for an integration destination. Quota 300 per organization.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: domain
+  path: /domains
+  description: A delegated domain used to serve notices or a preference centre.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: belongs_to, target: entity, via: entity_id}
+
+- name: sso_connection
+  path: /sso-connections
+  description: Enterprise SSO configuration, backed by Auth0.
+  relationships:
+  - {type: belongs_to, target: organization_group, via: organization_group_id}
+  - {type: belongs_to, target: auth0_connection, via: auth0_connection_id}
+
+- name: quota
+  path: /quotas
+  description: >-
+    The organization's enforced platform limits (scraper_enabled_properties,
+    parallel_notices_deployments, exports_configs, exports_destinations,
+    consent_proof_reports, api_requests, secrets, metadata_partners,
+    metadata_purposes).
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: premium_feature
+  path: /premium-features
+  description: Per-organization feature entitlement.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: organization_source_system
+  path: /organizations-source-systems
+  description: Binds an organization to an upstream source system.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: belongs_to, target: source_system, via: source_system_id}
+
+- name: taxonomy_vendor
+  path: /taxonomies/vendors
+  description: >-
+    The vendor taxonomy tree. Self-referential — parent_id makes this the one
+    genuinely hierarchical entity in the model.
+  relationships:
+  - {type: belongs_to, target: taxonomy_vendor, via: parent_id, self_referential: true}
+  - {type: has_many, target: metadata_vendor, via: taxonomy_id}
+  - {type: has_many, target: partner, via: taxonomy_id}
+  - {type: has_many, target: cookie, via: taxonomy_id}
+
+- name: metadata_vendor
+  path: /metadata/vendors
+  description: A vendor (third party) in the organization's metadata catalogue.
+  relationships:
+  - {type: belongs_to, target: taxonomy_vendor, via: taxonomy_id}
+
+- name: partner
+  path: /metadata/partners
+  description: >-
+    A partner/vendor record carrying the purposes it processes under. Has a
+    dedicated deprecation action, POST /metadata/partners/deprecate. Quota 500.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: belongs_to, target: taxonomy_vendor, via: taxonomy_id}
+  - {type: belongs_to, target: partner_category, via: category_id}
+  - {type: has_many, target: purpose, via: default_purposes_id}
+  - {type: has_many, target: purpose, via: legitimate_interest_purposes_id}
+  - {type: has_many, target: purpose, via: spi_purposes_id}
+  - {type: has_many, target: partner_storage, via: partner_id}
+
+- name: partner_category
+  path: /metadata/partners-categories
+  relationships:
+  - {type: has_many, target: partner, via: category_id}
+
+- name: partner_purpose
+  path: /metadata/partners-purposes
+  description: >-
+    The join entity between a partner and a purpose. Didomi models the join four
+    times over — partners-purposes, partners-default-purposes,
+    partners-legitimate-interest-purposes and partners-spi-purposes — one per
+    legal basis.
+  join: true
+  relationships:
+  - {type: belongs_to, target: partner, via: metadata_partner_id}
+  - {type: belongs_to, target: purpose, via: metadata_purpose_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: partner_purpose_override
+  paths:
+  - /metadata/partners-purposes-notices-regulations-overrides
+  - /metadata/partners-purposes-templates-overrides
+  description: >-
+    Per-notice-per-regulation and per-template overrides of a partner's purpose
+    binding. This is where the model's real complexity lives: the same
+    partner/purpose pair can resolve differently depending on the notice,
+    the regulation and the template in play.
+  relationships:
+  - {type: belongs_to, target: partner, via: metadata_partner_id}
+  - {type: belongs_to, target: purpose, via: metadata_purpose_id}
+  - {type: belongs_to, target: notice, via: notice_id}
+  - {type: belongs_to, target: regulation, via: regulation_id}
+  - {type: belongs_to, target: notice_template, via: template_id}
+
+- name: partner_storage
+  path: /metadata/partners-storages
+  description: A storage device/duration disclosure for a partner (IAB TCF device storage).
+  relationships:
+  - {type: belongs_to, target: partner, via: partner_id}
+  - {type: has_many, target: purpose, via: purposes_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: purpose
+  path: /metadata/purposes
+  description: A processing purpose. Quota 300 per organization.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: has_many, target: regulation, via: regulations_id}
+  - {type: has_many, target: purpose_regulation_override, via: metadata_purpose_id}
+
+- name: purpose_group
+  path: /metadata/purposes-groups
+  relationships:
+  - {type: has_many, target: purpose, via: purposes_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: purpose_regulation_override
+  path: /metadata/purposes-regulations-overrides
+  relationships:
+  - {type: belongs_to, target: purpose, via: metadata_purpose_id}
+  - {type: has_many, target: regulation, via: regulations_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: regulation
+  description: >-
+    gdpr, cpra and the other US state regimes. Referenced pervasively by
+    regulation_id / regulations_id, and filterable on the Consents API
+    (regulation[$in]=gdpr&regulation[$in]=cpra). Managed on a separate
+    compliance API (/compliance/v1/regulations) that is NOT part of this
+    OpenAPI — a real edge of the documented model.
+  external: true
+  external_path: /compliance/v1/regulations
+
+- name: cookie
+  path: /cookies
+  description: A cookie / storage entry in the organization's disclosure catalogue.
+  relationships:
+  - {type: belongs_to, target: taxonomy_vendor, via: taxonomy_id}
+  - {type: belongs_to, target: vendor, via: vendor_id}
+  - {type: belongs_to, target: property, via: property_id}
+
+- name: vendor
+  path: /vendors
+  description: >-
+    A vendor as observed on a property, distinct from metadata_vendor (the
+    catalogue entry) — this one links a property to its metadata.
+  relationships:
+  - {type: belongs_to, target: property, via: property_id}
+  - {type: belongs_to, target: metadata_vendor, via: metadata_id}
+
+- name: notice
+  path: /widgets/notices
+  description: A consent notice — the CMP banner. The centre of the widget subgraph.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: belongs_to, target: privacy_experience, via: privacy_experience_id}
+  - {type: has_many, target: notice_config, via: notice_id}
+  - {type: has_many, target: notice_deployment, via: notice_id}
+  - {type: has_many, target: notice_template, via: notices_id}
+
+- name: notice_config
+  path: /widgets/notices/configs
+  description: >-
+    A notice configuration. Since the multi-regulation migration, a config
+    carries an array of per-regulation configurations rather than one flat set.
+  relationships:
+  - {type: belongs_to, target: notice, via: notice_id}
+  - {type: belongs_to, target: notice_text, via: text_id}
+  - {type: belongs_to, target: notice_template, via: template_id}
+  - {type: has_many, target: notice_regulation_config, via: notice_config_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: notice_regulation_config
+  description: >-
+    The per-regulation slice of a notice configuration. Introduced by the
+    multi-regulation change; Didomi published a dedicated migration page for it.
+  relationships:
+  - {type: belongs_to, target: notice_config, via: notice_config_id}
+  - {type: belongs_to, target: regulation, via: regulation_id}
+  - {type: belongs_to, target: notice_template, via: template_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: notice_template
+  path: /widgets/notices/templates
+  relationships:
+  - {type: has_many, target: notice, via: notices_id}
+  - {type: has_many, target: notice_template_config, via: template_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: notice_template_config
+  path: /widgets/notices/templates/configs
+  relationships:
+  - {type: belongs_to, target: notice_template, via: template_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: notice_text
+  path: /widgets/notices/texts
+  description: A translatable text bundle for a notice.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: has_many, target: notice_text_content, via: text_id}
+
+- name: notice_text_content
+  path: /widgets/notices/texts-contents
+  description: The per-language content of a notice text.
+  relationships:
+  - {type: belongs_to, target: notice_text, via: text_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: notice_deployment
+  path: /widgets/notices/deployments
+  description: >-
+    A publish of a notice to production. Quota parallel_notices_deployments = 3.
+  relationships:
+  - {type: belongs_to, target: notice, via: notice_id}
+  - {type: belongs_to, target: notice_config, via: production_config_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: has_one, target: sdk_config, via: notice_deployment_id}
+
+- name: sdk_config
+  path: /widgets/notices/sdk-configs
+  description: >-
+    The rendered SDK configuration a deployment produces — what the loader
+    actually serves to a browser.
+  relationships:
+  - {type: belongs_to, target: notice_deployment, via: notice_deployment_id}
+  - {type: belongs_to, target: notice, via: notice_id}
+  - {type: belongs_to, target: notice_config, via: notice_config_id}
+  - {type: belongs_to, target: notice_regulation_config, via: notice_regulation_config_id}
+  - {type: belongs_to, target: regulation, via: regulation_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: privacy_center
+  path: /privacy-centers
+  description: A hosted preference / privacy centre.
+  relationships:
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: has_one, target: privacy_center_contact, via: contact}
+  - {type: has_one, target: privacy_center_customization, via: customization}
+
+- name: consent_user
+  path: /consents/users
+  description: >-
+    The consent subject. Carries the Didomi id AND the customer's own
+    organization_user_id, which is how consent joins to a CRM record.
+  relationships:
+  - {type: has_many, target: consent_event, via: user_id}
+  - {type: belongs_to, target: organization, via: organization_id}
+
+- name: consent_event
+  path: /consents/events
+  description: >-
+    The consent record of truth — an immutable-by-convention event carrying
+    purposes (with preference values), vendor enable/disable lists, the IAB TCF
+    consent string (tcfcs), regulation, delegate, domain and free-form metadata.
+    Deletable by filter, which is how DSAR erasure is executed.
+  relationships:
+  - {type: belongs_to, target: consent_user, via: user}
+  - {type: belongs_to, target: organization, via: organization_id}
+  - {type: has_many, target: purpose, via: 'consents.purposes[].id'}
+  - {type: has_many, target: partner, via: 'consents.vendors.enabled/disabled'}
+  emits:
+  - event.created
+  - event.updated
+  - event.deleted
+
+- name: consent_proof
+  path: /consents/proofs
+  description: >-
+    An uploaded audit artefact evidencing a consent. Write-then-read only — POST
+    to create, GET /{id} to retrieve; no list, no update, no delete.
+
+- name: consent_token
+  path: /consents/tokens
+  description: >-
+    A token for sharing consent across domains and devices. Create-only in the
+    API (POST); there is no GET.
+
+- name: dashboard_url
+  path: /analytics/dashboards-urls
+  description: >-
+    A signed URL to an analytics dashboard, parameterised by category, type,
+    product and aggregation_period. The only place in the API where enums are
+    modelled as named schema components (DashboardUrlCategory,
+    DashboardUrlType, DashboardUrlProduct, DashboardUrlAggregationPeriod).
+
+- name: platform_integration_session
+  path: /platform-integrations/sessions
+  description: >-
+    A separate session type for platform integrations, with its own 400/401/404
+    responses ("Platform authentication failed or missing", "Platform
+    integration not found").
+
+subgraphs:
+- name: tenancy
+  entities: [organization, organization_group, member, key, session, secret, domain, sso_connection, quota, premium_feature, organization_source_system]
+- name: metadata-taxonomy
+  entities: [taxonomy_vendor, metadata_vendor, partner, partner_category, partner_purpose, partner_purpose_override, partner_storage, purpose, purpose_group, purpose_regulation_override, regulation, cookie, vendor]
+- name: widgets
+  entities: [notice, notice_config, notice_regulation_config, notice_template, notice_template_config, notice_text, notice_text_content, notice_deployment, sdk_config, privacy_center]
+- name: consent-record
+  entities: [consent_user, consent_event, consent_proof, consent_token]
+
+observations:
+- >-
+  Every entity in the metadata subgraph is overridable per regulation, per
+  notice and per template. That three-axis override lattice is the structural
+  cost of being a multi-regulation CMP and it is the hardest part of this API
+  to reason about.
+- >-
+  The consent record is deliberately thin — user, event, proof, token — and is
+  the only subgraph with an outbound event stream (webhooks). Everything else
+  is configuration.
+- >-
+  `regulation` is referenced by fifteen schemas but has no endpoint in this
+  OpenAPI; it is served by a separate /compliance/v1/regulations API that is
+  not published as a spec. That is the single biggest hole in an otherwise
+  closed model.
+- >-
+  Ids carry no type prefix, so nothing in a payload tells an agent which
+  endpoint an id belongs to.
+
+render: null
+render_note: >-
+  No subway/ diagram exists for this repo. arazzo/ carries twelve workflows that
+  traverse this graph and are the closest existing render of it.

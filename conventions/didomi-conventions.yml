@@ -1,0 +1,209 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.didomi.io/api-and-platform/introduction
+docs:
+- https://developers.didomi.io/api-and-platform/introduction
+- https://developers.didomi.io/api-and-platform/introduction/authentication
+- https://developers.didomi.io/api-and-platform/introduction/errors
+- https://developers.didomi.io/api-and-platform/introduction/pagination
+- https://developers.didomi.io/api-and-platform/introduction/filters
+- https://developers.didomi.io/api-and-platform/introduction/caching
+- https://developers.didomi.io/api-and-platform/introduction/rate-limiting
+- https://developers.didomi.io/api-and-platform/introduction/quotas
+info:
+  name: Didomi Platform API — cross-cutting conventions
+  provider: didomi
+  api: Didomi Platform API
+  base_url: https://api.didomi.io/v1
+  openapi: https://api.didomi.io/openapi.json
+  reference: https://api.didomi.io/docs/
+  style: REST / JSON over HTTPS
+  description: >-
+    Runtime semantics an agent or integrator needs before writing the first
+    call: how to authenticate, how lists page, how errors arrive, how caching
+    and rate limiting are signalled, and — importantly — what Didomi does NOT
+    document.
+  checked: '2026-08-13'
+
+transport:
+  https_only: true
+  http_behaviour: >-
+    Plain HTTP requests receive a 301 redirect to the HTTPS equivalent.
+  content_type: application/json
+  note: >-
+    JSON is always the response format except on report routes, which accept an
+    explicit alternate format in the request.
+
+authentication:
+  style: bearer-jwt
+  header: 'Authorization: Bearer <access_token>'
+  token_endpoint: POST https://api.didomi.io/v1/sessions
+  token_request:
+    type: api-key
+    key: organization private API key
+    secret: the secret issued with that key
+  credential_source: Didomi Console > Settings > Private API keys
+  token_ttl_seconds: 3600
+  refresh: >-
+    No refresh token. Re-POST /sessions to mint a new JWT. Didomi explicitly
+    recommends caching and reusing the token rather than minting one per request.
+  failure_modes:
+    missing_or_invalid_token: 401
+    bad_credentials_at_/sessions: 400
+  oauth2: false
+  scopes: false
+  detail: authentication/didomi-authentication.yml
+
+pagination:
+  style: offset
+  request_params:
+    limit: $limit
+    skip: $skip
+  limit_ceiling: 100
+  limit_ceiling_note: 'documented as "it usually has to be lower than 100"'
+  response_envelope:
+    total: total number of entities available
+    limit: number of entities returned
+    skip: number of entities skipped
+    data: the array of entities
+  cursor: false
+  link_header: false
+
+filtering:
+  style: query-string equality on entity fields
+  example: 'GET /widgets/notices/configs?organization_id=didomi'
+  operators:
+    in: 'field[$in]=a&field[$in]=b'
+  examples_from_docs:
+  - 'status[$in]=confirmed&status[$in]=pending_approval'
+  - 'regulation[$in]=gdpr&regulation[$in]=cpra'
+  not_supported_on:
+  - /consents/*
+  note: >-
+    Filterable fields are the entity fields in the API reference; Didomi warns
+    filtering is not supported on all routes.
+
+field_expansion:
+  supported: partial
+  mechanism: '$include_full_tree=true'
+  applies_to:
+  - GET /consents/users
+  - GET /consents/users/{id}
+  cost: >-
+    Expanding the full tree moves the call from the unlimited /consents/* pool
+    into the 100-requests/15-seconds bucket.
+  sparse_fieldsets: false
+
+errors:
+  envelope: json-object
+  rfc9457: false
+  media_type: application/json
+  fields:
+    code: HTTP status code, repeated in the body
+    name: error name tied to the status code (BadRequest, NotFound, ...)
+    message: human-readable explanation
+    errors: array/object of batched sub-errors
+  verified_live:
+    url: https://api.privacy-center.org/
+    status: 404
+    body: '{"code":404,"errors":{},"message":"Page not found","name":"NotFound"}'
+  detail: errors/didomi-problem-types.yml
+
+rate_limiting:
+  standard: draft-ietf-httpapi-ratelimit-headers-07
+  default: 100 requests per 15 seconds, scoped to the ORGANIZATION not the key
+  exempt: /consents/*
+  headers_returned:
+  - name: RateLimit
+    format: 'limit={limit}, remaining={remaining}, reset={seconds}'
+  - name: RateLimit-Policy
+    format: '{limit};w={window}'
+  - name: Retry-After
+    format: seconds, returned only with 429
+  status_on_exhaustion: 429
+  detail: rate-limits/didomi-rate-limits.yml
+
+quotas:
+  scope: organization
+  inspect: GET https://api.didomi.io/v1/quotas?organization_id=<id>
+  increase_via: support@didomi.io
+  documented_defaults:
+    scraper_enabled_properties: 250
+    parallel_notices_deployments: 3
+    exports_configs: 3
+    exports_destinations: 2
+    consent_proof_reports: 10 per month
+    api_requests: 100 requests every 15 seconds
+    secrets: 300
+    metadata_partners: 500
+    metadata_purposes: 300
+
+caching:
+  server_side: true
+  scope: >-
+    Applied automatically to some high-traffic routes for API-key traffic only;
+    Console (end-user) responses are never cached.
+  invalidation: >-
+    Cached data is purged automatically when the underlying record changes.
+  response_headers:
+    X-DidomiCacheEnabled: boolean — caching is enabled for this route
+    X-DidomiCacheHit: boolean — this response was served from cache
+  client_directives: not documented (no ETag / If-None-Match / Cache-Control contract published)
+
+versioning:
+  scheme: path-prefix
+  current: v1
+  base: https://api.didomi.io/v1
+  policy: >-
+    Additive-only. Didomi states it guarantees backwards compatibility by not
+    removing properties or altering existing functionality, may add new
+    properties over time, and will communicate breaking changes or a future API
+    version in advance.
+  client_guidance: >-
+    Didomi explicitly asks clients validating against internal schemas to ignore
+    or skip unknown fields rather than throw.
+  detail: lifecycle/didomi-lifecycle.yml
+
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    NOT DOCUMENTED AND NOT SUPPORTED. Didomi publishes no idempotency key, no
+    request-replay window and no safe-retry contract on any write route. This
+    matters concretely: POST /consents/events records a consent decision, and a
+    client that retries after a timeout has no way to tell Didomi "this is the
+    same event". A regulated consent-of-record system with no idempotency key is
+    the single largest runtime-semantics gap in this API. No Idempotency pointer
+    is emitted in apis.yml, because there is nothing to point at.
+
+request_tracing:
+  request_id_header: not documented
+  correlation: >-
+    No X-Request-Id / trace-id contract is published. The only per-request
+    attribution mechanism Didomi documents is the public API key `key` query
+    parameter that the SDKs append to /sign, /sync and /batch-sign so access
+    logs can be attributed to the originating organization — that is SDK
+    telemetry, not a REST tracing header.
+
+metadata:
+  user_defined_fields: >-
+    No generic `metadata` bag documented on platform resources; organization
+    user identity is carried by organization_user_id on the /consents/* routes.
+
+bulk:
+  batch_writes: >-
+    DELETE /consents/events accepts a filtered delete across events. There is no
+    generic bulk/batch envelope.
+  exports: >-
+    Batch export configs and destinations exist as a platform feature (governed
+    by the exports_configs / exports_destinations quotas) and are configured in
+    the Console rather than through a documented public REST surface.
+
+gaps:
+- idempotency keys on write routes
+- a published request-id / correlation header
+- operationIds in the OpenAPI (none of the 190 operations declares one)
+- a servers[] block in the published openapi.json
+- RFC 9457 problem+json (Didomi uses a bespoke envelope)
+- ETag / conditional-request support to complement the server-side cache
+- a /.well-known/security.txt (the security contact exists, the file does not)

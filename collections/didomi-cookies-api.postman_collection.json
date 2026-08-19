@@ -1,0 +1,704 @@
+{
+  "item": [
+    {
+      "id": "fbd0724b-caa2-478b-bbfa-3b83c356d859",
+      "name": "cookies",
+      "description": {
+        "content": "Manage cookies set by a property",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2c7f317-ceb5-4cfb-b0cf-a04397271551",
+          "name": "Retrieve a list of cookies",
+          "request": {
+            "name": "Retrieve a list of cookies",
+            "description": {
+              "content": "Returns a list of cookies set by a property",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cookies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "property_id",
+                  "value": "<string>",
+                  "description": "The ID of the property"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cf36372a-c3ab-4115-a172-a85524b9f9c6",
+              "name": "A list of Cookie objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cookies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "property_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"taxonomy_id\": \"string\",\n    \"property_id\": \"string\",\n    \"domain\": \"string\",\n    \"lifetime\": 5036,\n    \"status\": \"string\",\n    \"vendor_id\": \"string\",\n    \"created_at\": \"2014-04-09T18:31:16.511Z\",\n    \"updated_at\": \"1986-08-01T02:22:44.532Z\",\n    \"version\": 4954.705960097508\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"taxonomy_id\": \"string\",\n    \"property_id\": \"string\",\n    \"domain\": \"string\",\n    \"lifetime\": 1753,\n    \"status\": \"string\",\n    \"vendor_id\": \"string\",\n    \"created_at\": \"1974-11-05T02:22:41.485Z\",\n    \"updated_at\": \"2021-02-17T13:48:21.857Z\",\n    \"version\": 3714.5340323322994\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3432b16-4ce4-43c6-b2ae-8991104383cb",
+          "name": "Create a cookie",
+          "request": {
+            "name": "Create a cookie",
+            "description": {
+              "content": "Create a new cookie for a property",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cookies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d64bcbc-6bbc-4759-9f05-fb6e6e90cea7",
+              "name": "The created Cookie object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cookies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a496006-d6c3-4c60-8ba4-4a2bfd307a99",
+          "name": "Retrieve a cookie",
+          "request": {
+            "name": "Retrieve a cookie",
+            "description": {
+              "content": "Returns a single cookie set by a property",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cookies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the cookie to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6469fee9-8895-4e87-825f-9ab9f938e921",
+              "name": "A Cookie object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cookies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the cookie to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb4c1ea9-ca2f-4022-8a34-13fc1c129da5",
+          "name": "Update a cookie",
+          "request": {
+            "name": "Update a cookie",
+            "description": {
+              "content": "Update an existing cookie set by a property and replace all its properties",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cookies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the cookie to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b846dbd8-7bc4-41ba-8a8c-2b66ed8e05b3",
+              "name": "The updated Cookie object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cookies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the cookie to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3806b8e5-18f2-48da-8d52-5a5b0118d577",
+          "name": "Patch a cookie",
+          "request": {
+            "name": "Patch a cookie",
+            "description": {
+              "content": "Partially update a cookie set by a property",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cookies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the cookie to patch"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53677581-2462-4c1f-b675-58fdf1493d38",
+              "name": "The patched Cookie object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cookies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the cookie to patch"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d215ae6-73cc-4182-866a-4cd53adf04fb",
+          "name": "Delete a cookie",
+          "request": {
+            "name": "Delete a cookie",
+            "description": {
+              "content": "Delete an existing cookie",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cookies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the cookie to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7e317ce5-1efb-4a3b-8e2a-45a575e53d58",
+              "name": "The deleted Cookie object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cookies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the cookie to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"taxonomy_id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"lifetime\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"vendor_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.didomi.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f9dcd64-562c-4252-b63f-41e96d346d1a",
+    "name": "Didomi consents/events cookies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A REST API to communicate with the Didomi platform (<a href=\"https://api.didomi.io/v1/\">https://api.didomi.io/v1/</a>)\n\nThis is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href=\"https://developers.didomi.io/\" target=\"_blank\">Developers Portal</a>.\n\nAll HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value \"Bearer <token>\".\nClick on the Authorize button in the header of this page to provide a token before testing requests from this documentation.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

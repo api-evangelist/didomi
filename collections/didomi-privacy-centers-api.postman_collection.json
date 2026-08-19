@@ -1,0 +1,704 @@
+{
+  "item": [
+    {
+      "id": "7df6417f-c125-4d29-a391-daf79a7e5e02",
+      "name": "privacy-centers",
+      "description": {
+        "content": "Manage privacy centers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e8d790fc-e57a-495d-834b-0fcc96303da5",
+          "name": "Retrieve a list of privacy centers",
+          "request": {
+            "name": "Retrieve a list of privacy centers",
+            "description": {
+              "content": "Returns a list of all the privacy centers the user has access to",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privacy-centers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "privacy_center_id",
+                  "value": "<string>",
+                  "description": "The ID of the privacy center"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "24b208a3-989e-4dfc-8d95-710d87ef7d54",
+              "name": "A list of PrivacyCenter objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privacy-centers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "privacy_center_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"website\": \"http://mmrxXg.abC-YOpom6sNskBqWp8REJ.ejZl,GqGwtZP5NZSAYvmyfJsLg\",\n    \"custom_domains\": [\n      \"string\",\n      \"string\"\n    ],\n    \"contact\": {\n      \"email\": \"string\",\n      \"schedule\": \"string\",\n      \"address\": \"string\"\n    },\n    \"customization\": {\n      \"logo\": \"https://FkARzWWLotuMGWoMfbnfdlKbNs.htecOYhbba8.toNErDryy-BnNC\",\n      \"colors\": {\n        \"primary\": \"string\"\n      }\n    },\n    \"legal_name\": \"string\",\n    \"display_cookies\": \"choices\",\n    \"privacy_policy\": \"string\",\n    \"content\": {},\n    \"languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"auth_required\": true,\n    \"organization_id\": \"string\",\n    \"created_at\": \"1977-09-01T12:51:37.258Z\",\n    \"updated_at\": \"1978-08-03T02:40:50.012Z\",\n    \"version\": 3106.1733087106822\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"website\": \"http://xcStUeIKMGXIKTPkWsYNaDEWGsHv.xxahV-1RNh9JRBeXNSqkHjeUh9MFTwi+tR+ML7spKVeY+7.\",\n    \"custom_domains\": [\n      \"string\",\n      \"string\"\n    ],\n    \"contact\": {\n      \"email\": \"string\",\n      \"schedule\": \"string\",\n      \"address\": \"string\"\n    },\n    \"customization\": {\n      \"logo\": \"http://suOqeWPYyqf.ffoZwk8p0stblNavuUlBz4xnZ9AFtilZgPSLEFFq\",\n      \"colors\": {\n        \"primary\": \"string\"\n      }\n    },\n    \"legal_name\": \"string\",\n    \"display_cookies\": \"none\",\n    \"privacy_policy\": \"string\",\n    \"content\": {},\n    \"languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"auth_required\": true,\n    \"organization_id\": \"string\",\n    \"created_at\": \"1977-10-30T15:31:39.112Z\",\n    \"updated_at\": \"2020-03-07T12:57:30.466Z\",\n    \"version\": 1479.8978191065194\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc175b24-57c8-4ab8-b1e3-dbad15b82a43",
+          "name": "Create a privacy center",
+          "request": {
+            "name": "Create a privacy center",
+            "description": {
+              "content": "Create a new privacy center",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privacy-centers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "35a3439e-07c8-4f20-8890-921d7836b66b",
+              "name": "The created PrivacyCenter object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privacy-centers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca4d2a4d-00ef-4668-99e6-8be3f947bd08",
+          "name": "Retrieve a privacy center",
+          "request": {
+            "name": "Retrieve a privacy center",
+            "description": {
+              "content": "Returns a single privacy center with the given ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privacy-centers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the privacy center to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2ac184f8-99a1-4843-92fb-06b5c7501afc",
+              "name": "A PrivacyCenter object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privacy-centers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the privacy center to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "370c1a66-8e13-43dc-9f9c-6e26ff3bb956",
+          "name": "Update a privacy center",
+          "request": {
+            "name": "Update a privacy center",
+            "description": {
+              "content": "Update an existing privacy center and replace all its properties",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privacy-centers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the session to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "86c520b6-6e8e-461c-b6a4-0504ac61268c",
+              "name": "The updated PrivacyCenter object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privacy-centers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the session to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9a77da2-1d6e-4cfe-b2d2-9110f218d2a9",
+          "name": "Patch a privacy center",
+          "request": {
+            "name": "Patch a privacy center",
+            "description": {
+              "content": "Partially update a privacy center",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privacy-centers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the session to patch"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3520856d-0869-4762-ad32-42b48ca8cdc0",
+              "name": "The patched PrivacyCenter object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privacy-centers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the session to patch"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77753eb0-2bda-45d4-81d9-9fa04159cf7e",
+          "name": "Delete a privacy center",
+          "request": {
+            "name": "Delete a privacy center",
+            "description": {
+              "content": "Delete an existing privacy center",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privacy-centers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the privacy center to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cb9dc7f2-c5a1-4f50-9b25-b522a63c9545",
+              "name": "The deleted PrivacyCenter object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privacy-centers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the privacy center to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"custom_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": {\n    \"email\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"customization\": {\n    \"logo\": \"<uri>\",\n    \"colors\": {\n      \"primary\": \"<string>\"\n    }\n  },\n  \"legal_name\": \"<string>\",\n  \"display_cookies\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"content\": \"<object>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"auth_required\": \"<boolean>\",\n  \"organization_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.didomi.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "67885c6a-50cd-42aa-903b-6253e8312d15",
+    "name": "Didomi consents/events privacy-centers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A REST API to communicate with the Didomi platform (<a href=\"https://api.didomi.io/v1/\">https://api.didomi.io/v1/</a>)\n\nThis is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href=\"https://developers.didomi.io/\" target=\"_blank\">Developers Portal</a>.\n\nAll HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value \"Bearer <token>\".\nClick on the Authorize button in the header of this page to provide a token before testing requests from this documentation.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

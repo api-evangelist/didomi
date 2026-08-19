@@ -1,0 +1,125 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of every Didomi host named in apis.yml and openapi servers[]
+info:
+  name: Didomi /.well-known probe
+  provider: didomi
+  description: >-
+    Didomi serves no /.well-known document on any host we could reach. Every
+    RFC 8615 path returned 404 on api.didomi.io, developers.didomi.io and
+    www.didomi.io. console.didomi.io answers HTTP 200 with the same 19,425-byte
+    single-page-app HTML shell for EVERY path under /.well-known/ — that is an
+    SPA catch-all, not a document, and it is recorded here as a miss.
+  result: no-hit
+  checked: '2026-08-13'
+hosts:
+- host: api.didomi.io
+  role: API base host (openapi servers[])
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: developers.didomi.io
+  role: developer portal / docs host
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: www.didomi.io
+  role: marketing site
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+    note: 'body is a fixed 88-byte page reading "Invalid .well-known request"'
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: console.didomi.io
+  role: customer console (SPA)
+  spa_catch_all: true
+  probes:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html; charset=UTF-8
+    document: false
+    note: >-
+      SPA shell, identical 19,425-byte HTML body for every path probed —
+      counted as a MISS, not a hit.
+  - path: /.well-known/openid-configuration
+    status: 200
+    document: false
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    document: false
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    document: false
+  - path: /.well-known/api-catalog
+    status: 200
+    document: false
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    document: false
+  - path: /.well-known/agent-card.json
+    status: 200
+    document: false
+  - path: /.well-known/agent.json
+    status: 200
+    document: false
+also_probed:
+- url: https://didomi.io/.well-known/security.txt
+  status: 404
+- url: https://www.didomi.io/security.txt
+  status: 404
+notes:
+- >-
+  NO WellKnown or SecurityTxt pointer is emitted in apis.yml from this file. The
+  probe records an absence, and a recorded absence must never be wired as a
+  presence.
+- >-
+  Didomi DOES run a security contact and a disclosure route, just not at
+  /.well-known/security.txt — see security/didomi-vulnerability-disclosure.yml
+  (security@didomi.io, documented at https://www.didomi.io/security). Publishing
+  a security.txt on didomi.io and api.didomi.io is the single cheapest fix
+  available to them here.
+- >-
+  No OAuth metadata is expected: the Platform API authenticates with a bearer
+  JWT minted by POST /v1/sessions, not with OAuth 2.0. See
+  authentication/didomi-authentication.yml.

@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Didomi consents/events metadata-purpose-regulation-override API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "metadata-purpose-regulation-override",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of MetadataPurposeRegulationOverrides.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization for which to filter overrides"
+              },
+              {
+                "name": "$limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of max results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "$sort",
+                "value": "",
+                "type": "query",
+                "description": "Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all MetadataPurposeRegulationOverrides. A null value of `regulations_id` means all regulations are supported, and an empty array means no regulations are supported."
+        },
+        {
+          "info": {
+            "name": "Create a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new MetadataPurposeRegulationOverride"
+        },
+        {
+          "info": {
+            "name": "Retrieve a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the MetadataPurposeRegulationOverride to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single MetadataPurposeRegulationOverride with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the MetadataPurposeRegulationOverride to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing MetadataPurposeRegulationOverride and replace all its properties"
+        },
+        {
+          "info": {
+            "name": "Patch a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the MetadataPurposeRegulationOverride to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a MetadataPurposeRegulationOverride"
+        },
+        {
+          "info": {
+            "name": "Delete a MetadataPurposeRegulationOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/metadata/purposes-regulations-overrides/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the MetadataPurposeRegulationOverride to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing MetadataPurposeRegulationOverride"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

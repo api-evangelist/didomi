@@ -1,4 +1,30 @@
-plans: 0.1
+spec_version: 0.1
+generated: '2026-08-13'
+method: searched
+source: https://www.didomi.io/offers
+docs: https://www.didomi.io/offers
+plan_count: 11
+currency: null
+pricing_model: contact-sales
+pricing_note: >-
+  Didomi publishes NAMED TIERS with itemised inclusions but NO PRICES. Every
+  tier below reads "Contact for pricing" on https://www.didomi.io/offers, with a
+  single exception: the Server-Side Tagging Free plan, which is genuinely free
+  and quotes an included volume (100,000 requests). No currency, billing period
+  or unit price is published anywhere on the offers page. Re-read on
+  2026-08-13; the tier NAMES and inclusions below are quoted from that page.
+tiers_published:
+- Consent Management Platform / Essential
+- Consent Management Platform / Advanced
+- Consent Management Platform / Premium
+- Connected TV Consent Management
+- Advanced Compliance Monitoring
+- Preference Management Platform
+- Server-Side Tagging / Free
+- Server-Side Tagging / Pay As You Go
+- Server-Side Tagging / Enterprise
+- Privacy Requests
+- Addingwell (server-side tagging, acquired)
 info:
   name: Didomi Plans and Pricing
   description: >-
@@ -31,6 +57,49 @@ plans:
   - React Native, Flutter, Unity, Vega OS, AMP plugins
   - Console
   - Platform API (CMP scope)
+  tiers:
+  - name: Essential
+    price: null
+    currency: null
+    billing_period: null
+    pricing_model: contact-sales
+    metered_on: Monthly Unique Visitors
+    included:
+    - Unlimited domains (metered on Monthly Unique Visitors)
+    - Multi-regulation compliance support
+    - Customized content and branding
+    - Cross-domain / cross-device consent synchronization
+  - name: Advanced
+    price: null
+    pricing_model: contact-sales
+    included:
+    - Everything in Essential
+    - Advanced Compliance Monitoring module
+    - White labelling
+    - 'Analytics exports: 1 destination'
+  - name: Premium
+    price: null
+    pricing_model: contact-sales
+    included:
+    - Everything in Advanced
+    - Preference Management Platform
+    - Server-side tagging
+    - 'Analytics exports: 2 destinations'
+    note: >-
+      The exports_destinations quota default of 2 in the API docs lines up
+      exactly with the Premium tier's "2 destinations".
+- id: ctv
+  name: Connected TV Consent Management
+  pricing_model: contact-sales
+  price: null
+  description: >-
+    Native CTV/OTT consent, sold as its own line. Matches the Vega OS SDK and
+    the heavy CTV/HbbTV work visible in the recent Web SDK changelog.
+  included:
+  - Native CTV / OTT consent integration
+  - Notice personalization
+  - Consent proofs and analytics
+  - Cross-device consent synchronization
 - id: pmp
   name: Preference Management Platform
   pricing_model: contact-sales
@@ -43,6 +112,13 @@ plans:
   - Privacy Widgets
   - Headless widgets
   - Platform API (Widgets scope)
+  metered_on: user database size and API call volume
+  included:
+  - Headless widget customization
+  - Preference analytics
+  - Native integrations (Salesforce, HubSpot, Mailchimp and others)
+  - Preference proofs
+  - Privacy request handling
 - id: privacy-requests
   name: Privacy Requests
   pricing_model: contact-sales
@@ -57,13 +133,61 @@ plans:
     Continuous scanning of websites and apps for vendor coverage, unauthorized
     tags, and CMP misconfigurations, surfaced as CSV / Excel compliance
     reports.
+  metered_on: number of scans
+  included:
+  - Daily / weekly / monthly scan frequency
+  - Multi-scenario compliance detection
+  - Cookie list extraction
+  - Compliance notifications
+  - Vendor synchronization
+  related_quota:
+    scraper_enabled_properties: 250
 - id: addingwell
-  name: Addingwell - Server-side Tagging
-  pricing_model: contact-sales
+  name: Server-Side Tagging (Addingwell)
+  pricing_model: freemium
   description: >-
     Server-side Google Tag Manager product acquired by Didomi, integrated
-    with the Didomi consent model for first-party tagging.
+    with the Didomi consent model for first-party tagging. The ONLY Didomi line
+    with a published free tier and a published included volume.
+  tiers:
+  - name: Free
+    price: 0
+    currency: null
+    billing_period: null
+    pricing_model: free
+    included_quota: 100,000 requests
+    included:
+    - Premium private network
+    - One-region infrastructure
+  - name: Pay As You Go
+    price: null
+    pricing_model: contact-sales
+    included_quota: 2,000,000 requests included
+    included:
+    - Multi-region infrastructure
+    - Tag and data monitoring
+    - Premium SLA
+  - name: Enterprise
+    price: null
+    pricing_model: contact-sales
+    included_quota: custom request volumes
+    included:
+    - Multi-region infrastructure
+    - Dedicated account manager
+    - Annual contract with invoice billing
 notes:
-- All pricing is quote-based; Didomi does not expose a self-serve checkout for the enterprise CMP/PMP.
-- A free Starter tier has historically been available for very small sites; verify via /offers or sales.
-- Per the developer docs, "the Consents API and Integrations are separately priced" on top of the base CMP / PMP modules.
+- >-
+  Didomi publishes tier NAMES and itemised inclusions but no numbers. The only
+  published price on the whole offers page is the Server-Side Tagging Free plan
+  (100,000 requests, no cost).
+- Didomi does not expose a self-serve checkout for the enterprise CMP/PMP.
+- >-
+  Per the developer docs, "the Consents API and the Integrations are priced
+  separately and are not included in your CMP or Preference Center contracts" —
+  which means a 403 on /consents/* can be a commercial boundary rather than a
+  permissions error.
+- >-
+  Platform quotas published in the docs (exports_destinations 2,
+  scraper_enabled_properties 250, consent_proof_reports 10/month) are the
+  machine-readable shadow of these tiers; read them per-organization with
+  GET https://api.didomi.io/v1/quotas.

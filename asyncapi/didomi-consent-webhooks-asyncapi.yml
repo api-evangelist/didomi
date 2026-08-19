@@ -1,0 +1,373 @@
+asyncapi: 3.0.0
+info:
+  title: Didomi Consent Webhooks
+  version: '1.0.0'
+  description: >-
+    Outbound webhook events emitted by the Didomi platform when an end-user's
+    consent or preference state changes.
+
+
+    PROVENANCE: Didomi publishes NO AsyncAPI document. This file is an API
+    Evangelist generation (method: generated, 2026-08-13) built faithfully from
+    Didomi's own published webhook catalog at
+    https://developers.didomi.io/integrations/generic-integrations/webhooks and
+    the Consents API V2 Event and User schemas at
+    https://developers.didomi.io/api-and-platform/consents/events. Every event
+    type, envelope field and delivery rule below is stated in those pages.
+    Nothing here is inferred beyond structuring what Didomi documents in prose.
+  contact:
+    name: Didomi Support
+    email: support@didomi.io
+    url: https://developers.didomi.io/
+  externalDocs:
+    description: Didomi webhooks documentation
+    url: https://developers.didomi.io/integrations/generic-integrations/webhooks
+  tags:
+  - name: consent
+  - name: privacy
+  - name: gdpr
+
+defaultContentType: application/json
+
+servers:
+  customerEndpoint:
+    host: '{customerWebhookHost}'
+    protocol: https
+    description: >-
+      The customer-operated HTTPS endpoint Didomi POSTs to. Configured per
+      organization in the Didomi Marketplace (Manage), or by Didomi Support.
+      Didomi sends from the fixed egress IP 35.159.1.63, which the receiver
+      must allowlist.
+    variables:
+      customerWebhookHost:
+        description: The host of the endpoint you registered with Didomi.
+        default: webhooks.example.com
+    security:
+    - $ref: '#/components/securitySchemes/customerOAuth'
+    tags:
+    - name: outbound
+
+channels:
+  consentWebhook:
+    address: '/'
+    title: Didomi organization webhook endpoint
+    description: >-
+      A single endpoint receives every subscribed event type for the
+      organization. Event routing is done on the `type` field of the payload,
+      not on the URL path.
+    messages:
+      eventCreated:
+        $ref: '#/components/messages/eventCreated'
+      eventUpdated:
+        $ref: '#/components/messages/eventUpdated'
+      eventDeleted:
+        $ref: '#/components/messages/eventDeleted'
+      userCreated:
+        $ref: '#/components/messages/userCreated'
+      userUpdated:
+        $ref: '#/components/messages/userUpdated'
+      userDeleted:
+        $ref: '#/components/messages/userDeleted'
+
+operations:
+  receiveConsentWebhook:
+    action: receive
+    channel:
+      $ref: '#/channels/consentWebhook'
+    summary: Receive a Didomi consent webhook.
+    description: >-
+      Didomi POSTs a JSON-encoded event. Delivery is retried at least five times
+      every five minutes while the endpoint is down; after the retries are
+      exhausted the event is written to permanent storage for later processing.
+      Webhooks are enabled for GDPR events by default; multi-regulation events
+      are enabled on request.
+    messages:
+    - $ref: '#/channels/consentWebhook/messages/eventCreated'
+    - $ref: '#/channels/consentWebhook/messages/eventUpdated'
+    - $ref: '#/channels/consentWebhook/messages/eventDeleted'
+    - $ref: '#/channels/consentWebhook/messages/userCreated'
+    - $ref: '#/channels/consentWebhook/messages/userUpdated'
+    - $ref: '#/channels/consentWebhook/messages/userDeleted'
+
+components:
+  securitySchemes:
+    customerOAuth:
+      type: oauth2
+      description: >-
+        INVERTED OAuth. Didomi authenticates against the CUSTOMER's
+        authorization server with a client_id/client_secret the customer
+        supplies, then presents the resulting access token to the customer's
+        endpoint as `Authorization: Bearer <token>`. Optional — if it is not
+        configured, the only sender authentication available is the fixed
+        source IP 35.159.1.63. Didomi publishes no HMAC payload signature.
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.example.com/oauth/token
+          availableScopes: {}
+      scopes: []
+
+  messages:
+    eventCreated:
+      name: event.created
+      title: Consent event created
+      summary: A new consent event has been created.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/EventEntityEnvelope'
+      examples:
+      - name: eventCreated
+        payload:
+          type: event.created
+          parameters:
+            entity:
+              organization_id: didomi
+              user:
+                id: some_unique_id
+                organization_user_id: user@example.com
+              consents:
+                purposes:
+                - id: geolocation_data
+                  enabled: true
+    eventUpdated:
+      name: event.updated
+      title: Consent event updated
+      summary: An existing consent event has been updated.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/EventChangeEnvelope'
+    eventDeleted:
+      name: event.deleted
+      title: Consent event deleted
+      summary: An existing consent event has been deleted.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/EventEntityEnvelope'
+      examples:
+      - name: eventDeleted
+        payload:
+          type: event.deleted
+          parameters:
+            entity:
+              id: deleted_event_id
+              created_at: '2019-08-07T10:45:11Z'
+    userCreated:
+      name: user.created
+      title: Consent user created
+      summary: A new user has been created.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UserEntityEnvelope'
+    userUpdated:
+      name: user.updated
+      title: Consent user updated
+      summary: An existing user has been updated.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UserChangeEnvelope'
+      examples:
+      - name: userUpdated
+        payload:
+          type: user.updated
+          parameters:
+            source:
+              id: unique_event_id
+              created_at: '2019-08-07T10:45:11Z'
+            old_entity:
+              id: didomi_user_id
+              organization_user_id: organization_user_id
+            new_entity:
+              id: didomi_user_id
+              organization_user_id: organization_user_id
+    userDeleted:
+      name: user.deleted
+      title: Consent user deleted
+      summary: An existing user has been deleted.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UserEntityEnvelope'
+
+  schemas:
+    EventEntityEnvelope:
+      type: object
+      required: [type, parameters]
+      properties:
+        type:
+          type: string
+          description: The type of event.
+          enum: [event.created, event.deleted]
+        regulation:
+          type: string
+          description: >-
+            The regulation to which the event belongs. Present once
+            multi-regulation events are enabled. Branch on this — Didomi warns
+            that a non-GDPR event mapped onto the same contact record can
+            silently overwrite GDPR consent.
+        parameters:
+          type: object
+          properties:
+            entity:
+              $ref: '#/components/schemas/Event'
+
+    EventChangeEnvelope:
+      type: object
+      required: [type, parameters]
+      properties:
+        type:
+          type: string
+          enum: [event.updated]
+        regulation:
+          type: string
+        parameters:
+          type: object
+          properties:
+            source:
+              type: object
+              description: The event that triggered the update.
+            old_entity:
+              $ref: '#/components/schemas/Event'
+            new_entity:
+              $ref: '#/components/schemas/Event'
+
+    UserEntityEnvelope:
+      type: object
+      required: [type, parameters]
+      properties:
+        type:
+          type: string
+          enum: [user.created, user.deleted]
+        regulation:
+          type: string
+        parameters:
+          type: object
+          properties:
+            entity:
+              $ref: '#/components/schemas/User'
+
+    UserChangeEnvelope:
+      type: object
+      required: [type, parameters]
+      properties:
+        type:
+          type: string
+          enum: [user.updated]
+        regulation:
+          type: string
+        parameters:
+          type: object
+          properties:
+            source:
+              type: object
+              description: The event that triggered the User update, if any.
+            old_entity:
+              $ref: '#/components/schemas/User'
+            new_entity:
+              $ref: '#/components/schemas/User'
+
+    Event:
+      type: object
+      description: >-
+        Consents API V2 Event schema, as published at
+        https://developers.didomi.io/api-and-platform/consents/events#event-schema
+      properties:
+        id:
+          type: string
+          description: Unique event ID. Generated by the API if not supplied on creation.
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation date. Generated by the API if not supplied.
+        regulation:
+          type: string
+          description: Regulation for which the consent is collected.
+        organization_id:
+          type: string
+        domain:
+          type: string
+          description: >-
+            Domain of the preference center this consent is linked to.
+        metadata:
+          type: object
+          description: Free-form metadata object.
+        delegate:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            metadata:
+              type: object
+        user:
+          $ref: '#/components/schemas/User'
+        consents:
+          type: object
+          properties:
+            purposes:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  enabled:
+                    type: [boolean, 'null']
+                    description: >-
+                      null means the user made no specific choice for the
+                      purpose but may have made choices for preference values.
+                  propagation:
+                    type: boolean
+                    description: >-
+                      One-click consent propagation was applied. Only present
+                      when propagation happened.
+                  metadata:
+                    type: object
+                  values:
+                    type: object
+                    description: >-
+                      Map of PREFERENCE_ID to {value, from_propagation}. `value`
+                      is a comma-separated list of preference value IDs.
+            tcfcs:
+              type: [string, 'null']
+              description: >-
+                IAB TCF consent string for the user, when one was available or
+                generated at collection time.
+            vendors:
+              type: object
+              properties:
+                enabled:
+                  type: array
+                  items:
+                    type: string
+                disabled:
+                  type: array
+                  items:
+                    type: string
+
+    User:
+      type: object
+      description: >-
+        Consents API User. Full schema at
+        https://developers.didomi.io/api-and-platform/consents/users
+      properties:
+        id:
+          type: string
+          description: Didomi user ID.
+        organization_user_id:
+          type: string
+          description: The organization's own identifier for the user.
+
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: https://developers.didomi.io/integrations/generic-integrations/webhooks
+  catalog: asyncapi/didomi-webhooks.yml
+  note: >-
+    Generated by the API Evangelist enrichment pipeline from Didomi's published
+    webhook and Consents API V2 documentation. Didomi does not publish an
+    AsyncAPI document. Fields Didomi does not document — delivery timeout,
+    ordering, dedup key, payload signature — are deliberately ABSENT rather
+    than invented.
+x-gaps:
+- Didomi publishes no AsyncAPI; this is our generation.
+- No payload signature scheme (no HMAC header) is documented.
+- No self-service registration API — webhooks are configured in the Marketplace UI.

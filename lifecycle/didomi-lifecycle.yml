@@ -1,0 +1,168 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.didomi.io/api-and-platform/introduction
+docs:
+- https://developers.didomi.io/api-and-platform/introduction
+- https://developers.didomi.io/cmp/web-sdk/reference/versions
+- https://developers.didomi.io/cmp/mobile-sdk/android/versions
+- https://developers.didomi.io/cmp/mobile-sdk/ios/versions
+- https://developers.didomi.io/cmp/web-sdk/reference/api/deprecated
+- https://status.didomi.io
+info:
+  name: Didomi API and SDK lifecycle
+  provider: didomi
+  description: >-
+    Didomi runs two lifecycles with very different discipline. The SDKs are
+    versioned, dated, changelogged per platform and carry explicit "Deprecated"
+    reference pages. The Platform REST API has a single unversioned v1 path, a
+    prose backwards-compatibility promise, and no dated release notes at all.
+  checked: '2026-08-13'
+
+api_versioning:
+  scheme: path-prefix
+  current_version: v1
+  base_url: https://api.didomi.io/v1
+  spec_version: '1.0'
+  spec_declares: openapi 3.0.2
+  version_header: null
+  version_negotiation: none
+  history: >-
+    A Consents API V2 exists as a SCHEMA generation, not a URL version: Didomi
+    states that organizations onboarded after 18 January 2022 use "Consents API
+    V2", which changed how purposes, preferences and preference values are
+    validated and flattened. Both generations are served under the same /v1
+    path prefix. Existing docs still show a V1 tab alongside V2.
+  policy_text: >-
+    "We guarantee backwards compatibility with our APIs and other interfaces by
+    not removing properties or otherwise altering existing functionality. We may
+    add new properties over time. If you are validating our response against
+    your own internal schemas, it is a recommended practice to ignore unknown
+    fields or skip them from your deserialization logic to not throw errors.
+    Breaking changes or future API versions will be communicated in advance."
+  policy_source: https://developers.didomi.io/api-and-platform/introduction
+
+deprecation:
+  policy_published: true
+  policy_type: prose backwards-compatibility guarantee
+  policy_url: https://developers.didomi.io/api-and-platform/introduction
+  commitments:
+  - Properties are never removed.
+  - Existing functionality is never altered.
+  - New properties may be added at any time; clients must tolerate unknown fields.
+  - Breaking changes and future API versions are communicated in advance.
+  notice_period: not specified
+  rfc8594_sunset_header: false
+  deprecation_header: false
+  sunset_header_note: >-
+    GAP. Didomi signals no deprecation at runtime — no RFC 8594 `Sunset` header,
+    no `Deprecation` header, no `Link rel="deprecation"`. A client learns about
+    a change only from an out-of-band communication.
+  deprecated_operations_in_spec: 0
+  deprecated_operations_note: >-
+    Zero of the 190 operations in Didomi's OpenAPI carry `deprecated: true`.
+    There IS a first-class deprecation ACTION in the API — POST
+    /metadata/partners/deprecate deprecates a vendor in the organization's
+    taxonomy — but that is a domain operation about vendors, not an API
+    lifecycle signal.
+  sdk_deprecation_pages:
+  - surface: Web SDK
+    url: https://developers.didomi.io/cmp/web-sdk/reference/api/deprecated
+  - surface: Android SDK
+    url: https://developers.didomi.io/cmp/mobile-sdk/android/reference/api/deprecated
+  - surface: iOS SDK
+    url: https://developers.didomi.io/cmp/mobile-sdk/ios/reference/api/deprecated
+  - surface: Unity SDK
+    url: https://developers.didomi.io/cmp/mobile-sdk/unity-sdk/reference/deprecated
+  observed_removals:
+  - change: 'CCPA: support for the deprecated regulation removed'
+    surface: Web SDK
+    version: 1.4.0
+    source: https://developers.didomi.io/cmp/web-sdk/reference/versions
+  - change: >-
+      Multi-regulation configurations changed the Notice and Configuration API
+      endpoints; Didomi migrated pre-existing Configurations and published a
+      dedicated migration page.
+    surface: Platform API
+    source: https://developers.didomi.io/api-and-platform/widgets/consent-notices/multi-reg-configurations/migration-of-existing-notices-and-api-updates
+  instrumentation:
+  - >-
+      Since Android SDK 2.44.0 (2026-06-16) Didomi emits API events to monitor
+      usage of deprecated `Didomi` methods — the provider measures deprecated
+      call volume before removing anything.
+
+sdk_versioning:
+  scheme: semver
+  cadence: roughly every 2-3 weeks across the mobile surfaces
+  latest:
+    android: {version: 2.47.0, released: '2026-08-03'}
+    ios: {version: 2.47.0, released: '2026-08-03'}
+    react_native: {version: 2.32.0, released: '2026-08-04'}
+    flutter: {version: 2.31.0, released: '2026-08-05'}
+    unity: {version: 2.29.0, released: '2026-08-04'}
+    vega_os: {version: 0.2.2, released: '2026-06-25'}
+    web: {version: 1.5.2, released: null}
+  web_version_note: >-
+    The Web SDK version history is published but UNDATED, and the distribution
+    URL (https://sdk.privacy-center.org/{apiKey}/loader.js) carries no version
+    segment — a site owner cannot pin, and cannot tell from the URL which build
+    is live.
+  support_window: not published
+  minimum_platform_versions:
+    android: minSdkVersion 21
+    ios: '>= 10'
+    tvos: '>= 11'
+
+status_page:
+  url: https://status.didomi.io
+  platform: Atlassian Statuspage
+  api: https://status.didomi.io/api/v2/summary.json
+  probed: '2026-08-13'
+  http_status: 200
+  state_at_probe: All Systems Operational
+  components:
+  - Console
+  - Consents APIs
+  - Consent Collection and Management (CMP & PMP)
+  - Batch Exports
+  - Platform API
+  - Mobile and CTV SDKs (Android and iOS)
+  - Connectors
+  - Integrations
+  - Platform Management
+  - Analytics
+  - Preference Centers
+  - Webhooks
+  - Privacy Centers API
+  - AWS cloudfront
+  - Compliance Reports
+  - Web SDK (Desktop & Mobile)
+  - Developers Documentation
+  note: >-
+    A genuinely well-decomposed status page — 17 separately-tracked components,
+    including Webhooks and the Platform API as distinct surfaces, with a
+    machine-readable JSON API. This is the strongest lifecycle signal Didomi
+    publishes.
+
+sla:
+  published: false
+  referenced: true
+  note: >-
+    Didomi references "our Service Level Agreement" in the rate-limiting docs
+    for customers needing availability and response-time commitments, but no SLA
+    document is published publicly — it is contractual. The rate-limiting page
+    states explicitly that rate limits are "not a service level agreement" and
+    that the limits "are subject to change at any time without prior
+    communication".
+
+changelog:
+  artifact: changelog/didomi-changelog.yml
+  api_changelog_published: false
+  sdk_changelog_published: true
+
+gaps:
+- No dated changelog or release notes for the Platform REST API itself.
+- No RFC 8594 Sunset / Deprecation headers on any response.
+- No published deprecation notice period.
+- No published SLA or support-window policy for older SDK majors.
+- Web SDK version history carries no dates and the CDN distribution is unpinnable.
+- Rate limits are explicitly changeable "without prior communication", which sits awkwardly beside the backwards-compatibility guarantee.

@@ -1,4 +1,20 @@
 rate_limits: 0.1
+generated: '2026-08-13'
+method: searched
+source: https://developers.didomi.io/api-and-platform/introduction/rate-limiting
+docs: https://developers.didomi.io/api-and-platform/introduction/rate-limiting
+limit_count: 2
+standard: draft-ietf-httpapi-ratelimit-headers-07
+standard_note: >-
+  Didomi names the standard explicitly: rate-limited routes "return headers
+  respecting the draft 7 of the IETF RateLimit header fields for HTTP
+  specification, even when the request and organization are not being actively
+  throttled". Verified 2026-08-13.
+volatility: >-
+  Didomi states the limits "are subject to change at any time without prior
+  communication" and that rate limiting "is not a commitment to honor any number
+  of requests" and "is not a service level agreement". Read the headers at
+  runtime; do not hard-code 100/15s.
 info:
   name: Didomi Platform API Rate Limits
   description: >-

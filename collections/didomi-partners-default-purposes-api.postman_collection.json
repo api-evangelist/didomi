@@ -1,0 +1,318 @@
+{
+  "item": [
+    {
+      "id": "d883873d-8a15-44f1-81a4-5d690c8eb077",
+      "name": "partners-default-purposes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "404240b2-46ab-4339-9d6b-4e35196ba263",
+          "name": "Retrieve a list of partners-default-purposes objects",
+          "request": {
+            "name": "Retrieve a list of partners-default-purposes objects",
+            "description": {
+              "content": "Returns a list of all partners-default-purposes objects",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-default-purposes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_partner_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_purpose_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_org_override",
+                  "value": "<boolean>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bddd0052-0287-4395-8129-04d8a4f23e60",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-default-purposes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "metadata_partner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata_purpose_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_org_override",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"metadata_partner_id\": \"<string>\",\n    \"metadata_purpose_id\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"is_org_override\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  {\n    \"metadata_partner_id\": \"<string>\",\n    \"metadata_purpose_id\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"is_org_override\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "325262da-2139-4e82-af09-439df27cb2b5",
+          "name": "Create a new association between a partner and purpose",
+          "request": {
+            "name": "Create a new association between a partner and purpose",
+            "description": {
+              "content": "Create a new partner purpose association",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-default-purposes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "694dd1ce-dfe1-4bfb-b138-fe2ca8b58d72",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-default-purposes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"metadata_partner_id\": \"<string>\",\n    \"metadata_purpose_id\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"is_org_override\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  {\n    \"metadata_partner_id\": \"<string>\",\n    \"metadata_purpose_id\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"is_org_override\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.didomi.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f54a43b6-2e9c-4fc7-91f5-fb178948153e",
+    "name": "Didomi consents/events partners-default-purposes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A REST API to communicate with the Didomi platform (<a href=\"https://api.didomi.io/v1/\">https://api.didomi.io/v1/</a>)\n\nThis is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href=\"https://developers.didomi.io/\" target=\"_blank\">Developers Portal</a>.\n\nAll HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value \"Bearer <token>\".\nClick on the Authorize button in the header of this page to provide a token before testing requests from this documentation.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,6 +1,56 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/didomi-platform-api-openapi.yml
+generated: '2026-08-13'
+method: searched
+docs: https://developers.didomi.io/api-and-platform/introduction/authentication
+source_searched: https://developers.didomi.io/api-and-platform/introduction/authentication
+flow:
+  style: bearer-jwt
+  token_endpoint: POST https://api.didomi.io/v1/sessions
+  token_endpoint_auth: none (the credentials are the body)
+  request_body:
+    type: api-key
+    key: the organization's private API key
+    secret: the secret issued with that key
+  response_field: access_token
+  header: 'Authorization: Bearer <access_token>'
+  token_ttl_seconds: 3600
+  refresh_token: false
+  refresh_method: re-POST /sessions
+  credential_source: Didomi Console > Settings > Private API keys
+  alternate_session_type: >-
+    `type: email` authenticates a Console user with an email and password. Use
+    api-key for machine access.
+  transport: >-
+    HTTPS required. Plain HTTP receives a 301 to the HTTPS equivalent, across
+    which some clients drop the Authorization header.
+  failure_modes:
+    invalid_credentials_at_sessions: 400
+    missing_or_expired_token: 401
+  guidance: >-
+    Didomi explicitly recommends caching and reusing the token rather than
+    minting one per request, and regenerating it regularly in long-running
+    processes.
+  oauth2: false
+  oidc: false
+  scopes: false
+  scopes_note: >-
+    There are no scopes and no way to mint a reduced-privilege token. A Didomi
+    API key grants full access to its organization, so least-privilege must be
+    enforced at key issuance in the Console, not at token exchange.
+  mtls: false
+  webhook_auth:
+    direction: inverted
+    mode: oauth2-client-credentials
+    description: >-
+      For OUTBOUND webhooks Didomi authenticates itself against the CUSTOMER's
+      authorization server with a client_id/client_secret the customer supplies,
+      and presents the resulting token to the customer endpoint as a bearer.
+      Source IP is fixed at 35.159.1.63. No payload signature is published.
+    source: https://developers.didomi.io/integrations/generic-integrations/webhooks
+derived_from: openapi/didomi-consents-events-api-openapi.yml, openapi/didomi-consents-proofs-api-openapi.yml,
+  openapi/didomi-consents-tokens-api-openapi.yml, openapi/didomi-consents-users-api-openapi.yml,
+  openapi/didomi-cookies-api-openapi.yml, openapi/didomi-dashboards-urls-api-openapi.yml, openapi/didomi-domains-api-openapi.yml,
+  openapi/didomi-integrations-api-openapi.yml, openapi/didomi-keys-api-openapi.yml, openapi/didomi-languages-api-openapi.yml,
+  openapi/didomi-members-api-openapi.yml, openapi/didomi-metadata-api-openapi.yml ...
 summary:
   types:
   - http
@@ -10,4 +60,35 @@ schemes:
   scheme: bearer
   bearerFormat: JWT
   sources:
-  - openapi/didomi-platform-api-openapi.yml
+  - openapi/didomi-consents-events-api-openapi.yml
+  - openapi/didomi-consents-proofs-api-openapi.yml
+  - openapi/didomi-consents-tokens-api-openapi.yml
+  - openapi/didomi-consents-users-api-openapi.yml
+  - openapi/didomi-cookies-api-openapi.yml
+  - openapi/didomi-dashboards-urls-api-openapi.yml
+  - openapi/didomi-domains-api-openapi.yml
+  - openapi/didomi-integrations-api-openapi.yml
+  - openapi/didomi-keys-api-openapi.yml
+  - openapi/didomi-languages-api-openapi.yml
+  - openapi/didomi-members-api-openapi.yml
+  - openapi/didomi-metadata-api-openapi.yml
+  - openapi/didomi-metadata-purpose-regulation-override-api-openapi.yml
+  - openapi/didomi-notices-api-openapi.yml
+  - openapi/didomi-organizations-api-openapi.yml
+  - openapi/didomi-organizations-source-systems-api-openapi.yml
+  - openapi/didomi-partners-api-openapi.yml
+  - openapi/didomi-partners-default-purposes-api-openapi.yml
+  - openapi/didomi-partners-legitimate-interest-purposes-api-openapi.yml
+  - openapi/didomi-partners-spi-purposes-api-openapi.yml
+  - openapi/didomi-partners-storages-api-openapi.yml
+  - openapi/didomi-premium-features-api-openapi.yml
+  - openapi/didomi-privacy-centers-api-openapi.yml
+  - openapi/didomi-purposes-api-openapi.yml
+  - openapi/didomi-purposes-groups-api-openapi.yml
+  - openapi/didomi-quotas-api-openapi.yml
+  - openapi/didomi-secrets-api-openapi.yml
+  - openapi/didomi-sessions-api-openapi.yml
+  - openapi/didomi-sso-connections-api-openapi.yml
+  - openapi/didomi-taxonomies-api-openapi.yml
+  - openapi/didomi-vendors-api-openapi.yml
+  - openapi/didomi-widgets-notices-remote-configs-api-openapi.yml

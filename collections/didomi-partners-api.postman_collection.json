@@ -1,0 +1,716 @@
+{
+  "item": [
+    {
+      "id": "699a0c5f-6d41-4a36-8fa0-baa175198ce8",
+      "name": "partners",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e92ecded-3f74-439f-ac54-7f4a3cac3d14",
+          "name": "Retrieve a list of partners",
+          "request": {
+            "name": "Retrieve a list of partners",
+            "description": {
+              "content": "Returns a list of partners",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "An URL to match to a partner. This parameter can be repeated multiple times to identify multiple partners at once."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e14f0d9b-41ec-4ab4-9ff9-7a100ad95a45",
+              "name": "A list of Partner objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"category_id\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"contact\": \"string\",\n    \"website\": \"https://Ux.lvyqK7Qei6I1k5Ia.polfYW0sR\",\n    \"website_optout\": \"http://hkcRJaJBQtwVkuVgSKVFMWLppBJ.wuA5AygxPc4.SckWAmuWHMguG4n3D6Gl0MUL+KohpDbnYlO6BGucWtxV3H\",\n    \"hosts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"url_patterns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"urls\": [\n      \"https://EIAdOelHikKqxNERqQPLPsG.ernwrOd-0xXb62g\",\n      \"https://kuyNeKgXYacFBWVwvI.tjheGNzftiE2G0aY94R1Y5dytkJInrC1OINg-Fda3g+xbzma1vEbRwiEJlkkH9VAlMST\"\n    ],\n    \"taxonomy_id\": \"string\",\n    \"organization_id\": \"string\",\n    \"country\": \"string\",\n    \"created_at\": \"1961-06-30T20:16:02.924Z\",\n    \"updated_at\": \"2004-02-04T09:25:39.954Z\",\n    \"version\": 777.7952508794716,\n    \"namespaces\": {\n      \"iab\": \"string\",\n      \"iab2\": \"string\",\n      \"didomi\": \"string\",\n      \"custom\": \"string\",\n      \"google\": \"string\"\n    },\n    \"default_purposes_id\": [\n      \"string\",\n      \"string\"\n    ],\n    \"legitimate_interest_purposes_id\": [\n      \"string\",\n      \"string\"\n    ],\n    \"spi_purposes_id\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cookie_max_duration\": 5331.839178102146,\n    \"cookie_max_duration_unit\": \"months\",\n    \"uses_non_cookie_access\": true,\n    \"deprecated\": true,\n    \"notes\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"category_id\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"contact\": \"string\",\n    \"website\": \"https://TxtIineZnkaCMORzVkH.gzaD6Ep7-hVSYP3VZhpzcjTB4QJCYkQA\",\n    \"website_optout\": \"http://fVTEYNypwAzrHXMYjJit.yzwQLIiAsqssMlBLFdFMhEcApcQMemy,IfLAy2Y6RIEDZTMojvX\",\n    \"hosts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"url_patterns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"urls\": [\n      \"https://PcIOskGezQEIUcQsDKkAbSuHhTVxG.twiey3MlWudaJj\",\n      \"https://OoVLLoExw.dyca6yKF\"\n    ],\n    \"taxonomy_id\": \"string\",\n    \"organization_id\": \"string\",\n    \"country\": \"string\",\n    \"created_at\": \"1982-11-02T14:21:59.969Z\",\n    \"updated_at\": \"1979-07-23T05:57:57.582Z\",\n    \"version\": 8178.131370710586,\n    \"namespaces\": {\n      \"iab\": \"string\",\n      \"iab2\": \"string\",\n      \"didomi\": \"string\",\n      \"custom\": \"string\",\n      \"google\": \"string\"\n    },\n    \"default_purposes_id\": [\n      \"string\",\n      \"string\"\n    ],\n    \"legitimate_interest_purposes_id\": [\n      \"string\",\n      \"string\"\n    ],\n    \"spi_purposes_id\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cookie_max_duration\": 5052.275833436858,\n    \"cookie_max_duration_unit\": \"days\",\n    \"uses_non_cookie_access\": true,\n    \"deprecated\": false,\n    \"notes\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02055c8d-be3b-4dd6-8916-ba80a910cda8",
+          "name": "Create a partner",
+          "request": {
+            "name": "Create a partner",
+            "description": {
+              "content": "Create a new partner",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad8c9b11-6152-4537-b77b-187f1db40bf4",
+              "name": "The created Partner object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1912be1-ee19-40dc-8093-cd176a6773f4",
+          "name": "Retrieve a partner",
+          "request": {
+            "name": "Retrieve a partner",
+            "description": {
+              "content": "Returns a single partner with the given ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the partner to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b6ac1587-bdd4-4c1a-92c2-c17ff1bf9a97",
+              "name": "A Partner object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the partner to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80113efb-5b11-4302-805e-f53465bb007a",
+          "name": "Update a partner",
+          "request": {
+            "name": "Update a partner",
+            "description": {
+              "content": "Update an existing a partner",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the partner to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f02a905d-e219-40b7-9423-a15db7658c22",
+              "name": "The updated Partner object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the partner to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98f405a2-e983-4e9a-9f13-9fbdca4af35f",
+          "name": "Patch a partner",
+          "request": {
+            "name": "Patch a partner",
+            "description": {
+              "content": "Partially update the partner",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the partner to patch"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4d9fc49-2a7e-4e9c-b158-34699434fd07",
+              "name": "The patched Partner object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the partner to patch"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78d69fb8-6cb0-44f7-a528-ab0cf7e932bd",
+          "name": "Delete a partner",
+          "request": {
+            "name": "Delete a partner",
+            "description": {
+              "content": "Delete the partner",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the partner to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9dbbbd47-ecd4-4b14-a124-1303849f283c",
+              "name": "The deleted Partner object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the partner to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.didomi.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "77d77feb-e3c9-4241-b9b6-0374eadd8d4f",
+    "name": "Didomi consents/events partners API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A REST API to communicate with the Didomi platform (<a href=\"https://api.didomi.io/v1/\">https://api.didomi.io/v1/</a>)\n\nThis is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href=\"https://developers.didomi.io/\" target=\"_blank\">Developers Portal</a>.\n\nAll HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value \"Bearer <token>\".\nClick on the Authorize button in the header of this page to provide a token before testing requests from this documentation.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

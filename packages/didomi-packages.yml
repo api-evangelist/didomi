@@ -1,0 +1,226 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Registry metadata endpoints (registry.npmjs.org, pub.dev, repo1.maven.org,
+  trunk.cocoapods.org) plus Didomi's own setup docs at developers.didomi.io and
+  the github.com/didomi organization.
+info:
+  name: Didomi Client Libraries and Distributions
+  provider: didomi
+  description: >-
+    First-party Didomi SDKs and client libraries. Didomi's CMP/PMP is delivered
+    primarily as platform SDKs (Web, Android, iOS/tvOS, React Native, Flutter,
+    Unity, Vega OS) rather than as REST API clients — there is NO first-party
+    client library for the Didomi Platform REST API at https://api.didomi.io/v1.
+    Consumers of the REST API call it directly with an HTTP client.
+  docs: https://developers.didomi.io/
+  registries_checked:
+  - npm (registry.npmjs.org)
+  - pub.dev
+  - Maven Central (repo1.maven.org)
+  - CocoaPods trunk
+  - Swift Package Manager (GitHub tags)
+  - crates.io
+  - Packagist
+  - pkg.go.dev / proxy.golang.org
+  - NuGet
+  checked: '2026-08-13'
+packages:
+- name: io.didomi.sdk:android
+  registry: maven
+  official: true
+  language: Kotlin/Java
+  surface: CMP Mobile SDK (Android / Android TV)
+  url: https://repo1.maven.org/maven2/io/didomi/sdk/android/
+  install: "implementation 'io.didomi.sdk:android:2.47.0'"
+  version: 2.47.0
+  published: '2026-08-03'
+  docs: https://developers.didomi.io/cmp/mobile-sdk/android/setup
+  note: >-
+    Version and date read from repo1.maven.org/maven2/io/didomi/sdk/android/maven-metadata.xml
+    (lastUpdated 20260803093308); the same 2.47.0 coordinate is the one Didomi's
+    own Android setup page publishes.
+- name: Didomi-XCFramework
+  registry: cocoapods
+  official: true
+  language: Swift/Objective-C
+  surface: CMP Mobile SDK (iOS / tvOS)
+  url: https://cocoapods.org/pods/Didomi-XCFramework
+  install: "pod 'Didomi-XCFramework', '2.47.0'"
+  version: 2.47.0
+  published: null
+  docs: https://developers.didomi.io/cmp/mobile-sdk/ios/setup
+  note: >-
+    2.47.0 is the version Didomi's iOS setup page publishes. The CocoaPods trunk
+    API (trunk.cocoapods.org/api/v1/pods/Didomi-XCFramework) returns a version
+    list whose tail stops at 2.9.2 (2024-07-02), so no publish date could be
+    read for 2.47.0 from the registry — recorded as null rather than guessed.
+    Pod owner is listed as "Tech Team" (Didomi).
+- name: didomi-ios-sdk-spm
+  registry: swift-pm
+  official: true
+  language: Swift
+  surface: CMP Mobile SDK (iOS / tvOS) via Swift Package Manager
+  url: https://github.com/didomi/didomi-ios-sdk-spm
+  install: 'Xcode > Package Dependencies > https://github.com/didomi/didomi-ios-sdk-spm'
+  version: 2.47.0
+  published: '2026-08-03'
+  docs: https://developers.didomi.io/cmp/mobile-sdk/ios/setup
+  note: >-
+    Swift Package Manager has no central registry; version read from the latest
+    git tag on the first-party repo (2.47.0), date from the repo's last push.
+- name: '@didomi/react-native'
+  registry: npm
+  official: true
+  language: TypeScript
+  surface: CMP SDK for React Native
+  url: https://www.npmjs.com/package/@didomi/react-native
+  install: npm install @didomi/react-native
+  version: 2.32.0
+  published: '2026-08-04'
+  repository: https://github.com/didomi/react-native
+  note: Published by Didomi's GitHub Actions CI.
+- name: didomi_sdk
+  registry: pub.dev
+  official: true
+  language: Dart
+  surface: CMP SDK for Flutter
+  url: https://pub.dev/packages/didomi_sdk
+  install: 'flutter pub add didomi_sdk'
+  version: 2.31.0
+  published: '2026-08-05'
+  repository: https://github.com/didomi/flutter
+- name: '@didomi/vega-sdk'
+  registry: npm
+  official: true
+  language: TypeScript
+  surface: CMP SDK for Amazon Vega OS (CTV)
+  url: https://www.npmjs.com/package/@didomi/vega-sdk
+  install: npm install @didomi/vega-sdk
+  version: 0.2.2
+  published: '2026-06-25'
+  note: Published by Didomi's GitLab CI/CD. Pre-1.0 — the newest and least mature surface.
+- name: '@didomi/react'
+  registry: npm
+  official: true
+  language: JavaScript
+  surface: React component that embeds and configures the Didomi Web SDK
+  url: https://www.npmjs.com/package/@didomi/react
+  install: npm install @didomi/react
+  version: 1.10.0
+  published: '2026-05-11'
+  repository: https://github.com/didomi/react
+  note: >-
+    npm `description` still reads "didomi-react-test React component" — a
+    leftover from the package's original scratch name.
+- name: '@didomi/consent-string'
+  registry: npm
+  official: true
+  language: TypeScript
+  surface: IAB TCF consent-string encoder/decoder
+  url: https://www.npmjs.com/package/@didomi/consent-string
+  install: npm install @didomi/consent-string
+  version: 1.24.0
+  published: '2026-04-09'
+  repository: https://github.com/didomi/consent-string
+- name: '@didomi/consent-string-schema'
+  registry: npm
+  official: true
+  language: TypeScript
+  surface: Schema for the Didomi consent string
+  url: https://www.npmjs.com/package/@didomi/consent-string-schema
+  version: 1.1.0
+  published: '2026-04-09'
+  repository: https://github.com/didomi/consent-string-schema
+- name: '@didomi/iabtcf-core'
+  registry: npm
+  official: true
+  language: TypeScript
+  surface: IAB TCF v2 encode/decode core (Didomi's fork of iabtcf-es)
+  url: https://www.npmjs.com/package/@didomi/iabtcf-core
+  version: 1.6.5
+  published: '2026-02-23'
+  repository: https://github.com/didomi/iabtcf-es
+- name: '@didomi/iabtcf-cmpapi'
+  registry: npm
+  official: true
+  language: TypeScript
+  surface: IAB TCF v2 CMP API surface (__tcfapi)
+  url: https://www.npmjs.com/package/@didomi/iabtcf-cmpapi
+  version: 1.6.4
+  published: '2026-02-23'
+  repository: https://github.com/didomi/iabtcf-es
+- name: didomi-unity
+  registry: github-release
+  official: true
+  language: C#
+  surface: CMP SDK plugin for Unity
+  url: https://github.com/didomi/unity
+  install: 'Import the .unitypackage from the GitHub release'
+  version: 2.29.0
+  published: '2026-08-04'
+  note: >-
+    Distributed as a GitHub release asset, not through a package registry
+    (no UPM/OpenUPM listing found); version and date read from the latest
+    release on the first-party repo.
+- name: Didomi Web SDK loader
+  registry: cdn
+  official: true
+  language: JavaScript
+  surface: CMP Web SDK (browser + CTV)
+  url: https://sdk.privacy-center.org/{apiKey}/loader.js
+  version: null
+  published: null
+  note: >-
+    UNPINNED. The documented embed snippet loads
+    https://sdk.privacy-center.org/{{Your-API-Key}}/loader.js with no version
+    segment, so the browser always receives whatever Didomi has currently
+    deployed — a consumer cannot tell which build they are running, and neither
+    can we. Didomi does publish a human-readable version history at
+    https://developers.didomi.io/cmp/web-sdk/reference/versions (latest entry
+    1.5.2 at the time of this check) but that number is not addressable in the
+    distribution URL. The CSP allowlist Didomi documents is
+    https://sdk.privacy-center.org/ and https://api.privacy-center.org/.
+- name: Didomi iOS XCFramework (direct download)
+  registry: cdn
+  official: true
+  language: Swift
+  surface: CMP Mobile SDK (iOS / tvOS), manual install
+  url: https://sdk.didomi.io/ios/didomi-ios-sdk-X.Y.Z-xcframework.zip
+  version: 2.47.0
+  published: null
+  note: >-
+    Version-templated download documented on the iOS setup page; the URL is
+    pinned by the consumer (X.Y.Z), so the distribution itself is versioned but
+    carries no registry metadata endpoint to read a publish date from.
+absent:
+- registry: crates.io
+  note: >-
+    github.com/didomi/consent-string-decoder-rust exists (last pushed
+    2026-05-26) but is not published to crates.io — crates.io/api/v1/crates
+    returns 404 for the obvious names.
+- registry: pkg.go.dev
+  note: >-
+    github.com/didomi/consent-string-golang exists but proxy.golang.org returns
+    404 for it; the repo carries no tags, so there is no importable module version.
+- registry: packagist
+  note: >-
+    github.com/didomi/magento (Magento 2 extension, last pushed 2023-08-27) is
+    not published on Packagist under didomi/magento or didomi/magento2.
+- registry: nuget
+  note: No first-party Didomi package found; the Unity plugin ships via GitHub releases.
+notes:
+- >-
+  There is no first-party SDK for the Didomi Platform REST API
+  (https://api.didomi.io/v1). Every package above wraps the client-side CMP/PMP,
+  not the management API. API consumers hand-roll HTTP calls against the
+  OpenAPI at https://api.didomi.io/openapi.json.
+- >-
+  The mobile SDKs are on a tight release cadence (Android 2.47.0 on 2026-08-03,
+  Flutter 2.31.0 on 2026-08-05, React Native 2.32.0 on 2026-08-04, Unity 2.29.0
+  on 2026-08-04) — no abandonment signal on any first-party surface.
+- >-
+  Third-party packages matching "didomi" on npm (n8n-nodes-didomi,
+  @orfon/didomi-types, @teklakct/didomi-react, cordova-plugin-didomi,
+  @libconsent/didomi, @thg-altitude/didomi-consent) are community-published and
+  are deliberately NOT listed above.

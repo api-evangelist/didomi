@@ -1,0 +1,825 @@
+{
+  "item": [
+    {
+      "id": "87d503cc-1273-41d8-83e4-bc27cda06b97",
+      "name": "consents/events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4cf9a3c5-0fcf-4a28-b307-00b8b1d2082e",
+          "name": "Retrieve events",
+          "request": {
+            "name": "Retrieve events",
+            "description": {
+              "content": "Returns a list of events for a given organization ID and user ID or organization user ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the organization for which to retrieve events"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The Didomi user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_user_id",
+                  "value": "<string>",
+                  "description": "The organization user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter events according to their status (possible values: confirmed, pending_approval). If this field is missing, only confirmed events are returned. To filter on multiple statuses in a single request, use the notation status[$in]: ?status[$in]=confirmed&status[$in]=pending_approval."
+                },
+                {
+                  "disabled": false,
+                  "key": "regulation",
+                  "value": "<string>",
+                  "description": "Filter events according to their regulation. Possible value is any existing regulation in the Regulations API (/compliance/v1/regulations). If this field is missing, only GDPR events are returned. To filter on multiple regulations in a single request, use the notation regulation[$in]: ?regulation[$in]=gdpr&regulation[$in]=cpra."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "41d31866-64a9-44ca-aa54-1cf234b14a38",
+              "name": "A list of ConsentEvent objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regulation",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"value\": \"reference #/definitions/consent-events not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/definitions/consent-events not found in the OpenAPI spec\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d18da71e-6729-4a88-ace6-95ea52f97ba8",
+          "name": "Create a new event",
+          "request": {
+            "name": "Create a new event",
+            "description": {
+              "content": "Create a new event and update the consent status of the user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the organization for which to create an event"
+                },
+                {
+                  "disabled": false,
+                  "key": "$disable_integrations",
+                  "value": "<boolean>",
+                  "description": "Disable sending the event to integrations configured for the organization. Set this parameter to true if you do not want the event processed by integrations (if you are importing events that already exist in the integrated systems, for instance)."
+                },
+                {
+                  "disabled": false,
+                  "key": "$generate_tcfcs",
+                  "value": "<boolean>",
+                  "description": "Set to \"true\" to generate a TCF consent string for the user based on the latest status of the user"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d3317607-5ae9-48b7-ac14-d4f20f8f5ea3",
+              "name": "The created ConsentEvent object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$disable_integrations",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$generate_tcfcs",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc844d68-d540-4715-a839-1338c855ee8b",
+          "name": "Delete events",
+          "request": {
+            "name": "Delete events",
+            "description": {
+              "content": "Delete events and update the user consent status as if the events had never happened ; the user consent status is re-computed from all events for that user except deleted events",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the organization that the event belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The Didomi user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_user_id",
+                  "value": "<string>",
+                  "description": "The organization user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+                },
+                {
+                  "disabled": false,
+                  "key": "{filters}",
+                  "value": "<string>",
+                  "description": "(Required) Keys and values to filter the events to delete. You can filter using any property of the events, including nested properties like metadata by using . as a separator for each level"
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "778a087f-855b-4721-96dc-a326989b577a",
+              "name": "The events were successfully deleted and the user consent status has been updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "{filters}",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89df91fb-a0db-4a2c-8649-de7d2db44b65",
+          "name": "Retrieve an event",
+          "request": {
+            "name": "Retrieve an event",
+            "description": {
+              "content": "Returns an event",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "events",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the organization that the event belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The Didomi user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_user_id",
+                  "value": "<string>",
+                  "description": "The organization user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the event to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e4a0a466-d1b5-4ad5-99da-ecafb9e6bc2e",
+              "name": "A ConsentEvent object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the event to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4267cdb-e45e-4382-9a1e-cc845b97e0f2",
+          "name": "Patch an event",
+          "request": {
+            "name": "Patch an event",
+            "description": {
+              "content": "Patch an existing event",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "events",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the organization that the event belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The Didomi user ID for which to update events. You must provide either **user_id** or **organization_user_id** when updating events"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_user_id",
+                  "value": "<string>",
+                  "description": "The organization user ID for which to update events. You must provide either **user_id** or **organization_user_id** when updating events"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the event to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bf8715ff-7191-4e3f-a590-93397c4ec24a",
+              "name": "The patched ConsentEvent object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the event to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9de5fe50-7e37-4d21-9e72-602171e937d8",
+          "name": "Delete an event",
+          "request": {
+            "name": "Delete an event",
+            "description": {
+              "content": "Delete an event and update the user consent status as if the event had never happened ; the user consent status is re-computed from all events for that user except deleted events",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "events",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the organization that the event belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The Didomi user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_user_id",
+                  "value": "<string>",
+                  "description": "The organization user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the event to delete"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "39e06bd1-a4b3-46b9-a4a5-d99f6a3f463a",
+              "name": "The event was successfully deleted and the user consent status has been updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the event to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.didomi.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c1f61e0a-046d-4475-91ff-4f46dddc47e3",
+    "name": "Didomi consents/events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A REST API to communicate with the Didomi platform (<a href=\"https://api.didomi.io/v1/\">https://api.didomi.io/v1/</a>)\n\nThis is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href=\"https://developers.didomi.io/\" target=\"_blank\">Developers Portal</a>.\n\nAll HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value \"Bearer <token>\".\nClick on the Authorize button in the header of this page to provide a token before testing requests from this documentation.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

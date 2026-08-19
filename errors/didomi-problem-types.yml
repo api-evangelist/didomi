@@ -1,0 +1,169 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.didomi.io/api-and-platform/introduction/errors
+derived_from: openapi/_original/didomi-platform-api-openapi.yml
+info:
+  name: Didomi Platform API error catalog
+  provider: didomi
+  api: Didomi Platform API
+  base_url: https://api.didomi.io/v1
+  format: bespoke-json
+  rfc9457: false
+  media_type: application/json
+  description: >-
+    Didomi returns a single consistent JSON error object on every failure. It is
+    NOT RFC 9457 application/problem+json: there is no `type` URI, no
+    `instance`, and no registered problem-type namespace, so there is nothing an
+    agent can dereference to learn what a specific failure means. Error identity
+    is carried entirely by the HTTP status code plus a `name` string that is
+    itself derived from the status code.
+  checked: '2026-08-13'
+envelope:
+  fields:
+    code:
+      type: integer
+      description: The HTTP response code, repeated in the body.
+      example: 400
+    name:
+      type: string
+      description: The name of the error, tied to the response code.
+      example: BadRequest
+    message:
+      type: string
+      description: An explanation of the error.
+      example: Invalid authentication information
+    errors:
+      type: object|array
+      description: More errors, when multiple have been batched together.
+  example: |-
+    {
+        "code": 400,
+        "errors": {},
+        "message": "Invalid authentication information",
+        "name": "BadRequest"
+    }
+  verified_live:
+    url: https://api.privacy-center.org/
+    method: GET
+    http_status: 404
+    body: '{"code":404,"errors":{},"message":"Page not found","name":"NotFound"}'
+    fetched: '2026-08-13'
+    note: >-
+      Confirms the envelope is real and identical on the anonymous edge —
+      code, errors, message and name in that shape, with name "NotFound".
+classes:
+- code: 2xx
+  meaning: Success.
+- code: 4xx
+  meaning: >-
+    An error in the parameters sent to the server — invalid authentication
+    information, a missing required parameter, and so on.
+- code: 5xx
+  meaning: A Didomi server-side error.
+problem_types:
+- status: 400
+  name: BadRequest
+  title: Invalid request
+  spec_descriptions:
+  - Invalid request or integration configuration error
+  occurrences_in_spec: 1
+  meaning: >-
+    Malformed body, missing required parameter, or invalid credentials supplied
+    to POST /sessions. Didomi's authentication docs explicitly state that a
+    failed /sessions exchange returns 400, not 401.
+  remediation: >-
+    Read `message` for the specific field. On /sessions, verify the API key and
+    secret pair from Console > Settings > Private API keys.
+  retryable: false
+- status: 401
+  name: Unauthorized
+  title: Not authenticated
+  spec_descriptions:
+  - not authenticated
+  - Unauthorized
+  - Platform authentication failed or missing
+  occurrences_in_spec: 12
+  meaning: >-
+    No Authorization header, a malformed bearer token, or an expired JWT.
+    Didomi's tokens expire after 3600 seconds.
+  remediation: >-
+    Mint a fresh token with POST /v1/sessions and retry once. Cache the token
+    and refresh it before the hour elapses rather than on failure.
+  retryable: true
+  retry_after_refresh: true
+- status: 403
+  name: Forbidden
+  title: Forbidden
+  spec_descriptions:
+  - forbidden
+  occurrences_in_spec: 1
+  meaning: >-
+    Authenticated, but the key's organization is not entitled to the resource.
+    Relevant to premium-features and to the separately-priced Consents API and
+    Integrations.
+  remediation: >-
+    Confirm the organization_id on the request matches the key, and confirm the
+    module is included in the contract — Didomi states the Consents API and
+    Integrations are priced separately from CMP/PMP.
+  retryable: false
+- status: 404
+  name: NotFound
+  title: Not found
+  spec_descriptions:
+  - not found
+  - Platform integration not found
+  occurrences_in_spec: 8
+  meaning: The resource id does not exist, or is not visible to this organization.
+  remediation: Verify the id and the organization_id query parameter.
+  retryable: false
+- status: 429
+  name: TooManyRequests
+  title: Rate limit exceeded
+  spec_descriptions: []
+  occurrences_in_spec: 0
+  documented_in_prose: true
+  meaning: >-
+    The organization exceeded 100 requests in the current 15-second window on a
+    rate-limited route. Applied per organization, shared across all of that
+    organization's API keys.
+  response_headers:
+  - Retry-After
+  - RateLimit
+  - RateLimit-Policy
+  remediation: >-
+    Back off for the number of seconds in Retry-After. Better: read the
+    `remaining` field of the RateLimit header on every response and throttle
+    before exhaustion.
+  retryable: true
+  gap: >-
+    NOT PRESENT IN THE OPENAPI. Didomi documents 429 thoroughly in prose at
+    /api-and-platform/introduction/rate-limiting but declares it on zero of the
+    190 operations, so a generated client will not handle it.
+- status: 500
+  name: InternalServerError
+  title: General error
+  spec_descriptions:
+  - general error
+  - Internal server error
+  occurrences_in_spec: 11
+  meaning: A Didomi server-side failure.
+  remediation: >-
+    Retry with exponential backoff. Check https://status.didomi.io before
+    escalating; contact support@didomi.io with the request details.
+  retryable: true
+coverage:
+  operations_in_spec: 190
+  operations_declaring_any_4xx: 21
+  operations_declaring_any_5xx: 11
+  note: >-
+    169 of 190 operations declare no error response at all — only a 200 or 204.
+    The error envelope is uniform across the API, so the omission is
+    documentation debt rather than behavioural inconsistency, but it means a
+    client generated from this spec has no error type to deserialize into on the
+    overwhelming majority of calls.
+gaps:
+- No RFC 9457 application/problem+json, no dereferenceable `type` URI.
+- No stable machine-readable error CODE beyond the HTTP status; `name` is a restatement of the status.
+- 429 is documented in prose but absent from all 190 operations in the spec.
+- No error-reference page enumerating specific `message` values.
+- No `errors[]` item schema — the field is documented as "an array containing more errors" with no shape.

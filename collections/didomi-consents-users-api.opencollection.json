@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Didomi consents/events consents/users API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "consents/users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/users",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization for which to retrieve users"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID to retrieve (optional)"
+              },
+              {
+                "name": "regulation",
+                "value": "",
+                "type": "query",
+                "description": "Filter user consents according to their regulation. Possible value is any existing regulation in the Regulations API (/compliance/v1/regulations). If this field is missing, only GDPR events are returned. To filter on multiple regulations in a single request, use the notation regulation[$in]: ?regulation[$in]=gdpr&regulation[$in]=cpra."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of end users and their consent status"
+        },
+        {
+          "info": {
+            "name": "Create a new user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/consents/users",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "$generate_tcfcs",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"true\" to generate a TCF consent string for the user based on the latest status of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new user and store its consent status"
+        },
+        {
+          "info": {
+            "name": "Retrieve a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/users/:id",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to retrieve. You can query by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter"
+              },
+              {
+                "name": "$by_organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Add this query-string parameter if you provide an organization user ID as the **id** in the path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a user and its consent status"
+        },
+        {
+          "info": {
+            "name": "Patch a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/consents/users/:id",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to update. You can update a user by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter"
+              },
+              {
+                "name": "$by_organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Add this query-string parameter if you provide an organization user ID as the **id** in the path"
+              },
+              {
+                "name": "$generate_tcfcs",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"true\" to generate a TCF consent string for the user based on the latest status of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch an existing user"
+        },
+        {
+          "info": {
+            "name": "Delete a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/consents/users/:id",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the user belongs to"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to delete. You can delete a user by organization user ID here by providing your organization user ID in the path and adding a **$by_organization_user_id** query-string parameter"
+              },
+              {
+                "name": "$by_organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Add this query-string parameter if you provide an organization user ID as the **id** in the path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

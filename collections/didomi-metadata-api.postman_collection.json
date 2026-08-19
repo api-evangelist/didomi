@@ -1,0 +1,4474 @@
+{
+  "item": [
+    {
+      "id": "eedbf055-19b5-4b96-b809-96e91403e557",
+      "name": "metadata",
+      "description": {
+        "content": "A metadata service",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec2128fe-3faf-480c-94d6-9c9a65829ac1",
+          "name": "Creates a new resource with data.",
+          "request": {
+            "name": "Creates a new resource with data.",
+            "description": {
+              "content": "Creates a new resource with data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners",
+                "deprecate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "43862a71-a2e1-495b-b96a-dcde15c8ae64",
+              "name": "created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners",
+                    "deprecate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0950db4c-818c-45f1-8ffe-f1a66bb5455a",
+              "name": "not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners",
+                    "deprecate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7b71779-08fe-4c3e-a02c-e59ee24885c1",
+              "name": "general error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners",
+                    "deprecate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contact\": \"<string>\",\n  \"website\": \"<uri>\",\n  \"website_optout\": \"<uri>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"taxonomy_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"country\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\",\n  \"namespaces\": {\n    \"iab\": \"<string>\",\n    \"iab2\": \"<string>\",\n    \"didomi\": \"<string>\",\n    \"custom\": \"<string>\",\n    \"google\": \"<string>\"\n  },\n  \"default_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"legitimate_interest_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spi_purposes_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookie_max_duration\": \"<number>\",\n  \"cookie_max_duration_unit\": \"<string>\",\n  \"uses_non_cookie_access\": \"<boolean>\",\n  \"deprecated\": \"<boolean>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a6e5477-f831-4b2d-8b35-f75bb6bc28ff",
+          "name": "Retrieve a list of vendors",
+          "request": {
+            "name": "Retrieve a list of vendors",
+            "description": {
+              "content": "Returns a list of vendors",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "vendors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "An URL to match to a vendor. This parameter can be repeated multiple times to identify multiple vendors at once."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0f928e0b-30fd-4da1-bd29-fffe7885e235",
+              "name": "A list of Vendor objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"website\": \"https://jKHIHghkXjRlIudMlmNfzjpyH.zwzbNjubFKou5Q\",\n    \"website_optout\": \"https://cuOuSTapwdkdBzVSrgjR.kfksU3klDw7QEM8nnJJ\",\n    \"hosts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"url_patterns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"urls\": [\n      \"https://PYakrzFGribQvjwEVSDgJuQZxW.hmplV+wZqBS\",\n      \"http://ogCXauFlcgZ.sfRkuOuxFYZAgMWvK\"\n    ],\n    \"taxonomy_id\": \"string\",\n    \"created_at\": \"1990-06-08T11:18:34.124Z\",\n    \"updated_at\": \"1992-11-20T19:01:17.304Z\",\n    \"version\": 4303.978891756755\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"website\": \"https://bizxfPGZ.ntb.vWg3F9qPMavtQIkyqgb-pt0\",\n    \"website_optout\": \"http://xToRKmVYVQXISfiQdajbqeauI.neg3rX7k0IKWAohjhsAO5L5HSw8x2sCDfzMVL\",\n    \"hosts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"url_patterns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"urls\": [\n      \"http://BtEeJoFFpQMrYAIktRvuqwCw.yerpGTRLHL.EqRp,CHYHYHUhX8PZjKrIkVRlNRuhwab4HJzZRRLu6pDAV700\",\n      \"http://HVQzRRCiuMVnGgFGudOUtyd.xgkpER\"\n    ],\n    \"taxonomy_id\": \"string\",\n    \"created_at\": \"1990-10-31T23:20:54.791Z\",\n    \"updated_at\": \"2002-03-08T16:09:16.265Z\",\n    \"version\": 6934.612889793255\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9d40a3d-fc2e-4998-8be0-8443c6a9c7af",
+          "name": "Create a vendor",
+          "request": {
+            "name": "Create a vendor",
+            "description": {
+              "content": "Create a new vendor",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "vendors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"metadata_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad50c0fc-46d1-4429-862b-184020a1157e",
+              "name": "The created Vendor object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"metadata_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"website\": \"https://tsTwDCvfthAriDXQVSetrtBZhtQmqKsBt.qryhkwRrYQN\",\n  \"website_optout\": \"http://ZcHgaXSHuYbmIrcrqOxZJaIMRUJCmJ.wumCc9PJ5yQfaV\",\n  \"hosts\": [\n    \"string\",\n    \"string\"\n  ],\n  \"url_patterns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"urls\": [\n    \"https://qyBObebFloqdnbgRsvPogaol.jrgK.6Dpe6P63OhzEWDGFBnaXmuHKn3oAYiEyG7oYcotpOFdi3Wmdq0wcIZwQp7F5Ux\",\n    \"http://vAxgHYeOIAskRVVaVCEvKxnq.rqclVyu5VFKUTEL6m9rvYc-Qxy8D7oWHEIknO4GLRopQa-KWs42nLS+EgpUUUR2DCPnd5gm4Bgu9-TFnueO\"\n  ],\n  \"taxonomy_id\": \"string\",\n  \"created_at\": \"1983-11-06T04:07:17.730Z\",\n  \"updated_at\": \"1959-01-23T01:01:10.544Z\",\n  \"version\": 4704.765785424594\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8f8a040-7b36-4ab8-9403-75405f1cc967",
+          "name": "Retrieve  a vendor",
+          "request": {
+            "name": "Retrieve  a vendor",
+            "description": {
+              "content": "Returns  a single vendor with the given ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "vendors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the vendor to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1cdb7416-c364-4ee6-ac24-05f6cb696bf0",
+              "name": "A Vendor object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the vendor to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"website\": \"https://tsTwDCvfthAriDXQVSetrtBZhtQmqKsBt.qryhkwRrYQN\",\n  \"website_optout\": \"http://ZcHgaXSHuYbmIrcrqOxZJaIMRUJCmJ.wumCc9PJ5yQfaV\",\n  \"hosts\": [\n    \"string\",\n    \"string\"\n  ],\n  \"url_patterns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"urls\": [\n    \"https://qyBObebFloqdnbgRsvPogaol.jrgK.6Dpe6P63OhzEWDGFBnaXmuHKn3oAYiEyG7oYcotpOFdi3Wmdq0wcIZwQp7F5Ux\",\n    \"http://vAxgHYeOIAskRVVaVCEvKxnq.rqclVyu5VFKUTEL6m9rvYc-Qxy8D7oWHEIknO4GLRopQa-KWs42nLS+EgpUUUR2DCPnd5gm4Bgu9-TFnueO\"\n  ],\n  \"taxonomy_id\": \"string\",\n  \"created_at\": \"1983-11-06T04:07:17.730Z\",\n  \"updated_at\": \"1959-01-23T01:01:10.544Z\",\n  \"version\": 4704.765785424594\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c38c033-580e-4f15-98e4-dce101b1044f",
+          "name": "Update a vendor",
+          "request": {
+            "name": "Update a vendor",
+            "description": {
+              "content": "Update an existing vendor",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "vendors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the vendor to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"metadata_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b51acce2-047a-44e1-97e9-55d6655d33d3",
+              "name": "The updated Vendor object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the vendor to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"metadata_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"website\": \"https://tsTwDCvfthAriDXQVSetrtBZhtQmqKsBt.qryhkwRrYQN\",\n  \"website_optout\": \"http://ZcHgaXSHuYbmIrcrqOxZJaIMRUJCmJ.wumCc9PJ5yQfaV\",\n  \"hosts\": [\n    \"string\",\n    \"string\"\n  ],\n  \"url_patterns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"urls\": [\n    \"https://qyBObebFloqdnbgRsvPogaol.jrgK.6Dpe6P63OhzEWDGFBnaXmuHKn3oAYiEyG7oYcotpOFdi3Wmdq0wcIZwQp7F5Ux\",\n    \"http://vAxgHYeOIAskRVVaVCEvKxnq.rqclVyu5VFKUTEL6m9rvYc-Qxy8D7oWHEIknO4GLRopQa-KWs42nLS+EgpUUUR2DCPnd5gm4Bgu9-TFnueO\"\n  ],\n  \"taxonomy_id\": \"string\",\n  \"created_at\": \"1983-11-06T04:07:17.730Z\",\n  \"updated_at\": \"1959-01-23T01:01:10.544Z\",\n  \"version\": 4704.765785424594\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e76ecee7-5358-4229-9631-8e4429dac091",
+          "name": "Patch a vendor",
+          "request": {
+            "name": "Patch a vendor",
+            "description": {
+              "content": "Partially update a vendor",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "vendors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the vendor to patch"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"metadata_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2cd19d99-9d72-42cd-afed-d9dfab962b82",
+              "name": "The patched Vendor object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the vendor to patch"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"metadata_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"website\": \"https://tsTwDCvfthAriDXQVSetrtBZhtQmqKsBt.qryhkwRrYQN\",\n  \"website_optout\": \"http://ZcHgaXSHuYbmIrcrqOxZJaIMRUJCmJ.wumCc9PJ5yQfaV\",\n  \"hosts\": [\n    \"string\",\n    \"string\"\n  ],\n  \"url_patterns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"urls\": [\n    \"https://qyBObebFloqdnbgRsvPogaol.jrgK.6Dpe6P63OhzEWDGFBnaXmuHKn3oAYiEyG7oYcotpOFdi3Wmdq0wcIZwQp7F5Ux\",\n    \"http://vAxgHYeOIAskRVVaVCEvKxnq.rqclVyu5VFKUTEL6m9rvYc-Qxy8D7oWHEIknO4GLRopQa-KWs42nLS+EgpUUUR2DCPnd5gm4Bgu9-TFnueO\"\n  ],\n  \"taxonomy_id\": \"string\",\n  \"created_at\": \"1983-11-06T04:07:17.730Z\",\n  \"updated_at\": \"1959-01-23T01:01:10.544Z\",\n  \"version\": 4704.765785424594\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb6e4b4f-4d13-4e39-86bb-5c026574d8f6",
+          "name": "Delete a vendor",
+          "request": {
+            "name": "Delete a vendor",
+            "description": {
+              "content": "Delete the vendor",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "vendors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the vendor to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e4897c7a-510b-4064-97af-65e2f3076250",
+              "name": "The deleted Vendor object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the vendor to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"property_id\": \"<string>\",\n  \"metadata_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<number>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42ccc655-34ec-448e-a90f-095ef8504f6e",
+          "name": "Retrieve a list of partners categories",
+          "request": {
+            "name": "Retrieve a list of partners categories",
+            "description": {
+              "content": "Returns a list of all partners categories",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "50f176c3-04b7-4537-9d06-e287624b9ba1",
+              "name": "A list of PartnersCategory objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2f96927-7210-45af-acde-27d253e96a88",
+          "name": "Create a partners category",
+          "request": {
+            "name": "Create a partners category",
+            "description": {
+              "content": "Create a new partners category",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "413d8c10-95a3-400f-b62d-08f00fa70eb1",
+              "name": "The created PartnersCategory object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f891592-b2aa-4d7e-bc1b-93e8316fb1ec",
+          "name": "Retrieve a partners category",
+          "request": {
+            "name": "Retrieve a partners category",
+            "description": {
+              "content": "Returns a single partners category with the given ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-categories",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the partners category to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "198083fc-3122-463c-a7d6-68632f7db595",
+              "name": "A PartnersCategory object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-categories",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the partners category to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d4d52f8-5dba-4470-82e5-db838aa14afc",
+          "name": "Update a partners category",
+          "request": {
+            "name": "Update a partners category",
+            "description": {
+              "content": "Update an existing partners category and replace all its properties",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-categories",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the partners category to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da6b073b-e651-47e9-8f10-a939dbbe61ac",
+              "name": "The updated PartnersCategory object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-categories",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the partners category to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b4e724c-549f-4c91-a74f-4b0125fff594",
+          "name": "Patch a partners category",
+          "request": {
+            "name": "Patch a partners category",
+            "description": {
+              "content": "Partially update a partners category",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-categories",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the partners category to patch"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f042b3b1-d26f-4df2-9d1a-d346abf41824",
+              "name": "The patched PartnersCategory object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-categories",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the partners category to patch"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f67af580-34f7-4e2f-b950-9ecac9589d5c",
+          "name": "Delete a partners category",
+          "request": {
+            "name": "Delete a partners category",
+            "description": {
+              "content": "Delete an existing partners category",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-categories",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the partners category to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "17fa6bd5-0acb-4f28-b015-3eeac1b11d9e",
+              "name": "The deleted PartnersCategory object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-categories",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the partners category to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49959beb-f412-4f50-adc0-6e4bc74ea292",
+          "name": "List partner-purpose associations",
+          "request": {
+            "name": "List partner-purpose associations",
+            "description": {
+              "content": "Returns a paginated list of partner-purpose associations the user has access to",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_partner_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_purpose_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "processing_rules",
+                  "value": "[\"<string>\"]",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_org_override",
+                  "value": "<boolean>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "default_purposes_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "legitimate_interest_purposes_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<integer>",
+                  "description": "Query parameters to filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d0ca41d0-396b-4c3c-84ac-2294a71b5e0c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata_partner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata_purpose_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "processing_rules",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_org_override",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "default_purposes_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legitimate_interest_purposes_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8112,\n  \"limit\": 3515,\n  \"skip\": 8761,\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"metadata_partner_id\": \"<string>\",\n      \"metadata_purpose_id\": \"<string>\",\n      \"processing_rules\": [\n        \"<string>\"\n      ],\n      \"organization_id\": \"<string>\",\n      \"is_org_override\": \"<boolean>\",\n      \"default_purposes_id\": \"<string>\",\n      \"legitimate_interest_purposes_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"version\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"metadata_partner_id\": \"<string>\",\n      \"metadata_purpose_id\": \"<string>\",\n      \"processing_rules\": [\n        \"<string>\"\n      ],\n      \"organization_id\": \"<string>\",\n      \"is_org_override\": \"<boolean>\",\n      \"default_purposes_id\": \"<string>\",\n      \"legitimate_interest_purposes_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"version\": \"<integer>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7df76cd1-2604-4b96-96c9-fe72185c7e80",
+          "name": "Create a partner-purpose association",
+          "request": {
+            "name": "Create a partner-purpose association",
+            "description": {
+              "content": "Creates a new association between a partner and purpose, optionally scoped to an organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "091e2bef-0055-4e12-885d-037a876edf13",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9d20526-2507-4378-afa2-6f7c79aaae69",
+          "name": "Get a partner-purpose association",
+          "request": {
+            "name": "Get a partner-purpose association",
+            "description": {
+              "content": "Retrieves a single partner-purpose association by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "311b64dc-14f5-491d-b6a7-28e8e9f2d8e9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e269fbc-f60d-48ea-8bbf-6fed3fb7b064",
+          "name": "Updates the resource identified by id using data.",
+          "request": {
+            "name": "Updates the resource identified by id using data.",
+            "description": {
+              "content": "Updates the resource identified by id using data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of partners-purposes to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "943eaad7-ed0a-4c3f-8e91-ecedc31359e2",
+              "name": "success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa368a55-1b5c-4e56-ab87-aee011cbaa9b",
+              "name": "not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "35f302da-b219-41a4-8a75-b16b52493d31",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "698d2962-92f5-4e40-bcda-325e9837363d",
+              "name": "general error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e7c03de-ea4b-4834-bd86-ad985211c125",
+          "name": "Update processing rules",
+          "request": {
+            "name": "Update processing rules",
+            "description": {
+              "content": "Updates only the processing rules for an existing partner-purpose association",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"processing_rules\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "910e1d03-10d9-4894-9548-d9cd3d54ed71",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"processing_rules\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"processing_rules\": [\n    \"<string>\"\n  ],\n  \"organization_id\": \"<string>\",\n  \"is_org_override\": \"<boolean>\",\n  \"default_purposes_id\": \"<string>\",\n  \"legitimate_interest_purposes_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a48a5148-026f-4b98-b4bf-8d72868f7083",
+          "name": "Delete a partner-purpose association",
+          "request": {
+            "name": "Delete a partner-purpose association",
+            "description": {
+              "content": "Permanently removes a partner-purpose association",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0c50de68-806b-4519-b92d-1e3f3edb03cc",
+              "name": "Association successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e4af87b-2c49-4cd4-a19c-b331da812052",
+          "name": "List template overrides",
+          "request": {
+            "name": "List template overrides",
+            "description": {
+              "content": "Returns a paginated list of template overrides",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-templates-overrides"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_partner_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_purpose_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "template_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "processing_rule",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<integer>",
+                  "description": "Query parameters to filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0f7accc3-a258-4979-855f-218e3304dc45",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata_partner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata_purpose_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "template_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "processing_rule",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3170,\n  \"limit\": 3112,\n  \"skip\": 2160,\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"metadata_partner_id\": \"<string>\",\n      \"metadata_purpose_id\": \"<string>\",\n      \"template_id\": \"<string>\",\n      \"organization_id\": \"<string>\",\n      \"processing_rule\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"version\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"metadata_partner_id\": \"<string>\",\n      \"metadata_purpose_id\": \"<string>\",\n      \"template_id\": \"<string>\",\n      \"organization_id\": \"<string>\",\n      \"processing_rule\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"version\": \"<integer>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbbdc65d-6dc2-4d3f-a0aa-ba0843d2cce5",
+          "name": "Create a template override",
+          "request": {
+            "name": "Create a template override",
+            "description": {
+              "content": "Creates a new template override for a partner-purpose association",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-templates-overrides"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3130138d-3056-4ded-b5cb-5f7db97cbb58",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "585a77ed-5ba7-4b2e-9756-97e52e0825e3",
+          "name": "Get a template override",
+          "request": {
+            "name": "Get a template override",
+            "description": {
+              "content": "Retrieves a single template override by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-templates-overrides",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "69f9f5f1-da22-4fc8-af56-35911dd6003c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11a34fce-d6bf-4b7f-9c6c-d78ecd0d3003",
+          "name": "Updates the resource identified by id using data.",
+          "request": {
+            "name": "Updates the resource identified by id using data.",
+            "description": {
+              "content": "Updates the resource identified by id using data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-templates-overrides",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of partners-purposes-templates-overrides to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b818797f-58f9-4f2a-8f3d-24ed0c4c17fa",
+              "name": "success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes-templates-overrides to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4883ef5-7e60-458f-8408-8be2d314e699",
+              "name": "not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes-templates-overrides to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6820a63a-1350-4146-a530-92b568f5ad03",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes-templates-overrides to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "216e7ced-9e79-4931-ad3e-d9140dd603e8",
+              "name": "general error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes-templates-overrides to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc01db2c-86fc-44e0-ac2c-4729860bbc38",
+          "name": "Update a template override",
+          "request": {
+            "name": "Update a template override",
+            "description": {
+              "content": "Updates the processing rule for an existing template override",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-templates-overrides",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"processing_rule\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b76d9d67-45ce-47f8-afa2-e58909e0b0c9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"processing_rule\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "897ab8fe-f1ca-4ce4-9dc6-aa4ab885c6f3",
+          "name": "Delete a template override",
+          "request": {
+            "name": "Delete a template override",
+            "description": {
+              "content": "Permanently removes a template override",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-templates-overrides",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c9d1423a-bb88-499c-8cc0-d1c5aa578e74",
+              "name": "Template override successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-templates-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72ddc9da-fb2b-4747-8d4e-8506af53eeee",
+          "name": "List notice-regulation overrides",
+          "request": {
+            "name": "List notice-regulation overrides",
+            "description": {
+              "content": "Returns a paginated list of notice-regulation overrides",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-notices-regulations-overrides"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_partner_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_purpose_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "notice_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "regulation_id",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "processing_rule",
+                  "value": "<string>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at",
+                  "value": "<dateTime>",
+                  "description": "Query parameters to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<integer>",
+                  "description": "Query parameters to filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "775b7910-4d61-4ff0-a4e2-7bee1a9b1628",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata_partner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata_purpose_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "notice_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regulation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "processing_rule",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8064,\n  \"limit\": 7947,\n  \"skip\": 601,\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"metadata_partner_id\": \"<string>\",\n      \"metadata_purpose_id\": \"<string>\",\n      \"notice_id\": \"<string>\",\n      \"organization_id\": \"<string>\",\n      \"regulation_id\": \"<string>\",\n      \"processing_rule\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"version\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"metadata_partner_id\": \"<string>\",\n      \"metadata_purpose_id\": \"<string>\",\n      \"notice_id\": \"<string>\",\n      \"organization_id\": \"<string>\",\n      \"regulation_id\": \"<string>\",\n      \"processing_rule\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"version\": \"<integer>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee5f8356-6a3a-46e2-af6d-399080ee3d5d",
+          "name": "Create a notice-regulation override",
+          "request": {
+            "name": "Create a notice-regulation override",
+            "description": {
+              "content": "Creates a new notice-regulation override for a partner-purpose association",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-notices-regulations-overrides"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ecbd777b-ad24-4c6c-95bf-25cfbfd12962",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9ea423f-31a2-492b-a3ed-28586479ec9f",
+          "name": "Get a notice-regulation override",
+          "request": {
+            "name": "Get a notice-regulation override",
+            "description": {
+              "content": "Retrieves a single notice-regulation override by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-notices-regulations-overrides",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "81934229-6053-467c-98d6-de9428e1e525",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a137f6c2-b016-424e-a629-e79a274b6e42",
+          "name": "Updates the resource identified by id using data.",
+          "request": {
+            "name": "Updates the resource identified by id using data.",
+            "description": {
+              "content": "Updates the resource identified by id using data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-notices-regulations-overrides",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of partners-purposes-notices-regulations-overrides to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b90d9a87-bcaf-4b2c-8092-08acea141cb8",
+              "name": "success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes-notices-regulations-overrides to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91d6b920-0160-463a-af75-6bc25ece19a4",
+              "name": "not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes-notices-regulations-overrides to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82f1ed60-49a8-4f1f-ba45-36b32cdab7bf",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes-notices-regulations-overrides to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ab01390-09fd-4fe2-a7ad-c454d6b02bdf",
+              "name": "general error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of partners-purposes-notices-regulations-overrides to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2da50905-bfeb-487b-884d-a8b23ab6f835",
+          "name": "Update a notice-regulation override",
+          "request": {
+            "name": "Update a notice-regulation override",
+            "description": {
+              "content": "Updates the processing rule for an existing notice-regulation override",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-notices-regulations-overrides",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"processing_rule\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25b5905a-3695-49fc-95de-55fb7eea3d13",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"processing_rule\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"metadata_partner_id\": \"<string>\",\n  \"metadata_purpose_id\": \"<string>\",\n  \"notice_id\": \"<string>\",\n  \"organization_id\": \"<string>\",\n  \"regulation_id\": \"<string>\",\n  \"processing_rule\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c2b2a6a-6c44-4f79-a864-a93069df8741",
+          "name": "Delete a notice-regulation override",
+          "request": {
+            "name": "Delete a notice-regulation override",
+            "description": {
+              "content": "Permanently removes a notice-regulation override",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "partners-purposes-notices-regulations-overrides",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "716556fa-38a4-478a-9254-0bbd7c45b959",
+              "name": "Notice-regulation override successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "partners-purposes-notices-regulations-overrides",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.didomi.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a0ef2169-8a5e-428a-ada6-c095dacea6d9",
+    "name": "Didomi consents/events metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A REST API to communicate with the Didomi platform (<a href=\"https://api.didomi.io/v1/\">https://api.didomi.io/v1/</a>)\n\nThis is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href=\"https://developers.didomi.io/\" target=\"_blank\">Developers Portal</a>.\n\nAll HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value \"Bearer <token>\".\nClick on the Authorize button in the header of this page to provide a token before testing requests from this documentation.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

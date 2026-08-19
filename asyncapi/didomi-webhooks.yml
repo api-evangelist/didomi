@@ -1,0 +1,141 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.didomi.io/integrations/generic-integrations/webhooks
+docs:
+- https://developers.didomi.io/integrations/generic-integrations/webhooks
+- https://developers.didomi.io/integrations/tutorials/configure-a-http-webhook
+- https://developers.didomi.io/api-and-platform/consents/events
+info:
+  name: Didomi webhook catalog
+  provider: didomi
+  description: >-
+    Didomi publishes a real outbound webhook surface. When an end-user changes a
+    consent or preference on any of an organization's websites, apps or
+    preference centers, Didomi POSTs a JSON payload to a customer-configured
+    HTTPS endpoint. Webhooks are configured at the ORGANIZATION level and apply
+    automatically to every property in that organization. The Didomi status page
+    tracks "Webhooks" as its own operational component.
+  status_component: https://status.didomi.io (component "Webhooks")
+  checked: '2026-08-13'
+transport:
+  protocol: https
+  method: POST
+  content_type: application/json
+  direction: outbound (Didomi -> customer endpoint)
+  configured_via: >-
+    Didomi Marketplace > Manage. There is no public REST endpoint documented for
+    self-service webhook registration; Didomi Support can also configure it.
+  source_ip: 35.159.1.63
+  source_ip_note: >-
+    Didomi publishes a single fixed egress IP that customers must allowlist.
+    Verbatim from the docs — allowlisting is required for delivery.
+authentication:
+  mode: oauth2-client-credentials
+  direction: >-
+    INVERTED. Didomi authenticates ITSELF against the CUSTOMER's OAuth
+    authorization server using a client_id and client_secret the customer
+    supplies, obtains an access token, and presents it to the customer's
+    endpoint as `Authorization: Bearer <token>`.
+  optional: true
+  signature: null
+  signature_note: >-
+    GAP. Didomi publishes no HMAC request-signing scheme and no shared-secret
+    signature header. A receiver that does not stand up an OAuth authorization
+    server has only the source IP (35.159.1.63) to authenticate the sender with.
+delivery:
+  retries: at least 5
+  retry_interval: every 5 minutes
+  after_exhaustion: >-
+    The event is written to permanent storage for later processing rather than
+    dropped.
+  ordering: not documented
+  deduplication: not documented
+  timeout: not documented
+envelope:
+  fields:
+    type:
+      type: string
+      description: The type of event.
+    parameters:
+      type: object
+      description: Entities affected by the event.
+    regulation:
+      type: string
+      description: The regulation to which the event belongs.
+  flatten_option:
+    supported: true
+    description: >-
+      An interface option that transforms the payload into a flat key-value
+      object using a double underscore (`__`) as the property-path separator.
+      Only `entity` and `new_entity` are flattened, and they merge into a single
+      `entity` property.
+events:
+- type: event.created
+  description: A new consent event has been created.
+  parameters:
+    entity: the created Event
+- type: event.updated
+  description: An existing consent event has been updated.
+  parameters:
+    source: the event that triggered the update
+    old_entity: the Event before the update
+    new_entity: the Event after the update
+- type: event.deleted
+  description: An existing consent event has been deleted.
+  parameters:
+    entity: the deleted Event
+- type: user.created
+  description: A new user has been created.
+  parameters:
+    entity: the created User
+- type: user.updated
+  description: An existing user has been updated.
+  parameters:
+    source: the event that triggered the User update, if any
+    old_entity: the User before the update
+    new_entity: the User after the update
+- type: user.deleted
+  description: An existing user has been deleted.
+  parameters:
+    entity: the deleted User
+filtering:
+  supported: true
+  mechanism: >-
+    Select the desired event types in the Didomi Marketplace. If no event types
+    are selected the webhook receives ALL available events by default.
+regulation_scope:
+  default: GDPR events only
+  multi_regulation: >-
+    Available on request — an organization must ask its Didomi representative to
+    enable non-GDPR (multi-regulation) events.
+  documented_hazard: >-
+    Quoted from Didomi's own docs: once multi-regulation events are enabled, an
+    organization that maps regulation events to a single contact record without
+    distinguishing between them can have a non-GDPR event (e.g. CPRA) SILENTLY
+    OVERWRITE GDPR consent for the same contact. Any consumer of this webhook
+    must branch on the `regulation` field.
+related_integrations:
+- name: Batch export
+  description: >-
+    Scheduled bulk export of consent data to a destination bucket (Didomi-owned
+    AWS S3, or a customer GCP Storage bucket).
+  docs: https://developers.didomi.io/integrations/generic-integrations/batch-export
+  quotas:
+    exports_configs: 3
+    exports_destinations: 2
+- name: Analytics export
+  description: Export of analytics to a configured destination.
+  docs: https://developers.didomi.io/integrations/tutorials/configure-an-analytics-export
+asyncapi:
+  published_by_provider: false
+  our_generation: asyncapi/didomi-consent-webhooks-asyncapi.yml
+  note: >-
+    Didomi ships no AsyncAPI document. The file above is an API Evangelist
+    generation from this catalog and Didomi's published Event/User schemas — it
+    is marked method: generated and must never be read as a provider artifact.
+gaps:
+- No AsyncAPI or other machine-readable event contract.
+- No HMAC signature / shared-secret verification header on delivered payloads.
+- No public REST endpoint to register or manage a webhook subscription (Marketplace UI or Support only).
+- No documented delivery timeout, ordering guarantee, or dedup key.
+- No replay/redelivery API for events that exhausted their retries into "permanent storage".

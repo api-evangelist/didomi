@@ -1,0 +1,151 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/didomi-platform-api-openapi.yml
+status: candidate
+info:
+  name: Didomi Platform API — candidate MCP tool surface
+  provider: didomi
+  description: >-
+    Didomi ships NO Model Context Protocol server. This file is a DERIVED
+    candidate tool surface computed from the 190 operations in Didomi's own
+    OpenAPI at https://api.didomi.io/openapi.json. It is a design starting
+    point, not something an agent can call today.
+  api_base: https://api.didomi.io/v1
+  openapi: openapi/_original/didomi-platform-api-openapi.yml
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: searched
+search_evidence:
+  checked: '2026-08-13'
+  findings:
+  - source: https://developers.didomi.io/llms.txt
+    result: >-
+      The full 281-line documentation index contains no MCP page. The only
+      agent-facing mechanism Didomi publishes is GitBook's `?ask=` query
+      parameter on any docs page, which answers questions over the docs — it is
+      a documentation Q&A endpoint, not an MCP server and not a route to the
+      Didomi platform.
+  - source: 'npm registry search: registry.npmjs.org/-/v1/search?text=didomi'
+    result: >-
+      40 results, no first-party MCP package. Nothing under the @didomi scope
+      resembles an MCP server. n8n-nodes-didomi (community, 1.0.1, 2026-01-10)
+      is an n8n node, not MCP.
+  - source: 'https://github.com/didomi (58 public repos)'
+    result: No MCP server repo.
+  - source: /.well-known probes across four Didomi hosts
+    result: >-
+      No ai-plugin.json, no agent-card.json, no OAuth metadata. See
+      well-known/didomi-well-known.yml.
+auth_note: >-
+  Any MCP server built over this API must first exchange an organization API key
+  and secret for a 1-hour JWT via POST https://api.didomi.io/v1/sessions, then
+  send `Authorization: Bearer <access_token>` on every call. Tokens should be
+  cached and refreshed; see authentication/didomi-authentication.yml.
+tools:
+- name: didomi_list_consent_events
+  rest: GET /consents/events
+  category: consents
+  description: >-
+    Retrieve consent events for an organization, filtered by user_id or
+    organization_user_id, optionally by status and regulation.
+  required: [organization_id]
+  consequence: read
+- name: didomi_record_consent_event
+  rest: POST /consents/events
+  category: consents
+  description: Record a new consent event and update the user's consent status.
+  consequence: write
+  human_in_the_loop: recommended
+- name: didomi_get_consent_user
+  rest: GET /consents/users/{id}
+  category: consents
+  description: Retrieve a consent user record.
+  consequence: read
+- name: didomi_list_consent_users
+  rest: GET /consents/users
+  category: consents
+  description: >-
+    List consent users. Note $include_full_tree=true moves this call under the
+    100-requests/15s rate limit; without it the /consents/* routes are unlimited.
+  consequence: read
+- name: didomi_delete_consent_user
+  rest: DELETE /consents/users/{id}
+  category: consents
+  description: Erase a consent user — a GDPR Article 17 action.
+  consequence: destructive
+  human_in_the_loop: required
+- name: didomi_upload_consent_proof
+  rest: POST /consents/proofs
+  category: consents
+  description: Upload an audit-grade proof of consent.
+  consequence: write
+- name: didomi_create_consent_token
+  rest: POST /consents/tokens
+  category: consents
+  description: Mint a consent token for cross-domain / cross-device consent sharing.
+  consequence: write
+- name: didomi_list_notices
+  rest: GET /widgets/notices
+  category: widgets
+  description: List consent notices for an organization.
+  consequence: read
+- name: didomi_create_notice
+  rest: POST /widgets/notices
+  category: widgets
+  description: Create a consent notice.
+  consequence: write
+- name: didomi_deploy_notice
+  rest: POST /widgets/notices/deployments
+  category: widgets
+  description: >-
+    Publish a notice to production. Subject to the parallel_notices_deployments
+    quota (default 3).
+  consequence: destructive
+  human_in_the_loop: required
+- name: didomi_list_vendors
+  rest: GET /metadata/vendors
+  category: metadata
+  description: List vendors in the organization's taxonomy.
+  consequence: read
+- name: didomi_list_purposes
+  rest: GET /metadata/purposes
+  category: metadata
+  description: List processing purposes.
+  consequence: read
+- name: didomi_list_cookies
+  rest: GET /cookies
+  category: metadata
+  description: List the cookie catalog.
+  consequence: read
+- name: didomi_get_quotas
+  rest: GET /quotas
+  category: platform
+  description: Read the organization's enforced platform quotas.
+  consequence: read
+- name: didomi_create_session
+  rest: POST /sessions
+  category: auth
+  description: Exchange an API key and secret for a 1-hour JWT access token.
+  consequence: write
+  note: Handled by the transport layer, not normally exposed as an agent tool.
+coverage:
+  openapi_operations: 190
+  candidate_tools: 15
+  note: >-
+    A deliberate subset. The full 190-operation surface (organizations, members,
+    SSO connections, secrets, domains, taxonomies, partner purpose overrides)
+    is administrative and better served by the Console than by an agent.
+caveats:
+- >-
+  Didomi's OpenAPI declares NO operationId on any of its 190 operations, so
+  every tool above is bound to a METHOD + path pair rather than to an
+  operationId. Adding operationIds is a prerequisite for any reliable
+  generated MCP server, and is captured in
+  overlays/didomi-platform-api-overlay.yaml.
+- >-
+  No ToolCrosswalk artifact is emitted: a crosswalk maps a REAL published MCP
+  (or GraphQL) surface onto REST operations, and Didomi publishes neither.

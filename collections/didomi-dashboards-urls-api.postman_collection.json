@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "6ac49c1c-cca8-4458-a7d8-871ae146dab8",
+      "name": "dashboards-urls",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29ae8ce7-0ab3-41d5-98f1-9ca128de6ada",
+          "name": "Retrieve a list of dashboards with signed URLs",
+          "request": {
+            "name": "Retrieve a list of dashboards with signed URLs",
+            "description": {
+              "content": "Returns a list of all dashboards with signed URLs",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "dashboards-urls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "The category of the dashboard. Used for grouping dashboard (per page for example)."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<string>",
+                  "description": "The ID of the organization that the user belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "$limit",
+                  "value": "<number>",
+                  "description": "Number of max results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<number>",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at",
+                  "value": "<number>",
+                  "description": "Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<number>",
+                  "description": "Object representing sorting options. Accepts properties to sort as keys and -1 or 1 for sort direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "79f23ee3-32f6-4fc0-acd4-6b29dd42d19f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "dashboards-urls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "updated_at",
+                      "value": "1"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7995.410178175301,\n  \"limit\": 8532.582263575032,\n  \"skip\": 8159.695412177851,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"type\": \"cluvio\",\n      \"aggregation_period\": \"weekly\",\n      \"product\": \"acm\",\n      \"name\": \"string\",\n      \"order\": 4812.22394832163,\n      \"category\": \"<string>\",\n      \"description\": \"string\",\n      \"illustration_ref\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"type\": \"cluvio\",\n      \"aggregation_period\": \"weekly\",\n      \"product\": \"pmp\",\n      \"name\": \"string\",\n      \"order\": 6987.210222883562,\n      \"category\": \"<string>\",\n      \"description\": \"string\",\n      \"illustration_ref\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.didomi.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5d7ff5ce-7115-4064-bb0b-ed5522528149",
+    "name": "Didomi consents/events dashboards-urls API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A REST API to communicate with the Didomi platform (<a href=\"https://api.didomi.io/v1/\">https://api.didomi.io/v1/</a>)\n\nThis is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href=\"https://developers.didomi.io/\" target=\"_blank\">Developers Portal</a>.\n\nAll HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value \"Bearer <token>\".\nClick on the Authorize button in the header of this page to provide a token before testing requests from this documentation.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

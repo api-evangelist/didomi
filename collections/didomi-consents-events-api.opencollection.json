@@ -1,0 +1,270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Didomi consents/events API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "consents/events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/events",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization for which to retrieve events"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter events according to their status (possible values: confirmed, pending_approval). If this field is missing, only confirmed events are returned. To filter on multiple statuses in a single request, use the notation status[$in]: ?status[$in]=confirmed&status[$in]=pending_approval."
+              },
+              {
+                "name": "regulation",
+                "value": "",
+                "type": "query",
+                "description": "Filter events according to their regulation. Possible value is any existing regulation in the Regulations API (/compliance/v1/regulations). If this field is missing, only GDPR events are returned. To filter on multiple regulations in a single request, use the notation regulation[$in]: ?regulation[$in]=gdpr&regulation[$in]=cpra."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of events for a given organization ID and user ID or organization user ID"
+        },
+        {
+          "info": {
+            "name": "Create a new event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.didomi.io/v1/consents/events",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization for which to create an event"
+              },
+              {
+                "name": "$disable_integrations",
+                "value": "",
+                "type": "query",
+                "description": "Disable sending the event to integrations configured for the organization. Set this parameter to true if you do not want the event processed by integrations (if you are importing events that already exist in the integrated systems, for instance)."
+              },
+              {
+                "name": "$generate_tcfcs",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"true\" to generate a TCF consent string for the user based on the latest status of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new event and update the consent status of the user"
+        },
+        {
+          "info": {
+            "name": "Delete events",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/consents/events",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the event belongs to"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "{filters}",
+                "value": "",
+                "type": "query",
+                "description": "Keys and values to filter the events to delete. You can filter using any property of the events, including nested properties like metadata by using . as a separator for each level"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete events and update the user consent status as if the events had never happened ; the user consent status is re-computed from all events for that user except deleted events"
+        },
+        {
+          "info": {
+            "name": "Retrieve an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.didomi.io/v1/consents/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to retrieve"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the event belongs to"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to retrieve events. You must provide either **user_id** or **organization_user_id** when querying events"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns an event"
+        },
+        {
+          "info": {
+            "name": "Patch an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.didomi.io/v1/consents/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to update"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the event belongs to"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to update events. You must provide either **user_id** or **organization_user_id** when updating events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to update events. You must provide either **user_id** or **organization_user_id** when updating events"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch an existing event"
+        },
+        {
+          "info": {
+            "name": "Delete an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.didomi.io/v1/consents/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to delete"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization that the event belongs to"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The Didomi user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+              },
+              {
+                "name": "organization_user_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization user ID for which to delete events. You must provide either **user_id** or **organization_user_id** when querying events"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an event and update the user consent status as if the event had never happened ; the user consent status is re-computed from all events for that user except deleted events"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

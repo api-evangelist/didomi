@@ -1,0 +1,106 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/_original/didomi-platform-api-openapi.yml plus the Didomi developer
+  documentation at developers.didomi.io. Every operation referenced is a real
+  METHOD + path in Didomi's published OpenAPI.
+info:
+  name: Didomi Agent Skills
+  provider: didomi
+  api: Didomi Platform API
+  base_url: https://api.didomi.io/v1
+  description: >-
+    Packaged Agent Skills for the marquee Didomi Platform API flows, mirroring
+    the Arazzo workflows in arazzo/. Each skill is grounded in real operations
+    and carries the conventions, quota, rate-limit and error rules an agent
+    needs to execute the flow safely.
+  provider_published_skills: false
+  provider_published_agents_md: false
+  note: >-
+    Didomi publishes no skills/ directory, no AGENTS.md and no llms-full.txt.
+    It DOES publish an llms.txt index (saved verbatim at llms/didomi-llms.txt)
+    and, through GitBook, a per-page `?ask=` query parameter that answers
+    natural-language questions against the docs — a documentation Q&A surface,
+    not an execution surface.
+  grounding_caveat: >-
+    Didomi's OpenAPI declares NO operationId on any of its 190 operations.
+    Skills therefore reference METHOD + path. Nothing here is invented; every
+    path was verified against the spec on 2026-08-13.
+skills:
+- name: didomi-authenticate
+  file: didomi-authenticate.md
+  summary: >-
+    Mint and maintain the 1-hour JWT every other Didomi call requires, and read
+    the quota and rate-limit signals before you start.
+  operations:
+  - POST /sessions
+  - GET /sessions/{id}
+  - GET /quotas
+  - GET /keys
+  prerequisite_for: all
+- name: didomi-record-consent
+  file: didomi-record-consent.md
+  summary: >-
+    Record an end-user consent decision as an auditable consent event and
+    confirm it moved to `confirmed`.
+  operations:
+  - POST /sessions
+  - POST /consents/events
+  - GET /consents/events/{id}
+  - GET /consents/events
+  mirrors: arazzo/didomi-record-consent-event-workflow.yml
+  consequence: write
+  emits_webhooks: [event.created, user.updated]
+- name: didomi-dsar-erasure
+  file: didomi-dsar-erasure.md
+  summary: >-
+    Execute a GDPR Article 17 / CCPA delete — resolve the subject, export the
+    record, then erase events and the user.
+  operations:
+  - POST /sessions
+  - GET /consents/users
+  - GET /consents/users/{id}
+  - GET /consents/events
+  - DELETE /consents/events
+  - DELETE /consents/events/{id}
+  - DELETE /consents/users/{id}
+  mirrors: arazzo/didomi-data-subject-erasure-workflow.yml
+  consequence: destructive
+  human_in_the_loop: required
+  emits_webhooks: [event.deleted, user.deleted]
+- name: didomi-deploy-notice
+  file: didomi-deploy-notice.md
+  summary: >-
+    Create, configure (including per-regulation configurations) and publish a
+    consent notice to production, then verify the rendered SDK config.
+  operations:
+  - POST /sessions
+  - POST /widgets/notices
+  - GET /widgets/notices
+  - POST /widgets/notices/texts
+  - POST /widgets/notices/texts-contents
+  - GET /widgets/notices/configs
+  - PATCH /widgets/notices/configs/{id}
+  - POST /widgets/notices/deployments
+  - GET /widgets/notices/deployments/{id}
+  - GET /widgets/notices/sdk-configs
+  mirrors: arazzo/didomi-deploy-notice-workflow.yml
+  consequence: destructive
+  human_in_the_loop: required
+cross_cutting:
+  authentication: authentication/didomi-authentication.yml
+  conventions: conventions/didomi-conventions.yml
+  errors: errors/didomi-problem-types.yml
+  rate_limits: rate-limits/didomi-rate-limits.yml
+  data_model: data-model/didomi-data-model.yml
+  webhooks: asyncapi/didomi-webhooks.yml
+  agentic_access: agentic-access/didomi-agentic-access.yml
+warnings:
+- >-
+  NO IDEMPOTENCY. Didomi publishes no Idempotency-Key header on any write route,
+  including POST /consents/events. Every skill that writes says so and offers a
+  metadata-correlation workaround; none of them can promise safe retry.
+- >-
+  A Didomi API key grants full organization access. There are no OAuth scopes
+  and no way to mint a reduced-privilege token, so an agent holding a key holds
+  everything the key holds. Scope at the key, in the Console.

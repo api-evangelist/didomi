@@ -1,0 +1,182 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Didomi Platform API
+  version: 1.0.0
+extends: ../openapi/_original/didomi-platform-api-openapi.yml
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: >-
+    Diff between the spec Didomi publishes at https://api.didomi.io/openapi.json
+    (fetched 2026-08-13, HTTP 200, 305,429 bytes, 81 paths / 190 operations) and
+    the enrichments API Evangelist applies. The overlay is the record of what we
+    changed; the original is never mutated in place.
+  note: >-
+    Didomi's published document is OpenAPI 3.0.2 but carries three Swagger 2.0
+    holdovers: a top-level `definitions` object (18 `#/definitions/...` refs
+    alongside 349 `#/components/...` refs), per-operation `consumes` and
+    `produces` keys (15 of each), and NO `servers` block at all. It also
+    declares no `operationId` on any of its 190 operations. Every action below
+    addresses one of those.
+actions:
+- target: $
+  description: >-
+    Add the servers block. Didomi's published openapi.json has no servers[], so
+    a generated client has no base URL. The host is stated in Didomi's own docs
+    ("Its base URL is: https://api.didomi.io/v1/") and in the spec's own
+    info.description.
+  update:
+    servers:
+    - url: https://api.didomi.io/v1
+      description: Didomi Platform API
+- target: $.info
+  description: >-
+    Add contact and terms so the document identifies its owner. Support address
+    is the one Didomi publishes in its API introduction and quota docs; the
+    security address is the one on https://www.didomi.io/security.
+  update:
+    contact:
+      name: Didomi Support
+      email: support@didomi.io
+      url: https://developers.didomi.io/
+    termsOfService: https://www.didomi.io/legal-notice
+    x-security-contact: security@didomi.io
+- target: $.info
+  description: >-
+    Record the documented backwards-compatibility guarantee as a machine-readable
+    extension. Didomi states: "We guarantee backwards compatibility with our APIs
+    and other interfaces by not removing properties or otherwise altering
+    existing functionality... Breaking changes or future API versions will be
+    communicated in advance."
+  update:
+    x-compatibility-policy:
+      additive_only: true
+      source: https://developers.didomi.io/api-and-platform/introduction
+- target: $
+  description: >-
+    Declare the rate-limit contract at the document level. Didomi returns IETF
+    draft-07 RateLimit headers on every rate-limited route and 429 + Retry-After
+    on exhaustion, but none of this appears in the spec.
+  update:
+    x-rate-limit:
+      standard: draft-ietf-httpapi-ratelimit-headers-07
+      default: 100 requests per 15 seconds per organization
+      exempt: /consents/*
+      exempt_exception: >-
+        GET /consents/users and GET /consents/users/{id} with
+        $include_full_tree=true are rate limited
+      headers:
+      - RateLimit
+      - RateLimit-Policy
+      - Retry-After
+      status_on_exhaustion: 429
+      source: https://developers.didomi.io/api-and-platform/introduction/rate-limiting
+- target: $
+  description: >-
+    Declare the error envelope. Didomi returns a consistent JSON object
+    {code, name, message, errors} on every 4xx/5xx, verified live against
+    https://api.privacy-center.org/ which answered
+    {"code":404,"errors":{},"message":"Page not found","name":"NotFound"}.
+    It is NOT RFC 9457 problem+json.
+  update:
+    x-error-envelope:
+      media_type: application/json
+      rfc9457: false
+      fields:
+        code: HTTP status code, repeated in the body
+        name: error name tied to the status code, e.g. BadRequest, NotFound
+        message: human-readable explanation
+        errors: array/object of batched sub-errors
+      source: https://developers.didomi.io/api-and-platform/introduction/errors
+- target: $
+  description: >-
+    Declare the pagination contract. Didomi's list endpoints accept $limit and
+    $skip and return {total, limit, skip, data}, but the spec documents neither
+    the parameters nor the envelope.
+  update:
+    x-pagination:
+      style: offset
+      request_params:
+        limit: $limit
+        skip: $skip
+      limit_ceiling: 100
+      response_fields:
+      - total
+      - limit
+      - skip
+      - data
+      source: https://developers.didomi.io/api-and-platform/introduction/pagination
+- target: $
+  description: >-
+    Declare the response-cache signalling headers Didomi adds to cached routes.
+    They are undocumented in the spec.
+  update:
+    x-cache-headers:
+      X-DidomiCacheEnabled: boolean — caching is enabled for this route
+      X-DidomiCacheHit: boolean — this response was served from cache
+      source: https://developers.didomi.io/api-and-platform/introduction/caching
+- target: $.paths['/consents/events'].get
+  description: >-
+    Add an operationId. Didomi declares none on any of its 190 operations, which
+    blocks every downstream generator — SDKs, MCP tool bindings, Arazzo step
+    references, agent skills. This action is the pattern; the same treatment is
+    required across all 190. Naming convention: <resource>_<verb>.
+  update:
+    operationId: consentEvents_list
+- target: $.paths['/consents/events'].post
+  update:
+    operationId: consentEvents_create
+- target: $.paths['/consents/events/{id}'].get
+  update:
+    operationId: consentEvents_get
+- target: $.paths['/consents/users'].get
+  update:
+    operationId: consentUsers_list
+- target: $.paths['/consents/users/{id}'].delete
+  update:
+    operationId: consentUsers_delete
+- target: $.paths['/consents/proofs'].post
+  update:
+    operationId: consentProofs_upload
+- target: $.paths['/consents/tokens'].post
+  update:
+    operationId: consentTokens_create
+- target: $.paths['/widgets/notices'].get
+  update:
+    operationId: notices_list
+- target: $.paths['/widgets/notices'].post
+  update:
+    operationId: notices_create
+- target: $.paths['/widgets/notices/deployments'].post
+  update:
+    operationId: noticeDeployments_create
+- target: $.paths['/sessions'].post
+  update:
+    operationId: sessions_create
+- target: $.paths['/quotas'].get
+  update:
+    operationId: quotas_list
+- target: $.paths['/metadata/vendors'].get
+  update:
+    operationId: metadataVendors_list
+- target: $.paths['/metadata/purposes'].get
+  update:
+    operationId: metadataPurposes_list
+- target: $.paths['/metadata/partners/deprecate'].post
+  update:
+    operationId: metadataPartners_deprecate
+- target: $.paths['/cookies'].get
+  update:
+    operationId: cookies_list
+x-not-applied:
+- reason: >-
+    Rewriting the 18 `#/definitions/...` refs to `#/components/schemas/...` and
+    dropping the Swagger 2.0 `consumes`/`produces` keys is a normalisation of
+    Didomi's own document rather than an addition to it. It belongs in Didomi's
+    build, not in an overlay — the refs currently resolve only because the
+    top-level `definitions` object was left in the document alongside
+    `components`.
+- reason: >-
+    No 429 response object is injected per-operation. Didomi documents the
+    behaviour in prose and returns the headers at the edge; asserting a response
+    shape we have not observed on an authenticated call would be a guess.

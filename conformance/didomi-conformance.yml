@@ -1,0 +1,265 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Didomi developer documentation (developers.didomi.io), the published OpenAPI at
+  https://api.didomi.io/openapi.json, https://www.didomi.io/security, and live
+  probes performed 2026-08-13.
+info:
+  name: Didomi standards conformance
+  provider: didomi
+  description: >-
+    What Didomi conforms to, asserted only where there is evidence. Didomi is a
+    consent management platform, so its heaviest conformance load is in the
+    PRIVACY-SIGNAL standards family (IAB TCF, IAB GPP, Global Privacy Control,
+    Google Consent Mode) rather than in the API-design standards family — and
+    that split is exactly what the evidence shows.
+  checked: '2026-08-13'
+
+standards:
+- id: openapi
+  name: OpenAPI Specification
+  conforms: true
+  version: 3.0.2
+  evidence:
+    url: https://api.didomi.io/openapi.json
+    http_status: 200
+    bytes: 305429
+    paths: 81
+    operations: 190
+    fetched: '2026-08-13'
+  caveats:
+  - No `servers` block in the published document.
+  - No `operationId` on any of the 190 operations.
+  - >-
+      Swagger 2.0 holdovers survive in an OpenAPI 3.0.2 document: a top-level
+      `definitions` object with 18 `#/definitions/...` refs alongside 349
+      `#/components/...` refs, plus 15 `consumes` and 15 `produces` keys.
+  remediation: overlays/didomi-platform-api-overlay.yaml
+
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: >-
+    Didomi runs a real webhook surface (six event types, its own status-page
+    component) but publishes no AsyncAPI document. Our generation lives at
+    asyncapi/didomi-consent-webhooks-asyncapi.yml and is marked
+    method: generated.
+
+- id: rfc9457
+  name: 'RFC 9457 / RFC 7807 Problem Details for HTTP APIs'
+  conforms: false
+  evidence: >-
+    Didomi returns a bespoke JSON envelope {code, name, message, errors} with
+    media type application/json. Verified live at https://api.privacy-center.org/
+    (HTTP 404, body {"code":404,"errors":{},"message":"Page not
+    found","name":"NotFound"}). No `type` URI, no `instance`, no
+    application/problem+json.
+  detail: errors/didomi-problem-types.yml
+
+- id: ratelimit-headers
+  name: 'IETF RateLimit header fields for HTTP (draft-ietf-httpapi-ratelimit-headers-07)'
+  conforms: true
+  evidence: >-
+    Didomi states its rate-limited routes "return headers respecting the draft 7
+    of the IETF RateLimit header fields for HTTP specification, even when the
+    request and organization are not being actively throttled", and documents
+    both `RateLimit: limit=100, remaining=60, reset=7` and `RateLimit-Policy:
+    100;w=15`.
+  source: https://developers.didomi.io/api-and-platform/introduction/rate-limiting
+  note: >-
+    Named explicitly, by draft number, with the exact header formats. This is
+    the strongest API-standards conformance claim Didomi makes, and it is
+    unusually specific — most providers cite no version at all.
+
+- id: rfc6585-429
+  name: 'RFC 6585 / RFC 7231 429 + Retry-After'
+  conforms: true
+  evidence: >-
+    Documented: on exhaustion the API returns 429 with a `Retry-After` header
+    carrying the wait in seconds.
+  caveat: 429 is declared on zero of the 190 operations in the OpenAPI.
+
+- id: oauth2
+  name: OAuth 2.0
+  conforms: partial
+  evidence: >-
+    NOT used to protect the Didomi API. The Platform API uses a bearer JWT
+    minted by POST /v1/sessions from an API key + secret; there is no
+    authorization server, no /.well-known/oauth-authorization-server (probed,
+    404 on every host), and no scopes. OAuth 2.0 client-credentials IS used, in
+    the INVERTED direction, for outbound webhooks: Didomi authenticates against
+    the CUSTOMER's authorization server to obtain a token before POSTing events.
+  source: https://developers.didomi.io/integrations/generic-integrations/webhooks
+
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: >-
+    /.well-known/openid-configuration returned 404 on api.didomi.io,
+    developers.didomi.io and www.didomi.io. Didomi does support customer SSO
+    (SSO connections are a first-class API resource at /sso-connections), but
+    publishes no OIDC discovery document of its own.
+
+- id: jwt
+  name: 'RFC 7519 JSON Web Token'
+  conforms: true
+  evidence: >-
+    securitySchemes.bearer declares type http, scheme bearer, bearerFormat JWT.
+    POST /v1/sessions returns an access_token; tokens expire after 3600 seconds.
+  source: https://developers.didomi.io/api-and-platform/introduction/authentication
+
+- id: rfc8594
+  name: 'RFC 8594 Sunset HTTP Header'
+  conforms: false
+  evidence: >-
+    No Sunset or Deprecation header is documented or observed. Deprecation is
+    communicated in prose only.
+  detail: lifecycle/didomi-lifecycle.yml
+
+- id: rfc8615-well-known
+  name: 'RFC 8615 Well-Known URIs'
+  conforms: false
+  evidence: >-
+    Every /.well-known path probed returned 404 on api.didomi.io,
+    developers.didomi.io and www.didomi.io. console.didomi.io answers 200 with
+    an SPA shell for all of them, which is not a document.
+  detail: well-known/didomi-well-known.yml
+
+- id: rfc9116-security-txt
+  name: 'RFC 9116 security.txt'
+  conforms: false
+  evidence: >-
+    https://didomi.io/.well-known/security.txt -> 404;
+    https://www.didomi.io/security.txt -> 404. A security contact DOES exist
+    (security@didomi.io) but is published only as prose on
+    https://www.didomi.io/security.
+  detail: security/didomi-vulnerability-disclosure.yml
+
+- id: idempotency-key
+  name: 'Idempotency-Key header (draft-ietf-httpapi-idempotency-key-header)'
+  conforms: false
+  evidence: >-
+    No idempotency key, replay window or safe-retry contract is documented on
+    any write route, including POST /consents/events.
+  detail: conventions/didomi-conventions.yml
+
+- id: pagination
+  name: Consistent collection pagination
+  conforms: true
+  evidence: >-
+    Uniform offset pagination across list endpoints — request $limit / $skip,
+    response {total, limit, skip, data}.
+  source: https://developers.didomi.io/api-and-platform/introduction/pagination
+
+- id: json-schema
+  name: JSON Schema
+  conforms: partial
+  evidence: >-
+    Schemas are expressed as OpenAPI 3.0.2 Schema Objects (a JSON Schema
+    dialect), split across `components.schemas` and the legacy top-level
+    `definitions`. Didomi also publishes @didomi/consent-string-schema on npm
+    for the consent string itself.
+
+- id: iab-tcf
+  name: IAB Europe Transparency and Consent Framework (TCF) v2.x
+  conforms: true
+  evidence: >-
+    Didomi is a registered IAB TCF CMP. It maintains a fork of the reference
+    implementation (github.com/didomi/iabtcf-es, published as
+    @didomi/iabtcf-core 1.6.5 and @didomi/iabtcf-cmpapi 1.6.4), ships the
+    __tcfapi surface in the Web SDK, encodes a TC string into every consent
+    event (`consents.tcfcs`), and tracked the April 2026 TCF updates in Web SDK
+    1.2.0 including new specialPurposes and optOut fields for cookie disclosures.
+  source: https://developers.didomi.io/cmp/web-sdk/third-parties/iab-frameworks
+
+- id: iab-gpp
+  name: IAB Global Privacy Platform (GPP)
+  conforms: true
+  evidence: >-
+    GPP string encoding is implemented and actively maintained across the recent
+    Web SDK releases (1.5.0 applicableSections fix, 1.5.1 Gpc field and
+    cmpDisplayStatus fixes, 1.5.2 gpp_string added to API event payloads and a
+    tcfeuv2 first-load race fix). Sections named in the changelog include
+    tcfeuv2, usnat and usca.
+  source: https://developers.didomi.io/cmp/web-sdk/reference/versions
+
+- id: gpc
+  name: Global Privacy Control
+  conforms: true
+  evidence: >-
+    The SDK reads navigator.globalPrivacyControl and reflects it into encoded
+    GPP sections (fixed in Web SDK 1.5.1); 1.5.0 added GPC territories and
+    purposes configuration options; 1.5.2 lets an explicit consent choice
+    override a GPC opt-out.
+
+- id: google-consent-mode-v2
+  name: Google Consent Mode v2
+  conforms: true
+  evidence: >-
+    Direct integration documented, with mixed-regulation support added in Web
+    SDK 1.5.0. Didomi's security page also displays a Google CMP Partner
+    certification badge.
+  source: https://developers.didomi.io/cmp/web-sdk/third-parties/direct-integrations/google-consent-mode
+
+- id: gdpr
+  name: 'EU General Data Protection Regulation (Regulation 2016/679)'
+  conforms: true
+  evidence: >-
+    The product's purpose. Didomi lists GDPR under its compliance posture on
+    https://www.didomi.io/security, defaults webhooks to GDPR events, exposes
+    consent proofs for audit, and ships DSAR / privacy-request workflows for
+    Articles 15-22.
+
+- id: us-state-privacy
+  name: 'US state privacy laws (CPRA and successors)'
+  conforms: true
+  evidence: >-
+    Multi-regulation configurations, per-regulation notice configs, and
+    regulation filtering on the Consents API (`regulation[$in]=gdpr&regulation[$in]=cpra`).
+    Web SDK 1.4.0 removed support for the now-superseded CCPA regulation.
+
+- id: iso27001
+  name: 'ISO/IEC 27001:2022'
+  conforms: true
+  evidence: >-
+    "the internationally-recognized standard that defined Didomi's Information
+    Security Management System (ISMS)" — https://www.didomi.io/security. A Vanta
+    trust center is served at https://trust.didomi.io (HTTP 200, 2026-08-13).
+  detail: security/didomi-trust-center.yml
+
+- id: soc2
+  name: SOC 2
+  conforms: unknown
+  evidence: >-
+    No SOC 2 claim found on https://www.didomi.io/security. The Vanta trust
+    center at https://trust.didomi.io renders client-side and its document list
+    could not be read anonymously, so absence of a SOC 2 claim here is absence
+    of evidence, not evidence of absence.
+
+- id: wcag
+  name: 'WCAG 2.x accessibility'
+  conforms: partial
+  evidence: >-
+    Accessibility work is visible in the changelog (Web SDK 1.2.0 fixed button
+    aria-label ordering for WCAG 2.5.3 "Label in Name"), but Didomi publishes no
+    VPAT or conformance statement for the notice UI.
+
+not_applicable:
+- id: fhir
+  reason: Not a healthcare data provider.
+- id: fapi
+  reason: Not a financial-grade API; no OAuth authorization server.
+- id: psd2
+  reason: Not a payment provider.
+- id: scim
+  reason: >-
+    Members and SSO connections are managed through bespoke REST resources
+    (/members, /sso-connections), not SCIM.
+- id: odata
+  reason: Bespoke $limit/$skip/$in filtering, not OData.
+- id: 'json:api'
+  reason: Bespoke {total, limit, skip, data} envelope.
+- id: graphql
+  reason: No GraphQL endpoint published or discovered.
+- id: grpc
+  reason: No .proto published in the GitHub org, on buf.build, or in the docs.
