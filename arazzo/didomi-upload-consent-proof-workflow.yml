@@ -11,8 +11,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: consentsProofsApi
+  url: ../openapi/didomi-consents-proofs-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: upload-consent-proof
@@ -41,7 +41,7 @@ workflows:
     description: >-
       Upload the base64-encoded file to serve as proof of consent for the
       organization. The file field is required by the ConsentProof input schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1proofs/post'
+    operationPath: '{$sourceDescriptions.consentsProofsApi.url}#/paths/~1consents~1proofs/post'
     parameters:
     - name: Authorization
       in: header
@@ -61,7 +61,7 @@ workflows:
     description: >-
       Retrieve the uploaded proof by its ID, scoped to the same organization, to
       verify that it was persisted.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1proofs~1{id}/get'
+    operationPath: '{$sourceDescriptions.consentsProofsApi.url}#/paths/~1consents~1proofs~1{id}/get'
     parameters:
     - name: Authorization
       in: header

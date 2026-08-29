@@ -11,8 +11,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: cookiesApi
+  url: ../openapi/didomi-cookies-api-openapi.yml
+  type: openapi
+- name: taxonomiesApi
+  url: ../openapi/didomi-taxonomies-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: classify-and-register-cookie
@@ -54,7 +57,7 @@ workflows:
     description: >-
       Create a vendor taxonomy item. id and name are both required by the
       TaxonomyVendorInput schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1taxonomies~1vendors/post'
+    operationPath: '{$sourceDescriptions.taxonomiesApi.url}#/paths/~1taxonomies~1vendors/post'
     parameters:
     - name: Authorization
       in: header
@@ -73,7 +76,7 @@ workflows:
       Register a cookie on the property, classifying it with the taxonomy item
       created above. name, domain, taxonomy_id and property_id are required by the
       CookieInput schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1cookies/post'
+    operationPath: '{$sourceDescriptions.cookiesApi.url}#/paths/~1cookies/post'
     parameters:
     - name: Authorization
       in: header
@@ -93,7 +96,7 @@ workflows:
     description: >-
       Read the cookie back by its ID to confirm it was registered with the new
       classification.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1cookies~1{id}/get'
+    operationPath: '{$sourceDescriptions.cookiesApi.url}#/paths/~1cookies~1{id}/get'
     parameters:
     - name: Authorization
       in: header

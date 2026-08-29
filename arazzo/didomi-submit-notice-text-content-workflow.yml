@@ -12,8 +12,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: noticesApi
+  url: ../openapi/didomi-notices-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: submit-notice-text-content
@@ -50,7 +50,7 @@ workflows:
     description: >-
       Create a notice text. organization_id and name are both required by the
       NoticeTextInput schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1texts/post'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices~1texts/post'
     parameters:
     - name: Authorization
       in: header
@@ -69,7 +69,7 @@ workflows:
       Submit a content version against the new text. content, organization_id and
       text_id are required by the NoticeTextContentInput schema. The content
       enters the Didomi approval process and is assigned a content version.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1texts-contents/post'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices~1texts-contents/post'
     parameters:
     - name: Authorization
       in: header
@@ -90,7 +90,7 @@ workflows:
     description: >-
       Read the content back by its ID and branch on its approval status: approved
       content ends the flow while submitted content is polled once more.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1texts-contents~1{id}/get'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices~1texts-contents~1{id}/get'
     parameters:
     - name: Authorization
       in: header
@@ -121,7 +121,7 @@ workflows:
     description: >-
       Re-read the content to poll its approval status when it was still submitted
       and awaiting review by the Didomi team.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1texts-contents~1{id}/get'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices~1texts-contents~1{id}/get'
     parameters:
     - name: Authorization
       in: header

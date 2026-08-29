@@ -11,8 +11,8 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: privacyCentersApi
+  url: ../openapi/didomi-privacy-centers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-privacy-center
@@ -47,7 +47,7 @@ workflows:
     description: >-
       Create a new privacy center. name and organization_id are both required by
       the PrivacyCenterInput schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1privacy-centers/post'
+    operationPath: '{$sourceDescriptions.privacyCentersApi.url}#/paths/~1privacy-centers/post'
     parameters:
     - name: Authorization
       in: header
@@ -66,7 +66,7 @@ workflows:
   - stepId: getPrivacyCenter
     description: >-
       Read the privacy center back by its ID to confirm it was created.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1privacy-centers~1{id}/get'
+    operationPath: '{$sourceDescriptions.privacyCentersApi.url}#/paths/~1privacy-centers~1{id}/get'
     parameters:
     - name: Authorization
       in: header

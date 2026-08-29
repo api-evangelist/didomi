@@ -11,8 +11,11 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: consentsTokensApi
+  url: ../openapi/didomi-consents-tokens-api-openapi.yml
+  type: openapi
+- name: consentsUsersApi
+  url: ../openapi/didomi-consents-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: issue-consent-token
@@ -45,7 +48,7 @@ workflows:
     description: >-
       Create a new end user under the organization. organization_id is supplied as
       a required query parameter.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users/post'
+    operationPath: '{$sourceDescriptions.consentsUsersApi.url}#/paths/~1consents~1users/post'
     parameters:
     - name: Authorization
       in: header
@@ -65,7 +68,7 @@ workflows:
     description: >-
       Patch the user to assign your organization's internal user ID so the token
       can be scoped to that ID.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users~1{id}/patch'
+    operationPath: '{$sourceDescriptions.consentsUsersApi.url}#/paths/~1consents~1users~1{id}/patch'
     parameters:
     - name: Authorization
       in: header
@@ -89,7 +92,7 @@ workflows:
       Issue a consent token scoped to the user and organization. organization_id,
       organization_user_id and lifetime are all required by the ConsentToken input
       schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1tokens/post'
+    operationPath: '{$sourceDescriptions.consentsTokensApi.url}#/paths/~1consents~1tokens/post'
     parameters:
     - name: Authorization
       in: header

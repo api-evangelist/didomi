@@ -12,8 +12,8 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: consentsEventsApi
+  url: ../openapi/didomi-consents-events-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: record-consent-event
@@ -55,7 +55,7 @@ workflows:
       Create a new consent event that updates the user's consent status for a
       single purpose. The user.id field is required by the ConsentEventInput
       schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1events/post'
+    operationPath: '{$sourceDescriptions.consentsEventsApi.url}#/paths/~1consents~1events/post'
     parameters:
     - name: Authorization
       in: header
@@ -83,7 +83,7 @@ workflows:
     description: >-
       Read the created event back by its ID and branch on its status: confirmed
       events end the flow while pending_approval events are polled once more.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1events~1{id}/get'
+    operationPath: '{$sourceDescriptions.consentsEventsApi.url}#/paths/~1consents~1events~1{id}/get'
     parameters:
     - name: Authorization
       in: header
@@ -120,7 +120,7 @@ workflows:
     description: >-
       Re-read the event to poll for a confirmed status when the event was still
       pending approval after creation.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1events~1{id}/get'
+    operationPath: '{$sourceDescriptions.consentsEventsApi.url}#/paths/~1consents~1events~1{id}/get'
     parameters:
     - name: Authorization
       in: header

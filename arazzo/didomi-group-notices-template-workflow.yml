@@ -11,8 +11,8 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: noticesApi
+  url: ../openapi/didomi-notices-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: group-notices-template
@@ -46,7 +46,7 @@ workflows:
     description: >-
       Create a consent notice owned by the organization. organization_id and name
       are both required by the NoticeInput schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices/post'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices/post'
     parameters:
     - name: Authorization
       in: header
@@ -64,7 +64,7 @@ workflows:
     description: >-
       Create a notice template that groups the new notice via its notices_id
       list, sharing common configuration across the listed notices.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1templates/post'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices~1templates/post'
     parameters:
     - name: Authorization
       in: header
@@ -83,7 +83,7 @@ workflows:
     description: >-
       Read the template back by its ID to confirm it was created and groups the
       notice.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1templates~1{id}/get'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices~1templates~1{id}/get'
     parameters:
     - name: Authorization
       in: header

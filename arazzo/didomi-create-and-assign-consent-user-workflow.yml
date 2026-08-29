@@ -11,8 +11,8 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: consentsUsersApi
+  url: ../openapi/didomi-consents-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-and-assign-consent-user
@@ -45,7 +45,7 @@ workflows:
     description: >-
       Create a new end user under the organization and store its consent status.
       organization_id is supplied as a required query parameter.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users/post'
+    operationPath: '{$sourceDescriptions.consentsUsersApi.url}#/paths/~1consents~1users/post'
     parameters:
     - name: Authorization
       in: header
@@ -65,7 +65,7 @@ workflows:
     description: >-
       Patch the user to assign your organization's internal user ID and country,
       linking the Didomi user to your own systems.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users~1{id}/patch'
+    operationPath: '{$sourceDescriptions.consentsUsersApi.url}#/paths/~1consents~1users~1{id}/patch'
     parameters:
     - name: Authorization
       in: header
@@ -89,7 +89,7 @@ workflows:
   - stepId: getUser
     description: >-
       Read the user back by its ID to confirm the internal ID assignment.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1consents~1users~1{id}/get'
+    operationPath: '{$sourceDescriptions.consentsUsersApi.url}#/paths/~1consents~1users~1{id}/get'
     parameters:
     - name: Authorization
       in: header

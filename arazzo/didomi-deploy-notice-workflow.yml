@@ -11,8 +11,8 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: didomiApi
-  url: ../openapi/didomi-platform-api-openapi.yml
+- name: noticesApi
+  url: ../openapi/didomi-notices-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: deploy-notice
@@ -49,7 +49,7 @@ workflows:
     description: >-
       Create a new consent notice owned by the organization. Only the
       organization_id and name are required by the NoticeInput schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices/post'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices/post'
     parameters:
     - name: Authorization
       in: header
@@ -68,7 +68,7 @@ workflows:
       Deploy the supplied production notice configuration for the new notice.
       notice_id, organization_id and production_config_id are all required by
       the NoticeDeploymentInput schema.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1deployments/post'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices~1deployments/post'
     parameters:
     - name: Authorization
       in: header
@@ -87,7 +87,7 @@ workflows:
   - stepId: getDeployment
     description: >-
       Read the deployment back by its ID to confirm it was registered.
-    operationPath: '{$sourceDescriptions.didomiApi.url}#/paths/~1widgets~1notices~1deployments~1{id}/get'
+    operationPath: '{$sourceDescriptions.noticesApi.url}#/paths/~1widgets~1notices~1deployments~1{id}/get'
     parameters:
     - name: Authorization
       in: header
