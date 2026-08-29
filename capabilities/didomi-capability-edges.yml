@@ -1,0 +1,115 @@
+slug: didomi
+provider: Didomi
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: consents/events
+  spec_file: didomi-consents-events-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.8
+  evidence: GET /consents/events    Retrieve events; POST /consents/events    Create a new event
+  reason: Consent events on a consent/preference management platform covering 'GDPR, CCPA ... IAB TCF
+    v2.x' record user privacy choices — the surface realises privacy and data protection management (consent
+    capture and record-keeping).
+- tag: consents/proofs
+  spec_file: didomi-consents-proofs-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.78
+  evidence: POST /consents/proofs    Upload a consent proof
+  reason: Storing and retrieving consent proofs is evidentiary record-keeping for GDPR-style consent,
+    i.e. privacy & data protection compliance.
+- tag: privacy-centers
+  spec_file: didomi-privacy-centers-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.78
+  evidence: 'POST /privacy-centers — "Create a privacy center"; schemas: privacy-centers-contact, privacy-centers-customization'
+  reason: Privacy centers are the user-facing surfaces where data subjects view and manage their privacy
+    choices and contact the controller; configuring them realises privacy & data protection management
+    (data subject rights, privacy by design).
+- tag: purposes
+  spec_file: didomi-purposes-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.75
+  evidence: POST /metadata/purposes — "Create a purpose"; GET /metadata/purposes/restrictions — "Retrieve
+    a list of available purposes for restrictions. For publisher restriction list."
+  reason: Processing purposes and publisher restrictions are core GDPR/TCF consent constructs; managing
+    them is privacy & data protection compliance, not generic metadata plumbing.
+- tag: notices
+  spec_file: didomi-notices-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.72
+  evidence: 'GET /widgets/notices/texts  Retrieve a list of notice texts; schemas: notices-regulations-config,
+    notices-deployments'
+  reason: Manages consent notices (banners), their texts, regulation configuration and SDK deployment
+    — the mechanism by which GDPR/CCPA consent is collected from data subjects. Maps to Privacy & Data
+    Protection Management.
+- tag: metadata
+  spec_file: didomi-metadata-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.7
+  evidence: 'GET /metadata/vendors  Retrieve a list of vendors; schemas: partners-purposes-notices-regulations-overrides,
+    partners-purposes'
+  reason: Manages the consent metadata catalogue — vendors, partner categories and processing purposes
+    with regulation overrides — which is the configuration substrate of GDPR/TCF consent handling, i.e.
+    privacy and data protection management. Some ambiguity as it is also reference-data administration.
+- tag: metadata-purpose-regulation-override
+  spec_file: didomi-metadata-purpose-regulation-override-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.7
+  evidence: GET /metadata/purposes-regulations-overrides  Retrieve a list of MetadataPurposeRegulationOverrides.
+  reason: Configures how processing purposes behave per privacy regulation, a privacy/data-protection
+    compliance construct rather than generic config.
+- tag: partners-legitimate-interest-purposes
+  spec_file: didomi-partners-legitimate-interest-purposes-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.7
+  evidence: GET /metadata/partners-legitimate-interest-purposes  Retrieve a list of partners-legitimate-interest-purposes
+    objects
+  reason: '''Legitimate interest purposes'' is an explicit GDPR legal-basis construct linked to partners,
+    placing this squarely in privacy and data protection management.'
+- tag: sso-connections
+  spec_file: didomi-sso-connections-api-openapi.yml
+  capability_id: BC-4230.50
+  capability_id_l1: BC-4230
+  capability_name: Tenant Identity Federation
+  confidence: 0.7
+  evidence: 'POST /sso-connections — "Create a SSO connection"; schemas: sso-connection-input-create'
+  reason: Configuring single-sign-on connections for a customer organisation on a multi-tenant SaaS platform
+    is tenant identity federation; could alternatively be read as generic IAM, hence not full confidence.
+- tag: vendors
+  spec_file: didomi-vendors-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.7
+  evidence: 'POST /vendors — "Create a vendor"; vendor description: "collect, manage, and act on user
+    privacy choices"'
+  reason: In a CMP, 'vendors' are the third parties processing personal data that must be disclosed and
+    consented to under GDPR/TCF; managing this register is privacy & data protection management, not procurement
+    supplier management.

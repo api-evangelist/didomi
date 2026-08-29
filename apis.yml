@@ -1321,6 +1321,9 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 common:
+  - type: CapabilityMap
+    url: capabilities/didomi-capability-edges.yml
+    name: Didomi Business Capability Map
   - type: Packages
     name: Didomi Client Libraries and Distributions
     url: packages/didomi-packages.yml
