@@ -342,7 +342,7 @@ apis:
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
   tags:
-  - cookies
+  - Cookies
   tags_raw:
   - cookies
   properties:
@@ -520,7 +520,7 @@ apis:
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
   tags:
-  - languages
+  - Language
   tags_raw:
   - languages
   properties:
@@ -663,7 +663,7 @@ apis:
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
   tags:
-  - notices
+  - Notices
   tags_raw:
   - notices
   properties:
