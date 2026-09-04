@@ -41,16 +41,18 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: paid
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Paid · Self-serve signup
+  label: Paid
   confidence: high
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - rate-limits
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/didomi.png
 kind: contract
@@ -1333,9 +1335,10 @@ common:
   - type: LLMsTxt
     name: Didomi llms.txt, saved verbatim from developers.didomi.io
     url: llms/didomi-llms.txt
-  - type: MCPServer
+  - type: X-MCPServerCandidate
     name: Candidate MCP tool surface derived from the Didomi OpenAPI (Didomi ships no MCP server)
     url: mcp/didomi-mcp.yml
+    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
   - type: Overlay
     name: OpenAPI Overlay 1.0.0 of API Evangelist enhancements to the Didomi Platform API
     url: overlays/didomi-platform-api-overlay.yaml
