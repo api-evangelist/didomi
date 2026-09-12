@@ -1,21 +1,23 @@
 ---
 kin_checks:
   slug: didomi
-  schema_version: 0.18.2
-  scored_at: '2026-09-04'
-  run_ts: 2026-09-04T062714
+  schema_version: 0.21.0
+  scored_at: '2026-09-12'
+  run_ts: 2026-09-12T080032
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.18.2.yml; counts below let you verify that.
+    in rubric/scoring-0.21.0.yml; counts below let you verify that.
   counts:
-    total: 132
-    earned: 63
-    partial: 15
-    missed: 29
+    total: 136
+    earned: 60
+    partial: 16
+    missed: 35
     na: 25
   checks:
   - id: maintainer_present
     status: missed
   - id: multiple_apis
+    status: missed
+  - id: human_url_per_api
     status: missed
   - id: base_url_per_api
     status: missed
@@ -40,6 +42,10 @@ kin_checks:
     detail: 0 of 32 openapi documents pass
   - id: inbound_contract_published
     status: missed
+  - id: json_schema_present
+    status: missed
+  - id: json_schema_per_resource
+    status: missed
   - id: domain_standard_conformance
     status: missed
   - id: overlay_published
@@ -54,6 +60,12 @@ kin_checks:
     status: missed
     detail: pointer liveness 0.0
   - id: reg_oauth_scopes
+    status: missed
+  - id: upsert_outcome_discriminator
+    status: missed
+  - id: upsert_named
+    status: missed
+  - id: upsert_declared_conflict
     status: missed
   - id: reversibility_documented
     status: missed
@@ -105,6 +117,9 @@ kin_checks:
     status: partial
     earned: 1.0
     detail: pointer liveness 0.5
+  - id: postman_present
+    status: partial
+    earned: 0.5
   - id: agent_skill_present
     status: partial
     earned: 0.75
