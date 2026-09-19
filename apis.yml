@@ -1013,6 +1013,8 @@ apis:
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
   tags:
+  - Purposes
+  tags_raw:
   - purposes
   properties:
   - type: OpenAPI
