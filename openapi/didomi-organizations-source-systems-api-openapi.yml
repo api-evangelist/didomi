@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events organizations-source-systems API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Organizations Source Systems API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -66,6 +63,8 @@ paths:
       - organizations-source-systems
       security:
       - bearer: []
+      operationId: getOrganizationsSourceSystems
+      x-operation-id-source: derived
     post:
       parameters: []
       responses:
@@ -92,6 +91,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/organizations-source-systems-input-create'
+      operationId: postOrganizationsSourceSystems
+      x-operation-id-source: derived
 components:
   schemas:
     organizations-source-systems_list:
@@ -111,6 +112,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/organizations-source-systems'
+    organizations-source-systems-input-create:
+      title: OrganizationSourceSystemInputCreate
+      type: object
+      properties:
+        organization_id:
+          type: string
+          description: The ID of the DDM organization
+        source_system:
+          type: string
+          description: The name of the source system
+          enum:
+          - sp
+        source_system_id:
+          type: string
+          description: The ID of the organization in the source system
+      required:
+      - organization_id
+      - source_system
+      - source_system_id
     organizations-source-systems:
       title: OrganizationSourceSystem
       type: object
@@ -139,25 +159,6 @@ components:
           format: date-time
       required:
       - id
-      - organization_id
-      - source_system
-      - source_system_id
-    organizations-source-systems-input-create:
-      title: OrganizationSourceSystemInputCreate
-      type: object
-      properties:
-        organization_id:
-          type: string
-          description: The ID of the DDM organization
-        source_system:
-          type: string
-          description: The name of the source system
-          enum:
-          - sp
-        source_system_id:
-          type: string
-          description: The ID of the organization in the source system
-      required:
       - organization_id
       - source_system
       - source_system_id

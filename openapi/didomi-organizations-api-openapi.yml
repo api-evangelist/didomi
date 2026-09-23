@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events organizations API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Organizations API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -20,7 +17,7 @@ servers:
 security:
 - bearer: []
 tags:
-- name: organizations
+- name: Organizations
   description: Manage organizations
 paths:
   /organizations:
@@ -61,9 +58,11 @@ paths:
       description: Returns a list of all organizations the user belongs to
       summary: Retrieve a list of organizations
       tags:
-      - organizations
+      - Organizations
       security:
       - bearer: []
+      operationId: getOrganizations
+      x-operation-id-source: derived
     post:
       parameters:
       - name: organization
@@ -82,7 +81,7 @@ paths:
       description: Create a new organization
       summary: Create an organization
       tags:
-      - organizations
+      - Organizations
       security:
       - bearer: []
       requestBody:
@@ -91,6 +90,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/organizations'
+      operationId: postOrganizations
+      x-operation-id-source: derived
   /organizations/{id}:
     get:
       parameters:
@@ -110,9 +111,11 @@ paths:
       description: Returns a single organization with the given ID
       summary: Retrieve an organization
       tags:
-      - organizations
+      - Organizations
       security:
       - bearer: []
+      operationId: getOrganizationsById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -137,7 +140,7 @@ paths:
       description: Update an existing organization and replace all its properties
       summary: Update an organization
       tags:
-      - organizations
+      - Organizations
       security:
       - bearer: []
       requestBody:
@@ -146,6 +149,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/organizations'
+      operationId: putOrganizationsById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -170,7 +175,7 @@ paths:
       description: Partially update an organization
       summary: Patch an organization
       tags:
-      - organizations
+      - Organizations
       security:
       - bearer: []
       requestBody:
@@ -179,6 +184,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/organizations'
+      operationId: patchOrganizationsById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -197,11 +204,49 @@ paths:
       description: Delete an existing organization
       summary: Delete an organization
       tags:
-      - organizations
+      - Organizations
       security:
       - bearer: []
+      operationId: deleteOrganizationsById
+      x-operation-id-source: derived
 components:
   schemas:
+    organizations-input:
+      title: OrganizationInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique name of the organization
+        website:
+          type: string
+          format: uri
+          description: Website URL of the organization
+        industry_id:
+          type: string
+          description: identifier of industry that the organization belongs to
+        analytics_url:
+          type: string
+          description: URL to a public Redash dashboard
+        auth_enabled:
+          type: boolean
+          description: Enable or disable authentication for end users - (DEPRECATED - auth is now always enabled)
+        auth_allow_user_creation:
+          type: boolean
+          description: Enable or disable creation of an end user on authentication if it doesn't exist
+        auth_message_priority:
+          type: array
+          description: List the priority of message channels, from the most important to the least
+          items:
+            type: string
+        organization_group_id:
+          type: string
+          description: Identifier of the organization group that the organization belongs to
+        salesforce_account_id:
+          type: string
+          description: Identifier of the salesforce account that the organization group belongs to
+      required:
+      - name
     organizations:
       type: object
       title: Organization
@@ -264,54 +309,20 @@ components:
           type: string
           description: Identifier of the organization group that the organization belongs to
         organization_group_name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the organization group that the organization belongs to
-          nullable: true
         iab_tcf_cmp_id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The IAB TCF CMP ID of the organization. If available, the ID will be added to generated TCF consent strings. If not available, the ID will be set to Didomi. If an ID is provided, it must be present in the IAB TCF CMP list (https://cmplist.consensu.org/v2/cmp-list.json).
-          nullable: true
         allow_chat_support:
           type: boolean
           description: Controls wether the organization should be allowed to contact support via chat
       required:
       - id
-      - name
-    organizations-input:
-      title: OrganizationInput
-      type: object
-      properties:
-        name:
-          type: string
-          description: Unique name of the organization
-        website:
-          type: string
-          format: uri
-          description: Website URL of the organization
-        industry_id:
-          type: string
-          description: identifier of industry that the organization belongs to
-        analytics_url:
-          type: string
-          description: URL to a public Redash dashboard
-        auth_enabled:
-          type: boolean
-          description: Enable or disable authentication for end users - (DEPRECATED - auth is now always enabled)
-        auth_allow_user_creation:
-          type: boolean
-          description: Enable or disable creation of an end user on authentication if it doesn't exist
-        auth_message_priority:
-          type: array
-          description: List the priority of message channels, from the most important to the least
-          items:
-            type: string
-        organization_group_id:
-          type: string
-          description: Identifier of the organization group that the organization belongs to
-        salesforce_account_id:
-          type: string
-          description: Identifier of the salesforce account that the organization group belongs to
-      required:
       - name
   securitySchemes:
     bearer:

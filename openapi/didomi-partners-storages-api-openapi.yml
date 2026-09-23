@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events partners-storages API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Partners Storages API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -63,6 +60,8 @@ paths:
       - partners-storages
       security:
       - bearer: []
+      operationId: getMetadataPartnersStorages
+      x-operation-id-source: derived
     post:
       parameters:
       - name: storage
@@ -90,6 +89,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/partners-storages'
+      operationId: postMetadataPartnersStorages
+      x-operation-id-source: derived
   /metadata/partners-storages/{id}:
     get:
       parameters:
@@ -112,6 +113,8 @@ paths:
       - partners-storages
       security:
       - bearer: []
+      operationId: getMetadataPartnersStoragesById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -145,6 +148,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/partners-storages'
+      operationId: putMetadataPartnersStoragesById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -178,6 +183,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/partners-storages'
+      operationId: patchMetadataPartnersStoragesById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -199,46 +206,10 @@ paths:
       - partners-storages
       security:
       - bearer: []
+      operationId: deleteMetadataPartnersStoragesById
+      x-operation-id-source: derived
 components:
   schemas:
-    partners-storages-input:
-      title: StorageInput
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - cookie
-          - web_storage
-          - app_storage
-          description: What type of storage or access mechanism is used
-        identifier:
-          type: string
-          description: Name of the storage item
-        purposes_id:
-          type: array
-          description: The purpose IDs for which the storage is used
-          items:
-            type: string
-        domain:
-          type: string
-          description: The domain for which the storage is used (only required for type "cookie" and "web_storage")
-        max_age:
-          type: number
-          description: The duration for storage on a device (only required for type "cookie")
-        max_age_unit:
-          type: string
-          enum:
-          - months
-          - days
-          - seconds
-          description: The unit of the storage duration
-        organization_id:
-          type: string
-          description: The organization ID that owns the storage
-        partner_id:
-          type: string
-          description: The partner ID that owns the storage
     partners-storages:
       description: List of additional storages used by the vendor
       type: object
@@ -280,6 +251,44 @@ components:
           description: The partner ID that owns the storage
       required:
       - id
+    partners-storages-input:
+      title: StorageInput
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - cookie
+          - web_storage
+          - app_storage
+          description: What type of storage or access mechanism is used
+        identifier:
+          type: string
+          description: Name of the storage item
+        purposes_id:
+          type: array
+          description: The purpose IDs for which the storage is used
+          items:
+            type: string
+        domain:
+          type: string
+          description: The domain for which the storage is used (only required for type "cookie" and "web_storage")
+        max_age:
+          type: number
+          description: The duration for storage on a device (only required for type "cookie")
+        max_age_unit:
+          type: string
+          enum:
+          - months
+          - days
+          - seconds
+          description: The unit of the storage duration
+        organization_id:
+          type: string
+          description: The organization ID that owns the storage
+        partner_id:
+          type: string
+          description: The partner ID that owns the storage
   securitySchemes:
     bearer:
       scheme: bearer

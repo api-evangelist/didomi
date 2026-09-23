@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events premium-features API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Premium Features API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -64,6 +61,8 @@ paths:
       - premium-features
       security:
       - bearer: []
+      operationId: getPremiumFeatures
+      x-operation-id-source: derived
   /premium-features/{id}:
     get:
       parameters:
@@ -86,6 +85,8 @@ paths:
       - premium-features
       security:
       - bearer: []
+      operationId: getPremiumFeaturesById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -119,6 +120,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/premium-features'
+      operationId: putPremiumFeaturesById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -152,8 +155,124 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/premium-features'
+      operationId: patchPremiumFeaturesById
+      x-operation-id-source: derived
 components:
   schemas:
+    premium-features-input:
+      title: PremiumFeatureInput
+      type: object
+      properties:
+        organization_id:
+          type: string
+          description: Identifier of the organization the premium feature belongs to
+        preference_center:
+          type: boolean
+          description: Flag to enable or disable the Consents API for the "Preference Center" product.
+        preference_management_platform:
+          type: boolean
+          description: Flag to enable or disable the PMP SPA in the console.
+        propagate_consents_on_sync:
+          type: boolean
+          description: Flag to enable or disable the propagation to secondary users during synchronization process.
+        consent_management_platform:
+          type: boolean
+          description: Flag to enable or disable the CMP SPA in the console.
+        cross_device:
+          type: boolean
+          description: Flag to enable or disable the "Cross Device" product.
+        batch_exports:
+          type: boolean
+          description: Flag to enable or disable the "Batch Exports" product.
+        batch_exports_manual_run:
+          type: boolean
+          description: Flag to enable the /exports/execute endpoint to run exports from the API.
+        batch_exports_analytics:
+          type: boolean
+          description: Flag to enable or disable the "Analytics Exports" product.
+        data_residency_russia:
+          type: boolean
+          description: Flag to enable or disable the "Data residency" product for Russia.
+        integrations:
+          type: boolean
+          description: Flag to enable the Didomi integrations product.
+        integrations_v2:
+          type: boolean
+          description: Flag to enable the delivery of Consents API events to the new integrations platform.
+        smart_vendor_list:
+          type: boolean
+          description: Flag to enable or disable the "Smart Vendor list" product.
+        compliance_report_v2:
+          type: boolean
+          description: Flag to enable or disable the "Compliance Report Premium" product.
+        versions_and_proofs:
+          type: boolean
+          description: Flag to enable the "Versions & Proofs" product.
+        mass_update:
+          type: boolean
+          description: Flag to enable or disable the "Mass Update" product.
+        store_cmp_consents:
+          type: boolean
+          description: If enabled, it will send cmp consents that have an organization_user_id in their payload, commonly used for the cross_device feature.
+        store_guest_cmp_consents:
+          type: boolean
+          description: A subset of the store_cmp_consents flag, it will also enable sending cmp consents that do not have an organization_user_id.
+        server_side:
+          type: boolean
+          description: Flag to enable or disable the Server-Side product.
+        acm_static_ip:
+          type: boolean
+          description: Flag to enable or disable the ACM static IP.
+        acm_vendor_templates:
+          type: boolean
+          description: Flag to enable or disable the ACM vendors comparison with templates.
+        acm_data_exports:
+          type: boolean
+          description: Flag to enable or disable the ACM data exports feature.
+        acm_high_frequency:
+          type: boolean
+          description: Flag to enable or disable the ACM high frequency scheduled reports (up to 1 hour).
+        acm_full_website_scan:
+          type: boolean
+          description: Flag to enable or disable the ACM full website scan feature.
+        web_sdk_versioning:
+          type: boolean
+          description: Flag to enable or disable the Web SDK versioning feature.
+        web_sdk_fixed_versioning:
+          type: boolean
+          description: Flag to enable or disable the Web SDK fixed versioning feature.
+        privacy_widgets_advanced:
+          type: boolean
+          description: Flag to enable the Privacy Widgets Advanced feature. Fully manage privacy widgets, add new components, layers.
+        cmp_consent_or_pay:
+          type: boolean
+          description: Flag to enable the CMP Consent or Pay widget template.
+        cmp_rules_underage:
+          type: boolean
+          description: Flag to enable the CMP Rules Underage feature. Grants access to Didomi underage template + access to the Age group condition group in the privacy experience.
+        privacy_widgets_versions:
+          type: boolean
+          description: Flag to enable the Privacy Widgets Versions feature.
+        dsar_experience:
+          type: boolean
+          description: Flag to enable the DSAR Experience feature.
+        brand_manager:
+          type: boolean
+          description: Flag to enable the Brand Manager feature.
+        cmp_advanced_widgets:
+          type: boolean
+          description: Flag to enable the CMP Advanced Widgets feature.
+        pmp_data_exports:
+          type: boolean
+          description: Flag to enable or disable the PMP data exports feature.
+        cmp_data_exports:
+          type: boolean
+          description: Flag to enable or disable the CMP data exports feature.
+        cmp_ctv_widgets:
+          type: boolean
+          description: Flag to enable the CMP CTV Widgets feature.
+      required:
+      - organization_id
     premium-features:
       type: object
       title: PremiumFeature
@@ -340,120 +459,6 @@ components:
           description: Flag to enable the CMP CTV Widgets feature.
       required:
       - id
-      - organization_id
-    premium-features-input:
-      title: PremiumFeatureInput
-      type: object
-      properties:
-        organization_id:
-          type: string
-          description: Identifier of the organization the premium feature belongs to
-        preference_center:
-          type: boolean
-          description: Flag to enable or disable the Consents API for the "Preference Center" product.
-        preference_management_platform:
-          type: boolean
-          description: Flag to enable or disable the PMP SPA in the console.
-        propagate_consents_on_sync:
-          type: boolean
-          description: Flag to enable or disable the propagation to secondary users during synchronization process.
-        consent_management_platform:
-          type: boolean
-          description: Flag to enable or disable the CMP SPA in the console.
-        cross_device:
-          type: boolean
-          description: Flag to enable or disable the "Cross Device" product.
-        batch_exports:
-          type: boolean
-          description: Flag to enable or disable the "Batch Exports" product.
-        batch_exports_manual_run:
-          type: boolean
-          description: Flag to enable the /exports/execute endpoint to run exports from the API.
-        batch_exports_analytics:
-          type: boolean
-          description: Flag to enable or disable the "Analytics Exports" product.
-        data_residency_russia:
-          type: boolean
-          description: Flag to enable or disable the "Data residency" product for Russia.
-        integrations:
-          type: boolean
-          description: Flag to enable the Didomi integrations product.
-        integrations_v2:
-          type: boolean
-          description: Flag to enable the delivery of Consents API events to the new integrations platform.
-        smart_vendor_list:
-          type: boolean
-          description: Flag to enable or disable the "Smart Vendor list" product.
-        compliance_report_v2:
-          type: boolean
-          description: Flag to enable or disable the "Compliance Report Premium" product.
-        versions_and_proofs:
-          type: boolean
-          description: Flag to enable the "Versions & Proofs" product.
-        mass_update:
-          type: boolean
-          description: Flag to enable or disable the "Mass Update" product.
-        store_cmp_consents:
-          type: boolean
-          description: If enabled, it will send cmp consents that have an organization_user_id in their payload, commonly used for the cross_device feature.
-        store_guest_cmp_consents:
-          type: boolean
-          description: A subset of the store_cmp_consents flag, it will also enable sending cmp consents that do not have an organization_user_id.
-        server_side:
-          type: boolean
-          description: Flag to enable or disable the Server-Side product.
-        acm_static_ip:
-          type: boolean
-          description: Flag to enable or disable the ACM static IP.
-        acm_vendor_templates:
-          type: boolean
-          description: Flag to enable or disable the ACM vendors comparison with templates.
-        acm_data_exports:
-          type: boolean
-          description: Flag to enable or disable the ACM data exports feature.
-        acm_high_frequency:
-          type: boolean
-          description: Flag to enable or disable the ACM high frequency scheduled reports (up to 1 hour).
-        acm_full_website_scan:
-          type: boolean
-          description: Flag to enable or disable the ACM full website scan feature.
-        web_sdk_versioning:
-          type: boolean
-          description: Flag to enable or disable the Web SDK versioning feature.
-        web_sdk_fixed_versioning:
-          type: boolean
-          description: Flag to enable or disable the Web SDK fixed versioning feature.
-        privacy_widgets_advanced:
-          type: boolean
-          description: Flag to enable the Privacy Widgets Advanced feature. Fully manage privacy widgets, add new components, layers.
-        cmp_consent_or_pay:
-          type: boolean
-          description: Flag to enable the CMP Consent or Pay widget template.
-        cmp_rules_underage:
-          type: boolean
-          description: Flag to enable the CMP Rules Underage feature. Grants access to Didomi underage template + access to the Age group condition group in the privacy experience.
-        privacy_widgets_versions:
-          type: boolean
-          description: Flag to enable the Privacy Widgets Versions feature.
-        dsar_experience:
-          type: boolean
-          description: Flag to enable the DSAR Experience feature.
-        brand_manager:
-          type: boolean
-          description: Flag to enable the Brand Manager feature.
-        cmp_advanced_widgets:
-          type: boolean
-          description: Flag to enable the CMP Advanced Widgets feature.
-        pmp_data_exports:
-          type: boolean
-          description: Flag to enable or disable the PMP data exports feature.
-        cmp_data_exports:
-          type: boolean
-          description: Flag to enable or disable the CMP data exports feature.
-        cmp_ctv_widgets:
-          type: boolean
-          description: Flag to enable the CMP CTV Widgets feature.
-      required:
       - organization_id
   securitySchemes:
     bearer:

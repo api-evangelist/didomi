@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events partners-spi-purposes API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Partners Spi Purposes API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -62,6 +59,8 @@ paths:
       - partners-spi-purposes
       security:
       - bearer: []
+      operationId: getMetadataPartnersSpiPurposes
+      x-operation-id-source: derived
     post:
       parameters:
       - name: partners-spi-purposes
@@ -92,21 +91,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/partners-spi-purposes'
+      operationId: postMetadataPartnersSpiPurposes
+      x-operation-id-source: derived
 components:
   schemas:
-    partners-spi-purposes-input:
-      title: PartnersSPIPurposesInput
-      type: object
-      properties:
-        metadata_partner_id:
-          type: string
-          description: Partner ID
-        metadata_purpose_id:
-          type: string
-          description: Purpose ID
-        organization_id:
-          type: string
-          description: Organization ID
     partners-spi-purposes:
       type: object
       title: PartnersSPIPurposes
@@ -135,6 +123,19 @@ components:
       - metadata_partner_id
       - metadata_purpose_id
       - organization_id
+    partners-spi-purposes-input:
+      title: PartnersSPIPurposesInput
+      type: object
+      properties:
+        metadata_partner_id:
+          type: string
+          description: Partner ID
+        metadata_purpose_id:
+          type: string
+          description: Purpose ID
+        organization_id:
+          type: string
+          description: Organization ID
   securitySchemes:
     bearer:
       scheme: bearer

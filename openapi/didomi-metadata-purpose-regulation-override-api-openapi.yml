@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events metadata-purpose-regulation-override API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Metadata Purpose Regulation Override API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -70,11 +67,13 @@ paths:
                     items:
                       $ref: '#/components/schemas/MetadataPurposeRegulationOverride'
       description: Returns a list of all MetadataPurposeRegulationOverrides. A null value of `regulations_id` means all regulations are supported, and an empty array means no regulations are supported.
-      summary: Retrieve a list of MetadataPurposeRegulationOverrides.
+      summary: Retrieve a list of MetadataPurposeRegulationOverrides
       tags:
       - metadata-purpose-regulation-override
       security:
       - bearer: []
+      operationId: getMetadataPurposesRegulationsOverrides
+      x-operation-id-source: derived
     post:
       parameters: []
       responses:
@@ -96,6 +95,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MetadataPurposeRegulationOverrideInput'
+      operationId: postMetadataPurposesRegulationsOverrides
+      x-operation-id-source: derived
   /metadata/purposes-regulations-overrides/{id}:
     get:
       parameters:
@@ -118,6 +119,8 @@ paths:
       - metadata-purpose-regulation-override
       security:
       - bearer: []
+      operationId: getMetadataPurposesRegulationsOverridesById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -145,6 +148,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MetadataPurposeRegulationOverridePatchInput'
+      operationId: putMetadataPurposesRegulationsOverridesById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -172,6 +177,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MetadataPurposeRegulationOverridePatchInput'
+      operationId: patchMetadataPurposesRegulationsOverridesById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -193,6 +200,8 @@ paths:
       - metadata-purpose-regulation-override
       security:
       - bearer: []
+      operationId: deleteMetadataPurposesRegulationsOverridesById
+      x-operation-id-source: derived
 components:
   schemas:
     MetadataPurposeRegulationOverridePatchInput:
@@ -207,24 +216,6 @@ components:
         metadata_purpose_id:
           type: string
           description: The ID of the associated global (organization_id=null) metadata purpose
-    MetadataPurposeRegulationOverrideInput:
-      title: MetadataPurposeRegulationOverrideInput
-      type: object
-      properties:
-        organization_id:
-          type: string
-          description: ID of the organization which the MetadataPurposeRegulationOverride belongs to
-        regulations_id:
-          type: array
-          description: An array of regulation IDs the override configures the metadata purpose to support
-          items:
-            type: string
-        metadata_purpose_id:
-          type: string
-          description: The ID of the associated global (organization_id=null) metadata purpose
-      required:
-      - organization_id
-      - metadata_purpose_id
     MetadataPurposeRegulationOverride:
       description: A table to define MetadataPurposeRegulationOverrides. Overrides allow clients to define which regulations a global (organization_id=null) metadata purpose supports. It is not supported to define overrides for a custom purpose (purposes created by an organization). A null value of `regulations_id` means all regulations are supported, and an empty array means no regulations are supported.
       type: object
@@ -260,6 +251,24 @@ components:
       - id
       - metadata_purpose_id
       - organization_id
+    MetadataPurposeRegulationOverrideInput:
+      title: MetadataPurposeRegulationOverrideInput
+      type: object
+      properties:
+        organization_id:
+          type: string
+          description: ID of the organization which the MetadataPurposeRegulationOverride belongs to
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the override configures the metadata purpose to support
+          items:
+            type: string
+        metadata_purpose_id:
+          type: string
+          description: The ID of the associated global (organization_id=null) metadata purpose
+      required:
+      - organization_id
+      - metadata_purpose_id
   securitySchemes:
     bearer:
       scheme: bearer

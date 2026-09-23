@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events purposes API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Purposes API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -20,7 +17,7 @@ servers:
 security:
 - bearer: []
 tags:
-- name: purposes
+- name: Purposes
 paths:
   /metadata/purposes/restrictions:
     get:
@@ -54,11 +51,13 @@ paths:
                     items:
                       $ref: '#/components/schemas/purposes'
       description: Returns a list of all purposes
-      summary: Retrieve a list of available purposes for restrictions. For publisher restriction list.
+      summary: Retrieve a list of available purposes for restrictions.
       tags:
-      - purposes
+      - Purposes
       security:
       - bearer: []
+      operationId: getMetadataPurposesRestrictions
+      x-operation-id-source: derived
   /metadata/purposes:
     get:
       parameters:
@@ -125,9 +124,11 @@ paths:
       description: Returns a list of all purposes
       summary: Retrieve a list of purposes
       tags:
-      - purposes
+      - Purposes
       security:
       - bearer: []
+      operationId: getMetadataPurposes
+      x-operation-id-source: derived
     post:
       parameters: []
       responses:
@@ -140,7 +141,7 @@ paths:
       description: Create a new purpose
       summary: Create a purpose
       tags:
-      - purposes
+      - Purposes
       security:
       - bearer: []
       requestBody:
@@ -149,6 +150,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/purposes-input'
+      operationId: postMetadataPurposes
+      x-operation-id-source: derived
   /metadata/purposes/{id}:
     get:
       parameters:
@@ -168,9 +171,11 @@ paths:
       description: Returns a single purpose with the given ID
       summary: Retrieve a purpose
       tags:
-      - purposes
+      - Purposes
       security:
       - bearer: []
+      operationId: getMetadataPurposesById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -189,7 +194,7 @@ paths:
       description: Update an existing purpose and replace all its properties
       summary: Update a purpose
       tags:
-      - purposes
+      - Purposes
       security:
       - bearer: []
       requestBody:
@@ -198,6 +203,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/purposes-patch-input'
+      operationId: putMetadataPurposesById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -216,7 +223,7 @@ paths:
       description: Partially update a purpose
       summary: Patch a purpose
       tags:
-      - purposes
+      - Purposes
       security:
       - bearer: []
       requestBody:
@@ -225,6 +232,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/purposes-patch-input'
+      operationId: patchMetadataPurposesById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -243,67 +252,13 @@ paths:
       description: Delete an existing purpose
       summary: Delete a purpose
       tags:
-      - purposes
+      - Purposes
       security:
       - bearer: []
+      operationId: deleteMetadataPurposesById
+      x-operation-id-source: derived
 components:
   schemas:
-    purposes-input:
-      title: PurposeInput
-      type: object
-      properties:
-        description:
-          description: Name of the purpose
-          schema:
-            type: object
-        details:
-          description: Details of the purpose
-          schema:
-            type: object
-        enabled_status_description:
-          description: Description of the purpose when the sdk status for the user for this purpose is enabled
-          schema:
-            type: object
-        disabled_status_description:
-          description: Description of the purpose when the sdk status for the user for this purpose is disabled
-          schema:
-            type: object
-        reference:
-          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
-          schema:
-            type: object
-        organization_id:
-          type: string
-          description: Id of organization which purpose belongs to. If id is 'null', purpose is global
-        namespaces:
-          type: object
-          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
-          properties:
-            iab:
-              type: string
-              description: ID of the purpose in the IAB TCF version 1
-            iab2:
-              type: string
-              description: ID of the purpose in the IAB TCF version 2
-            didomi:
-              type: string
-              description: ID of the purpose in the Didomi SDK
-            custom:
-              type: string
-              description: Custom ID for the purpose
-        regulations_id:
-          type: array
-          description: An array of regulation IDs the purpose supports
-          items:
-            type: string
-        metadata:
-          type: object
-          additionalProperties: {}
-          description: Metadata for additional information
-        type:
-          type: string
-          description: The purpose type discriminator.
-          default: purpose
     purposes:
       description: The reason why a company is collecting and processing personal data
       type: object
@@ -375,6 +330,62 @@ components:
           description: Metadata for additional information
       required:
       - id
+    purposes-input:
+      title: PurposeInput
+      type: object
+      properties:
+        description:
+          description: Name of the purpose
+          schema:
+            type: object
+        details:
+          description: Details of the purpose
+          schema:
+            type: object
+        enabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is enabled
+          schema:
+            type: object
+        disabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is disabled
+          schema:
+            type: object
+        reference:
+          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
+          schema:
+            type: object
+        organization_id:
+          type: string
+          description: Id of organization which purpose belongs to. If id is 'null', purpose is global
+        namespaces:
+          type: object
+          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab:
+              type: string
+              description: ID of the purpose in the IAB TCF version 1
+            iab2:
+              type: string
+              description: ID of the purpose in the IAB TCF version 2
+            didomi:
+              type: string
+              description: ID of the purpose in the Didomi SDK
+            custom:
+              type: string
+              description: Custom ID for the purpose
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the purpose supports
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata for additional information
+        type:
+          type: string
+          description: The purpose type discriminator.
+          default: purpose
     purposes-patch-input:
       title: PurposeInput
       type: object

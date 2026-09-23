@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events keys API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Keys API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -20,7 +17,7 @@ servers:
 security:
 - bearer: []
 tags:
-- name: keys
+- name: Keys
   description: Manage API keys
 paths:
   /keys:
@@ -61,9 +58,11 @@ paths:
       description: Returns a list of all API keys the user has access to
       summary: Retrieve a list of API keys
       tags:
-      - keys
+      - Keys
       security:
       - bearer: []
+      operationId: getKeys
+      x-operation-id-source: derived
     post:
       parameters:
       - name: key
@@ -98,7 +97,7 @@ paths:
       description: Create a new API key that can be used for authenticating HTTP requests to the Didomi API
       summary: Create a new API key
       tags:
-      - keys
+      - Keys
       security: []
       requestBody:
         required: true
@@ -106,6 +105,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/keys'
+      operationId: postKeys
+      x-operation-id-source: derived
   /keys/{id}:
     get:
       parameters:
@@ -125,9 +126,11 @@ paths:
       description: Returns a single API key with the given ID
       summary: Retrieve an API key
       tags:
-      - keys
+      - Keys
       security:
       - bearer: []
+      operationId: getKeysById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -152,7 +155,7 @@ paths:
       description: Update an existing API key
       summary: Update an API key
       tags:
-      - keys
+      - Keys
       security:
       - bearer: []
       requestBody:
@@ -161,6 +164,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/keys'
+      operationId: putKeysById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -185,7 +190,7 @@ paths:
       description: Patch an existing API key
       summary: Patch an API key
       tags:
-      - keys
+      - Keys
       security:
       - bearer: []
       requestBody:
@@ -194,6 +199,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/keys'
+      operationId: patchKeysById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -212,9 +219,11 @@ paths:
       description: Delete an existing API key
       summary: Delete an API key
       tags:
-      - keys
+      - Keys
       security:
       - bearer: []
+      operationId: deleteKeysById
+      x-operation-id-source: derived
 components:
   schemas:
     keys-input-update:

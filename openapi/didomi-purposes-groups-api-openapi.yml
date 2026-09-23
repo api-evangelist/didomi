@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events purposes-groups API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Purposes Groups API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -63,6 +60,8 @@ paths:
       - purposes-groups
       security:
       - bearer: []
+      operationId: getMetadataPurposesGroups
+      x-operation-id-source: derived
     post:
       parameters:
       - name: group
@@ -90,6 +89,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/purposes-groups'
+      operationId: postMetadataPurposesGroups
+      x-operation-id-source: derived
   /metadata/purposes-groups/{id}:
     get:
       parameters:
@@ -112,6 +113,8 @@ paths:
       - purposes-groups
       security:
       - bearer: []
+      operationId: getMetadataPurposesGroupsById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -145,6 +148,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/purposes-groups'
+      operationId: putMetadataPurposesGroupsById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -178,6 +183,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/purposes-groups'
+      operationId: patchMetadataPurposesGroupsById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -199,36 +206,10 @@ paths:
       - purposes-groups
       security:
       - bearer: []
+      operationId: deleteMetadataPurposesGroupsById
+      x-operation-id-source: derived
 components:
   schemas:
-    purposes-group-input:
-      title: PurposesGroupInput
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the group
-        description:
-          type: string
-          description: Description of the group
-        namespaces:
-          type: object
-          description: IDs of this group in other namespaces / vendor lists and used in Didomi SDKs and consents
-          properties:
-            iab2:
-              type: string
-              description: ID of the group in the IAB TCF version 2 as a stack ID
-        purposes_id:
-          description: Purposes that belong to the group
-          type: array
-          items:
-            type: string
-            description: ID of a purpose
-        organization_id:
-          type: string
-          description: ID of the organization that owns the group. If ID is null, the group is global.
-      required:
-      - name
     purposes-groups:
       description: A group of purposes
       type: object
@@ -267,6 +248,34 @@ components:
           type: string
           description: Last update date of the purpose
           format: date-time
+      required:
+      - name
+    purposes-group-input:
+      title: PurposesGroupInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the group
+        description:
+          type: string
+          description: Description of the group
+        namespaces:
+          type: object
+          description: IDs of this group in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab2:
+              type: string
+              description: ID of the group in the IAB TCF version 2 as a stack ID
+        purposes_id:
+          description: Purposes that belong to the group
+          type: array
+          items:
+            type: string
+            description: ID of a purpose
+        organization_id:
+          type: string
+          description: ID of the organization that owns the group. If ID is null, the group is global.
       required:
       - name
   securitySchemes:

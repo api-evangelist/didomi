@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events Integrations API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Integrations API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -58,8 +55,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/platform-integrations-sessions-input'
+      operationId: postPlatformIntegrationsSessions
+      x-operation-id-source: derived
 components:
   schemas:
+    platform-integrations-sessions-input:
+      type: object
+      properties: {}
+      required: []
     platform-integrations-sessions:
       type: object
       properties:
@@ -81,10 +84,6 @@ components:
       - key
       - access_token
       - platform_integration_id
-    platform-integrations-sessions-input:
-      type: object
-      properties: {}
-      required: []
   securitySchemes:
     bearer:
       scheme: bearer

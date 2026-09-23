@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events domains API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Domains API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -20,7 +17,7 @@ servers:
 security:
 - bearer: []
 tags:
-- name: domains
+- name: Domains
   description: Provisioned domains for consent notices and privacy centers
 paths:
   /domains:
@@ -61,9 +58,11 @@ paths:
       description: Returns a list of domains
       summary: Retrieve a list of domains
       tags:
-      - domains
+      - Domains
       security:
       - bearer: []
+      operationId: getDomains
+      x-operation-id-source: derived
     post:
       parameters:
       - name: domain
@@ -82,7 +81,7 @@ paths:
       description: Create a new domain
       summary: Create a domain
       tags:
-      - domains
+      - Domains
       security:
       - bearer: []
       requestBody:
@@ -91,6 +90,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/domains'
+      operationId: postDomains
+      x-operation-id-source: derived
   /domains/{id}:
     get:
       parameters:
@@ -110,9 +111,11 @@ paths:
       description: Returns a domain by its ID
       summary: Retrieve a domain
       tags:
-      - domains
+      - Domains
       security:
       - bearer: []
+      operationId: getDomainsById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -137,7 +140,7 @@ paths:
       description: Update an existing domain
       summary: Update a domain
       tags:
-      - domains
+      - Domains
       security:
       - bearer: []
       requestBody:
@@ -146,6 +149,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/domains'
+      operationId: putDomainsById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -170,7 +175,7 @@ paths:
       description: Partially update a domain
       summary: Patch a domain
       tags:
-      - domains
+      - Domains
       security:
       - bearer: []
       requestBody:
@@ -179,6 +184,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/domains'
+      operationId: patchDomainsById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -197,33 +204,13 @@ paths:
       description: Delete a domain with type "managed" by its ID
       summary: Delete a domain
       tags:
-      - domains
+      - Domains
       security:
       - bearer: []
+      operationId: deleteDomainsById
+      x-operation-id-source: derived
 components:
   schemas:
-    domains-input-update:
-      title: DomainInputUpdate
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the domain name usage in your organization
-        enabled:
-          type: boolean
-          description: Whether the domain is enabled or not. Disabling a domain triggers de-provisioning of the domain on the Didomi platform which might break existing notices or privacy centers if the domain is still in use. Make sure that the domain is not used anymore before disabling it.
-        entity_id:
-          type: string
-          description: Which entity the domain is used by. This entity ID is currently used by PMP for the domain to properly redirect to the correct S3 bucket (preference-center/organization_id/entity_id/)
-        status:
-          type: string
-          description: "Provisioning status on the Didomi platform. \n    Possible values: \n      draft (domain is created but not deployed yet), \n      scheduled (domain is scheduled for deployment), \n      to_be_deleted (domain is scheduled for deletion),\n      deploying (domain is being provisioned),\n      deleting (domain is being deleted),\n      failed (domain deployment/deletion failed),\n      ready (domain is provisioned and ready for use)"
-        bots_crawl:
-          type: string
-          description: 'Controls whether bots are allowed to crawl the domain. Possible values: "allow_all" (allow crawls from any bots) or "disallow_all" (disallow crawls from all bots)'
-          enum:
-          - allow_all
-          - disallow_all
     domains-input-create:
       title: DomainInputCreate
       type: object
@@ -259,6 +246,28 @@ components:
       - id
       - usage
       - organization_id
+    domains-input-update:
+      title: DomainInputUpdate
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the domain name usage in your organization
+        enabled:
+          type: boolean
+          description: Whether the domain is enabled or not. Disabling a domain triggers de-provisioning of the domain on the Didomi platform which might break existing notices or privacy centers if the domain is still in use. Make sure that the domain is not used anymore before disabling it.
+        entity_id:
+          type: string
+          description: Which entity the domain is used by. This entity ID is currently used by PMP for the domain to properly redirect to the correct S3 bucket (preference-center/organization_id/entity_id/)
+        status:
+          type: string
+          description: "Provisioning status on the Didomi platform. \n    Possible values: \n      draft (domain is created but not deployed yet), \n      scheduled (domain is scheduled for deployment), \n      to_be_deleted (domain is scheduled for deletion),\n      deploying (domain is being provisioned),\n      deleting (domain is being deleted),\n      failed (domain deployment/deletion failed),\n      ready (domain is provisioned and ready for use)"
+        bots_crawl:
+          type: string
+          description: 'Controls whether bots are allowed to crawl the domain. Possible values: "allow_all" (allow crawls from any bots) or "disallow_all" (disallow crawls from all bots)'
+          enum:
+          - allow_all
+          - disallow_all
     domains:
       title: Domain
       type: object

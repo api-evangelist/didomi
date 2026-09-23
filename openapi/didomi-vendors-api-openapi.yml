@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events vendors API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Vendors API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -20,7 +17,7 @@ servers:
 security:
 - bearer: []
 tags:
-- name: vendors
+- name: Vendors
   description: Manage vendors used by a property
 paths:
   /vendors:
@@ -44,9 +41,11 @@ paths:
       description: Returns a list of vendors used by a property
       summary: Retrieve a list of vendors
       tags:
-      - vendors
+      - Vendors
       security:
       - bearer: []
+      operationId: getVendors
+      x-operation-id-source: derived
     post:
       parameters:
       - name: vendor
@@ -65,7 +64,7 @@ paths:
       description: Create a new vendor for a property
       summary: Create a vendor
       tags:
-      - vendors
+      - Vendors
       security:
       - bearer: []
       requestBody:
@@ -74,6 +73,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/vendors'
+      operationId: postVendors
+      x-operation-id-source: derived
   /vendors/{id}:
     get:
       parameters:
@@ -93,9 +94,11 @@ paths:
       description: Returns a single vendor used by a property
       summary: Retrieve a vendor
       tags:
-      - vendors
+      - Vendors
       security:
       - bearer: []
+      operationId: getVendorsById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -120,7 +123,7 @@ paths:
       description: Update an existing vendor used by a property and replace all its properties
       summary: Update a vendor
       tags:
-      - vendors
+      - Vendors
       security:
       - bearer: []
       requestBody:
@@ -129,6 +132,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/vendors'
+      operationId: putVendorsById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -153,7 +158,7 @@ paths:
       description: Partially update a vendor used by a property
       summary: Patch a vendor
       tags:
-      - vendors
+      - Vendors
       security:
       - bearer: []
       requestBody:
@@ -162,6 +167,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/vendors'
+      operationId: patchVendorsById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -180,27 +187,13 @@ paths:
       description: Delete an existing vendor
       summary: Delete a vendor
       tags:
-      - vendors
+      - Vendors
       security:
       - bearer: []
+      operationId: deleteVendorsById
+      x-operation-id-source: derived
 components:
   schemas:
-    vendors-input:
-      title: VendorInput
-      type: object
-      properties:
-        status:
-          type: string
-          description: The status of the vendor for the privacy center (draft or published)
-        property_id:
-          type: string
-          description: The ID of the property that sets this cookie
-        metadata_id:
-          type: string
-          description: The ID of the vendor metadata
-      required:
-      - property_id
-      - metadata_id
     vendors:
       type: object
       title: Vendor
@@ -231,6 +224,22 @@ components:
           description: Revision number of the property object
       required:
       - id
+      - property_id
+      - metadata_id
+    vendors-input:
+      title: VendorInput
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the vendor for the privacy center (draft or published)
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+        metadata_id:
+          type: string
+          description: The ID of the vendor metadata
+      required:
       - property_id
       - metadata_id
   securitySchemes:

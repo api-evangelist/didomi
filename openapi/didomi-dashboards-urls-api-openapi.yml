@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events dashboards-urls API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Dashboards URLS API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -90,13 +87,17 @@ paths:
       - dashboards-urls
       security:
       - bearer: []
+      operationId: getAnalyticsDashboardsUrls
+      x-operation-id-source: derived
 components:
   schemas:
-    DashboardUrlCategory:
+    DashboardUrlProduct:
       type: string
       enum:
-      - analytics
-      - home
+      - cmp
+      - pmp
+      - integration
+      - acm
     dashboards-urls:
       type: object
       title: dashboard
@@ -141,18 +142,11 @@ components:
       - type
       - aggregation_period
       - product
-    DashboardUrlProduct:
+    DashboardUrlCategory:
       type: string
       enum:
-      - cmp
-      - pmp
-      - integration
-      - acm
-    DashboardUrlType:
-      type: string
-      enum:
-      - cluvio
-      - redash
+      - analytics
+      - home
     DashboardUrlAggregationPeriod:
       type: string
       enum:
@@ -160,6 +154,11 @@ components:
       - weekly
       - daily
       - hourly
+    DashboardUrlType:
+      type: string
+      enum:
+      - cluvio
+      - redash
   securitySchemes:
     bearer:
       scheme: bearer

@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events members API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Members API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -20,7 +17,7 @@ servers:
 security:
 - bearer: []
 tags:
-- name: members
+- name: Members
   description: Manage members of an organization
 paths:
   /members:
@@ -42,9 +39,11 @@ paths:
       description: Returns a list of members of an organization
       summary: Retrieve a list of members of an organization
       tags:
-      - members
+      - Members
       security:
       - bearer: []
+      operationId: getMembers
+      x-operation-id-source: derived
     post:
       parameters:
       - name: member
@@ -63,7 +62,7 @@ paths:
       description: Add a new member to an organization. If the user is new it will send an email with a password reset link. Finally it will send an added to organization notification
       summary: Add a user to an organization
       tags:
-      - members
+      - Members
       security:
       - bearer: []
       requestBody:
@@ -72,6 +71,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/members'
+      operationId: postMembers
+      x-operation-id-source: derived
   /members/{id}:
     get:
       parameters:
@@ -91,9 +92,11 @@ paths:
       description: Returns a single member of an organization
       summary: Retrieve a member
       tags:
-      - members
+      - Members
       security:
       - bearer: []
+      operationId: getMembersById
+      x-operation-id-source: derived
     patch:
       parameters:
       - in: path
@@ -116,9 +119,9 @@ paths:
         '500':
           description: general error
       description: Updates the resource identified by id using data.
-      summary: ''
+      summary: Update members by id
       tags:
-      - members
+      - Members
       security: []
       requestBody:
         required: true
@@ -126,6 +129,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/members'
+      x-summary-source: derived
+      operationId: patchMembersById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -144,9 +150,11 @@ paths:
       description: Delete an existing member of an organization
       summary: Remove a user from an organization
       tags:
-      - members
+      - Members
       security:
       - bearer: []
+      operationId: deleteMembersById
+      x-operation-id-source: derived
 components:
   schemas:
     members:

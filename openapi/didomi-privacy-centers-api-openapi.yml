@@ -1,18 +1,15 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Didomi consents/events privacy-centers API
-  description: 'A REST API to communicate with the Didomi platform (<a href="https://api.didomi.io/v1/">https://api.didomi.io/v1/</a>)
+  title: Didomi Privacy Centers API
+  description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
-    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our <a href="https://developers.didomi.io/" target="_blank">Developers Portal</a>.
+    This is the complete specification of the API. A complete guide to authenticating and using the API is available on our Developers Portal.
 
 
-    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer <token>".
+    All HTTP calls to the API require a valid JWT token. The token must be provided in an **Authorization** header with the value "Bearer ".
 
-    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.
-
-
-    '
+    Click on the Authorize button in the header of this page to provide a token before testing requests from this documentation.'
   version: '1.0'
 servers:
 - url: https://api.didomi.io/v1
@@ -47,6 +44,8 @@ paths:
       - privacy-centers
       security:
       - bearer: []
+      operationId: getPrivacyCenters
+      x-operation-id-source: derived
     post:
       parameters:
       - name: privacycenter
@@ -74,6 +73,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/privacy-centers'
+      operationId: postPrivacyCenters
+      x-operation-id-source: derived
   /privacy-centers/{id}:
     get:
       parameters:
@@ -96,6 +97,8 @@ paths:
       - privacy-centers
       security:
       - bearer: []
+      operationId: getPrivacyCentersById
+      x-operation-id-source: derived
     put:
       parameters:
       - name: id
@@ -129,6 +132,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/privacy-centers'
+      operationId: putPrivacyCentersById
+      x-operation-id-source: derived
     patch:
       parameters:
       - name: id
@@ -162,6 +167,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/privacy-centers'
+      operationId: patchPrivacyCentersById
+      x-operation-id-source: derived
     delete:
       parameters:
       - name: id
@@ -183,8 +190,27 @@ paths:
       - privacy-centers
       security:
       - bearer: []
+      operationId: deletePrivacyCentersById
+      x-operation-id-source: derived
 components:
   schemas:
+    privacy-centers-customization:
+      type: object
+      title: Customization
+      description: Customization options for the privacy center
+      properties:
+        logo:
+          type: string
+          format: uri
+          description: URL of the logo to display (must be HTTPS)
+        colors:
+          type: object
+          title: Colors
+          description: Colors information
+          properties:
+            primary:
+              type: string
+              description: Primary color to use in the Privacy Center theme
     privacy-centers-contact:
       type: object
       title: Contact
@@ -314,23 +340,6 @@ components:
       required:
       - id
       - name
-    privacy-centers-customization:
-      type: object
-      title: Customization
-      description: Customization options for the privacy center
-      properties:
-        logo:
-          type: string
-          format: uri
-          description: URL of the logo to display (must be HTTPS)
-        colors:
-          type: object
-          title: Colors
-          description: Colors information
-          properties:
-            primary:
-              type: string
-              description: Primary color to use in the Privacy Center theme
   securitySchemes:
     bearer:
       scheme: bearer
