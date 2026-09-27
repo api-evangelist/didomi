@@ -194,6 +194,20 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    privacy-centers-contact:
+      type: object
+      title: Contact
+      description: Contact information of the DPO or person in charge of privacy
+      properties:
+        email:
+          type: string
+          description: Email address
+        schedule:
+          type: string
+          description: Phone number
+        address:
+          type: string
+          description: Postal address
     privacy-centers-customization:
       type: object
       title: Customization
@@ -211,70 +225,6 @@ components:
             primary:
               type: string
               description: Primary color to use in the Privacy Center theme
-    privacy-centers-contact:
-      type: object
-      title: Contact
-      description: Contact information of the DPO or person in charge of privacy
-      properties:
-        email:
-          type: string
-          description: Email address
-        schedule:
-          type: string
-          description: Phone number
-        address:
-          type: string
-          description: Postal address
-    privacy-centers-input:
-      title: PrivacyCenterInput
-      type: object
-      properties:
-        name:
-          type: string
-          description: Display name of the privacy center (usually the company or website name)
-        website:
-          type: string
-          format: uri
-          description: URL of the website linked to the privacy center
-        custom_domains:
-          type: array
-          description: Sub-domains that the privacy center should be served on
-          items:
-            type: string
-        contact:
-          $ref: '#/components/schemas/privacy-centers-contact'
-        customization:
-          $ref: '#/components/schemas/privacy-centers-customization'
-        legal_name:
-          type: string
-          description: Full legal name of the company
-        display_cookies:
-          type: string
-          description: How to display the cookies section in the privacy center?
-          enum:
-          - list
-          - choices
-          - none
-        privacy_policy:
-          type: string
-          description: The privacy policy to display in the privacy center formatted with Markdown (English)
-        content:
-          type: object
-          description: Texts of the privacy center
-        languages:
-          type: array
-          description: Languages enabled in the privacy center (two-letter codes); an empty list or a null value will enabled all available languages
-          items:
-            type: string
-        auth_required:
-          type: boolean
-          description: Whether end users must be authenticated when accessing a privacy center
-        organization_id:
-          type: string
-          description: The ID of the organization that owns this property
-      required:
-      - name
-      - organization_id
     privacy-centers:
       type: object
       title: PrivacyCenter
@@ -340,6 +290,56 @@ components:
       required:
       - id
       - name
+    privacy-centers-input:
+      title: PrivacyCenterInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name of the privacy center (usually the company or website name)
+        website:
+          type: string
+          format: uri
+          description: URL of the website linked to the privacy center
+        custom_domains:
+          type: array
+          description: Sub-domains that the privacy center should be served on
+          items:
+            type: string
+        contact:
+          $ref: '#/components/schemas/privacy-centers-contact'
+        customization:
+          $ref: '#/components/schemas/privacy-centers-customization'
+        legal_name:
+          type: string
+          description: Full legal name of the company
+        display_cookies:
+          type: string
+          description: How to display the cookies section in the privacy center?
+          enum:
+          - list
+          - choices
+          - none
+        privacy_policy:
+          type: string
+          description: The privacy policy to display in the privacy center formatted with Markdown (English)
+        content:
+          type: object
+          description: Texts of the privacy center
+        languages:
+          type: array
+          description: Languages enabled in the privacy center (two-letter codes); an empty list or a null value will enabled all available languages
+          items:
+            type: string
+        auth_required:
+          type: boolean
+          description: Whether end users must be authenticated when accessing a privacy center
+        organization_id:
+          type: string
+          description: The ID of the organization that owns this property
+      required:
+      - name
+      - organization_id
   securitySchemes:
     bearer:
       scheme: bearer

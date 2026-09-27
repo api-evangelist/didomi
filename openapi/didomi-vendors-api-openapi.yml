@@ -194,6 +194,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    vendors-input:
+      title: VendorInput
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the vendor for the privacy center (draft or published)
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+        metadata_id:
+          type: string
+          description: The ID of the vendor metadata
+      required:
+      - property_id
+      - metadata_id
     vendors:
       type: object
       title: Vendor
@@ -224,22 +240,6 @@ components:
           description: Revision number of the property object
       required:
       - id
-      - property_id
-      - metadata_id
-    vendors-input:
-      title: VendorInput
-      type: object
-      properties:
-        status:
-          type: string
-          description: The status of the vendor for the privacy center (draft or published)
-        property_id:
-          type: string
-          description: The ID of the property that sets this cookie
-        metadata_id:
-          type: string
-          description: The ID of the vendor metadata
-      required:
       - property_id
       - metadata_id
   securitySchemes:

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Didomi Dashboards URLS API
+  title: Didomi Dashboards URLs API
   description: 'A REST API to communicate with the Didomi platform (https://api.didomi.io/v1/)
 
 
@@ -91,13 +91,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DashboardUrlProduct:
+    DashboardUrlCategory:
       type: string
       enum:
-      - cmp
-      - pmp
-      - integration
-      - acm
+      - analytics
+      - home
+    DashboardUrlAggregationPeriod:
+      type: string
+      enum:
+      - monthly
+      - weekly
+      - daily
+      - hourly
     dashboards-urls:
       type: object
       title: dashboard
@@ -142,18 +147,13 @@ components:
       - type
       - aggregation_period
       - product
-    DashboardUrlCategory:
+    DashboardUrlProduct:
       type: string
       enum:
-      - analytics
-      - home
-    DashboardUrlAggregationPeriod:
-      type: string
-      enum:
-      - monthly
-      - weekly
-      - daily
-      - hourly
+      - cmp
+      - pmp
+      - integration
+      - acm
     DashboardUrlType:
       type: string
       enum:

@@ -304,199 +304,6 @@ components:
       bearerFormat: JWT
       type: http
 definitions:
-  consent-events-input-update:
-    type: object
-    title: ConsentEventInputUpdate
-    description: A partial update to an event consent status
-    properties:
-      status:
-        type: string
-        description: 'Status of the event (possible values: confirmed, pending_approval)'
-      consents:
-        type: object
-        title: Consents
-        description: Consent status of the user
-        properties:
-          channels:
-            type: array
-            description: Channels
-            items:
-              type: object
-              title: Channel
-              description: Channel
-              properties:
-                id:
-                  type: string
-                  description: Channel ID
-                enabled:
-                  type: boolean
-                  description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
-                metadata:
-                  type: object
-                  title: Metadata
-                  description: Free-form metadata object on the channel
-              required:
-              - id
-          purposes:
-            type: array
-            description: Purposes that the user has made choices for
-            items:
-              type: object
-              title: ConsentChoice
-              description: Consent choice of the user
-              properties:
-                id:
-                  type: string
-                  description: Purpose ID
-                enabled:
-                  type: boolean
-                  description: Whether the user has given consent to this purpose or not. A null value indicates that the user has not made a specific choice for the purpose but might have made choices for preferences or channels.
-                enabled_li:
-                  type: boolean
-                  description: Whether the user has objected to this purpose based on legitimate interest. A null value indicates that the user has not made a specific choice for the purpose. A "false" value indicates that the user has objected to the purpose.
-                metadata:
-                  type: object
-                  title: Metadata
-                  description: Free-form metadata object on the purpose
-                channels:
-                  type: array
-                  description: Channels. This property is deprecated.
-                  deprecated: true
-                  items:
-                    type: object
-                    title: Channel
-                    description: Channel
-                    properties:
-                      id:
-                        type: string
-                        description: Channel ID
-                      enabled:
-                        type: boolean
-                        description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
-                      metadata:
-                        type: object
-                        title: Metadata
-                        description: Free-form metadata object on the channel
-                    required:
-                    - id
-                preferences:
-                  type: array
-                  description: Extra preferences expressed for the purpose. This property is deprecated.
-                  deprecated: true
-                  items:
-                    type: object
-                    title: ConsentPreference
-                    description: Extra preference expressed for the purpose
-                    properties:
-                      id:
-                        type: string
-                        description: Preference ID
-                      enabled:
-                        type: boolean
-                        description: Whether the user has given consent to this preference or not. A null value indicates that the user has not made a specific choice for the preference but might have made choices for channels.
-                      metadata:
-                        type: object
-                        title: Metadata
-                        description: Free-form metadata object on the preference
-                      channels:
-                        type: array
-                        description: Channels
-                        items:
-                          type: object
-                          title: Channel
-                          description: Channel
-                          properties:
-                            id:
-                              type: string
-                              description: Channel ID
-                            enabled:
-                              type: boolean
-                              description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
-                            metadata:
-                              type: object
-                              title: Metadata
-                              description: Free-form metadata object on the channel
-                          required:
-                          - id
-                    required:
-                    - id
-                values:
-                  type: object
-                  description: Flat structure for every selected value by the user.
-                  title: ConsentValues
-                  properties:
-                    preferenceId1:
-                      type: object
-                      description: A map of the selected value(s) by the user by preference ID.
-                      properties:
-                        value:
-                          type: string
-                          description: The list of selected value(s) by the user separated by a comma
-                    preferenceId2:
-                      type: object
-                      description: A map of the selected value(s) by the user by preference ID.
-                      properties:
-                        value:
-                          type: string
-                          description: The list of selected value(s) by the user separated by a comma
-              required:
-              - id
-          vendors:
-            type: object
-            description: Vendors that the user has made choices for
-            properties:
-              enabled:
-                type: array
-                items:
-                  type: string
-                  description: IDs of the vendors that the user given consent to
-              enabled_li:
-                type: array
-                items:
-                  type: string
-                  description: IDs of the vendors that the user has not objected to based on legitimate interest
-              disabled:
-                type: array
-                items:
-                  type: string
-                  description: IDs of the vendors that the user denied consent to
-              disabled_li:
-                type: array
-                items:
-                  type: string
-                  description: IDs of the vendors that the user has objected to based on legitimate interest
-          tcfcs:
-            type: string
-            description: TCF consent string of the user
-        required:
-        - vendors
-      proofs_id:
-        type: array
-        items:
-          description: IDs of the proofs associated with this event
-          type: string
-      proofs:
-        type: array
-        items:
-          description: List of proofs to associate with this event. Proofs must be base64-encoded data URIs.
-          type: string
-      delegate:
-        type: object
-        description: Information on the delegate that created the event on behalf of the user. A delegate is a third-party that modifies the consents for an end user and that you want to keep track of. The delegate will be ignored if the API call is done with a consent token.
-        properties:
-          id:
-            type: string
-            description: Unique ID of the delegate. This is usually an internal ID in your organization (team, user, etc.) and is a free-form string.
-          name:
-            type: string
-            description: Name of the delegate
-          metadata:
-            type: object
-            title: Metadata
-            description: Free-form metadata object on the delegate. Use it to store custom information on the delegate.
-        required:
-        - id
-        - consents
   consent-events:
     type: object
     title: ConsentEvent
@@ -956,3 +763,196 @@ definitions:
     - created_at
     - user
     - consents
+  consent-events-input-update:
+    type: object
+    title: ConsentEventInputUpdate
+    description: A partial update to an event consent status
+    properties:
+      status:
+        type: string
+        description: 'Status of the event (possible values: confirmed, pending_approval)'
+      consents:
+        type: object
+        title: Consents
+        description: Consent status of the user
+        properties:
+          channels:
+            type: array
+            description: Channels
+            items:
+              type: object
+              title: Channel
+              description: Channel
+              properties:
+                id:
+                  type: string
+                  description: Channel ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the channel
+              required:
+              - id
+          purposes:
+            type: array
+            description: Purposes that the user has made choices for
+            items:
+              type: object
+              title: ConsentChoice
+              description: Consent choice of the user
+              properties:
+                id:
+                  type: string
+                  description: Purpose ID
+                enabled:
+                  type: boolean
+                  description: Whether the user has given consent to this purpose or not. A null value indicates that the user has not made a specific choice for the purpose but might have made choices for preferences or channels.
+                enabled_li:
+                  type: boolean
+                  description: Whether the user has objected to this purpose based on legitimate interest. A null value indicates that the user has not made a specific choice for the purpose. A "false" value indicates that the user has objected to the purpose.
+                metadata:
+                  type: object
+                  title: Metadata
+                  description: Free-form metadata object on the purpose
+                channels:
+                  type: array
+                  description: Channels. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: Channel
+                    description: Channel
+                    properties:
+                      id:
+                        type: string
+                        description: Channel ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the channel
+                    required:
+                    - id
+                preferences:
+                  type: array
+                  description: Extra preferences expressed for the purpose. This property is deprecated.
+                  deprecated: true
+                  items:
+                    type: object
+                    title: ConsentPreference
+                    description: Extra preference expressed for the purpose
+                    properties:
+                      id:
+                        type: string
+                        description: Preference ID
+                      enabled:
+                        type: boolean
+                        description: Whether the user has given consent to this preference or not. A null value indicates that the user has not made a specific choice for the preference but might have made choices for channels.
+                      metadata:
+                        type: object
+                        title: Metadata
+                        description: Free-form metadata object on the preference
+                      channels:
+                        type: array
+                        description: Channels
+                        items:
+                          type: object
+                          title: Channel
+                          description: Channel
+                          properties:
+                            id:
+                              type: string
+                              description: Channel ID
+                            enabled:
+                              type: boolean
+                              description: Whether the user has given consent to this channel or not. A null value indicates that the user has not made a specific choice for the channel
+                            metadata:
+                              type: object
+                              title: Metadata
+                              description: Free-form metadata object on the channel
+                          required:
+                          - id
+                    required:
+                    - id
+                values:
+                  type: object
+                  description: Flat structure for every selected value by the user.
+                  title: ConsentValues
+                  properties:
+                    preferenceId1:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+                    preferenceId2:
+                      type: object
+                      description: A map of the selected value(s) by the user by preference ID.
+                      properties:
+                        value:
+                          type: string
+                          description: The list of selected value(s) by the user separated by a comma
+              required:
+              - id
+          vendors:
+            type: object
+            description: Vendors that the user has made choices for
+            properties:
+              enabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user given consent to
+              enabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has not objected to based on legitimate interest
+              disabled:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user denied consent to
+              disabled_li:
+                type: array
+                items:
+                  type: string
+                  description: IDs of the vendors that the user has objected to based on legitimate interest
+          tcfcs:
+            type: string
+            description: TCF consent string of the user
+        required:
+        - vendors
+      proofs_id:
+        type: array
+        items:
+          description: IDs of the proofs associated with this event
+          type: string
+      proofs:
+        type: array
+        items:
+          description: List of proofs to associate with this event. Proofs must be base64-encoded data URIs.
+          type: string
+      delegate:
+        type: object
+        description: Information on the delegate that created the event on behalf of the user. A delegate is a third-party that modifies the consents for an end user and that you want to keep track of. The delegate will be ignored if the API call is done with a consent token.
+        properties:
+          id:
+            type: string
+            description: Unique ID of the delegate. This is usually an internal ID in your organization (team, user, etc.) and is a free-form string.
+          name:
+            type: string
+            description: Name of the delegate
+          metadata:
+            type: object
+            title: Metadata
+            description: Free-form metadata object on the delegate. Use it to store custom information on the delegate.
+        required:
+        - id
+        - consents

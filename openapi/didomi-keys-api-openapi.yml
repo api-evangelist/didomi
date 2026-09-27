@@ -226,6 +226,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    keys-input-create:
+      type: object
+      title: APIKeyInputCreate
+      properties:
+        organization_id:
+          type: string
+          description: ID of the organization that owns the API key
+        name:
+          type: string
+          description: Unique name to identify this key like the app or team that will be using it, or what it will be used for
+        description:
+          type: string
+          description: Description of the API key
+        is_internal:
+          type: boolean
+          description: Marks an API key as internal. These keys are managed by Didomi. Internal keys are excluded from list results unless explicitly requested.
     keys-input-update:
       type: object
       title: APIKeyInputUpdate
@@ -262,22 +278,6 @@ components:
         enabled:
           type: boolean
           description: Status of the API key. A disabled API key cannot be used for obtaining a token. Already issued tokens remain valid until their expiration.
-        is_internal:
-          type: boolean
-          description: Marks an API key as internal. These keys are managed by Didomi. Internal keys are excluded from list results unless explicitly requested.
-    keys-input-create:
-      type: object
-      title: APIKeyInputCreate
-      properties:
-        organization_id:
-          type: string
-          description: ID of the organization that owns the API key
-        name:
-          type: string
-          description: Unique name to identify this key like the app or team that will be using it, or what it will be used for
-        description:
-          type: string
-          description: Description of the API key
         is_internal:
           type: boolean
           description: Marks an API key as internal. These keys are managed by Didomi. Internal keys are excluded from list results unless explicitly requested.

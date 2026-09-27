@@ -193,6 +193,107 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    partners-input:
+      title: PartnerInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the partner
+        tags:
+          type: array
+          description: Extra classification items for the partner
+          items:
+            type: string
+        contact:
+          type: string
+          description: Contact information for someone from the partner
+        website:
+          type: string
+          format: uri
+          description: Website URL of the partner
+        website_optout:
+          type: string
+          format: uri
+          description: URL for consumers to opt-out from data collection and processing from the partner
+        hosts:
+          type: array
+          description: List of hosts (DNS names) that belong to the partner
+          items:
+            type: string
+        url_patterns:
+          type: array
+          description: List of URL patterns (regular expressions) that uniquely identify the partner
+          items:
+            type: string
+        taxonomy_id:
+          type: string
+          description: The ID of the taxonomy item for classifying this partner
+        organization_id:
+          type: string
+          description: The organization ID that owns the partner
+        category_id:
+          type: string
+          description: The category ID of the partner
+        country:
+          type: string
+          description: The ISO Alpha-2 code of the country where the partner is located.
+        namespaces:
+          type: object
+          description: IDs of this partner in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab:
+              type: string
+              description: ID of the vendor in the IAB TCF version 1
+            iab2:
+              type: string
+              description: ID of the vendor in the IAB TCF version 2
+            didomi:
+              type: string
+              description: ID of the vendor in the Didomi SDK
+            custom:
+              type: string
+              description: Custom ID for the vendor
+            google:
+              type: string
+              description: ID of the vendor for Google DFP/GAM
+        default_purposes_id:
+          type: array
+          description: Purposes of the partner with consent legal basis
+          items:
+            type: string
+        legitimate_interest_purposes_id:
+          type: array
+          description: Purposes of the partner with legitimate interest legal basis
+          items:
+            type: string
+        spi_purposes_id:
+          type: array
+          description: Purposes of the partner with sensitive personal information
+          items:
+            type: string
+        cookie_max_duration:
+          type: number
+          description: The duration of time for which the cookies are stored
+        cookie_max_duration_unit:
+          type: string
+          enum:
+          - months
+          - days
+          - seconds
+          description: The unit of the cookie max duration
+        uses_non_cookie_access:
+          type: boolean
+          description: Whether the vendor uses other means of storage than cookies
+        deprecated:
+          type: boolean
+          description: Whether a partner is deprecated or not. Deprecated partners cannot be added to privacy centers or consent notices but are not immediately removed to not break entities that already use them. Deprecated partners will eventually be removed.
+        notes:
+          type: string
+          description: Free-form field to keep various notes on a vendor
+      required:
+      - name
+      - category_id
     partners:
       type: object
       title: Partner
@@ -314,107 +415,6 @@ components:
           description: Free-form field to keep various notes on a vendor
       required:
       - id
-      - name
-      - category_id
-    partners-input:
-      title: PartnerInput
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the partner
-        tags:
-          type: array
-          description: Extra classification items for the partner
-          items:
-            type: string
-        contact:
-          type: string
-          description: Contact information for someone from the partner
-        website:
-          type: string
-          format: uri
-          description: Website URL of the partner
-        website_optout:
-          type: string
-          format: uri
-          description: URL for consumers to opt-out from data collection and processing from the partner
-        hosts:
-          type: array
-          description: List of hosts (DNS names) that belong to the partner
-          items:
-            type: string
-        url_patterns:
-          type: array
-          description: List of URL patterns (regular expressions) that uniquely identify the partner
-          items:
-            type: string
-        taxonomy_id:
-          type: string
-          description: The ID of the taxonomy item for classifying this partner
-        organization_id:
-          type: string
-          description: The organization ID that owns the partner
-        category_id:
-          type: string
-          description: The category ID of the partner
-        country:
-          type: string
-          description: The ISO Alpha-2 code of the country where the partner is located.
-        namespaces:
-          type: object
-          description: IDs of this partner in other namespaces / vendor lists and used in Didomi SDKs and consents
-          properties:
-            iab:
-              type: string
-              description: ID of the vendor in the IAB TCF version 1
-            iab2:
-              type: string
-              description: ID of the vendor in the IAB TCF version 2
-            didomi:
-              type: string
-              description: ID of the vendor in the Didomi SDK
-            custom:
-              type: string
-              description: Custom ID for the vendor
-            google:
-              type: string
-              description: ID of the vendor for Google DFP/GAM
-        default_purposes_id:
-          type: array
-          description: Purposes of the partner with consent legal basis
-          items:
-            type: string
-        legitimate_interest_purposes_id:
-          type: array
-          description: Purposes of the partner with legitimate interest legal basis
-          items:
-            type: string
-        spi_purposes_id:
-          type: array
-          description: Purposes of the partner with sensitive personal information
-          items:
-            type: string
-        cookie_max_duration:
-          type: number
-          description: The duration of time for which the cookies are stored
-        cookie_max_duration_unit:
-          type: string
-          enum:
-          - months
-          - days
-          - seconds
-          description: The unit of the cookie max duration
-        uses_non_cookie_access:
-          type: boolean
-          description: Whether the vendor uses other means of storage than cookies
-        deprecated:
-          type: boolean
-          description: Whether a partner is deprecated or not. Deprecated partners cannot be added to privacy centers or consent notices but are not immediately removed to not break entities that already use them. Deprecated partners will eventually be removed.
-        notes:
-          type: string
-          description: Free-form field to keep various notes on a vendor
-      required:
       - name
       - category_id
   securitySchemes:

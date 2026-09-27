@@ -194,6 +194,36 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    cookies-input:
+      title: CookieInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the cookie
+        domain:
+          type: string
+          description: Domain that the cookie is set on (should be the same as the property or a sub-domain)
+        lifetime:
+          type: integer
+          description: Lifetime of the cookie (in seconds)
+        status:
+          type: string
+          description: The status of the cookie for the privacy center (draft or published)
+        taxonomy_id:
+          type: string
+          description: The ID of the taxonomy item for classifying this cookie
+        vendor_id:
+          type: string
+          description: The ID of the vendor that sets or uses this cookie (if any)
+        property_id:
+          type: string
+          description: The ID of the property that sets this cookie
+      required:
+      - name
+      - domain
+      - taxonomy_id
+      - property_id
     cookies:
       type: object
       title: Cookie
@@ -237,36 +267,6 @@ components:
       required:
       - id
       - name
-      - taxonomy_id
-      - property_id
-    cookies-input:
-      title: CookieInput
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the cookie
-        domain:
-          type: string
-          description: Domain that the cookie is set on (should be the same as the property or a sub-domain)
-        lifetime:
-          type: integer
-          description: Lifetime of the cookie (in seconds)
-        status:
-          type: string
-          description: The status of the cookie for the privacy center (draft or published)
-        taxonomy_id:
-          type: string
-          description: The ID of the taxonomy item for classifying this cookie
-        vendor_id:
-          type: string
-          description: The ID of the vendor that sets or uses this cookie (if any)
-        property_id:
-          type: string
-          description: The ID of the property that sets this cookie
-      required:
-      - name
-      - domain
       - taxonomy_id
       - property_id
   securitySchemes:

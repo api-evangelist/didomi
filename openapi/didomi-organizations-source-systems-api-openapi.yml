@@ -95,23 +95,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    organizations-source-systems_list:
-      title: OrganizationSourceSystemList
-      type: object
-      properties:
-        total:
-          type: number
-          description: Total number of items
-        limit:
-          type: number
-          description: Number of items per page
-        skip:
-          type: number
-          description: Number of items skipped
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/organizations-source-systems'
     organizations-source-systems-input-create:
       title: OrganizationSourceSystemInputCreate
       type: object
@@ -162,6 +145,23 @@ components:
       - organization_id
       - source_system
       - source_system_id
+    organizations-source-systems_list:
+      title: OrganizationSourceSystemList
+      type: object
+      properties:
+        total:
+          type: number
+          description: Total number of items
+        limit:
+          type: number
+          description: Number of items per page
+        skip:
+          type: number
+          description: Number of items skipped
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizations-source-systems'
   securitySchemes:
     bearer:
       scheme: bearer

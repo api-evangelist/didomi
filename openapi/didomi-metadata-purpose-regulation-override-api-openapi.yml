@@ -204,6 +204,24 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    MetadataPurposeRegulationOverrideInput:
+      title: MetadataPurposeRegulationOverrideInput
+      type: object
+      properties:
+        organization_id:
+          type: string
+          description: ID of the organization which the MetadataPurposeRegulationOverride belongs to
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the override configures the metadata purpose to support
+          items:
+            type: string
+        metadata_purpose_id:
+          type: string
+          description: The ID of the associated global (organization_id=null) metadata purpose
+      required:
+      - organization_id
+      - metadata_purpose_id
     MetadataPurposeRegulationOverridePatchInput:
       title: MetadataPurposeRegulationOverridePatchInput
       type: object
@@ -251,24 +269,6 @@ components:
       - id
       - metadata_purpose_id
       - organization_id
-    MetadataPurposeRegulationOverrideInput:
-      title: MetadataPurposeRegulationOverrideInput
-      type: object
-      properties:
-        organization_id:
-          type: string
-          description: ID of the organization which the MetadataPurposeRegulationOverride belongs to
-        regulations_id:
-          type: array
-          description: An array of regulation IDs the override configures the metadata purpose to support
-          items:
-            type: string
-        metadata_purpose_id:
-          type: string
-          description: The ID of the associated global (organization_id=null) metadata purpose
-      required:
-      - organization_id
-      - metadata_purpose_id
   securitySchemes:
     bearer:
       scheme: bearer

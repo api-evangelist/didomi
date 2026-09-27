@@ -9,7 +9,25 @@ description: >-
   multi-regulation configuration model. Didomi exposes a JSON REST API (https://api.didomi.io/v1/) plus first-party SDKs
   for Web, iOS/tvOS, Android/Android TV, Unity, React Native, Flutter, Vega OS, and AMP, alongside IAB-compliant consent
   string tooling and reverse-proxy boilerplates for Fastly, CloudFront, and Cloudflare.
+x-docs-platform: gitbook
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-09-25
 tags:
+  - Advertising
+  - AdTech
+  - CCPA
+  - CMP
+  - Consent
+  - Consent Management
+  - DSAR
+  - Privacy
+  - GDPR
+  - IAB TCF
+  - MarTech
+  - Preference Management
+  - Privacy Requests
+  - Regulatory Compliance
+tags_raw:
   - Advertising
   - AdTech
   - CCPA
@@ -271,7 +289,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-consents-tokens-api
-  name: Didomi consents/tokens API
+  name: Didomi Consents/tokens API
   description: The consents/tokens API from Didomi — 1 operation(s) for consents/tokens.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -305,7 +323,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-consents-users-api
-  name: Didomi consents/users API
+  name: Didomi Consents/users API
   description: The consents/users API from Didomi — 2 operation(s) for consents/users.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -339,7 +357,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-cookies-api
-  name: Didomi cookies API
+  name: Didomi Cookies API
   description: Manage cookies set by a property
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -375,7 +393,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-dashboards-urls-api
-  name: Didomi dashboards-urls API
+  name: Didomi Dashboards URLs API
   description: The dashboards-urls API from Didomi — 1 operation(s) for dashboards-urls.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -409,7 +427,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-domains-api
-  name: Didomi domains API
+  name: Didomi Domains API
   description: Provisioned domains for consent notices and privacy centers
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -481,7 +499,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-keys-api
-  name: Didomi keys API
+  name: Didomi Keys API
   description: Manage API keys
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -517,7 +535,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-languages-api
-  name: Didomi languages API
+  name: Didomi Languages API
   description: List of available languages for the SDKs
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -553,7 +571,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-members-api
-  name: Didomi members API
+  name: Didomi Members API
   description: Manage members of an organization
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -589,7 +607,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-metadata-api
-  name: Didomi metadata API
+  name: Didomi Metadata API
   description: A metadata service
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -625,7 +643,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-metadata-purpose-regulation-override-api
-  name: Didomi metadata-purpose-regulation-override API
+  name: Didomi Metadata Purpose Regulation Override API
   description: >-
     The metadata-purpose-regulation-override API from Didomi — 2 operation(s) for metadata-purpose-regulation-override.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
@@ -660,7 +678,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-notices-api
-  name: Didomi notices API
+  name: Didomi Notices API
   description: The notices API from Didomi — 18 operation(s) for notices.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -696,7 +714,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-organizations-api
-  name: Didomi organizations API
+  name: Didomi Organizations API
   description: Manage organizations
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -732,7 +750,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-organizations-source-systems-api
-  name: Didomi organizations-source-systems API
+  name: Didomi Organizations Source Systems API
   description: Manage organization source systems
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -766,7 +784,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-partners-api
-  name: Didomi partners API
+  name: Didomi Partners API
   description: The partners API from Didomi — 2 operation(s) for partners.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -802,7 +820,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-partners-default-purposes-api
-  name: Didomi partners-default-purposes API
+  name: Didomi Partners Default Purposes API
   description: >-
     The partners-default-purposes API from Didomi — 1 operation(s) for partners-default-purposes.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
@@ -837,7 +855,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-partners-legitimate-interest-purposes-api
-  name: Didomi partners-legitimate-interest-purposes API
+  name: Didomi Partners Legitimate Interest Purposes API
   description: >-
     The partners-legitimate-interest-purposes API from Didomi — 1 operation(s) for partners-legitimate-interest-purposes.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
@@ -872,7 +890,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-partners-spi-purposes-api
-  name: Didomi partners-spi-purposes API
+  name: Didomi Partners Spi Purposes API
   description: The partners-spi-purposes API from Didomi — 1 operation(s) for partners-spi-purposes.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -906,7 +924,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-partners-storages-api
-  name: Didomi partners-storages API
+  name: Didomi Partners Storages API
   description: The partners-storages API from Didomi — 2 operation(s) for partners-storages.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -940,7 +958,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-premium-features-api
-  name: Didomi premium-features API
+  name: Didomi Premium Features API
   description: Manage premium features
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -974,7 +992,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-privacy-centers-api
-  name: Didomi privacy-centers API
+  name: Didomi Privacy Centers API
   description: Manage privacy centers
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1008,7 +1026,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-purposes-api
-  name: Didomi purposes API
+  name: Didomi Purposes API
   description: The purposes API from Didomi — 3 operation(s) for purposes.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1044,7 +1062,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-purposes-groups-api
-  name: Didomi purposes-groups API
+  name: Didomi Purposes Groups API
   description: The purposes-groups API from Didomi — 2 operation(s) for purposes-groups.
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1078,7 +1096,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-quotas-api
-  name: Didomi quotas API
+  name: Didomi Quotas API
   description: Manage quotas
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1114,7 +1132,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-secrets-api
-  name: Didomi secrets API
+  name: Didomi Secrets API
   description: Manage secrets
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1150,7 +1168,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-sessions-api
-  name: Didomi sessions API
+  name: Didomi Sessions API
   description: Manage sessions
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1186,7 +1204,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-sso-connections-api
-  name: Didomi sso-connections API
+  name: Didomi SSO Connections API
   description: Manage SSO connections
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1220,7 +1238,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-taxonomies-api
-  name: Didomi taxonomies API
+  name: Didomi Taxonomies API
   description: Manage the taxonomy for vendors
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1254,7 +1272,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-vendors-api
-  name: Didomi vendors API
+  name: Didomi Vendors API
   description: Manage vendors used by a property
   humanURL: https://developers.didomi.io/api-and-platform/introduction
   baseURL: https://api.didomi.io/v1
@@ -1290,7 +1308,7 @@ apis:
   - type: Examples
     url: examples/didomi-privacy-request-example.json
 - aid: didomi:didomi-widgets-notices-remote-configs-api
-  name: Didomi widgets/notices/remote-configs API
+  name: Didomi Widgets/notices/remote Configs API
   description: >-
     The widgets/notices/remote-configs API from Didomi — 1 operation(s) for widgets/notices/remote-configs.
   humanURL: https://developers.didomi.io/api-and-platform/introduction

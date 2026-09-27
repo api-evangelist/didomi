@@ -210,6 +210,44 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    partners-storages-input:
+      title: StorageInput
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - cookie
+          - web_storage
+          - app_storage
+          description: What type of storage or access mechanism is used
+        identifier:
+          type: string
+          description: Name of the storage item
+        purposes_id:
+          type: array
+          description: The purpose IDs for which the storage is used
+          items:
+            type: string
+        domain:
+          type: string
+          description: The domain for which the storage is used (only required for type "cookie" and "web_storage")
+        max_age:
+          type: number
+          description: The duration for storage on a device (only required for type "cookie")
+        max_age_unit:
+          type: string
+          enum:
+          - months
+          - days
+          - seconds
+          description: The unit of the storage duration
+        organization_id:
+          type: string
+          description: The organization ID that owns the storage
+        partner_id:
+          type: string
+          description: The partner ID that owns the storage
     partners-storages:
       description: List of additional storages used by the vendor
       type: object
@@ -251,44 +289,6 @@ components:
           description: The partner ID that owns the storage
       required:
       - id
-    partners-storages-input:
-      title: StorageInput
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - cookie
-          - web_storage
-          - app_storage
-          description: What type of storage or access mechanism is used
-        identifier:
-          type: string
-          description: Name of the storage item
-        purposes_id:
-          type: array
-          description: The purpose IDs for which the storage is used
-          items:
-            type: string
-        domain:
-          type: string
-          description: The domain for which the storage is used (only required for type "cookie" and "web_storage")
-        max_age:
-          type: number
-          description: The duration for storage on a device (only required for type "cookie")
-        max_age_unit:
-          type: string
-          enum:
-          - months
-          - days
-          - seconds
-          description: The unit of the storage duration
-        organization_id:
-          type: string
-          description: The organization ID that owns the storage
-        partner_id:
-          type: string
-          description: The partner ID that owns the storage
   securitySchemes:
     bearer:
       scheme: bearer

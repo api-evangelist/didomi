@@ -259,6 +259,114 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    purposes-patch-input:
+      title: PurposeInput
+      type: object
+      properties:
+        description:
+          description: Name of the purpose
+          schema:
+            type: object
+        details:
+          description: Details of the purpose
+          schema:
+            type: object
+        enabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is enabled
+          schema:
+            type: object
+        disabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is disabled
+          schema:
+            type: object
+        reference:
+          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
+          schema:
+            type: object
+        organization_id:
+          type: string
+          description: Id of organization which purpose belongs to. If id is 'null', purpose is global
+        namespaces:
+          type: object
+          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab:
+              type: string
+              description: ID of the purpose in the IAB TCF version 1
+            iab2:
+              type: string
+              description: ID of the purpose in the IAB TCF version 2
+            didomi:
+              type: string
+              description: ID of the purpose in the Didomi SDK
+            custom:
+              type: string
+              description: Custom ID for the purpose
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata for additional information
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the purpose supports
+          items:
+            type: string
+    purposes-input:
+      title: PurposeInput
+      type: object
+      properties:
+        description:
+          description: Name of the purpose
+          schema:
+            type: object
+        details:
+          description: Details of the purpose
+          schema:
+            type: object
+        enabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is enabled
+          schema:
+            type: object
+        disabled_status_description:
+          description: Description of the purpose when the sdk status for the user for this purpose is disabled
+          schema:
+            type: object
+        reference:
+          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
+          schema:
+            type: object
+        organization_id:
+          type: string
+          description: Id of organization which purpose belongs to. If id is 'null', purpose is global
+        namespaces:
+          type: object
+          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab:
+              type: string
+              description: ID of the purpose in the IAB TCF version 1
+            iab2:
+              type: string
+              description: ID of the purpose in the IAB TCF version 2
+            didomi:
+              type: string
+              description: ID of the purpose in the Didomi SDK
+            custom:
+              type: string
+              description: Custom ID for the purpose
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the purpose supports
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata for additional information
+        type:
+          type: string
+          description: The purpose type discriminator.
+          default: purpose
     purposes:
       description: The reason why a company is collecting and processing personal data
       type: object
@@ -330,114 +438,6 @@ components:
           description: Metadata for additional information
       required:
       - id
-    purposes-input:
-      title: PurposeInput
-      type: object
-      properties:
-        description:
-          description: Name of the purpose
-          schema:
-            type: object
-        details:
-          description: Details of the purpose
-          schema:
-            type: object
-        enabled_status_description:
-          description: Description of the purpose when the sdk status for the user for this purpose is enabled
-          schema:
-            type: object
-        disabled_status_description:
-          description: Description of the purpose when the sdk status for the user for this purpose is disabled
-          schema:
-            type: object
-        reference:
-          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
-          schema:
-            type: object
-        organization_id:
-          type: string
-          description: Id of organization which purpose belongs to. If id is 'null', purpose is global
-        namespaces:
-          type: object
-          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
-          properties:
-            iab:
-              type: string
-              description: ID of the purpose in the IAB TCF version 1
-            iab2:
-              type: string
-              description: ID of the purpose in the IAB TCF version 2
-            didomi:
-              type: string
-              description: ID of the purpose in the Didomi SDK
-            custom:
-              type: string
-              description: Custom ID for the purpose
-        regulations_id:
-          type: array
-          description: An array of regulation IDs the purpose supports
-          items:
-            type: string
-        metadata:
-          type: object
-          additionalProperties: {}
-          description: Metadata for additional information
-        type:
-          type: string
-          description: The purpose type discriminator.
-          default: purpose
-    purposes-patch-input:
-      title: PurposeInput
-      type: object
-      properties:
-        description:
-          description: Name of the purpose
-          schema:
-            type: object
-        details:
-          description: Details of the purpose
-          schema:
-            type: object
-        enabled_status_description:
-          description: Description of the purpose when the sdk status for the user for this purpose is enabled
-          schema:
-            type: object
-        disabled_status_description:
-          description: Description of the purpose when the sdk status for the user for this purpose is disabled
-          schema:
-            type: object
-        reference:
-          description: The reference number uniquely identifies the purpose in an official classification like the one from the CNIL
-          schema:
-            type: object
-        organization_id:
-          type: string
-          description: Id of organization which purpose belongs to. If id is 'null', purpose is global
-        namespaces:
-          type: object
-          description: IDs of this purpose in other namespaces / vendor lists and used in Didomi SDKs and consents
-          properties:
-            iab:
-              type: string
-              description: ID of the purpose in the IAB TCF version 1
-            iab2:
-              type: string
-              description: ID of the purpose in the IAB TCF version 2
-            didomi:
-              type: string
-              description: ID of the purpose in the Didomi SDK
-            custom:
-              type: string
-              description: Custom ID for the purpose
-        metadata:
-          type: object
-          additionalProperties: {}
-          description: Metadata for additional information
-        regulations_id:
-          type: array
-          description: An array of regulation IDs the purpose supports
-          items:
-            type: string
   securitySchemes:
     bearer:
       scheme: bearer
