@@ -996,44 +996,52 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    partners-purposes-input:
-      title: partners-purposes-input
+    partners-purposes-notices-regulations-overrides:
       type: object
       properties:
+        id:
+          type: string
+          description: Unique identifier for the notice-regulation override
         metadata_partner_id:
           type: string
           description: Foreign key reference to metadata-partners(id)
         metadata_purpose_id:
           type: string
           description: Foreign key reference to metadata-purposes(id)
+        notice_id:
+          type: string
+          description: Foreign key reference to widgets-notices(id)
         organization_id:
-          type:
-          - string
-          - 'null'
-          description: Optional organization ID for org-specific overrides. Null indicates a global association
-        processing_rules:
-          type: array
-          items:
-            type: string
-            enum:
-            - opt-in
-            - opt-out
-          description: Processing rules for this partner-purpose combination
-          minItems: 1
+          type: string
+          description: Foreign key reference to organizations(id)
+        regulation_id:
+          type: string
+          description: Reference to the regulation ID in the Regulations Service
+        processing_rule:
+          type: string
+          enum:
+          - opt-in
+          - opt-out
+          description: Processing rule override for this notice-regulation combination
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of record creation
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last update
+        version:
+          type: integer
+          description: Version number for concurrency control
       required:
+      - id
       - metadata_partner_id
       - metadata_purpose_id
-      - processing_rules
-    partners-categories-input:
-      title: PartnersCategoryInput
-      type: object
-      properties:
-        id:
-          type: string
-          description: Partners category ID
-        name:
-          type: string
-          description: Name of the partners category
+      - notice_id
+      - organization_id
+      - regulation_id
+      - processing_rule
     partners:
       type: object
       title: Partner
@@ -1157,12 +1165,10 @@ components:
       - id
       - name
       - category_id
-    partners-purposes:
+    partners-purposes-input:
+      title: partners-purposes-input
       type: object
       properties:
-        id:
-          type: string
-          description: Unique identifier for the partner-purpose association
         metadata_partner_id:
           type: string
           description: Foreign key reference to metadata-partners(id)
@@ -1183,92 +1189,42 @@ components:
             - opt-out
           description: Processing rules for this partner-purpose combination
           minItems: 1
-        is_org_override:
-          type: boolean
-          description: Read-only flag indicating if this is an organization override of a global association
-        default_purposes_id:
-          type:
-          - string
-          - 'null'
-          description: Legacy foreign key reference to metadata-partners-default-purposes(id)
-        legitimate_interest_purposes_id:
-          type:
-          - string
-          - 'null'
-          description: Legacy foreign key reference to metadata-partners-legitimate-interest-purposes(id)
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp of record creation
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp of last update
-        version:
-          type: integer
-          description: Version number for concurrency control
       required:
-      - id
       - metadata_partner_id
       - metadata_purpose_id
       - processing_rules
-    metadata-vendors:
+    vendors:
       type: object
       title: Vendor
-      description: A vendor is a third-party company that provides services to properties by collecting data, transforming it, ... This object describes a vendor.
+      description: A vendor that provides services to a property
       properties:
         id:
           type: string
-          description: Vendor ID
-        name:
+          description: The ID of the vendor for the property (ie different from the ID of the vendor metadata on the Didomi platform)
+        status:
           type: string
-          description: Name of the vendor
-        tags:
-          type: array
-          description: Extra classification items for the vendor
-          items:
-            type: string
-        website:
+          description: The status of the vendor for the privacy center (draft or published)
+        property_id:
           type: string
-          format: uri
-          description: Website URL of the vendor
-        website_optout:
+          description: The ID of the property that sets this cookie
+        metadata_id:
           type: string
-          format: uri
-          description: URL for consumers to opt-out from data collection and processing from the vendor
-        hosts:
-          type: array
-          description: List of hosts (DNS names) that belong to the vendor
-          items:
-            type: string
-        url_patterns:
-          type: array
-          description: List of URL patterns (regular expressions) that uniquely identify the vendor
-          items:
-            type: string
-        urls:
-          type: array
-          description: If vendors were queried from URLs (with the `url` query-string parameter), this property contains a list of all URLs that were matched to this vendor
-          items:
-            type: string
-            format: uri
-        taxonomy_id:
-          type: string
-          description: The ID of the taxonomy item for classifying this vendor
+          description: The ID of the vendor metadata
         created_at:
           type: string
-          description: Creation date of the vendor
+          description: Creation date of the property
           format: date-time
         updated_at:
           type: string
-          description: Last update date of the vendor
+          description: Last update date of the property
           format: date-time
         version:
           type: number
-          description: Revision number of the vendor object
+          description: Revision number of the property object
       required:
       - id
-      - name
+      - property_id
+      - metadata_id
     partners-purposes-templates-overrides:
       type: object
       properties:
@@ -1342,6 +1298,63 @@ components:
       - organization_id
       - regulation_id
       - processing_rule
+    metadata-vendors:
+      type: object
+      title: Vendor
+      description: A vendor is a third-party company that provides services to properties by collecting data, transforming it, ... This object describes a vendor.
+      properties:
+        id:
+          type: string
+          description: Vendor ID
+        name:
+          type: string
+          description: Name of the vendor
+        tags:
+          type: array
+          description: Extra classification items for the vendor
+          items:
+            type: string
+        website:
+          type: string
+          format: uri
+          description: Website URL of the vendor
+        website_optout:
+          type: string
+          format: uri
+          description: URL for consumers to opt-out from data collection and processing from the vendor
+        hosts:
+          type: array
+          description: List of hosts (DNS names) that belong to the vendor
+          items:
+            type: string
+        url_patterns:
+          type: array
+          description: List of URL patterns (regular expressions) that uniquely identify the vendor
+          items:
+            type: string
+        urls:
+          type: array
+          description: If vendors were queried from URLs (with the `url` query-string parameter), this property contains a list of all URLs that were matched to this vendor
+          items:
+            type: string
+            format: uri
+        taxonomy_id:
+          type: string
+          description: The ID of the taxonomy item for classifying this vendor
+        created_at:
+          type: string
+          description: Creation date of the vendor
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the vendor
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the vendor object
+      required:
+      - id
+      - name
     partners-categories:
       type: object
       title: PartnersCategory
@@ -1362,33 +1375,45 @@ components:
           format: date-time
       required:
       - id
-    partners-purposes-notices-regulations-overrides:
+    partners-purposes:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier for the notice-regulation override
+          description: Unique identifier for the partner-purpose association
         metadata_partner_id:
           type: string
           description: Foreign key reference to metadata-partners(id)
         metadata_purpose_id:
           type: string
           description: Foreign key reference to metadata-purposes(id)
-        notice_id:
-          type: string
-          description: Foreign key reference to widgets-notices(id)
         organization_id:
-          type: string
-          description: Foreign key reference to organizations(id)
-        regulation_id:
-          type: string
-          description: Reference to the regulation ID in the Regulations Service
-        processing_rule:
-          type: string
-          enum:
-          - opt-in
-          - opt-out
-          description: Processing rule override for this notice-regulation combination
+          type:
+          - string
+          - 'null'
+          description: Optional organization ID for org-specific overrides. Null indicates a global association
+        processing_rules:
+          type: array
+          items:
+            type: string
+            enum:
+            - opt-in
+            - opt-out
+          description: Processing rules for this partner-purpose combination
+          minItems: 1
+        is_org_override:
+          type: boolean
+          description: Read-only flag indicating if this is an organization override of a global association
+        default_purposes_id:
+          type:
+          - string
+          - 'null'
+          description: Legacy foreign key reference to metadata-partners-default-purposes(id)
+        legitimate_interest_purposes_id:
+          type:
+          - string
+          - 'null'
+          description: Legacy foreign key reference to metadata-partners-legitimate-interest-purposes(id)
         created_at:
           type: string
           format: date-time
@@ -1404,10 +1429,7 @@ components:
       - id
       - metadata_partner_id
       - metadata_purpose_id
-      - notice_id
-      - organization_id
-      - regulation_id
-      - processing_rule
+      - processing_rules
     partners-purposes-templates-overrides-input:
       type: object
       properties:
@@ -1470,38 +1492,16 @@ components:
           description: The ID of the taxonomy item for classifying this vendor
       required:
       - name
-    vendors:
+    partners-categories-input:
+      title: PartnersCategoryInput
       type: object
-      title: Vendor
-      description: A vendor that provides services to a property
       properties:
         id:
           type: string
-          description: The ID of the vendor for the property (ie different from the ID of the vendor metadata on the Didomi platform)
-        status:
+          description: Partners category ID
+        name:
           type: string
-          description: The status of the vendor for the privacy center (draft or published)
-        property_id:
-          type: string
-          description: The ID of the property that sets this cookie
-        metadata_id:
-          type: string
-          description: The ID of the vendor metadata
-        created_at:
-          type: string
-          description: Creation date of the property
-          format: date-time
-        updated_at:
-          type: string
-          description: Last update date of the property
-          format: date-time
-        version:
-          type: number
-          description: Revision number of the property object
-      required:
-      - id
-      - property_id
-      - metadata_id
+          description: Name of the partners category
   securitySchemes:
     bearer:
       scheme: bearer

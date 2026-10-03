@@ -194,37 +194,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    privacy-centers-contact:
-      type: object
-      title: Contact
-      description: Contact information of the DPO or person in charge of privacy
-      properties:
-        email:
-          type: string
-          description: Email address
-        schedule:
-          type: string
-          description: Phone number
-        address:
-          type: string
-          description: Postal address
-    privacy-centers-customization:
-      type: object
-      title: Customization
-      description: Customization options for the privacy center
-      properties:
-        logo:
-          type: string
-          format: uri
-          description: URL of the logo to display (must be HTTPS)
-        colors:
-          type: object
-          title: Colors
-          description: Colors information
-          properties:
-            primary:
-              type: string
-              description: Primary color to use in the Privacy Center theme
     privacy-centers:
       type: object
       title: PrivacyCenter
@@ -290,6 +259,23 @@ components:
       required:
       - id
       - name
+    privacy-centers-customization:
+      type: object
+      title: Customization
+      description: Customization options for the privacy center
+      properties:
+        logo:
+          type: string
+          format: uri
+          description: URL of the logo to display (must be HTTPS)
+        colors:
+          type: object
+          title: Colors
+          description: Colors information
+          properties:
+            primary:
+              type: string
+              description: Primary color to use in the Privacy Center theme
     privacy-centers-input:
       title: PrivacyCenterInput
       type: object
@@ -340,6 +326,20 @@ components:
       required:
       - name
       - organization_id
+    privacy-centers-contact:
+      type: object
+      title: Contact
+      description: Contact information of the DPO or person in charge of privacy
+      properties:
+        email:
+          type: string
+          description: Email address
+        schedule:
+          type: string
+          description: Phone number
+        address:
+          type: string
+          description: Postal address
   securitySchemes:
     bearer:
       scheme: bearer

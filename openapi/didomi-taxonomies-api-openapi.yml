@@ -188,6 +188,34 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    taxonomies-vendors:
+      type: object
+      title: TaxonomyVendor
+      description: A classification item for vendors
+      properties:
+        id:
+          type: string
+          description: Item ID
+        name:
+          type: string
+          description: Name of the item
+        parent_id:
+          type: string
+          description: ID of the parent of this item
+        created_at:
+          type: string
+          description: Creation date of the item
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the item
+          format: date-time
+        version:
+          type: number
+          description: Revision number of the item
+      required:
+      - id
+      - name
     taxonomies-vendors-input:
       title: TaxonomyVendorInput
       type: object
@@ -236,34 +264,6 @@ components:
       - id
       - property_id
       - metadata_id
-    taxonomies-vendors:
-      type: object
-      title: TaxonomyVendor
-      description: A classification item for vendors
-      properties:
-        id:
-          type: string
-          description: Item ID
-        name:
-          type: string
-          description: Name of the item
-        parent_id:
-          type: string
-          description: ID of the parent of this item
-        created_at:
-          type: string
-          description: Creation date of the item
-          format: date-time
-        updated_at:
-          type: string
-          description: Last update date of the item
-          format: date-time
-        version:
-          type: number
-          description: Revision number of the item
-      required:
-      - id
-      - name
   securitySchemes:
     bearer:
       scheme: bearer

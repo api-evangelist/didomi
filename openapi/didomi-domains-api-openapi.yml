@@ -211,10 +211,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    domains-input-update:
-      title: DomainInputUpdate
+    domains-input-create:
+      title: DomainInputCreate
       type: object
       properties:
+        id:
+          type: string
+          description: Fully qualified domain name
+        organization_id:
+          type: string
+          description: The ID of the organization that owns this data processing
         description:
           type: string
           description: Description of the domain name usage in your organization
@@ -227,12 +233,19 @@ components:
         status:
           type: string
           description: "Provisioning status on the Didomi platform. \n    Possible values: \n      draft (domain is created but not deployed yet), \n      scheduled (domain is scheduled for deployment), \n      to_be_deleted (domain is scheduled for deletion),\n      deploying (domain is being provisioned),\n      deleting (domain is being deleted),\n      failed (domain deployment/deletion failed),\n      ready (domain is provisioned and ready for use)"
+        usage:
+          type: string
+          description: 'What the domain is used for: CMP ("cmp"), Privacy Center ("privacy-center"), Preference Center ("preference-center")'
         bots_crawl:
           type: string
           description: 'Controls whether bots are allowed to crawl the domain. Possible values: "allow_all" (allow crawls from any bots) or "disallow_all" (disallow crawls from all bots)'
           enum:
           - allow_all
           - disallow_all
+      required:
+      - id
+      - usage
+      - organization_id
     domains:
       title: Domain
       type: object
@@ -278,16 +291,10 @@ components:
         version:
           type: number
           description: Revision number of the domain entity
-    domains-input-create:
-      title: DomainInputCreate
+    domains-input-update:
+      title: DomainInputUpdate
       type: object
       properties:
-        id:
-          type: string
-          description: Fully qualified domain name
-        organization_id:
-          type: string
-          description: The ID of the organization that owns this data processing
         description:
           type: string
           description: Description of the domain name usage in your organization
@@ -300,19 +307,12 @@ components:
         status:
           type: string
           description: "Provisioning status on the Didomi platform. \n    Possible values: \n      draft (domain is created but not deployed yet), \n      scheduled (domain is scheduled for deployment), \n      to_be_deleted (domain is scheduled for deletion),\n      deploying (domain is being provisioned),\n      deleting (domain is being deleted),\n      failed (domain deployment/deletion failed),\n      ready (domain is provisioned and ready for use)"
-        usage:
-          type: string
-          description: 'What the domain is used for: CMP ("cmp"), Privacy Center ("privacy-center"), Preference Center ("preference-center")'
         bots_crawl:
           type: string
           description: 'Controls whether bots are allowed to crawl the domain. Possible values: "allow_all" (allow crawls from any bots) or "disallow_all" (disallow crawls from all bots)'
           enum:
           - allow_all
           - disallow_all
-      required:
-      - id
-      - usage
-      - organization_id
   securitySchemes:
     bearer:
       scheme: bearer

@@ -104,6 +104,47 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    sso-connections:
+      title: SSOConnection
+      type: object
+      properties:
+        id:
+          type: string
+          description: SSO connection ID.
+        auth0_connection_id:
+          type: string
+          description: The id of the SSO connection in Auth0.
+        auth0_connection_name:
+          type: string
+          description: A unique name that identifies the SSO connection.
+        auth0_certificate:
+          type: string
+          description: The public SSO connection certificate.
+        auth0_domain_aliases:
+          type: array
+          items:
+            type: string
+            description: A list of domains aliases that are used for home realm discovery for the SSO connection.
+        auth0_sign_in_endpoint:
+          type: string
+          description: The sign in URL where users are redirected to complete the authentication step.
+        auth0_sign_out_endpoint:
+          type: string
+          description: The sign out URL where users are redirected after logging out.
+        auth0_sign_saml_request:
+          type: boolean
+          description: Whether or not SAML request signing is enabled for the SSO connection.
+        organization_group_id:
+          type: string
+          description: The ID of the organization group.
+        created_at:
+          type: string
+          description: Creation date of the SSO connection.
+          format: date-time
+        updated_at:
+          type: string
+          description: Last update date of the SSO connection.
+          format: date-time
     sso-connection-input-create:
       title: SSOConnectionInputCreate
       type: object
@@ -158,47 +199,6 @@ components:
           description: The ID of the organization.
       required:
       - organization_id
-    sso-connections:
-      title: SSOConnection
-      type: object
-      properties:
-        id:
-          type: string
-          description: SSO connection ID.
-        auth0_connection_id:
-          type: string
-          description: The id of the SSO connection in Auth0.
-        auth0_connection_name:
-          type: string
-          description: A unique name that identifies the SSO connection.
-        auth0_certificate:
-          type: string
-          description: The public SSO connection certificate.
-        auth0_domain_aliases:
-          type: array
-          items:
-            type: string
-            description: A list of domains aliases that are used for home realm discovery for the SSO connection.
-        auth0_sign_in_endpoint:
-          type: string
-          description: The sign in URL where users are redirected to complete the authentication step.
-        auth0_sign_out_endpoint:
-          type: string
-          description: The sign out URL where users are redirected after logging out.
-        auth0_sign_saml_request:
-          type: boolean
-          description: Whether or not SAML request signing is enabled for the SSO connection.
-        organization_group_id:
-          type: string
-          description: The ID of the organization group.
-        created_at:
-          type: string
-          description: Creation date of the SSO connection.
-          format: date-time
-        updated_at:
-          type: string
-          description: Last update date of the SSO connection.
-          format: date-time
   securitySchemes:
     bearer:
       scheme: bearer

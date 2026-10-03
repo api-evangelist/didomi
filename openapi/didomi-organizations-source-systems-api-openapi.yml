@@ -95,25 +95,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    organizations-source-systems-input-create:
-      title: OrganizationSourceSystemInputCreate
+    organizations-source-systems_list:
+      title: OrganizationSourceSystemList
       type: object
       properties:
-        organization_id:
-          type: string
-          description: The ID of the DDM organization
-        source_system:
-          type: string
-          description: The name of the source system
-          enum:
-          - sp
-        source_system_id:
-          type: string
-          description: The ID of the organization in the source system
-      required:
-      - organization_id
-      - source_system
-      - source_system_id
+        total:
+          type: number
+          description: Total number of items
+        limit:
+          type: number
+          description: Number of items per page
+        skip:
+          type: number
+          description: Number of items skipped
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizations-source-systems'
     organizations-source-systems:
       title: OrganizationSourceSystem
       type: object
@@ -145,23 +143,25 @@ components:
       - organization_id
       - source_system
       - source_system_id
-    organizations-source-systems_list:
-      title: OrganizationSourceSystemList
+    organizations-source-systems-input-create:
+      title: OrganizationSourceSystemInputCreate
       type: object
       properties:
-        total:
-          type: number
-          description: Total number of items
-        limit:
-          type: number
-          description: Number of items per page
-        skip:
-          type: number
-          description: Number of items skipped
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/organizations-source-systems'
+        organization_id:
+          type: string
+          description: The ID of the DDM organization
+        source_system:
+          type: string
+          description: The name of the source system
+          enum:
+          - sp
+        source_system_id:
+          type: string
+          description: The ID of the organization in the source system
+      required:
+      - organization_id
+      - source_system
+      - source_system_id
   securitySchemes:
     bearer:
       scheme: bearer

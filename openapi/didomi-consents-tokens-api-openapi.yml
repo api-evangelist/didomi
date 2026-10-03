@@ -54,6 +54,27 @@ components:
       bearerFormat: JWT
       type: http
 definitions:
+  consent-tokens-input:
+    type: object
+    title: ConsentToken
+    description: A JWT token authorizing users to access and modify their consent data
+    properties:
+      organization_id:
+        type: string
+        description: ID of the organization that the consent gives access to
+      organization_user_id:
+        type: string
+        description: User ID
+      lifetime:
+        type: integer
+        description: Lifetime of the token (in seconds)
+      metadata:
+        type: object
+        description: Free-form metadata object on the token. Use it to store custom information tied to the token user. That information will not be stored in events or user data and will only be available for the lifetime of the token.
+    required:
+    - organization_id
+    - organization_user_id
+    - lifetime
   consent-tokens:
     type: object
     title: ConsentToken
@@ -76,27 +97,6 @@ definitions:
         description: Free-form metadata object on the token. Use it to store custom information tied to the token user. That information will not be stored in events or user data and will only be available for the lifetime of the token.
     required:
     - id_token
-    - organization_id
-    - organization_user_id
-    - lifetime
-  consent-tokens-input:
-    type: object
-    title: ConsentToken
-    description: A JWT token authorizing users to access and modify their consent data
-    properties:
-      organization_id:
-        type: string
-        description: ID of the organization that the consent gives access to
-      organization_user_id:
-        type: string
-        description: User ID
-      lifetime:
-        type: integer
-        description: Lifetime of the token (in seconds)
-      metadata:
-        type: object
-        description: Free-form metadata object on the token. Use it to store custom information tied to the token user. That information will not be stored in events or user data and will only be available for the lifetime of the token.
-    required:
     - organization_id
     - organization_user_id
     - lifetime

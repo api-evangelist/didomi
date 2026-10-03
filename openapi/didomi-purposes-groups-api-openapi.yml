@@ -210,6 +210,34 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    purposes-group-input:
+      title: PurposesGroupInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the group
+        description:
+          type: string
+          description: Description of the group
+        namespaces:
+          type: object
+          description: IDs of this group in other namespaces / vendor lists and used in Didomi SDKs and consents
+          properties:
+            iab2:
+              type: string
+              description: ID of the group in the IAB TCF version 2 as a stack ID
+        purposes_id:
+          description: Purposes that belong to the group
+          type: array
+          items:
+            type: string
+            description: ID of a purpose
+        organization_id:
+          type: string
+          description: ID of the organization that owns the group. If ID is null, the group is global.
+      required:
+      - name
     purposes-groups:
       description: A group of purposes
       type: object
@@ -248,34 +276,6 @@ components:
           type: string
           description: Last update date of the purpose
           format: date-time
-      required:
-      - name
-    purposes-group-input:
-      title: PurposesGroupInput
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the group
-        description:
-          type: string
-          description: Description of the group
-        namespaces:
-          type: object
-          description: IDs of this group in other namespaces / vendor lists and used in Didomi SDKs and consents
-          properties:
-            iab2:
-              type: string
-              description: ID of the group in the IAB TCF version 2 as a stack ID
-        purposes_id:
-          description: Purposes that belong to the group
-          type: array
-          items:
-            type: string
-            description: ID of a purpose
-        organization_id:
-          type: string
-          description: ID of the organization that owns the group. If ID is null, the group is global.
       required:
       - name
   securitySchemes:
