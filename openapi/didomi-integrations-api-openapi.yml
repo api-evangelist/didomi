@@ -59,6 +59,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    platform-integrations-sessions-input:
+      type: object
+      properties: {}
+      required: []
     platform-integrations-sessions:
       type: object
       properties:
@@ -80,10 +84,6 @@ components:
       - key
       - access_token
       - platform_integration_id
-    platform-integrations-sessions-input:
-      type: object
-      properties: {}
-      required: []
   securitySchemes:
     bearer:
       scheme: bearer

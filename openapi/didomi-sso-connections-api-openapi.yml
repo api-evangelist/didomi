@@ -104,6 +104,60 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    sso-connection-input-patch:
+      title: SSOConnectionInputPatch
+      type: object
+      properties:
+        auth0_certificate:
+          type: string
+          description: The public SSO connection certificate.
+        auth0_domain_aliases:
+          type: array
+          items:
+            type: string
+            description: A list of domains aliases that will be used for home realm discovery for the SSO connection.
+        auth0_sign_in_endpoint:
+          type: string
+          description: The sign in URL where users will be redirected to complete the authentication step.
+        auth0_sign_out_endpoint:
+          type: string
+          description: The sign out URL where users will be redirected after logging out.
+        auth0_sign_saml_request:
+          type: boolean
+          description: Whether or not SAML request signing is enabled for the SSO connection.
+        organization_id:
+          type: string
+          description: The ID of the organization.
+      required:
+      - organization_id
+    sso-connection-input-create:
+      title: SSOConnectionInputCreate
+      type: object
+      properties:
+        auth0_certificate:
+          type: string
+          description: The public SSO connection certificate.
+        auth0_domain_aliases:
+          type: array
+          items:
+            type: string
+            description: A list of domains aliases that will be used for home realm discovery for the SSO connection.
+        auth0_sign_in_endpoint:
+          type: string
+          description: The sign in URL where users will be redirected to complete the authentication step.
+        auth0_sign_out_endpoint:
+          type: string
+          description: The sign out URL where users will be redirected after logging out.
+        auth0_sign_saml_request:
+          type: boolean
+          description: Whether or not SAML request signing is enabled for the SSO connection.
+        organization_id:
+          type: string
+          description: The ID of the organization.
+      required:
+      - auth0_certificate
+      - auth0_sign_in_endpoint
+      - organization_id
     sso-connections:
       title: SSOConnection
       type: object
@@ -145,60 +199,6 @@ components:
           type: string
           description: Last update date of the SSO connection.
           format: date-time
-    sso-connection-input-create:
-      title: SSOConnectionInputCreate
-      type: object
-      properties:
-        auth0_certificate:
-          type: string
-          description: The public SSO connection certificate.
-        auth0_domain_aliases:
-          type: array
-          items:
-            type: string
-            description: A list of domains aliases that will be used for home realm discovery for the SSO connection.
-        auth0_sign_in_endpoint:
-          type: string
-          description: The sign in URL where users will be redirected to complete the authentication step.
-        auth0_sign_out_endpoint:
-          type: string
-          description: The sign out URL where users will be redirected after logging out.
-        auth0_sign_saml_request:
-          type: boolean
-          description: Whether or not SAML request signing is enabled for the SSO connection.
-        organization_id:
-          type: string
-          description: The ID of the organization.
-      required:
-      - auth0_certificate
-      - auth0_sign_in_endpoint
-      - organization_id
-    sso-connection-input-patch:
-      title: SSOConnectionInputPatch
-      type: object
-      properties:
-        auth0_certificate:
-          type: string
-          description: The public SSO connection certificate.
-        auth0_domain_aliases:
-          type: array
-          items:
-            type: string
-            description: A list of domains aliases that will be used for home realm discovery for the SSO connection.
-        auth0_sign_in_endpoint:
-          type: string
-          description: The sign in URL where users will be redirected to complete the authentication step.
-        auth0_sign_out_endpoint:
-          type: string
-          description: The sign out URL where users will be redirected after logging out.
-        auth0_sign_saml_request:
-          type: boolean
-          description: Whether or not SAML request signing is enabled for the SSO connection.
-        organization_id:
-          type: string
-          description: The ID of the organization.
-      required:
-      - organization_id
   securitySchemes:
     bearer:
       scheme: bearer

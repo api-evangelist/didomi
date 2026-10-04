@@ -204,6 +204,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    MetadataPurposeRegulationOverridePatchInput:
+      title: MetadataPurposeRegulationOverridePatchInput
+      type: object
+      properties:
+        regulations_id:
+          type: array
+          description: An array of regulation IDs the override configures the metadata purpose to support
+          items:
+            type: string
+        metadata_purpose_id:
+          type: string
+          description: The ID of the associated global (organization_id=null) metadata purpose
     MetadataPurposeRegulationOverride:
       description: A table to define MetadataPurposeRegulationOverrides. Overrides allow clients to define which regulations a global (organization_id=null) metadata purpose supports. It is not supported to define overrides for a custom purpose (purposes created by an organization). A null value of `regulations_id` means all regulations are supported, and an empty array means no regulations are supported.
       type: object
@@ -239,18 +251,6 @@ components:
       - id
       - metadata_purpose_id
       - organization_id
-    MetadataPurposeRegulationOverridePatchInput:
-      title: MetadataPurposeRegulationOverridePatchInput
-      type: object
-      properties:
-        regulations_id:
-          type: array
-          description: An array of regulation IDs the override configures the metadata purpose to support
-          items:
-            type: string
-        metadata_purpose_id:
-          type: string
-          description: The ID of the associated global (organization_id=null) metadata purpose
     MetadataPurposeRegulationOverrideInput:
       title: MetadataPurposeRegulationOverrideInput
       type: object

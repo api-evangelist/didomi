@@ -91,16 +91,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DashboardUrlType:
-      type: string
-      enum:
-      - cluvio
-      - redash
     DashboardUrlCategory:
       type: string
       enum:
       - analytics
       - home
+    DashboardUrlProduct:
+      type: string
+      enum:
+      - cmp
+      - pmp
+      - integration
+      - acm
     dashboards-urls:
       type: object
       title: dashboard
@@ -145,6 +147,11 @@ components:
       - type
       - aggregation_period
       - product
+    DashboardUrlType:
+      type: string
+      enum:
+      - cluvio
+      - redash
     DashboardUrlAggregationPeriod:
       type: string
       enum:
@@ -152,13 +159,6 @@ components:
       - weekly
       - daily
       - hourly
-    DashboardUrlProduct:
-      type: string
-      enum:
-      - cmp
-      - pmp
-      - integration
-      - acm
   securitySchemes:
     bearer:
       scheme: bearer

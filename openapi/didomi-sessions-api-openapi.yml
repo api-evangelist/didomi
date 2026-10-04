@@ -81,23 +81,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    sessions-input:
-      type: object
-      title: SessionInput
-      properties:
-        type:
-          type: string
-          description: The type of session ("api-key" or "email")
-        key:
-          type: string
-          description: The key to use for authentication (either an email address or an API key)
-        secret:
-          type: string
-          description: The secret to use for authentication (either a password or an API secret)
-      required:
-      - type
-      - key
-      - secret
     sessions:
       type: object
       title: Session
@@ -112,6 +95,23 @@ components:
         access_token:
           type: string
           description: The access token to use when making API calls with this session
+      required:
+      - type
+      - key
+      - secret
+    sessions-input:
+      type: object
+      title: SessionInput
+      properties:
+        type:
+          type: string
+          description: The type of session ("api-key" or "email")
+        key:
+          type: string
+          description: The key to use for authentication (either an email address or an API key)
+        secret:
+          type: string
+          description: The secret to use for authentication (either a password or an API secret)
       required:
       - type
       - key

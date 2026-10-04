@@ -95,6 +95,19 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    partners-spi-purposes-input:
+      title: PartnersSPIPurposesInput
+      type: object
+      properties:
+        metadata_partner_id:
+          type: string
+          description: Partner ID
+        metadata_purpose_id:
+          type: string
+          description: Purpose ID
+        organization_id:
+          type: string
+          description: Organization ID
     partners-spi-purposes:
       type: object
       title: PartnersSPIPurposes
@@ -123,19 +136,6 @@ components:
       - metadata_partner_id
       - metadata_purpose_id
       - organization_id
-    partners-spi-purposes-input:
-      title: PartnersSPIPurposesInput
-      type: object
-      properties:
-        metadata_partner_id:
-          type: string
-          description: Partner ID
-        metadata_purpose_id:
-          type: string
-          description: Purpose ID
-        organization_id:
-          type: string
-          description: Organization ID
   securitySchemes:
     bearer:
       scheme: bearer

@@ -237,17 +237,11 @@ components:
       bearerFormat: JWT
       type: http
 definitions:
-  consent-users-input-create:
+  consent-users-input-update:
     type: object
-    title: ConsentUserCreate
+    title: ConsentUserUpdate
     description: An end user and its consent status
     properties:
-      id:
-        type: string
-        description: Didomi user ID (A random UUID for users encountered on websites and an IDFA/ADID for users from mobile apps)
-      organization_id:
-        type: string
-        description: ID of the organization that owns the user
       organization_user_id:
         type: string
         description: A unique user ID, internal to your organization. This can be an email, a phone number, an internal client ID, etc. It is used to link Didomi users to your internal systems.
@@ -261,7 +255,7 @@ definitions:
       country:
         type: string
         title: Country
-        description: Two-letter ISO code of the user country
+        description: Two-letter ISO code of the user's country
       last_seen_country:
         type: string
         title: Last seen country
@@ -425,9 +419,6 @@ definitions:
         required:
         - vendors
         deprecated: true
-    required:
-    - id
-    - organization_id
   consent-users:
     type: object
     title: ConsentUser
@@ -627,11 +618,17 @@ definitions:
     - version
     - created_at
     - updated_at
-  consent-users-input-update:
+  consent-users-input-create:
     type: object
-    title: ConsentUserUpdate
+    title: ConsentUserCreate
     description: An end user and its consent status
     properties:
+      id:
+        type: string
+        description: Didomi user ID (A random UUID for users encountered on websites and an IDFA/ADID for users from mobile apps)
+      organization_id:
+        type: string
+        description: ID of the organization that owns the user
       organization_user_id:
         type: string
         description: A unique user ID, internal to your organization. This can be an email, a phone number, an internal client ID, etc. It is used to link Didomi users to your internal systems.
@@ -645,7 +642,7 @@ definitions:
       country:
         type: string
         title: Country
-        description: Two-letter ISO code of the user's country
+        description: Two-letter ISO code of the user country
       last_seen_country:
         type: string
         title: Last seen country
@@ -809,3 +806,6 @@ definitions:
         required:
         - vendors
         deprecated: true
+    required:
+    - id
+    - organization_id

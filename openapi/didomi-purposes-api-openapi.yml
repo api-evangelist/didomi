@@ -259,7 +259,7 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    purposes-patch-input:
+    purposes-input:
       title: PurposeInput
       type: object
       properties:
@@ -302,15 +302,19 @@ components:
             custom:
               type: string
               description: Custom ID for the purpose
-        metadata:
-          type: object
-          additionalProperties: {}
-          description: Metadata for additional information
         regulations_id:
           type: array
           description: An array of regulation IDs the purpose supports
           items:
             type: string
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata for additional information
+        type:
+          type: string
+          description: The purpose type discriminator.
+          default: purpose
     purposes:
       description: The reason why a company is collecting and processing personal data
       type: object
@@ -382,7 +386,7 @@ components:
           description: Metadata for additional information
       required:
       - id
-    purposes-input:
+    purposes-patch-input:
       title: PurposeInput
       type: object
       properties:
@@ -425,19 +429,15 @@ components:
             custom:
               type: string
               description: Custom ID for the purpose
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata for additional information
         regulations_id:
           type: array
           description: An array of regulation IDs the purpose supports
           items:
             type: string
-        metadata:
-          type: object
-          additionalProperties: {}
-          description: Metadata for additional information
-        type:
-          type: string
-          description: The purpose type discriminator.
-          default: purpose
   securitySchemes:
     bearer:
       scheme: bearer

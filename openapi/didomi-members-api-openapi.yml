@@ -157,6 +157,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    members-invite-to-org-input:
+      title: InvitedMemberInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: The invited user's name
+        email:
+          type: string
+          description: The invited user's email
+        organization_id:
+          type: string
+          description: Organization ID
+      required:
+      - name
+      - email
+      - organization_id
     members:
       type: object
       title: Member
@@ -200,23 +217,6 @@ components:
       - id
       - organization_id
       - user_id
-    members-invite-to-org-input:
-      title: InvitedMemberInput
-      type: object
-      properties:
-        name:
-          type: string
-          description: The invited user's name
-        email:
-          type: string
-          description: The invited user's email
-        organization_id:
-          type: string
-          description: Organization ID
-      required:
-      - name
-      - email
-      - organization_id
   securitySchemes:
     bearer:
       scheme: bearer

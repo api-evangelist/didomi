@@ -211,42 +211,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    organizations-input:
-      title: OrganizationInput
-      type: object
-      properties:
-        name:
-          type: string
-          description: Unique name of the organization
-        website:
-          type: string
-          format: uri
-          description: Website URL of the organization
-        industry_id:
-          type: string
-          description: identifier of industry that the organization belongs to
-        analytics_url:
-          type: string
-          description: URL to a public Redash dashboard
-        auth_enabled:
-          type: boolean
-          description: Enable or disable authentication for end users - (DEPRECATED - auth is now always enabled)
-        auth_allow_user_creation:
-          type: boolean
-          description: Enable or disable creation of an end user on authentication if it doesn't exist
-        auth_message_priority:
-          type: array
-          description: List the priority of message channels, from the most important to the least
-          items:
-            type: string
-        organization_group_id:
-          type: string
-          description: Identifier of the organization group that the organization belongs to
-        salesforce_account_id:
-          type: string
-          description: Identifier of the salesforce account that the organization group belongs to
-      required:
-      - name
     organizations:
       type: object
       title: Organization
@@ -323,6 +287,42 @@ components:
           description: Controls wether the organization should be allowed to contact support via chat
       required:
       - id
+      - name
+    organizations-input:
+      title: OrganizationInput
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique name of the organization
+        website:
+          type: string
+          format: uri
+          description: Website URL of the organization
+        industry_id:
+          type: string
+          description: identifier of industry that the organization belongs to
+        analytics_url:
+          type: string
+          description: URL to a public Redash dashboard
+        auth_enabled:
+          type: boolean
+          description: Enable or disable authentication for end users - (DEPRECATED - auth is now always enabled)
+        auth_allow_user_creation:
+          type: boolean
+          description: Enable or disable creation of an end user on authentication if it doesn't exist
+        auth_message_priority:
+          type: array
+          description: List the priority of message channels, from the most important to the least
+          items:
+            type: string
+        organization_group_id:
+          type: string
+          description: Identifier of the organization group that the organization belongs to
+        salesforce_account_id:
+          type: string
+          description: Identifier of the salesforce account that the organization group belongs to
+      required:
       - name
   securitySchemes:
     bearer:
