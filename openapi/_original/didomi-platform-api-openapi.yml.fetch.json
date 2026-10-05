@@ -1,0 +1,12 @@
+{
+ "url": "https://api.didomi.io/openapi.json",
+ "requested_url": "https://api.didomi.io/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 311986,
+ "sha256": "32787b3e7b03fa41dd61d9fb7162f6158170b0868b100c224220516c8a3b470b",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
