@@ -191,3 +191,45 @@ notes:
   scraper_enabled_properties 250, consent_proof_reports 10/month) are the
   machine-readable shadow of these tiers; read them per-organization with
   GET https://api.didomi.io/v1/quotas.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Consent Management Platform
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Connected TV Consent Management
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Preference Management Platform
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Privacy Requests
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Advanced Compliance Monitoring
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Server-Side Tagging (Addingwell)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
