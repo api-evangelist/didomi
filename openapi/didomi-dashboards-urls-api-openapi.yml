@@ -91,11 +91,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DashboardUrlCategory:
-      type: string
-      enum:
-      - analytics
-      - home
     DashboardUrlProduct:
       type: string
       enum:
@@ -147,11 +142,11 @@ components:
       - type
       - aggregation_period
       - product
-    DashboardUrlType:
+    DashboardUrlCategory:
       type: string
       enum:
-      - cluvio
-      - redash
+      - analytics
+      - home
     DashboardUrlAggregationPeriod:
       type: string
       enum:
@@ -159,6 +154,11 @@ components:
       - weekly
       - daily
       - hourly
+    DashboardUrlType:
+      type: string
+      enum:
+      - cluvio
+      - redash
   securitySchemes:
     bearer:
       scheme: bearer

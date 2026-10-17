@@ -94,6 +94,16 @@ components:
       bearerFormat: JWT
       type: http
 definitions:
+  consent-proofs-input:
+    type: object
+    title: ConsentProof
+    description: A file proving the consent of the user
+    properties:
+      file:
+        type: string
+        description: 'Base64-encoded data URI. Accepted file formats: PDF, PNG, JPG, GIF, DOCX, DOC'
+    required:
+    - file
   consent-proofs:
     type: object
     title: ConsentProof
@@ -111,14 +121,4 @@ definitions:
     required:
     - id
     - size
-    - file
-  consent-proofs-input:
-    type: object
-    title: ConsentProof
-    description: A file proving the consent of the user
-    properties:
-      file:
-        type: string
-        description: 'Base64-encoded data URI. Accepted file formats: PDF, PNG, JPG, GIF, DOCX, DOC'
-    required:
     - file
