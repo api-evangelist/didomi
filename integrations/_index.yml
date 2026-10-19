@@ -27,3 +27,74 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: didomi-maven-central
+  label: Maven Central
+  partner: maven-central
+  partner_name: Maven Central
+  category: official SDK (Java/JVM)
+  type: register
+  channel: package-registry
+  evidence: https://central.sonatype.com/artifact/io.didomi.sdk/android
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: io.didomi.sdk:android
+      version: 2.52.0
+      released: '2026-10-12'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/io.didomi.sdk/android
+      repo_leg: domain:didomi.io
+      publisher_leg: groupId:didomi.io
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: didomi-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@didomi/react
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@didomi/react'
+      version: 1.11.0
+      released: '2026-08-26'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@didomi/react
+      repo_leg: domain:didomi.io
+      publisher_leg: email:didomi.io
+      matched_by: domain
+    - name: '@didomi/react-native'
+      version: 2.37.0
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@didomi/react-native
+      repo_leg: domain:didomi.io
+      publisher_leg: email:didomi.io
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
