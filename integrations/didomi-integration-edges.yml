@@ -27,25 +27,6 @@ edges:
   seller_name: Didomi SAS
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
-- partner_name: mParticle
-  partner: mparticle
-  partner_match: aggregator
-  marketplace: coverage
-  channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://docs.mparticle.com/integrations/didomi/event/
-  coverage_role:
-  - destination
-  cdp_signals:
-    destination:
-      catalog_entries:
-      - didomi
-      integration_types:
-      - event
-  detected_by: sweep-cdp.py
-  first_seen: '2026-10-14'
 - partner_name: Maven Central
   partner: maven-central
   partner_match: register
@@ -115,4 +96,23 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/didomi/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - didomi
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 source: https://docs.mparticle.com/integrations/didomi/event/
