@@ -1,4 +1,4 @@
-# Didomi (didomi)
+# Didomi
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,242 +66,270 @@
 
 Didomi is a Paris-based consent and preference management platform (CMP/PMP) that helps publishers, advertisers, retailers, and large enterprises collect, manage, and act on user privacy choices across web, mobile, CTV, and AMP surfaces. The platform covers GDPR, CCPA and the wider US state-law landscape, IAB TCF v2.x, Google Consent Mode v2, the IAB GPP, GPC, the EU DMA, Chilean Law 25, Australian privacy law, and other regulations through a single multi-regulation configuration model. Didomi exposes a JSON REST API (https://api.didomi.io/v1/) plus first-party SDKs for Web, iOS/tvOS, Android/Android TV, Unity, React Native, Flutter, Vega OS, and AMP, alongside IAB-compliant consent string tooling and reverse-proxy boilerplates for Fastly, CloudFront, and Cloudflare.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/didomi/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/didomi/refs/heads/main/apis.yml)
+**Areas:** Advertising · AdTech · CCPA · CMP · Consent · Consent Management · DSAR · Privacy · GDPR · IAB TCF · MarTech · Preference Management
 
-## Scope
+## Didomi on APIs.io
 
-- **Access:** 3rd-Party
+Everything profiled for Didomi is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/didomi/](https://apis.io/providers/didomi/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (37)
 
-- Advertising
-- AdTech
-- CCPA
-- CMP
-- Consent
-- Consent Management
-- DSAR
-- Data Privacy
-- GDPR
-- IAB TCF
-- MarTech
-- Preference Management
-- Privacy
-- Privacy Requests
-- Regulatory Compliance
+- [Didomi Web SDK](https://apis.io/apis/didomi/didomi-web-sdk/) — The Didomi Web SDK is the browser-side library that renders consent notices, preference centers, and privacy widgets, gates third-party tags on user…
+- [Didomi Android SDK](https://apis.io/apis/didomi/didomi-android-sdk/) — Didomi's Android and Android TV SDK delivers native consent notices, preference popups, and TCF / GPP / Didomi consent string generation in Java / Kotlin /…
+- [Didomi iOS SDK](https://apis.io/apis/didomi/didomi-ios-sdk/) — The iOS / tvOS / Mac Catalyst SDK renders Didomi consent notices and preference centers natively in Swift and Objective-C apps, coordinates Apple's App…
+- [Didomi Cross-Platform SDKs (React Native, Flutter, Unity, Vega OS, AMP)](https://apis.io/apis/didomi/didomi-cross-platform-sdks/) — Didomi maintains first-party CMP plugins for React Native, Flutter, Unity (games and game consoles), Vega OS (LG webOS smart TVs), and Google AMP. Each…
+- [Didomi Consent String Toolkit](https://apis.io/apis/didomi/didomi-consent-string-toolkit/) — Open-source libraries published under github.com/didomi for encoding, decoding, and validating the Didomi consent string and the IAB TCF v2 consent string.…
+- [Didomi consents/events API](https://apis.io/apis/didomi/didomi-consents-events-api/) — The consents/events API from Didomi — 2 operation(s) for consents/events.
+- [Didomi consents/proofs API](https://apis.io/apis/didomi/didomi-consents-proofs-api/) — The consents/proofs API from Didomi — 2 operation(s) for consents/proofs.
+- [Didomi Consents/tokens API](https://apis.io/apis/didomi/didomi-consents-tokens-api/) — The consents/tokens API from Didomi — 1 operation(s) for consents/tokens.
+- [Didomi Consents/users API](https://apis.io/apis/didomi/didomi-consents-users-api/) — The consents/users API from Didomi — 2 operation(s) for consents/users.
+- [Didomi Cookies API](https://apis.io/apis/didomi/didomi-cookies-api/) — Manage cookies set by a property
+- [Didomi Dashboards URLs API](https://apis.io/apis/didomi/didomi-dashboards-urls-api/) — The dashboards-urls API from Didomi — 1 operation(s) for dashboards-urls.
+- [Didomi Domains API](https://apis.io/apis/didomi/didomi-domains-api/) — Provisioned domains for consent notices and privacy centers
+- [Didomi Integrations API](https://apis.io/apis/didomi/didomi-integrations-api/) — The Integrations API from Didomi — 1 operation(s) for integrations.
+- [Didomi Keys API](https://apis.io/apis/didomi/didomi-keys-api/) — Manage API keys
+- [Didomi Languages API](https://apis.io/apis/didomi/didomi-languages-api/) — List of available languages for the SDKs
+- [Didomi Members API](https://apis.io/apis/didomi/didomi-members-api/) — Manage members of an organization
+- [Didomi Metadata API](https://apis.io/apis/didomi/didomi-metadata-api/) — A metadata service
+- [Didomi Metadata Purpose Regulation Override API](https://apis.io/apis/didomi/didomi-metadata-purpose-regulation-override-api/) — The metadata-purpose-regulation-override API from Didomi — 2 operation(s) for metadata-purpose-regulation-override.
+- [Didomi Notices API](https://apis.io/apis/didomi/didomi-notices-api/) — The notices API from Didomi — 18 operation(s) for notices.
+- [Didomi Organizations API](https://apis.io/apis/didomi/didomi-organizations-api/) — Manage organizations
+- [Didomi Organizations Source Systems API](https://apis.io/apis/didomi/didomi-organizations-source-systems-api/) — Manage organization source systems
+- [Didomi Partners API](https://apis.io/apis/didomi/didomi-partners-api/) — The partners API from Didomi — 2 operation(s) for partners.
+- [Didomi Partners Default Purposes API](https://apis.io/apis/didomi/didomi-partners-default-purposes-api/) — The partners-default-purposes API from Didomi — 1 operation(s) for partners-default-purposes.
+- [Didomi Partners Legitimate Interest Purposes API](https://apis.io/apis/didomi/didomi-partners-legitimate-interest-purposes-api/) — The partners-legitimate-interest-purposes API from Didomi — 1 operation(s) for partners-legitimate-interest-purposes.
+- [Didomi Partners Spi Purposes API](https://apis.io/apis/didomi/didomi-partners-spi-purposes-api/) — The partners-spi-purposes API from Didomi — 1 operation(s) for partners-spi-purposes.
+- [Didomi Partners Storages API](https://apis.io/apis/didomi/didomi-partners-storages-api/) — The partners-storages API from Didomi — 2 operation(s) for partners-storages.
+- [Didomi Premium Features API](https://apis.io/apis/didomi/didomi-premium-features-api/) — Manage premium features
+- [Didomi Privacy Centers API](https://apis.io/apis/didomi/didomi-privacy-centers-api/) — Manage privacy centers
+- [Didomi Purposes API](https://apis.io/apis/didomi/didomi-purposes-api/) — The purposes API from Didomi — 3 operation(s) for purposes.
+- [Didomi Purposes Groups API](https://apis.io/apis/didomi/didomi-purposes-groups-api/) — The purposes-groups API from Didomi — 2 operation(s) for purposes-groups.
+- [Didomi Quotas API](https://apis.io/apis/didomi/didomi-quotas-api/) — Manage quotas
+- [Didomi Secrets API](https://apis.io/apis/didomi/didomi-secrets-api/) — Manage secrets
+- [Didomi Sessions API](https://apis.io/apis/didomi/didomi-sessions-api/) — Manage sessions
+- [Didomi SSO Connections API](https://apis.io/apis/didomi/didomi-sso-connections-api/) — Manage SSO connections
+- [Didomi Taxonomies API](https://apis.io/apis/didomi/didomi-taxonomies-api/) — Manage the taxonomy for vendors
+- [Didomi Vendors API](https://apis.io/apis/didomi/didomi-vendors-api/) — Manage vendors used by a property
+- [Didomi Widgets/notices/remote Configs API](https://apis.io/apis/didomi/didomi-widgets-notices-remote-configs-api/) — The widgets/notices/remote-configs API from Didomi — 1 operation(s) for widgets/notices/remote-configs.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (12)
 
-### Didomi Platform API
+Multi-step workflows that chain operations into a business task.
 
-The Didomi Platform REST API at https://api.didomi.io/v1/ is the machine-facing surface for the entire Didomi CMP/PMP. It exposes 80+ operations across consents events / proofs / tokens / users, widgets (notices, configs, deployments, SDK configs, templates), data manager metadata (vendors, purposes, partners, taxonomies, regulations), and administration (organizations, members, keys, secrets, domains, SSO connections, premium features). Authentication is JWT bearer — clients POST API key + secret to /v1/sessions and reuse the returned access_token for one hour. Default rate limit is 100 requests per 15 seconds per organization (the /consents/* high-volume routes are exempt). Standard JSON request / response, cursor and offset pagination, structured error envelope.
+- [Didomi Classify a Vendor and Register a Cookie](https://apis.io/arazzos/didomi/didomi-classify-and-register-cookie-workflow/)
+- [Didomi Create a Consent User and Assign an Internal ID](https://apis.io/arazzos/didomi/didomi-create-and-assign-consent-user-workflow/)
+- [Didomi Create and Verify a Privacy Center](https://apis.io/arazzos/didomi/didomi-create-privacy-center-workflow/)
+- [Didomi Data Subject Erasure Request](https://apis.io/arazzos/didomi/didomi-data-subject-erasure-workflow/)
+- [Didomi Deploy a Consent Notice](https://apis.io/arazzos/didomi/didomi-deploy-notice-workflow/)
+- [Didomi Group Notices Under a Template](https://apis.io/arazzos/didomi/didomi-group-notices-template-workflow/)
+- [Didomi Issue a Consent Token for an End User](https://apis.io/arazzos/didomi/didomi-issue-consent-token-workflow/)
+- [Didomi Provision an Organization and Invite a Member](https://apis.io/arazzos/didomi/didomi-provision-organization-workflow/)
+- [Didomi Record a Consent Event and Confirm Status](https://apis.io/arazzos/didomi/didomi-record-consent-event-workflow/)
+- [Didomi Register and Verify a Cookie](https://apis.io/arazzos/didomi/didomi-register-cookie-workflow/)
+- [Didomi Submit Notice Text Content for Approval](https://apis.io/arazzos/didomi/didomi-submit-notice-text-content-workflow/)
+- [Didomi Upload and Verify a Consent Proof](https://apis.io/arazzos/didomi/didomi-upload-consent-proof-workflow/)
 
-- **Human URL:** [https://developers.didomi.io/api-and-platform/introduction](https://developers.didomi.io/api-and-platform/introduction)
-- **Base URL:** `https://api.didomi.io/v1`
+#### AsyncAPI (2)
 
-#### Tags
+Event-driven and webhook contracts.
 
-- Consent Management
-- Data Manager
-- Privacy
-- Vendors
-- Widgets
+- [Didomi Consent Webhooks](https://apis.io/asyncapis/didomi/didomi-consent-webhooks-asyncapi/)
+- [Didomi Webhooks](https://apis.io/asyncapis/didomi/didomi-webhooks/)
 
-#### Properties
+#### Event channels (1)
 
-- [Documentation](https://developers.didomi.io/api-and-platform/introduction)
-- [Authentication](https://developers.didomi.io/api-and-platform/introduction/authentication)
-- [Rate Limits](https://developers.didomi.io/api-and-platform/introduction/rate-limiting)
-- [Errors](https://developers.didomi.io/api-and-platform/introduction/errors)
-- [Pagination](https://developers.didomi.io/api-and-platform/introduction/pagination)
-- [OpenAPI](openapi/didomi-platform-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/didomi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/didomi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/didomi-consent-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/didomi-consent-notice-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/didomi-privacy-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/didomi-consent-event-structure.json)
-- [Example](examples/didomi-consent-event-example.json)
-- [Example](examples/didomi-consent-notice-example.json)
-- [Example](examples/didomi-privacy-request-example.json)
+Individual events and webhooks the provider emits.
 
-### Didomi Web SDK
+- [/](https://apis.io/channels/didomi/consentwebhook/)
 
-The Didomi Web SDK is the browser-side library that renders consent notices, preference centers, and privacy widgets, gates third-party tags on user consent, and writes IAB TCF v2 / GPP / Didomi consent strings to storage. It exposes a programmatic API (Didomi.getUserConsentStatus, Didomi.setUserAgreeToAll, Didomi.openPreferences, etc.), a typed event bus, and integrations with Google Tag Manager, Adobe Launch, Tealium, Prebid, Google Consent Mode v2, Salesforce DMP, Piano Analytics and other tag managers and SSPs.
+#### MCP servers (1)
 
-- **Human URL:** [https://developers.didomi.io/cmp/web-sdk](https://developers.didomi.io/cmp/web-sdk)
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [Candidate MCP tool surface derived from the Didomi OpenAPI (Didomi ships no MCP server)](https://apis.io/servers/didomi/candidate-mcp-tool-surface-derived-from-the-didomi-openapi-didomi-ships-no-mcp-server/)
 
-- Consent
-- JavaScript
-- SDK
-- Web
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://developers.didomi.io/cmp/web-sdk)
-- [Getting Started](https://developers.didomi.io/cmp/web-sdk/getting-started)
-- [API Reference](https://developers.didomi.io/cmp/web-sdk/reference/api)
-- [Events](https://developers.didomi.io/cmp/web-sdk/reference/events)
-- [Versioning](https://developers.didomi.io/cmp/web-sdk/reference/versions)
-- [Performance](https://developers.didomi.io/cmp/web-sdk/performance)
-- [Postman Collection](collections/didomi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/didomi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Didomi Agentic Access](https://apis.io/agentic-access/didomi/didomi-agentic-access/)
 
-### Didomi Android SDK
+#### JSON Schema (3)
 
-Didomi's Android and Android TV SDK delivers native consent notices, preference popups, and TCF / GPP / Didomi consent string generation in Java / Kotlin / Jetpack Compose apps. It shares consent with WebViews, bridges to Google Consent Mode v2, and ships with sample apps in Java, Kotlin, and Compose.
+The data models the API reads and writes.
 
-- **Human URL:** [https://developers.didomi.io/cmp/mobile-sdk/android](https://developers.didomi.io/cmp/mobile-sdk/android)
+- [Didomi Consent Event](https://apis.io/schemas/didomi/didomi-consent-event/)
+- [Didomi Consent Notice](https://apis.io/schemas/didomi/didomi-consent-notice/)
+- [Didomi Privacy Request (DSAR)](https://apis.io/schemas/didomi/didomi-privacy-request/)
 
-#### Tags
+#### JSON Structure (1)
 
-- Android
-- Android TV
-- Consent
-- Mobile
-- SDK
+Data models expressed in JSON Structure.
 
-#### Properties
+- [Didomi Consent Event Structure](https://apis.io/json-structure/didomi/didomi-consent-event-structure/)
 
-- [Documentation](https://developers.didomi.io/cmp/mobile-sdk/android)
-- [Getting Started](https://developers.didomi.io/cmp/mobile-sdk/android/setup)
-- [API Reference](https://developers.didomi.io/cmp/mobile-sdk/android/reference/api)
-- [Events](https://developers.didomi.io/cmp/mobile-sdk/android/reference/events)
-- [Versioning](https://developers.didomi.io/cmp/mobile-sdk/android/versions)
-- [Postman Collection](collections/didomi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/didomi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON-LD (1)
 
-### Didomi iOS SDK
+Linked-data contexts for the provider's vocabulary.
 
-The iOS / tvOS / Mac Catalyst SDK renders Didomi consent notices and preference centers natively in Swift and Objective-C apps, coordinates Apple's App Tracking Transparency (ATT) prompt with consent, shares consent with WebViews, and emits TCF / GPP / Didomi consent strings. Distributed via Swift Package Manager (github.com/didomi/didomi-ios-sdk-spm) and CocoaPods.
+- [Didomi Context](https://apis.io/jsonld/didomi/didomi-context/)
 
-- **Human URL:** [https://developers.didomi.io/cmp/mobile-sdk/ios](https://developers.didomi.io/cmp/mobile-sdk/ios)
+#### Vocabulary (1)
 
-#### Tags
+The provider's domain terms, defined.
 
-- Consent
-- iOS
-- Mobile
-- SDK
-- tvOS
+- [Didomi Vocabulary](https://apis.io/vocabularies/didomi/didomi-vocabulary/)
 
-#### Properties
+#### Examples (3)
 
-- [Documentation](https://developers.didomi.io/cmp/mobile-sdk/ios)
-- [Getting Started](https://developers.didomi.io/cmp/mobile-sdk/ios/setup)
-- [API Reference](https://developers.didomi.io/cmp/mobile-sdk/ios/reference/api)
-- [Events](https://developers.didomi.io/cmp/mobile-sdk/ios/reference/events)
-- [Versioning](https://developers.didomi.io/cmp/mobile-sdk/ios/versions)
-- [Documentation](https://developers.didomi.io/cmp/mobile-sdk/ios/app-tracking-transparency-ios-14)
-- [Postman Collection](collections/didomi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/didomi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Example requests and responses.
 
-### Didomi Cross-Platform SDKs (React Native, Flutter, Unity, Vega OS, AMP)
+- [Didomi Consent Event Example](https://apis.io/examples/didomi/didomi-consent-event-example/)
+- [Didomi Consent Notice Example](https://apis.io/examples/didomi/didomi-consent-notice-example/)
+- [Didomi Privacy Request Example](https://apis.io/examples/didomi/didomi-privacy-request-example/)
 
-Didomi maintains first-party CMP plugins for React Native, Flutter, Unity (games and game consoles), Vega OS (LG webOS smart TVs), and Google AMP. Each wraps the platform's notice rendering, consent storage, event bus, and consent-string generation so cross-platform teams ship one consent UX across browser, native mobile, CTV, in-game, and AMP surfaces.
+#### Collections (34)
 
-- **Human URL:** [https://developers.didomi.io/cmp/mobile-sdk](https://developers.didomi.io/cmp/mobile-sdk)
+Postman and Open Collection request collections.
 
-#### Tags
+- [Didomi consents/events API](https://apis.io/collections/didomi/open-didomi-consents-events-api/)
+- [Didomi consents/events consents/proofs API](https://apis.io/collections/didomi/open-didomi-consents-proofs-api/)
+- [Didomi consents/events consents/tokens API](https://apis.io/collections/didomi/open-didomi-consents-tokens-api/)
+- [Didomi consents/events consents/users API](https://apis.io/collections/didomi/open-didomi-consents-users-api/)
+- [Didomi consents/events cookies API](https://apis.io/collections/didomi/open-didomi-cookies-api/)
+- [Didomi consents/events dashboards-urls API](https://apis.io/collections/didomi/open-didomi-dashboards-urls-api/)
+- [Didomi consents/events domains API](https://apis.io/collections/didomi/open-didomi-domains-api/)
+- [Didomi consents/events Integrations API](https://apis.io/collections/didomi/open-didomi-integrations-api/)
+- [Didomi consents/events keys API](https://apis.io/collections/didomi/open-didomi-keys-api/)
+- [Didomi consents/events languages API](https://apis.io/collections/didomi/open-didomi-languages-api/)
+- [Didomi consents/events members API](https://apis.io/collections/didomi/open-didomi-members-api/)
+- [Didomi consents/events metadata API](https://apis.io/collections/didomi/open-didomi-metadata-api/)
+- [Didomi consents/events metadata-purpose-regulation-override API](https://apis.io/collections/didomi/open-didomi-metadata-purpose-regulation-override-api/)
+- [Didomi consents/events notices API](https://apis.io/collections/didomi/open-didomi-notices-api/)
+- [Didomi consents/events organizations API](https://apis.io/collections/didomi/open-didomi-organizations-api/)
+- [Didomi consents/events organizations-source-systems API](https://apis.io/collections/didomi/open-didomi-organizations-source-systems-api/)
+- [Didomi consents/events partners API](https://apis.io/collections/didomi/open-didomi-partners-api/)
+- [Didomi consents/events partners-default-purposes API](https://apis.io/collections/didomi/open-didomi-partners-default-purposes-api/)
+- [Didomi consents/events partners-legitimate-interest-purposes API](https://apis.io/collections/didomi/open-didomi-partners-legitimate-interest-purposes-api/)
+- [Didomi consents/events partners-spi-purposes API](https://apis.io/collections/didomi/open-didomi-partners-spi-purposes-api/)
+- [Didomi consents/events partners-storages API](https://apis.io/collections/didomi/open-didomi-partners-storages-api/)
+- [Didomi API](https://apis.io/collections/didomi/open-didomi-platform-api/)
+- [Didomi consents/events premium-features API](https://apis.io/collections/didomi/open-didomi-premium-features-api/)
+- [Didomi consents/events privacy-centers API](https://apis.io/collections/didomi/open-didomi-privacy-centers-api/)
+- [Didomi consents/events purposes API](https://apis.io/collections/didomi/open-didomi-purposes-api/)
+- …and 9 more published on APIs.io
 
-- AMP
-- Consent
-- Cross-Platform
-- Flutter
-- React Native
-- SDK
-- Unity
-- Vega OS
+#### Overlays (1)
 
-#### Properties
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Documentation](https://developers.didomi.io/cmp/mobile-sdk/react-native)
-- [Documentation](https://developers.didomi.io/cmp/mobile-sdk/flutter)
-- [Documentation](https://developers.didomi.io/cmp/mobile-sdk/unity-sdk)
-- [Documentation](https://developers.didomi.io/cmp/mobile-sdk/vega-os)
-- [Documentation](https://developers.didomi.io/cmp/amp)
-- [Postman Collection](collections/didomi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/didomi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Didomi Platform Api Overlay](https://apis.io/overlays/didomi/didomi-platform-api-overlay/)
 
-### Didomi Consent String Toolkit
+#### Governance rules (2)
 
-Open-source libraries published under github.com/didomi for encoding, decoding, and validating the Didomi consent string and the IAB TCF v2 consent string. Includes TypeScript (`consent-string`, `consent-string-schema`), Rust with C/Java FFI (`consent-string-decoder-rust`), Go (`consent-string-golang`), and a fork of the official IAB tooling (`iabtcf-es`). Useful for server-side auditing, downstream ad-tech reading consent state, and offline analysis.
+Spectral rulesets for the provider's contracts.
 
-- **Human URL:** [https://developers.didomi.io/cmp/didomi-consent-string](https://developers.didomi.io/cmp/didomi-consent-string)
+- [Didomi — jsonschema rules](https://apis.io/rules/didomi/didomi-jsonschema-spectral-rules/)
+- [Didomi API Rules](https://apis.io/rules/didomi/didomi-rules/)
 
-#### Tags
+#### Security (4)
 
-- Consent String
-- Decoder
-- Encoder
-- IAB TCF
-- Toolkit
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Didomi Authentication](https://apis.io/security/didomi/didomi-authentication/)
+- [Didomi Domain Security](https://apis.io/security/didomi/didomi-domain-security/)
+- [Didomi Trust Center](https://apis.io/security/didomi/didomi-trust-center/)
+- [Didomi Vulnerability Disclosure](https://apis.io/security/didomi/didomi-vulnerability-disclosure/)
 
-- [Documentation](https://developers.didomi.io/cmp/didomi-consent-string)
-- [Documentation](https://developers.didomi.io/cmp/didomi-consent-string/didomi-consent-string-structure)
-- [Documentation](https://developers.didomi.io/cmp/didomi-consent-string/consent-string-examples)
-- [GitHub Repository](https://github.com/didomi/consent-string)
-- [GitHub Repository](https://github.com/didomi/consent-string-schema)
-- [GitHub Repository](https://github.com/didomi/consent-string-decoder-rust)
-- [GitHub Repository](https://github.com/didomi/consent-string-golang)
-- [GitHub Repository](https://github.com/didomi/iabtcf-es)
-- [Postman Collection](collections/didomi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/didomi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-## Common Properties
+Published plans, tiers and prices.
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://www.didomi.io)
+- [Didomi Plans Pricing](https://apis.io/plans/didomi/didomi-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Didomi Rate Limits](https://apis.io/rate-limits/didomi/didomi-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Didomi Finops](https://apis.io/finops/didomi/didomi-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.didomi.io/)
 - [Documentation](https://developers.didomi.io/)
-- [Documentation](https://developers.didomi.io/readme)
-- [Getting Started](https://developers.didomi.io/cmp/web-sdk/getting-started)
-- [Console](https://console.didomi.io)
-- [Sign Up](https://www.didomi.io/contact-us)
+- [Getting started](https://developers.didomi.io/cmp/web-sdk/getting-started)
+- [API reference](https://api.didomi.io/docs/)
 - [Pricing](https://www.didomi.io/offers)
-- [Terms of Service](https://www.didomi.io/legal-notice)
-- [Privacy Policy](https://www.didomi.io/privacy-policy)
-- [Cookie Policy](https://www.didomi.io/cookie-policy)
-- [Status Page](https://status.didomi.io)
-- [Blog](https://www.didomi.io/blog)
 - [Support](https://support.didomi.io)
-- [Training](https://www.didomi.io/didomi-academy)
-- [LinkedIn](https://www.linkedin.com/company/didomi)
-- [GitHub Organization](https://github.com/didomi)
-- [SDK](https://www.npmjs.com/package/@didomi/react)
-- [SDK](https://github.com/didomi/react-native)
-- [SDK](https://github.com/didomi/flutter)
-- [SDK](https://github.com/didomi/unity)
-- [SDK](https://github.com/didomi/didomi-ios-sdk-spm)
-- [Tool](https://github.com/didomi/gtm-template)
-- [Tool](https://github.com/didomi/magento)
-- [Tool](https://github.com/didomi/mparticle-javascript-integration-didomi)
-- [Tool](https://github.com/didomi/firebase)
-- [Code Examples](https://github.com/didomi/samples)
-- [Code Examples](https://github.com/didomi/boilerplate-fastly-reverse-proxy-didomi-cmp)
-- [Code Examples](https://github.com/didomi/boilerplate-aws-cloudfront-reverse-proxy-didomi-cmp)
-- [Code Examples](https://github.com/didomi/boilerplate-cloudflare-reverse-proxy-didomi-cmp)
-- [JSON-LD](json-ld/didomi-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/didomi-rules.yml)
-- [Vocabulary](vocabulary/didomi-vocabulary.yml)
-- [Plans](plans/didomi-plans-pricing.yml)
-- [Rate Limits](rate-limits/didomi-rate-limits.yml)
-- [Fin Ops](finops/didomi-finops.yml)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Solutions](undefined)
+- [Blog](https://www.didomi.io/blog)
+- [Terms of service](https://www.didomi.io/legal-notice)
+- [Privacy policy](https://www.didomi.io/privacy-policy)
+- [GitHub](https://github.com/didomi)
+- [Status](https://status.didomi.io)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** API Evangelist
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 80.0** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 74.5 |
+| Contract governance | 45.5 |
+| Operational transparency | 81.6 |
+| Developer ergonomics | 76.8 |
+| Access clarity | 92.1 |
+
+**Agent readiness 32.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/didomi/](https://apis.io/providers/didomi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Didomi: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/didomi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
